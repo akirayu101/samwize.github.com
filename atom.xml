@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Junda Ong]]></title>
-  <link href="http://samwize.com/atom.xml" rel="self"/>
-  <link href="http://samwize.com/"/>
-  <updated>2012-09-10T01:52:43+08:00</updated>
-  <id>http://samwize.com/</id>
+  <link href="http://samwize.just2us.com/atom.xml" rel="self"/>
+  <link href="http://samwize.just2us.com/"/>
+  <updated>2012-09-10T03:31:19+08:00</updated>
+  <id>http://samwize.just2us.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
-    <link href="http://samwize.com/blog/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <link href="http://samwize.just2us.com/blog/2012/09/10/switched-from-wordpress-to-octopress/"/>
     <updated>2012-09-10T00:29:00+08:00</updated>
-    <id>http://samwize.com/blog/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <id>http://samwize.just2us.com/blog/2012/09/10/switched-from-wordpress-to-octopress</id>
     <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
 
 <p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
