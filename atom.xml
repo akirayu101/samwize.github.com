@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Junda Ong]]></title>
-  <link href="http://samwize.github.com/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-09-10T00:59:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-09-10T01:52:43+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -14,11 +14,41 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Switched from Wordpress to Octopress]]></title>
-    <link href="http://samwize.github.com/blog/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
+    <link href="http://samwize.com/blog/2012/09/10/switched-from-wordpress-to-octopress/"/>
     <updated>2012-09-10T00:29:00+08:00</updated>
-    <id>http://samwize.github.com/blog/2012/09/10/switched-from-wordpress-to-octopress</id>
-    <content type="html"><![CDATA[
+    <id>http://samwize.com/blog/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
+
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
+
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
+<li><p>There isn&#8217;t a good &amp; free Wordpress editor for Mac</p></li>
+<li><p>I wish I can write in markdown or something</p></li>
+</ol>
+
+
+<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
+
+<blockquote><p>A blogging framework for hackers</p></blockquote>
+
+<p>It makes sense:</p>
+
+<ul>
+<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL</p></li>
+<li><p>Hacker prefers to write in markdown; it&#8217;s clear like code</p></li>
+</ul>
+
+
+<p>Switching wouldn&#8217;t count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
+
+<p>Time will tell if it&#8217;s worth.</p>
 ]]></content>
   </entry>
   

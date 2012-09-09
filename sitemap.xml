@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://samwize.github.com/blog/2012/09/10/switched-from-wordpress-to-octopress/</loc>
-        <lastmod>2012-09-10T00:29:14+08:00</lastmod>
+        <loc>http://samwize.com/blog/2012/09/10/switched-from-wordpress-to-octopress/</loc>
+        <lastmod>2012-09-10T01:52:43+08:00</lastmod>
     </url>
     <url>
-        <loc>http://samwize.github.com/blog/archives/</loc>
-        <lastmod>2012-09-10T00:29:14+08:00</lastmod>
+        <loc>http://samwize.com/blog/archives/</loc>
+        <lastmod>2012-09-10T01:52:43+08:00</lastmod>
     </url>
     <url>
-        <loc>http://samwize.github.com/</loc>
-        <lastmod>2012-09-10T00:29:14+08:00</lastmod>
+        <loc>http://samwize.com/</loc>
+        <lastmod>2012-09-10T01:52:43+08:00</lastmod>
     </url>
 </urlset>
