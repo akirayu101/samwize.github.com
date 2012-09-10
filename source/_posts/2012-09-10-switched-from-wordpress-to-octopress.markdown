@@ -26,7 +26,7 @@ And so.. I decided to make a bold move and switch to [Octopress](http://octopres
 
 It makes sense:
 
-- 	Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL
+- 	Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!
 
 - 	Hacker prefers to write in markdown; it's clear like code
 

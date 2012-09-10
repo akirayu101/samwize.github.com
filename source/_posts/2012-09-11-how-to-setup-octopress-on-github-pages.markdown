@@ -17,19 +17,25 @@ As mentioned in the previous post, I have [switched from to Octopress](/blog/201
 
 You need to install **Git** and **Ruby 1.9.3**. As Octopress must use Ruby 1.9.3, if `ruby --version` does not give you 1.9.3, then you must install via rbenv.
 
-Follow the guide for [rbenv](http://octopress.org/docs/setup/rbenv/). 
+Follow the guide for [rbenv](http://octopress.org/docs/setup/rbenv/). Do the standard method if you have Mac Ports installed (cos it conflicts with Homebrew).
 
-The only exception for me is that I installed p194 instead of p0. I found out when `rake new_post[".."]` gave me an error.
+If you are using Mac, you will need to download and install [OSX GCC Compiler](https://github.com/kennethreitz/osx-gcc-installer/downloads) because Apple no longer includes that, and Ruby needs that.
 
-	# Tried new_post and encounted error
+An exception for me is that I installed p194 instead of p0. You might need other post revisions.
+
+	# Here's how I found out
 	rake new_post["Switched Wordpress to Octopress"]
 	rbenv: version `1.9.3-p194' is not installed
 
 	# Hence..
 	rbenv install 1.9.3-p194
+	rbenv global 1.9.3-p194
 
 With Ruby 1.9.3, [setup octopress](http://octopress.org/docs/setup/).
 
+	gem install bundler
+	rbenv rehash
+	bundle install
 
 ## Deploy ##
 
