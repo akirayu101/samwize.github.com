@@ -3,7 +3,7 @@ layout: post
 title: "Hide \"All My Files\" in Mac's Finder"
 date: 2012-09-12 13:18
 comments: true
-categories: 
+categories: Mac
 ---
 
 It took me a few months before I decide "All My Files" is a useless feature for Mac OS Lion. 

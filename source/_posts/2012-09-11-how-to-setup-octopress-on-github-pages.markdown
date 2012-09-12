@@ -3,7 +3,7 @@ layout: post
 title: "How to setup Octopress on Github Pages"
 date: 2012-09-11 02:07
 comments: true
-categories: 
+categories: [Blogging, Octopress]
 published: false
 ---
 

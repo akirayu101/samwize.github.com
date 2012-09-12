@@ -3,7 +3,7 @@ layout: post
 title: "Sphinx – Documentation for Python"
 date: 2012-09-13 22:08
 comments: true
-categories: 
+categories: Python
 ---
 Python is a wonderful language also because of the awesome tools that are available.
 
@@ -12,6 +12,8 @@ One of which is [Sphinx](http://sphinx.pocoo.org/). It is like markdown, but eve
 Start with installing Sphinx.
 
 	$ sudo easy_install -U Sphinx
+
+<!-- more -->
 
 Create sphinx docs in your project.
 

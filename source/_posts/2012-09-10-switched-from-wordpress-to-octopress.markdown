@@ -3,7 +3,7 @@ layout: post
 title: "Switched Wordpress to Octopress"
 date: 2012-09-10 00:29
 comments: true
-categories: 
+categories: [Blogging, Octopress]
 ---
 
 I started [just2us.com](http://blog.just2us.com/2009/05/just2uscom-is-here/) 3 years ago, using it as a avenue for me to share about my apps and development guides.
