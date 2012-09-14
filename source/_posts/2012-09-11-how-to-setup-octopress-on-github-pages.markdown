@@ -4,12 +4,12 @@ title: "How to setup Octopress on Github Pages"
 date: 2012-09-11 02:07
 comments: true
 categories: [Blogging, Octopress]
-published: false
+published: true
 ---
 
 This blog is hosted entirely on [Github Pages](http://pages.github.com/), powered by the blogging framework for hacker - [Octopress](http://octopress.org/).
 
-As mentioned in the previous post, I have [switched from to Octopress](/blog/2012/09/10/switched-from-wordpress-to-octopress). This post, I wrote the steps on how I get it running. 
+As mentioned in the previous post, I have [switched from Wordpress to Octopress](/blog/2012/09/10/switched-from-wordpress-to-octopress). This post, I am writing the steps on how I get it running. 
 
 <!-- more -->
 
@@ -17,7 +17,7 @@ As mentioned in the previous post, I have [switched from to Octopress](/blog/201
 
 You need to install **Git** and **Ruby 1.9.3**. As Octopress must use Ruby 1.9.3, if `ruby --version` does not give you 1.9.3, then you must install via rbenv.
 
-Follow the guide for [rbenv](http://octopress.org/docs/setup/rbenv/). Do the standard method if you have Mac Ports installed (cos it conflicts with Homebrew).
+Follow the guide for [rbenv](http://octopress.org/docs/setup/rbenv/). Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).
 
 If you are using Mac, you will need to download and install [OSX GCC Compiler](https://github.com/kennethreitz/osx-gcc-installer/downloads) because Apple no longer includes that, and Ruby needs that.
 
@@ -39,7 +39,7 @@ With Ruby 1.9.3, [setup octopress](http://octopress.org/docs/setup/).
 
 ## Deploy ##
 
-I chose to deploy to Github Pages, since it's free as long as you don't mind pushing your 'code' to public. Follow the guide at [Octopress](http://octopress.org/docs/deploying/github/).
+I chose to deploy to [Github Pages](http://pages.github.com/), since it's free as long as you don't mind pushing your 'code' to public. Follow the guide at [Octopress](http://octopress.org/docs/deploying/github/).
 
 It is interesting to notice that `rake setup_github_pages` does 2 things:
 
