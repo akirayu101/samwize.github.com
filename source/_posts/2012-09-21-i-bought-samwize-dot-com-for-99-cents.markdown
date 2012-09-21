@@ -3,10 +3,10 @@ layout: post
 title: "I bought samwize.com for 99 cents"
 date: 2012-09-21 10:51
 comments: true
-categories: Blogging
+categories: [Blogging, Octopress]
 ---
 
-This blog is now given an official name since I [switched to Octopress](/2012/09/10/switched-from-wordpress-to-octopress/). 
+This blog is now given an official (domain) name since I [switched to Octopress](/2012/09/10/switched-from-wordpress-to-octopress/) 2 weeks ago. 
 
 The domain is bought from [NameCheap](http://www.namecheap.com/) at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code **WELOVEU**)
 
@@ -14,7 +14,7 @@ Wonder how I host this blog?
 
 <!-- more -->
 
-## Configuration ##
+## Host blog on Github Pages ##
 
 The blogging framework is using Octopress, and the baked webpages are hosted using [Github Pages](/2012/09/11/how-to-setup-octopress-on-github-pages/) (Free!).
 

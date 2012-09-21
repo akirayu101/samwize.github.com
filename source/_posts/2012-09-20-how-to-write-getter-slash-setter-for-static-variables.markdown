@@ -3,7 +3,7 @@ layout: post
 title: "How to write Getter/Setter for static variables"
 date: 2012-09-20 14:14
 comments: true
-categories: 
+categories: Python
 ---
 
 In the last post, I blogged about how you should write [Getter/Setter for member variables](/2012/09/19/how-you-should-write-getter-slash-setter-for-python/). 
