@@ -9,7 +9,7 @@ published: true
 
 This blog is hosted entirely on [Github Pages](http://pages.github.com/), powered by the blogging framework for hacker - [Octopress](http://octopress.org/).
 
-As mentioned in the previous post, I have [switched from Wordpress to Octopress](/blog/2012/09/10/switched-from-wordpress-to-octopress). This post, I am writing the steps on how I get it running. 
+As mentioned in the previous post, I have [switched from Wordpress to Octopress](/2012/09/10/switched-from-wordpress-to-octopress). This post, I am writing the steps on how I get it running. 
 
 <!-- more -->
 
