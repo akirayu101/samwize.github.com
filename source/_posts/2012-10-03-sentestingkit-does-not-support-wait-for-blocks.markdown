@@ -37,4 +37,4 @@ Though there is [a workaround](https://gist.github.com/2254570) using semaphore.
 }
 ```
 
-But if you mind, there are other testing frameworks that support asynchrounous testing.
+But if you mind, there are lots of [other testing frameworks](http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing), eg [GHUnit](https://github.com/gabriel/gh-unit) supports asynchronous testing.
