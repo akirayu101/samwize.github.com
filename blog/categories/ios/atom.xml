@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to setup GHUnit with CocoaPods]]></title>
+    <link href="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/"/>
+    <updated>2012-10-04T23:21:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods</id>
+    <content type="html"><![CDATA[<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">installation guide for GHUnit</a> is for installing the framework in the traditional way.</p>
+
+<p>As you might know, <a href="http://cocoapods.org/">CocoaPods</a> is the new way to handle dependencies. Of course, GHUnit is supported.</p>
+
+<p>The is a lack of a guide on how you setup the two useful iOS libraries together.</p>
+
+<!-- more -->
+
+
+<p>It is similar to the <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">official guide</a>. I am going to point out the differences when need to.</p>
+
+<h2>Step 1 - Create Test Target</h2>
+
+<p>This is the same. You create a completely new application target.</p>
+
+<p>I prefer to name it <code>AppGHTests</code>, as I might still be using <code>AppTests</code> for my <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">SenTestings</a>.</p>
+
+<p><img class="center" src="/images/xcode-ghunit-pods-new-target.png"></p>
+
+<h2>Step 2 - Configure Test Target</h2>
+
+<p>You DON'T have to download and copy <code>GHUnitIOS.framework</code> to your project since you are using CocoaPods. Instead, you should setup GHUnit pods.</p>
+
+<p>Edit the <code>Prodfile</code> and add GHUnitIOS.</p>
+
+<pre><code>platform :ios
+pod 'GHUnitIOS', '0.5.5'
+</code></pre>
+
+<p>Then install the pod as per normal.</p>
+
+<pre><code>$ pod install
+</code></pre>
+
+<p>Continue with the official guide to remove the unnecessary files, and edit <code>main.m</code> to replace the delegate class with <code>GHUnitIOSAppDelegate</code>.</p>
+
+<h2>Step 3 - Configure Pod for Test Target</h2>
+
+<p>This part is IMPORTANT. The new test target will not include the pods.</p>
+
+<p>You need to configure the target to be based on Pods project. Refer to <a href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">this post</a>.</p>
+
+<p>Lastly, add the <code>libPods.a</code> library to the test target.</p>
+
+<p><img class="center" src="/images/xcode-ghunit-pods-libpods.png"></p>
+
+<p>That's it. Run the test target!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SenTestingKit does not support wait for blocks]]></title>
+    <link href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
+    <updated>2012-10-03T00:21:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
+    <content type="html"><![CDATA[<p>I was using <a href="http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html">SenTestingKit</a>, the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.</p>
+
+<p>That's a waste.</p>
+
+<!-- more -->
+
+
+<p>Though there is <a href="https://gist.github.com/2254570">a workaround</a> using semaphore.</p>
+
+<p>``` objc
+- (void)testBlockMethod {</p>
+
+<pre><code>dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+
+// Your block method eg. AFNetworking
+NSURL *url = [NSURL URLWithString:@"http://httpbin.org/ip"];
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    NSLog(@"IP Address: %@", [JSON valueForKeyPath:@"origin"]);
+    STAssertNotNil(JSON, @"JSON not loaded");
+    // Signal that block has completed
+    dispatch_semaphore_signal(semaphore);        
+} failure:nil];
+[operation start];
+
+// Run loop
+while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                             beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+dispatch_release(semaphore);    
+</code></pre>
+
+<p>}
+```</p>
+
+<p>But if you mind, there are lots of <a href="http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing">other testing frameworks</a>, eg <a href="https://github.com/gabriel/gh-unit">GHUnit</a> supports asynchronous testing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[App Store Changes in iOS6]]></title>
+    <link href="http://samwize.github.com/2012/10/02/app-store-changes-in-ios6/"/>
+    <updated>2012-10-02T22:22:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/02/app-store-changes-in-ios6</id>
+    <content type="html"><![CDATA[<p>iOS 6 has introduced a big change to how App Store works.</p>
+
+<p>The changes <a href="http://www.gamezebo.com/news/2012/09/25/ios-6-app-store-and-what-it-means-developers">means a lot to developers</a>, and affects how developers would write their app descriptions, screenshots, etc.</p>
+
+<p>Some of the changes are so breaking, that lightwoodgames said - <a href="http://www.lightwoodgames.com/blog/2012/09/everything-thats-wrong-with-the-app-store-in-ios-6/#.UGhVbaQe7UO">don't just put up with this!</a>.</p>
+
+<p>You could also refer to a <a href="http://www.apptamin.com/ASO_Cheat_Sheet-v2.pdf">simple cheatsheet</a>.</p>
+
+<p>Here's my short version of what you should take note of:</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>First screenshot is very important</p></li>
+<li><p>First 3 lines of description is still very prominent</p></li>
+<li><p>Fill up What's New section</p></li>
+<li><p>Enter your App Support URL</p></li>
+<li><p>Ask your users to 'like' on Facebook</p></li>
+</ol>
+
+
+<p>And as always, search algorithm is forever changing. Use your keywords effectively. Use unique (and not generic) keywords. Use singular form.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit Tests with CocoaPods]]></title>
+    <link href="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/"/>
+    <updated>2012-10-01T23:41:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods</id>
+    <content type="html"><![CDATA[<p><a href="http://cocoapods.org/">CocoaPods</a> is a tool for managing dependecies for iOS and Mac OS X projects.</p>
+
+<p><a href="http://cocoapods.org/">Getting started</a> with using CocoaPods is easy. The tricky part is getting used to opening Xcode workspace (eg. <code>App.xcworkspace</code>) instead of Xocde project. But that's not what I want to covered in this post.</p>
+
+<p>One of the hurdle I encountered is getting unit testing to work after CocoaPods is setup.</p>
+
+<!-- more -->
+
+
+<p>Apparently, after you setup CocoaPods, it automatically configures your project's main target to use the pods (dependecies). However, it does not configure the same for your unit tests target. So when you run your unit test, you will likely encounter errors like this:</p>
+
+<pre><code>SomeLibrary.h not found
+</code></pre>
+
+<p>To fix, go to <strong>Project</strong> > <strong>Info</strong> > <strong>Configurations</strong> > change <code>Based on Configuration File</code> to <code>Pods</code>. Like this:</p>
+
+<p><img class="center" src="/images/cocoapods-unit-test-configure.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Singleton/SharedInstance Template for iOS 5 (ARC and GCD)]]></title>
+    <link href="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/"/>
+    <updated>2012-09-29T19:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd</id>
+    <content type="html"><![CDATA[<p>The singleton pattern is widely used in iOS to have a global, static class.</p>
+
+<p>The most famous is <code>[NSUserDefaults standardUserDefaults]</code>.</p>
+
+<p>Over the years, the template for creating a singleton/SharedInstance has also changed. This is due to the introduction of new technologies in Apple's SDK, particularly ARC and GDC.</p>
+
+<!-- more -->
+
+
+<p>The <a href="http://lukeredpath.co.uk/blog/a-note-on-objective-c-singletons.html">implementation</a> has simplified to:</p>
+
+<p>``` objc
++ (id)sharedInstance
+{
+  static dispatch_once_t pred = 0;
+  <em>_strong static id </em>sharedObject = nil;
+  dispatch_once(&amp;pred, ^{</p>
+
+<pre><code>_sharedObject = [[self alloc] init]; // or some other init method
+</code></pre>
+
+<p>  });
+  return _sharedObject;
+}
+```</p>
+
+<p>Nice piece of code added to my Xcode snippet.</p>
+]]></content>
+  </entry>
+  
+</feed>

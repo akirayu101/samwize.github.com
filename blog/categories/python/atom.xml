@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to write Getter/Setter for static variables]]></title>
+    <link href="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/"/>
+    <updated>2012-09-20T14:14:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables</id>
+    <content type="html"><![CDATA[<p>In the last post, I blogged about how you should write <a href="/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">Getter/Setter for member variables</a>.</p>
+
+<p>This is a follow-up for <strong>static variables</strong>, instead of instance variables.</p>
+
+<!-- more -->
+
+
+<p>I didn't know the answer to that, until I searched around <a href="http://stackoverflow.com/questions/128573/using-property-on-classmethods">Stackoverflow</a>. There are a couple of ways around using @property on classmethods.</p>
+
+<p>The best answer for me is this:</p>
+
+<p>``` python
+class MyClass(object):</p>
+
+<pre><code>_foo = 5
+class __metaclass__(type):
+    @property
+    def foo(cls):
+            return cls._foo
+
+    @foo.setter
+    def foo(cls, value):
+            cls._foo = value
+</code></pre>
+
+<p>```</p>
+
+<p>It uses <code>__metaclass__</code>, some kind of <a href="http://www.voidspace.org.uk/python/articles/five-minutes.shtml">black magic</a> in Python.</p>
+
+<p>With that, you can use the getter/setter on the static variable.</p>
+
+<p>``` python</p>
+
+<blockquote><blockquote><blockquote><p>MyClass.foo
+5
+MyClass.foo = 3
+MyClass.foo
+3
+```</p></blockquote></blockquote></blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Non-ASCII Character in Python File]]></title>
+    <link href="http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file/"/>
+    <updated>2012-09-18T18:00:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file</id>
+    <content type="html"><![CDATA[<p>If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error:</p>
+
+<pre><code>Python Error: Non-ASCII character in file but no encoding declared
+</code></pre>
+
+<p>Python by default does not allow Non-ASCII characters in the file. You have to insert the following at the top of the Python file.</p>
+
+<pre><code>#!/usr/bin/env python
+# -*- coding: utf8 -*- 
+</code></pre>
+
+<p>This works on a <a href="http://www.python.org/dev/peps/pep-0263/">per file basis</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sphinx – Documentation for Python]]></title>
+    <link href="http://samwize.github.com/2012/09/13/sphinx-documentation-for-python/"/>
+    <updated>2012-09-13T22:08:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/13/sphinx-documentation-for-python</id>
+    <content type="html"><![CDATA[<p>Python is a wonderful language also because of the awesome tools that are available.</p>
+
+<p>One of which is <a href="http://sphinx.pocoo.org/">Sphinx</a>. It is like markdown, but even more, with cross referencing of pages and autogeneration of doc for python code.</p>
+
+<p>Start with installing Sphinx.</p>
+
+<pre><code>$ sudo easy_install -U Sphinx
+</code></pre>
+
+<!-- more -->
+
+
+<p>Create sphinx docs in your project.</p>
+
+<pre><code>$ cd /path/to/project/docs/
+$ sphinx-quickstart
+</code></pre>
+
+<p>Write your documentation (eg. quick start guide) in your index.rst. Sphinx uses reStructured Text (a kind of text formatting).  Refer to this <a href="http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html">quick tutorial</a> and this <a href="https://github.com/ralsina/rst-cheatsheet">handy cheatsheet</a>.</p>
+
+<p><a href="http://sphinx.pocoo.org/markup/inline.html#cross-referencing-syntax">Cross reference</a> your documentation. You can link across to arbitrary location with <code>:ref:`my-label-name`</code> or across files with <code>:doc:`my-doc-name`</code>.</p>
+
+<pre><code>.. _my-label-name:
+
+Section to cross-reference
+--------------------------
+
+This is the text of the section.
+
+It refers to the section itself, see :ref:`my-label-name`.
+</code></pre>
+
+<p>Finally, generate the HTML files.</p>
+
+<pre><code>make html
+</code></pre>
+
+<p>Lastly, Sphinx can automatically generate your module and classes, using your docstrings. That way, you can write your documentation in your python files (and not again in Sphinx doc).</p>
+
+<p>To do that, you have to edit Sphinx's <code>conf.py</code> and add your modules path to <code>sys.path</code>. Insert the following code in <code>conf.py</code>:</p>
+
+<p>``` python</p>
+
+<pre><code>sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), '..')))
+</code></pre>
+
+<p>```</p>
+
+<p>With that, you can automatically generate doc for a class.</p>
+
+<pre><code>.. automodule:: mymodule.something
+
+.. autoclass:: MyClass
+    :members:
+</code></pre>
+
+<p>This is a short introduction guide to Sphinx. There’s obviously more, with cases of authors writing books using Sphinx!</p>
+]]></content>
+  </entry>
+  
+</feed>

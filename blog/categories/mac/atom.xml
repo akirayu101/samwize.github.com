@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode 4.5 Tips &amp; Tricks]]></title>
+    <link href="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/"/>
+    <updated>2012-09-26T01:16:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks</id>
+    <content type="html"><![CDATA[<p>Some of my favorite Xcode tips &amp; tricks (tested on Xcode 4.5).</p>
+
+<h2>Shortcut</h2>
+
+<p><img class="center" src="/images/xcode-shortcuts.png" title="xcode shortcuts" ></p>
+
+<!-- more -->
+
+
+<h2>Catch All Exceptions</h2>
+
+<ol>
+<li>Bring up breakpoint navigator (⌘6)</li>
+<li>Click + on the bottom left</li>
+<li>Add Exception Breakpoint</li>
+</ol>
+
+
+<p><img class="center" src="/images/xcode-catch-all-exceptions.png" title="xcode catch exceptions" ></p>
+
+<p><em>Anyone knows the difference with <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">symbolic breakpoint</a>?</em></p>
+
+<h2>NSLog, Auto Continue on Breakpoints</h2>
+
+<p>Breakpoints are so much powerful. Don't limit to just pause on every breakpoint.</p>
+
+<p>You could set actions such as log a message under certain condition, or automatically continue. Or if you are not interested in the first 10 times of a while loop, you can ignore x times before pause. Or even have your Mac speaks out instead of traditional text logging.</p>
+
+<p>Edit a breakpoint for more options:</p>
+
+<p><img class="center" src="/images/xcode-nslog-on-breakpoints.png" title="breakpoints actions" ></p>
+
+<h2>Use of Tabs</h2>
+
+<ol>
+<li>Create new tabs with ⌘T</li>
+<li>Double click to edit tab name</li>
+<li>My workflow uses these tabs: Project Resources, Design, Coding 1, Coding 2, Build</li>
+</ol>
+
+
+<p><img class="center" src="/images/xcode-tabs-workflow.png" title="tabs for my workflow" ></p>
+
+<p>It's totally up to you to organize your tabs, just like web browsing.</p>
+
+<h2>Use of Behaviours</h2>
+
+<p>Behaviours are hooks to Xcode for events like build, test, run, and search. You can find them in <strong>Preferences</strong> > <strong>Behaviours</strong>.</p>
+
+<p>These are my additional behaviours.</p>
+
+<p>Show Build tab when there is new issue:</p>
+
+<p><img class="center" src="/images/xcode-behaviour-build-new-issues.png" title="'Show Build tab when there is new issue'" ></p>
+
+<p>Show console when start running:</p>
+
+<p><img class="center" src="/images/xcode-behaviour-console.png" title="'Show console when start running'" ></p>
+
+<p>Show Debug tab when paused:</p>
+
+<p><img class="center" src="/images/xcode-behaviour-debug-tab.png" title="'Show Debug tab when paused'" ></p>
+
+<h2>More Reference</h2>
+
+<ol>
+<li><a href="http://developer.apple.com/videos/wwdc/2012/">WWDC 2012</a> - "Working Efficiently with Xcode" is an excellent introductory</li>
+<li><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215-CH1-SW1">Xcode4 User Guide</a> - Complete, but way too much text</li>
+<li><a href="http://blog.gomiso.com/2012/02/07/work-efficiently-with-xcode/">miso blog</a> - from a developer</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hide "All My Files" in Mac's Finder]]></title>
+    <link href="http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder/"/>
+    <updated>2012-09-12T13:18:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder</id>
+    <content type="html"><![CDATA[<p>It took me a few months before I decide "All My Files" is a useless feature for Mac OS Lion.</p>
+
+<p>I was irked that it is the default view when you create new Finder window. And I was even more irked that the default arrangement by Kind shows my Adium chat log right at the top..</p>
+
+<!-- more -->
+
+
+<p>So I decided to change it.</p>
+
+<pre><code>Finder &gt; Preferences &gt; General &gt; New Finder windows show: Downloads
+
+Finder &gt; Preferences &gt; Sidebar &gt; Uncheck as Favorites
+</code></pre>
+
+<p>If I still want to access "All My Files", I could still use the handy shortcut Shift+Cmd+F.</p>
+
+<p><img class="left" src="/images/new-finder-windows-show.png" width="340" title="New Finder windows show" > <img class="left" src="/images/hide-show-my-files-sidebar.png" width="340" title="Hide from sidebar" ></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Configure your local environment for Scala on Heroku - Junda Ong</title>
+  <meta name="author" content="Junda">
+
+  
+  <meta name="description" content="Heroku has a good getting started guide with Scala. If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Junda Ong" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-8780506-5']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Junda Ong</a></h1>
+  
+    <h2>aka @samwize ¯\_(ツ)_/¯</h2>
+  
+</hgroup>
+
+<script type="text/javascript">var _kiq = _kiq || [];</script>
+<script type="text/javascript" src="//s3.amazonaws.com/ki.js/43620/8u-.js" async="true"></script>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:samwize.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/quotes/">Quotes</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Configure Your Local Environment for Scala on Heroku</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T00:35:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
+
+<p>If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you need to know.</p>
+
+<p>You should know how to properly configure your local development environment.</p>
+
+<!-- more -->
+
+
+<h2>Add the start script plugin</h2>
+
+<p>Typesafe&#8217;s <a href="https://github.com/typesafehub/xsbt-start-script-plugin">start script plugin</a> helps to generate a <code>target/start</code> script (you will use later).</p>
+
+<p>Create the file <code>project/build.sbt</code> with this</p>
+
+<pre><code>resolvers += Classpaths.typesafeResolver
+
+addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.3")
+</code></pre>
+
+<h2>Procfile</h2>
+
+<p>Create the file <code>Procfile</code> in the root folder. Enter this line:</p>
+
+<pre><code>web: target/start Web
+</code></pre>
+
+<h2>Build your app locally</h2>
+
+<p>You need to run this EVERYTIME before you run the app</p>
+
+<pre><code>$ sbt clean compile stage
+</code></pre>
+
+<h2>Run your app locally</h2>
+
+<p>Run your app using <a href="http://blog.daviddollar.org/2011/05/06/introducing-foreman.html">foreman</a></p>
+
+<pre><code>$ foreman run
+</code></pre>
+
+<p>The app will run on port 5000 (instead of usual 9000).</p>
+
+<p>Note: When you change your code, you need to exit, <code>sbt clean compile run</code>, then <code>foreman start</code> again..</p>
+
+<h2>Environment Variables (.env)</h2>
+
+<p>The <code>.env</code> file at root is for storing <a href="https://devcenter.heroku.com/articles/config-vars#local_setup">environment variables</a>. This file is in <code>.gitignore</code>, because it usually contains API credentials or environment specific settings.</p>
+
+<p>For example, credentials for mysql/redis/s3/etc is different between local and production environment.</p>
+
+<p>Enter your local environment variables in <code>.env</code> like this</p>
+
+<pre><code>S3_KEY=mykey
+S3_SECRET=mysecret
+</code></pre>
+
+<p>Enter your production environment variables using heroku command as such</p>
+
+<pre><code>$ heroku config:add S3_KEY=superkey
+$ heroku config:add S3_SECRET=supersecret
+</code></pre>
+
+<p>Then in your scala code, you can access the respective environment variables as such:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">s3Key</span> <span class="k">=</span> <span class="nc">System</span><span class="o">.</span><span class="n">getenv</span><span class="o">(</span><span class="s">&quot;S3_KEY&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-09T00:35:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/heroku/'>Heroku</a>, <a class='category' href='/blog/categories/play-/'>Play!</a>, <a class='category' href='/blog/categories/scala/'>Scala</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/10/07/a-short-scala-tutorial-for-java-developers/" title="Previous Post: A short Scala tutorial for Java Developers">&laquo; A short Scala tutorial for Java Developers</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/09/configure-your-local-environment-for-scala-on-heroku/">Configure your local environment for Scala on Heroku</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/07/a-short-scala-tutorial-for-java-developers/">A short Scala tutorial for Java Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/04/how-to-setup-ghunit-with-cocoapods/">How to setup GHUnit with CocoaPods</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/">SenTestingKit does not support wait for blocks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/10/02/app-store-changes-in-ios6/">App Store Changes in iOS6</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("samwize", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/samwize" class="twitter-follow-button" data-show-count="true">Follow @samwize</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Junda -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'just2us';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/';
+        var disqus_url = 'http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

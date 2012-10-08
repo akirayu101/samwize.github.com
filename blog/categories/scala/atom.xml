@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Scala | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/scala/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configure your local environment for Scala on Heroku]]></title>
+    <link href="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/"/>
+    <updated>2012-10-09T00:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku</id>
+    <content type="html"><![CDATA[<p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
+
+<p>If you know the basic of Heroku, and has got started with Typesafe's Scala + Play! framework, there is 1 more thing you need to know.</p>
+
+<p>You should know how to properly configure your local development environment.</p>
+
+<!-- more -->
+
+
+<h2>Add the start script plugin</h2>
+
+<p>Typesafe's <a href="https://github.com/typesafehub/xsbt-start-script-plugin">start script plugin</a> helps to generate a <code>target/start</code> script (you will use later).</p>
+
+<p>Create the file <code>project/build.sbt</code> with this</p>
+
+<pre><code>resolvers += Classpaths.typesafeResolver
+
+addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.3")
+</code></pre>
+
+<h2>Procfile</h2>
+
+<p>Create the file <code>Procfile</code> in the root folder. Enter this line:</p>
+
+<pre><code>web: target/start Web
+</code></pre>
+
+<h2>Build your app locally</h2>
+
+<p>You need to run this EVERYTIME before you run the app</p>
+
+<pre><code>$ sbt clean compile stage
+</code></pre>
+
+<h2>Run your app locally</h2>
+
+<p>Run your app using <a href="http://blog.daviddollar.org/2011/05/06/introducing-foreman.html">foreman</a></p>
+
+<pre><code>$ foreman run
+</code></pre>
+
+<p>The app will run on port 5000 (instead of usual 9000).</p>
+
+<p>Note: When you change your code, you need to exit, <code>sbt clean compile run</code>, then <code>foreman start</code> again..</p>
+
+<h2>Environment Variables (.env)</h2>
+
+<p>The <code>.env</code> file at root is for storing <a href="https://devcenter.heroku.com/articles/config-vars#local_setup">environment variables</a>. This file is in <code>.gitignore</code>, because it usually contains API credentials or environment specific settings.</p>
+
+<p>For example, credentials for mysql/redis/s3/etc is different between local and production environment.</p>
+
+<p>Enter your local environment variables in <code>.env</code> like this</p>
+
+<pre><code>S3_KEY=mykey
+S3_SECRET=mysecret
+</code></pre>
+
+<p>Enter your production environment variables using heroku command as such</p>
+
+<pre><code>$ heroku config:add S3_KEY=superkey
+$ heroku config:add S3_SECRET=supersecret
+</code></pre>
+
+<p>Then in your scala code, you can access the respective environment variables as such:</p>
+
+<p>``` scala</p>
+
+<pre><code>val s3Key = System.getenv("S3_KEY")
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A short Scala tutorial for Java Developers]]></title>
+    <link href="http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers/"/>
+    <updated>2012-10-07T21:10:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers</id>
+    <content type="html"><![CDATA[<p>This post is a tutorial guide for Java programmers who want to learn <a href="http://www.scala-lang.org/">Scala</a>.</p>
+
+<p>I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some <a href="http://www.artima.com/scalazine/articles/steps.html">baby steps</a> into the new language.</p>
+
+<p>The following post is what I have learnt.</p>
+
+<!-- more -->
+
+
+<h2>Methods Declaration</h2>
+
+<p>We use an example of a max function to illustrate the different ways to declare a method.</p>
+
+<p>You do it like this, in a single line.</p>
+
+<p>``` scala</p>
+
+<pre><code>def max(x: Int, y: Int): Int = if (x &lt; y) y else x
+</code></pre>
+
+<p>```</p>
+
+<p>Or, you can skip the return type (Int in this case) and let the compiler infer.</p>
+
+<p>``` scala</p>
+
+<pre><code>def max(x: Int, y: Int) = if (x &lt; y) y else x
+</code></pre>
+
+<p>```</p>
+
+<p>If the method is more than a single line, you can wrap with curly braces.</p>
+
+<p>``` scala</p>
+
+<pre><code>def max(x: Int, y: Int) = { 
+    // More lines of code ..
+    if (x &lt; y) y else x 
+}
+</code></pre>
+
+<p>```</p>
+
+<p>You might have already notice. The <code>return</code> keyword is actually optional in Scala.  If omitted, the last expression is the value that will be returned.</p>
+
+<p>To be verbose, you can specify the return type with the <code>return</code> keyword.</p>
+
+<p>``` scala</p>
+
+<pre><code>def max(x: Int, y: Int) = { 
+    return if (x &lt; y) y else x 
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>Method with 0 parameter is Special</h2>
+
+<p>If you have the following method</p>
+
+<p>``` scala</p>
+
+<pre><code>def foo() = println("foo!")
+</code></pre>
+
+<p>```</p>
+
+<p>You may call it in 2 ways</p>
+
+<p>``` scala</p>
+
+<pre><code>foo()
+</code></pre>
+
+<p>```</p>
+
+<p>Or simply</p>
+
+<p>``` scala</p>
+
+<pre><code>foo
+</code></pre>
+
+<p>```</p>
+
+<p>However, there is a guideline when to use which style. If there is a side effect, you should use the parenthesis. In other words, a getter method can skip the parenthesis.</p>
+
+<h2>Method with 1 parameter is Special</h2>
+
+<p>Int has a method <code>to</code> that takes 1 parameter of Int to return a sequence.</p>
+
+<p>``` scala</p>
+
+<pre><code>0.to(10)
+</code></pre>
+
+<p>```</p>
+
+<p>You can drop the . and ( ) and simplify to</p>
+
+<p>``` scala</p>
+
+<pre><code>0 to 10
+</code></pre>
+
+<p>```</p>
+
+<p>This alone makes the Scala language beautiful in many ways.</p>
+
+<h2>Method names can contain .+*/</h2>
+
+<p>Surprisingly, Scala doesn't have operators, and therefore no operator overloading.</p>
+
+<p>But it can have a method name '+'. So an expression <code>1 + 2</code> is actually</p>
+
+<p>``` scala</p>
+
+<pre><code>1.+(2)
+</code></pre>
+
+<p>```</p>
+
+<p>But since <em>Method with 1 parameter is Special</em> (read above), 1.+(2) can be simplified to</p>
+
+<p>``` scala</p>
+
+<pre><code>1 + 2
+</code></pre>
+
+<p>```</p>
+
+<h2>val and var declarations</h2>
+
+<p>To declare a variable,</p>
+
+<p>``` scala</p>
+
+<pre><code>var foo = 1
+foo = 2
+</code></pre>
+
+<p>```</p>
+
+<p>To declare a value, which does not allow you to change/reassign,</p>
+
+<p>``` scala</p>
+
+<pre><code>val foo = 1
+// foo = 2 is not possible
+</code></pre>
+
+<p>```</p>
+
+<p>Also, a semi-colon at the end of a line is optional.</p>
+
+<h2>Class constructor</h2>
+
+<p>The constructor is the class declaration itself, and any constructor parameters can be used in other methods</p>
+
+<p>``` scala</p>
+
+<pre><code>class Color(color: String, index: Int) {
+    // foo() uses color
+    def foo() = println(color)
+}
+
+// Usage
+val c = new Color("Blue", 1)
+c.foo
+</code></pre>
+
+<p>```</p>
+
+<p>If you need to have some code in the constructor, you could write it right in the class body, right after the declaration.</p>
+
+<p>``` scala</p>
+
+<pre><code>class Color(color: String, index: Int) {
+
+    if (color == null)
+        throw new NullPointerException("Color is null")
+
+    if (index &lt;= 0)
+        index = 0
+
+    def foo() = println(color)
+}
+</code></pre>
+
+<p>```</p>
+
+<p>If you have multiple constructors, you can add them with <code>this</code> method.</p>
+
+<p>``` scala</p>
+
+<pre><code>class Color(color: String, index: Int) {
+
+    def this(color:String) = this(color, 0)
+
+    def foo() = println(color)
+}
+
+// Usage
+val c = new Color("Blue")
+</code></pre>
+
+<p>```</p>
+
+<h2>Static/Singleton object</h2>
+
+<p>You cannot have static classes or variables in a class.</p>
+
+<p>Instead, if you want to add a static method, you have to use the <code>object</code> declaration, also known as Singleton objects.</p>
+
+<p>``` scala</p>
+
+<pre><code>object Color {
+    def exclaim(s: String) = println(s + " color!")
+}
+
+// Usage
+Color.exclaim("Pink")
+// Prints "Pink color!"
+</code></pre>
+
+<p>```</p>
+
+<p>You can also use the static method in the class method.</p>
+
+<p>``` scala</p>
+
+<pre><code>class Color(color: String, index: Int) {
+    def foo() = Color.exclaim(color)
+}
+
+object Color {
+    def exclaim(s: String) = println(s + " color!")
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>Interface is traits</h2>
+
+<p>In Java, you have <code>Interface</code>. In Scala, you use <code>traits</code>. Moreover, you can have non-abstract methods in <code>traits</code>.</p>
+
+<p>``` scala</p>
+
+<pre><code>trait Friendly {
+    def greet() = "Hi"
+}
+</code></pre>
+
+<p>```</p>
+
+<p>To have a <code>class</code> implement the <code>traits</code>, you use the <code>extends</code> keyword. And if you need to override the method, you need to explicitly use <code>override def</code>.</p>
+
+<p>``` scala</p>
+
+<pre><code>class Dog extends Friendly {
+    override def greet() = "Woof"
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Similar to Java, a class can extend 1 class and multiple traits.</p>
+
+<p>Another difference is that Scala can mix in traits at instantiation time. In the following, we create another trait and use the <code>with</code> keyword to instantiate a Dog with that trait.</p>
+
+<p>``` scala</p>
+
+<pre><code>trait ExclamatoryGreeter extends Friendly {
+  override def greet() = super.greet() + "!"
+}
+
+// Usage
+val pup = new Dog with ExclamatoryGreeter
+println(pup.greet())
+// Prints "Woof!"
+</code></pre>
+
+<p>```</p>
+
+<h2>Array does not use subscript [ ]</h2>
+
+<p>To access an array, you use ( ) instead of [ ]. It is not a matter of symbol choice. Scala uses ( ) because an array is an object with methods.</p>
+
+<p>To access the 4th element of an array, you write</p>
+
+<p>``` scala</p>
+
+<pre><code>myArray(3)
+</code></pre>
+
+<p>```</p>
+
+<p>Behind the scene, it is in fact calling a method <code>apply</code>.</p>
+
+<p>``` scala</p>
+
+<pre><code>myArray.apply(3)
+</code></pre>
+
+<p>```</p>
+
+<p>Similarly, for setting an array element, you write</p>
+
+<p>``` scala</p>
+
+<pre><code>myArray(3) = "foo"
+</code></pre>
+
+<p>```</p>
+
+<p>Which is interpreted as</p>
+
+<p>``` scala</p>
+
+<pre><code>myArray.update(3, "foo")
+</code></pre>
+
+<p>```</p>
+
+<h2>Functions are first class constructs</h2>
+
+<p>Java is <em>imperative</em> style. Scala is <em>imperative</em>, but excels in <em>functional</em> style too.</p>
+
+<p>Being a functional language, functions are first class constructs. We use an example of printing <code>args</code>.</p>
+
+<p>``` scala</p>
+
+<pre><code>args.foreach(arg =&gt; println(arg))
+</code></pre>
+
+<p>```</p>
+
+<p>The <code>foreach</code> is being passed a function</p>
+
+<p>``` scala</p>
+
+<pre><code>arg =&gt; println(arg)
+</code></pre>
+
+<p>```</p>
+
+<p>The above function has a few characteristics:</p>
+
+<ul>
+<li>It is an anonymous function (has no name)</li>
+<li>It get passed a single parameter named <code>arg</code> and the type is being inferred by compiler</li>
+<li>The main code is simply the <code>println</code></li>
+<li>Yeah, <code>=&gt;</code> is used, also call a right arrow</li>
+</ul>
+
+
+<p>A more complete example of an anonymous method with explicit parameter type</p>
+
+<p>``` scala</p>
+
+<pre><code>(x: Int, y: Int) =&gt; {
+    // More code
+    x + y
+}
+</code></pre>
+
+<p>```</p>
+
+<p>As we said, functions are first class constructs, so you basically could assign it to a variable</p>
+
+<p>``` scala</p>
+
+<pre><code>var add = (x: Int, y: Int) =&gt; {
+    // More code
+    x + y
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Then use it</p>
+
+<p>``` scala</p>
+
+<pre><code>add(2, 3)
+// returns 5
+</code></pre>
+
+<p>```</p>
+
+<h2>for arg in args</h2>
+
+<p>This is how you use <code>for (arg in args)</code></p>
+
+<p>``` scala</p>
+
+<pre><code>for (arg &lt;- args)
+    println(arg)
+</code></pre>
+
+<p>```</p>
+
+<p>Some characteristics:</p>
+
+<ul>
+<li>For each element in <code>args</code>, it is assigned to <code>arg</code> using <code>val (not</code>var`, so you can re-assign)</li>
+<li>Yeah, it is using a <code>&lt;-</code>, which you can interpret as 'in'</li>
+<li>It is not a <code>&lt;=</code> because that would mean less-than-or-equal</li>
+</ul>
+
+
+<h2>Array, List, and Tuple</h2>
+
+<p>Much about immutability from Java is different in Scala.</p>
+
+<ul>
+<li>Array is mutable</li>
+<li>List is immutable</li>
+<li>Tuple is immutable, and can contain different types</li>
+</ul>
+
+
+<p>You can read more about <a href="http://www.scala-lang.org/api/current/scala/Array.html">Array</a> and <a href="http://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a>.</p>
+
+<p>However, I would want to point out about Tuple, as that is never heard of in Java. In Java, when you want to return multiple objects, you will probably create a POJO (plain old java object) to contain the multiple objects. Using tuple, you can avoid POJO like classes.</p>
+
+<p>``` scala</p>
+
+<pre><code>val color = ("blue", 258, 'b')
+</code></pre>
+
+<p>```</p>
+
+<p>You can then access the tuple using a dot, underscore, and the one-based index of the element.</p>
+
+<p>``` scala</p>
+
+<pre><code>println(color._1)
+// Prints blue
+</code></pre>
+
+<p>```</p>
+
+<h2>Set and Map</h2>
+
+<p>The way immutability works for Set and Map is different.</p>
+
+<p>To use a mutable Set, you import the mutable HashSet.</p>
+
+<p>``` scala</p>
+
+<pre><code>import scala.collection.mutable.HashSet
+
+val colorSet = new HashSet[String]
+colorSet += "blue"
+colorSet += ("red", "green")
+</code></pre>
+
+<p>```</p>
+
+<p>To use an immutable Set, you import the <em>immutable version</em>.</p>
+
+<p>``` scala</p>
+
+<pre><code>import scala.collection.immutable.HashSet
+
+val colorSet = HashSet[String]("blue", "red", "green")
+</code></pre>
+
+<p>```</p>
+
+<p>Similarly for map, there is a mutable and immutable version. Let's take a look at just the mutable HashMap.</p>
+
+<p>``` scala</p>
+
+<pre><code>import scala.collection.mutable.HashMap
+
+val colorMap = new HashMap[Int, String]
+colorMap += 1 -&gt; "Blue"
+colorMap += 2 -&gt; "Red"
+</code></pre>
+
+<p>```</p>
+
+<p>The expression <code>1 -&gt; "Blue"</code> means <code>1.-&gt;("Blue")</code>. The method <code>-&gt;</code> is available for any object in Scala, and it returns a 2-element tuple. So basically a 2-element tuple of (Int, String) is added to colorMap.</p>
+
+<p>You might think the equivalent is</p>
+
+<p>``` scala</p>
+
+<pre><code>colorMap += (1, "Blue")
+</code></pre>
+
+<p>```</p>
+
+<p>However, that would not work as <code>+=</code> method will interpret as you want to add 2 elements - a Int and a String - where in fact you want to add a tuple (Int, String). Hence you need to add ( ) for the tuple</p>
+
+<p>``` scala</p>
+
+<pre><code>colorMap += ((1, "Blue"))
+</code></pre>
+
+<p>```</p>
+
+<p>You can also create Map with a shorthand</p>
+
+<p>``` scala</p>
+
+<pre><code>var a = Map(1 -&gt; "Blue", 2 -&gt; "Red", 3 -&gt; "Green")
+</code></pre>
+
+<p>```</p>
+
+<p>Once again, that's same as</p>
+
+<p>``` scala</p>
+
+<pre><code>var a = Map( (1, "Blue"), (2, "Red"), (3, "Green") )
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

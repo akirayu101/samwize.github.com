@@ -1,0 +1,1503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Junda Ong]]></title>
+  <link href="http://samwize.github.com/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configure your local environment for Scala on Heroku]]></title>
+    <link href="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/"/>
+    <updated>2012-10-09T00:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku</id>
+    <content type="html"><![CDATA[<p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
+
+<p>If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you need to know.</p>
+
+<p>You should know how to properly configure your local development environment.</p>
+
+<!-- more -->
+
+
+<h2>Add the start script plugin</h2>
+
+<p>Typesafe&#8217;s <a href="https://github.com/typesafehub/xsbt-start-script-plugin">start script plugin</a> helps to generate a <code>target/start</code> script (you will use later).</p>
+
+<p>Create the file <code>project/build.sbt</code> with this</p>
+
+<pre><code>resolvers += Classpaths.typesafeResolver
+
+addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.3")
+</code></pre>
+
+<h2>Procfile</h2>
+
+<p>Create the file <code>Procfile</code> in the root folder. Enter this line:</p>
+
+<pre><code>web: target/start Web
+</code></pre>
+
+<h2>Build your app locally</h2>
+
+<p>You need to run this EVERYTIME before you run the app</p>
+
+<pre><code>$ sbt clean compile stage
+</code></pre>
+
+<h2>Run your app locally</h2>
+
+<p>Run your app using <a href="http://blog.daviddollar.org/2011/05/06/introducing-foreman.html">foreman</a></p>
+
+<pre><code>$ foreman run
+</code></pre>
+
+<p>The app will run on port 5000 (instead of usual 9000).</p>
+
+<p>Note: When you change your code, you need to exit, <code>sbt clean compile run</code>, then <code>foreman start</code> again..</p>
+
+<h2>Environment Variables (.env)</h2>
+
+<p>The <code>.env</code> file at root is for storing <a href="https://devcenter.heroku.com/articles/config-vars#local_setup">environment variables</a>. This file is in <code>.gitignore</code>, because it usually contains API credentials or environment specific settings.</p>
+
+<p>For example, credentials for mysql/redis/s3/etc is different between local and production environment.</p>
+
+<p>Enter your local environment variables in <code>.env</code> like this</p>
+
+<pre><code>S3_KEY=mykey
+S3_SECRET=mysecret
+</code></pre>
+
+<p>Enter your production environment variables using heroku command as such</p>
+
+<pre><code>$ heroku config:add S3_KEY=superkey
+$ heroku config:add S3_SECRET=supersecret
+</code></pre>
+
+<p>Then in your scala code, you can access the respective environment variables as such:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">s3Key</span> <span class="k">=</span> <span class="nc">System</span><span class="o">.</span><span class="n">getenv</span><span class="o">(</span><span class="s">&quot;S3_KEY&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A short Scala tutorial for Java Developers]]></title>
+    <link href="http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers/"/>
+    <updated>2012-10-07T21:10:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers</id>
+    <content type="html"><![CDATA[<p>This post is a tutorial guide for Java programmers who want to learn <a href="http://www.scala-lang.org/">Scala</a>.</p>
+
+<p>I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some <a href="http://www.artima.com/scalazine/articles/steps.html">baby steps</a> into the new language.</p>
+
+<p>The following post is what I have learnt.</p>
+
+<!-- more -->
+
+
+<h2>Methods Declaration</h2>
+
+<p>We use an example of a max function to illustrate the different ways to declare a method.</p>
+
+<p>You do it like this, in a single line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or, you can skip the return type (Int in this case) and let the compiler infer.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the method is more than a single line, you can wrap with curly braces.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// More lines of code ..</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You might have already notice. The <code>return</code> keyword is actually optional in Scala.  If omitted, the last expression is the value that will be returned.</p>
+
+<p>To be verbose, you can specify the return type with the <code>return</code> keyword.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Method with 0 parameter is Special</h2>
+
+<p>If you have the following method</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="s">&quot;foo!&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You may call it in 2 ways</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">foo</span><span class="o">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or simply</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">foo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, there is a guideline when to use which style. If there is a side effect, you should use the parenthesis. In other words, a getter method can skip the parenthesis.</p>
+
+<h2>Method with 1 parameter is Special</h2>
+
+<p>Int has a method <code>to</code> that takes 1 parameter of Int to return a sequence.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mf">0.</span><span class="n">to</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can drop the . and ( ) and simplify to</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mi">0</span> <span class="n">to</span> <span class="mi">10</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This alone makes the Scala language beautiful in many ways.</p>
+
+<h2>Method names can contain .+*/</h2>
+
+<p>Surprisingly, Scala doesn&#8217;t have operators, and therefore no operator overloading.</p>
+
+<p>But it can have a method name &#8216;+&#8217;. So an expression <code>1 + 2</code> is actually</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mf">1.</span><span class="o">+(</span><span class="mi">2</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But since <em>Method with 1 parameter is Special</em> (read above), 1.+(2) can be simplified to</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>val and var declarations</h2>
+
+<p>To declare a variable,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">foo</span> <span class="k">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">foo</span> <span class="k">=</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To declare a value, which does not allow you to change/reassign,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">foo</span> <span class="k">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="c1">// foo = 2 is not possible</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Also, a semi-colon at the end of a line is optional.</p>
+
+<h2>Class constructor</h2>
+
+<p>The constructor is the class declaration itself, and any constructor parameters can be used in other methods</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// foo() uses color</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Usage</span>
+</span><span class='line'><span class="k">val</span> <span class="n">c</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Color</span><span class="o">(</span><span class="s">&quot;Blue&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
+</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">foo</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you need to have some code in the constructor, you could write it right in the class body, right after the declaration.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">color</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nc">NullPointerException</span><span class="o">(</span><span class="s">&quot;Color is null&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span>
+</span><span class='line'>      <span class="n">index</span> <span class="k">=</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have multiple constructors, you can add them with <code>this</code> method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="k">this</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="k">this</span><span class="o">(</span><span class="n">color</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Usage</span>
+</span><span class='line'><span class="k">val</span> <span class="n">c</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Color</span><span class="o">(</span><span class="s">&quot;Blue&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Static/Singleton object</h2>
+
+<p>You cannot have static classes or variables in a class.</p>
+
+<p>Instead, if you want to add a static method, you have to use the <code>object</code> declaration, also known as Singleton objects.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">object</span> <span class="nc">Color</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">exclaim</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">&quot; color!&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Usage</span>
+</span><span class='line'><span class="nc">Color</span><span class="o">.</span><span class="n">exclaim</span><span class="o">(</span><span class="s">&quot;Pink&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="c1">// Prints &quot;Pink color!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also use the static method in the class method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="nc">Color</span><span class="o">.</span><span class="n">exclaim</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">object</span> <span class="nc">Color</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">exclaim</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">&quot; color!&quot;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Interface is traits</h2>
+
+<p>In Java, you have <code>Interface</code>. In Scala, you use <code>traits</code>. Moreover, you can have non-abstract methods in <code>traits</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">trait</span> <span class="nc">Friendly</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="s">&quot;Hi&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To have a <code>class</code> implement the <code>traits</code>, you use the <code>extends</code> keyword. And if you need to override the method, you need to explicitly use <code>override def</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Dog</span> <span class="k">extends</span> <span class="nc">Friendly</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="s">&quot;Woof&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similar to Java, a class can extend 1 class and multiple traits.</p>
+
+<p>Another difference is that Scala can mix in traits at instantiation time. In the following, we create another trait and use the <code>with</code> keyword to instantiate a Dog with that trait.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">trait</span> <span class="nc">ExclamatoryGreeter</span> <span class="k">extends</span> <span class="nc">Friendly</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="k">super</span><span class="o">.</span><span class="n">greet</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Usage</span>
+</span><span class='line'><span class="k">val</span> <span class="n">pup</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Dog</span> <span class="k">with</span> <span class="nc">ExclamatoryGreeter</span>
+</span><span class='line'><span class="n">println</span><span class="o">(</span><span class="n">pup</span><span class="o">.</span><span class="n">greet</span><span class="o">())</span>
+</span><span class='line'><span class="c1">// Prints &quot;Woof!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Array does not use subscript [ ]</h2>
+
+<p>To access an array, you use ( ) instead of [ ]. It is not a matter of symbol choice. Scala uses ( ) because an array is an object with methods.</p>
+
+<p>To access the 4th element of an array, you write</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Behind the scene, it is in fact calling a method <code>apply</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">.</span><span class="n">apply</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similarly, for setting an array element, you write</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="k">=</span> <span class="s">&quot;foo&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which is interpreted as</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;foo&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Functions are first class constructs</h2>
+
+<p>Java is <em>imperative</em> style. Scala is <em>imperative</em>, but excels in <em>functional</em> style too.</p>
+
+<p>Being a functional language, functions are first class constructs. We use an example of printing <code>args</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">args</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">arg</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>foreach</code> is being passed a function</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">arg</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above function has a few characteristics:</p>
+
+<ul>
+<li>It is an anonymous function (has no name)</li>
+<li>It get passed a single parameter named <code>arg</code> and the type is being inferred by compiler</li>
+<li>The main code is simply the <code>println</code></li>
+<li>Yeah, <code>=&gt;</code> is used, also call a right arrow</li>
+</ul>
+
+
+<p>A more complete example of an anonymous method with explicit parameter type</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// More code</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As we said, functions are first class constructs, so you basically could assign it to a variable</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">add</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+</span><span class='line'>  <span class="c1">// More code</span>
+</span><span class='line'>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then use it</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+</span><span class='line'><span class="c1">// returns 5</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>for arg in args</h2>
+
+<p>This is how you use <code>for (arg in args)</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">for</span> <span class="o">(</span><span class="n">arg</span> <span class="k">&lt;-</span> <span class="n">args</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Some characteristics:</p>
+
+<ul>
+<li>For each element in <code>args</code>, it is assigned to <code>arg</code> using <code>val (not</code>var`, so you can re-assign)</li>
+<li>Yeah, it is using a <code>&lt;-</code>, which you can interpret as &#8216;in&#8217;</li>
+<li>It is not a <code>&lt;=</code> because that would mean less-than-or-equal</li>
+</ul>
+
+
+<h2>Array, List, and Tuple</h2>
+
+<p>Much about immutability from Java is different in Scala.</p>
+
+<ul>
+<li>Array is mutable</li>
+<li>List is immutable</li>
+<li>Tuple is immutable, and can contain different types</li>
+</ul>
+
+
+<p>You can read more about <a href="http://www.scala-lang.org/api/current/scala/Array.html">Array</a> and <a href="http://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a>.</p>
+
+<p>However, I would want to point out about Tuple, as that is never heard of in Java. In Java, when you want to return multiple objects, you will probably create a POJO (plain old java object) to contain the multiple objects. Using tuple, you can avoid POJO like classes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">color</span> <span class="k">=</span> <span class="o">(</span><span class="s">&quot;blue&quot;</span><span class="o">,</span> <span class="mi">258</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can then access the tuple using a dot, underscore, and the one-based index of the element.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
+</span><span class='line'><span class="c1">// Prints blue</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Set and Map</h2>
+
+<p>The way immutability works for Set and Map is different.</p>
+
+<p>To use a mutable Set, you import the mutable HashSet.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.mutable.HashSet</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">val</span> <span class="n">colorSet</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
+</span><span class='line'><span class="n">colorSet</span> <span class="o">+=</span> <span class="s">&quot;blue&quot;</span>
+</span><span class='line'><span class="n">colorSet</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&quot;red&quot;</span><span class="o">,</span> <span class="s">&quot;green&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To use an immutable Set, you import the <em>immutable version</em>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.immutable.HashSet</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">val</span> <span class="n">colorSet</span> <span class="k">=</span> <span class="nc">HashSet</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">&quot;blue&quot;</span><span class="o">,</span> <span class="s">&quot;red&quot;</span><span class="o">,</span> <span class="s">&quot;green&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similarly for map, there is a mutable and immutable version. Let&#8217;s take a look at just the mutable HashMap.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.mutable.HashMap</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">val</span> <span class="n">colorMap</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">String</span><span class="o">]</span>
+</span><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Blue&quot;</span>
+</span><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;Red&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The expression <code>1 -&gt; "Blue"</code> means <code>1.-&gt;("Blue")</code>. The method <code>-&gt;</code> is available for any object in Scala, and it returns a 2-element tuple. So basically a 2-element tuple of (Int, String) is added to colorMap.</p>
+
+<p>You might think the equivalent is</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, that would not work as <code>+=</code> method will interpret as you want to add 2 elements - a Int and a String - where in fact you want to add a tuple (Int, String). Hence you need to add ( ) for the tuple</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="o">((</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also create Map with a shorthand</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Blue&quot;</span><span class="o">,</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;Red&quot;</span><span class="o">,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="s">&quot;Green&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once again, that&#8217;s same as</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">&quot;Red&quot;</span><span class="o">),</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;Green&quot;</span><span class="o">)</span> <span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to setup GHUnit with CocoaPods]]></title>
+    <link href="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/"/>
+    <updated>2012-10-04T23:21:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods</id>
+    <content type="html"><![CDATA[<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">installation guide for GHUnit</a> is for installing the framework in the traditional way.</p>
+
+<p>As you might know, <a href="http://cocoapods.org/">CocoaPods</a> is the new way to handle dependencies. Of course, GHUnit is supported.</p>
+
+<p>The is a lack of a guide on how you setup the two useful iOS libraries together.</p>
+
+<!-- more -->
+
+
+<p>It is similar to the <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">official guide</a>. I am going to point out the differences when need to.</p>
+
+<h2>Step 1 - Create Test Target</h2>
+
+<p>This is the same. You create a completely new application target.</p>
+
+<p>I prefer to name it <code>AppGHTests</code>, as I might still be using <code>AppTests</code> for my <a href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">SenTestings</a>.</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-ghunit-pods-new-target.png"></p>
+
+<h2>Step 2 - Configure Test Target</h2>
+
+<p>You DON&#8217;T have to download and copy <code>GHUnitIOS.framework</code> to your project since you are using CocoaPods. Instead, you should setup GHUnit pods.</p>
+
+<p>Edit the <code>Prodfile</code> and add GHUnitIOS.</p>
+
+<pre><code>platform :ios
+pod 'GHUnitIOS', '0.5.5'
+</code></pre>
+
+<p>Then install the pod as per normal.</p>
+
+<pre><code>$ pod install
+</code></pre>
+
+<p>Continue with the official guide to remove the unnecessary files, and edit <code>main.m</code> to replace the delegate class with <code>GHUnitIOSAppDelegate</code>.</p>
+
+<h2>Step 3 - Configure Pod for Test Target</h2>
+
+<p>This part is IMPORTANT. The new test target will not include the pods.</p>
+
+<p>You need to configure the target to be based on Pods project. Refer to <a href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">this post</a>.</p>
+
+<p>Lastly, add the <code>libPods.a</code> library to the test target.</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-ghunit-pods-libpods.png"></p>
+
+<p>That&#8217;s it. Run the test target!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SenTestingKit does not support wait for blocks]]></title>
+    <link href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
+    <updated>2012-10-03T00:21:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
+    <content type="html"><![CDATA[<p>I was using <a href="http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html">SenTestingKit</a>, the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.</p>
+
+<p>That&#8217;s a waste.</p>
+
+<!-- more -->
+
+
+<p>Though there is <a href="https://gist.github.com/2254570">a workaround</a> using semaphore.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testBlockMethod</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">dispatch_semaphore_t</span> <span class="n">semaphore</span> <span class="o">=</span> <span class="n">dispatch_semaphore_create</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Your block method eg. AFNetworking</span>
+</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://httpbin.org/ip&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">AFJSONRequestOperation</span> <span class="o">*</span><span class="n">operation</span> <span class="o">=</span> <span class="p">[</span><span class="n">AFJSONRequestOperation</span> <span class="nl">JSONRequestOperationWithRequest:</span><span class="n">request</span> <span class="nl">success:</span><span class="o">^</span><span class="p">(</span><span class="n">NSURLRequest</span> <span class="o">*</span><span class="n">request</span><span class="p">,</span> <span class="n">NSHTTPURLResponse</span> <span class="o">*</span><span class="n">response</span><span class="p">,</span> <span class="kt">id</span> <span class="n">JSON</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;IP Address: %@&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">JSON</span> <span class="nl">valueForKeyPath:</span><span class="s">@&quot;origin&quot;</span><span class="p">]);</span>
+</span><span class='line'>        <span class="n">STAssertNotNil</span><span class="p">(</span><span class="n">JSON</span><span class="p">,</span> <span class="s">@&quot;JSON not loaded&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="c1">// Signal that block has completed</span>
+</span><span class='line'>        <span class="n">dispatch_semaphore_signal</span><span class="p">(</span><span class="n">semaphore</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="nl">failure:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">operation</span> <span class="n">start</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Run loop</span>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="n">dispatch_semaphore_wait</span><span class="p">(</span><span class="n">semaphore</span><span class="p">,</span> <span class="n">DISPATCH_TIME_NOW</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">[[</span><span class="n">NSRunLoop</span> <span class="n">currentRunLoop</span><span class="p">]</span> <span class="nl">runMode:</span><span class="n">NSDefaultRunLoopMode</span>
+</span><span class='line'>                                 <span class="nl">beforeDate:</span><span class="p">[</span><span class="n">NSDate</span> <span class="nl">dateWithTimeIntervalSinceNow:</span><span class="mi">10</span><span class="p">]];</span>
+</span><span class='line'>    <span class="n">dispatch_release</span><span class="p">(</span><span class="n">semaphore</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But if you mind, there are lots of <a href="http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing">other testing frameworks</a>, eg <a href="https://github.com/gabriel/gh-unit">GHUnit</a> supports asynchronous testing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[App Store Changes in iOS6]]></title>
+    <link href="http://samwize.github.com/2012/10/02/app-store-changes-in-ios6/"/>
+    <updated>2012-10-02T22:22:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/02/app-store-changes-in-ios6</id>
+    <content type="html"><![CDATA[<p>iOS 6 has introduced a big change to how App Store works.</p>
+
+<p>The changes <a href="http://www.gamezebo.com/news/2012/09/25/ios-6-app-store-and-what-it-means-developers">means a lot to developers</a>, and affects how developers would write their app descriptions, screenshots, etc.</p>
+
+<p>Some of the changes are so breaking, that lightwoodgames said - <a href="http://www.lightwoodgames.com/blog/2012/09/everything-thats-wrong-with-the-app-store-in-ios-6/#.UGhVbaQe7UO">don&#8217;t just put up with this!</a>.</p>
+
+<p>You could also refer to a <a href="http://www.apptamin.com/ASO_Cheat_Sheet-v2.pdf">simple cheatsheet</a>.</p>
+
+<p>Here&#8217;s my short version of what you should take note of:</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>First screenshot is very important</p></li>
+<li><p>First 3 lines of description is still very prominent</p></li>
+<li><p>Fill up What&#8217;s New section</p></li>
+<li><p>Enter your App Support URL</p></li>
+<li><p>Ask your users to &#8216;like&#8217; on Facebook</p></li>
+</ol>
+
+
+<p>And as always, search algorithm is forever changing. Use your keywords effectively. Use unique (and not generic) keywords. Use singular form.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit Tests with CocoaPods]]></title>
+    <link href="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/"/>
+    <updated>2012-10-01T23:41:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods</id>
+    <content type="html"><![CDATA[<p><a href="http://cocoapods.org/">CocoaPods</a> is a tool for managing dependecies for iOS and Mac OS X projects.</p>
+
+<p><a href="http://cocoapods.org/">Getting started</a> with using CocoaPods is easy. The tricky part is getting used to opening Xcode workspace (eg. <code>App.xcworkspace</code>) instead of Xocde project. But that&#8217;s not what I want to covered in this post.</p>
+
+<p>One of the hurdle I encountered is getting unit testing to work after CocoaPods is setup.</p>
+
+<!-- more -->
+
+
+<p>Apparently, after you setup CocoaPods, it automatically configures your project&#8217;s main target to use the pods (dependecies). However, it does not configure the same for your unit tests target. So when you run your unit test, you will likely encounter errors like this:</p>
+
+<pre><code>SomeLibrary.h not found
+</code></pre>
+
+<p>To fix, go to <strong>Project</strong> > <strong>Info</strong> > <strong>Configurations</strong> > change <code>Based on Configuration File</code> to <code>Pods</code>. Like this:</p>
+
+<p><img class="center" src="http://samwize.github.com/images/cocoapods-unit-test-configure.png"></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress would not deploy]]></title>
+    <link href="http://samwize.github.com/2012/09/30/octopress-would-not-deploy/"/>
+    <updated>2012-09-30T21:59:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/30/octopress-would-not-deploy</id>
+    <content type="html"><![CDATA[<p>I encountered a problem when I did a <code>rake deploy</code>. Somehow it does not get deployed.</p>
+
+<p>The only error I got was:</p>
+
+<pre><code>The following paths are ignored by one of your .gitignore files:
+_deploy
+</code></pre>
+
+<!-- more -->
+
+
+<p>That&#8217;s a strange error. And I verified the <code>public</code> and <code>_deploy</code> directories were generated correctly.</p>
+
+<p>It turns out to be an issue when you clone the repos. You <a href="https://github.com/imathis/octopress/issues/412">must setup the Github pages</a> again.</p>
+
+<pre><code>rake setup_github_pages 
+</code></pre>
+
+<p>Just that. Wasted a few hours. Hopes this help others.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Singleton/SharedInstance Template for iOS 5 (ARC and GCD)]]></title>
+    <link href="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/"/>
+    <updated>2012-09-29T19:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd</id>
+    <content type="html"><![CDATA[<p>The singleton pattern is widely used in iOS to have a global, static class.</p>
+
+<p>The most famous is <code>[NSUserDefaults standardUserDefaults]</code>.</p>
+
+<p>Over the years, the template for creating a singleton/SharedInstance has also changed. This is due to the introduction of new technologies in Apple&#8217;s SDK, particularly ARC and GDC.</p>
+
+<!-- more -->
+
+
+<p>The <a href="http://lukeredpath.co.uk/blog/a-note-on-objective-c-singletons.html">implementation</a> has simplified to:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">sharedInstance</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">static</span> <span class="n">dispatch_once_t</span> <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">__strong</span> <span class="k">static</span> <span class="kt">id</span> <span class="n">_sharedObject</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
+</span><span class='line'>    <span class="n">_sharedObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span> <span class="c1">// or some other init method</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">_sharedObject</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nice piece of code added to my Xcode snippet.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[API Design Rules for iOS/OS X]]></title>
+    <link href="http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x/"/>
+    <updated>2012-09-28T21:43:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x</id>
+    <content type="html"><![CDATA[<p>If you are designing an SDK/library/API, read these 25 rules by <a href="http://mattgemmell.com/2012/05/24/api-design/">Matt Gemmell</a>:</p>
+
+<p><a href="http://mattgemmell.com/2012/05/24/api-design/"><img class="center" src="http://samwize.github.com/images/ios-api-design-rules.jpeg"></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode 4.5 Tips &amp; Tricks]]></title>
+    <link href="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/"/>
+    <updated>2012-09-26T01:16:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks</id>
+    <content type="html"><![CDATA[<p>Some of my favorite Xcode tips &amp; tricks (tested on Xcode 4.5).</p>
+
+<h2>Shortcut</h2>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-shortcuts.png" title="xcode shortcuts" ></p>
+
+<!-- more -->
+
+
+<h2>Catch All Exceptions</h2>
+
+<ol>
+<li>Bring up breakpoint navigator (⌘6)</li>
+<li>Click + on the bottom left</li>
+<li>Add Exception Breakpoint</li>
+</ol>
+
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-catch-all-exceptions.png" title="xcode catch exceptions" ></p>
+
+<p><em>Anyone knows the difference with <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">symbolic breakpoint</a>?</em></p>
+
+<h2>NSLog, Auto Continue on Breakpoints</h2>
+
+<p>Breakpoints are so much powerful. Don&#8217;t limit to just pause on every breakpoint.</p>
+
+<p>You could set actions such as log a message under certain condition, or automatically continue. Or if you are not interested in the first 10 times of a while loop, you can ignore x times before pause. Or even have your Mac speaks out instead of traditional text logging.</p>
+
+<p>Edit a breakpoint for more options:</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-nslog-on-breakpoints.png" title="breakpoints actions" ></p>
+
+<h2>Use of Tabs</h2>
+
+<ol>
+<li>Create new tabs with ⌘T</li>
+<li>Double click to edit tab name</li>
+<li>My workflow uses these tabs: Project Resources, Design, Coding 1, Coding 2, Build</li>
+</ol>
+
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-tabs-workflow.png" title="tabs for my workflow" ></p>
+
+<p>It&#8217;s totally up to you to organize your tabs, just like web browsing.</p>
+
+<h2>Use of Behaviours</h2>
+
+<p>Behaviours are hooks to Xcode for events like build, test, run, and search. You can find them in <strong>Preferences</strong> > <strong>Behaviours</strong>.</p>
+
+<p>These are my additional behaviours.</p>
+
+<p>Show Build tab when there is new issue:</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-behaviour-build-new-issues.png" title="'Show Build tab when there is new issue'" ></p>
+
+<p>Show console when start running:</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-behaviour-console.png" title="'Show console when start running'" ></p>
+
+<p>Show Debug tab when paused:</p>
+
+<p><img class="center" src="http://samwize.github.com/images/xcode-behaviour-debug-tab.png" title="'Show Debug tab when paused'" ></p>
+
+<h2>More Reference</h2>
+
+<ol>
+<li><a href="http://developer.apple.com/videos/wwdc/2012/">WWDC 2012</a> - &#8220;Working Efficiently with Xcode&#8221; is an excellent introductory</li>
+<li><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215-CH1-SW1">Xcode4 User Guide</a> - Complete, but way too much text</li>
+<li><a href="http://blog.gomiso.com/2012/02/07/work-efficiently-with-xcode/">miso blog</a> - from a developer</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Table Stylesheet]]></title>
+    <link href="http://samwize.github.com/2012/09/24/octopress-table-stylesheet/"/>
+    <updated>2012-09-24T19:27:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/24/octopress-table-stylesheet</id>
+    <content type="html"><![CDATA[<p>Octopress has been very cool for the 2 weeks since I began using.</p>
+
+<p>My first hiccup came when I tried using table in <a href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/">this post</a>. Firstly, I have to figure out how to create table in Octopress. Yet after figuring out, the table doesn&#8217;t get displayed! It&#8217;s just not working.</p>
+
+<!-- more -->
+
+
+<h2>Usage</h2>
+
+<p>The first problem is with understanding how to create table in Octopress. They didn&#8217;t really <a href="http://octopress.org/docs/">document</a> that, because they expect you to know <a href="http://daringfireball.net/projects/markdown/syntax#html">markdown inline HTML</a> can be used. That means writing:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Column1<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Column2<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>foo<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;td&gt;</span>foo<span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>    
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>However, that&#8217;s not really nice, and defeats the point of <em>not writing in HTML</em>.</p>
+
+<p>Fortunately, you can do the same using extended markdown syntax like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>| Column1     | Column2      |
+</span><span class='line'>| ----------- | ------------ |
+</span><span class='line'>| foo         | foo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But that still does not work. You will not see the table borders..</p>
+
+<p>I would say that&#8217;s a bug with Octopress.</p>
+
+<h2>Table Stylesheet</h2>
+
+<p>As I inspect the generated HTML, the table tags are present, and correct.</p>
+
+<p>They are not showing because of the css stylesheet. <code>table</code>, <code>th</code> and <code>td</code> has <code>border-width</code> of ZERO! This <a href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/">post in chinese</a> provides a solution. Translated, it means:</p>
+
+<h3>Step 1. Add data-table.css</h3>
+
+<p>Add data-table.css to <code>source/stylesheets/</code>.</p>
+
+<div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
+<noscript><pre><code>* + table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}
+
+* + table th, * + table td {
+  border-style:dashed;
+  border-width:1px;
+  border-color:#e7e3e7;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+* + table th {
+  border-style:solid;
+  font-weight:bold;
+  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
+}
+
+* + table th[align=&quot;left&quot;], * + table td[align=&quot;left&quot;] {
+  text-align:left;
+}
+
+* + table th[align=&quot;right&quot;], * + table td[align=&quot;right&quot;] {
+  text-align:right;
+}
+
+* + table th[align=&quot;center&quot;], * + table td[align=&quot;center&quot;] {
+  text-align:center;
+}
+</code></pre></noscript></div>
+
+
+<h3>Step 2. Add link header</h3>
+
+<p>In <code>source/_includes/head.html</code> insert this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/data-table.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen, projection&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And now the table appears!</p>
+
+<p>PS: I am puzzled why Octopress does not ship with a default table stylesheet.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I bought samwize.com for 99 cents]]></title>
+    <link href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
+    <updated>2012-09-21T10:51:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
+    <content type="html"><![CDATA[<p>This blog is now given an official (domain) name since I <a href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/">switched to Octopress</a> 2 weeks ago.</p>
+
+<p>The domain is bought from <a href="http://www.namecheap.com/">NameCheap</a> at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code <strong>WELOVEU</strong>)</p>
+
+<p>Wonder how I host this blog?</p>
+
+<!-- more -->
+
+
+<h2>Host blog on Github Pages</h2>
+
+<p>The blogging framework is using Octopress, and the baked webpages are hosted using <a href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/">Github Pages</a> (Free!).</p>
+
+<p>To use my custom domain, I added <code>samwize.com</code> to the file <code>/source/CNAME</code> in Octopress.</p>
+
+<p>Since I am now using a top-level domain, I have to add an A record pointing to <code>204.232.175.78</code>. I also redirect <a href="http://www.samwize.com">www.samwize.com</a> to <a href="http://samwize.com">samwize.com</a>. My Namecheap host records looks like this:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> HOST NAME   </th>
+<th> IP ADDRESS/URL    </th>
+<th> RECORD TYPE       </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> @           </td>
+<td> 204.232.175.78    </td>
+<td> A (Address)       </td>
+</tr>
+<tr>
+<td></td>
+<td> www         </td>
+<td> samwize.com.      </td>
+<td> CNAME (Alias)     </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to write Getter/Setter for static variables]]></title>
+    <link href="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/"/>
+    <updated>2012-09-20T14:14:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables</id>
+    <content type="html"><![CDATA[<p>In the last post, I blogged about how you should write <a href="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">Getter/Setter for member variables</a>.</p>
+
+<p>This is a follow-up for <strong>static variables</strong>, instead of instance variables.</p>
+
+<!-- more -->
+
+
+<p>I didn&#8217;t know the answer to that, until I searched around <a href="http://stackoverflow.com/questions/128573/using-property-on-classmethods">Stackoverflow</a>. There are a couple of ways around using @property on classmethods.</p>
+
+<p>The best answer for me is this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">_foo</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'>    <span class="k">class</span> <span class="nc">__metaclass__</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+</span><span class='line'>        <span class="nd">@property</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nd">@foo.setter</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span class='line'>                <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It uses <code>__metaclass__</code>, some kind of <a href="http://www.voidspace.org.uk/python/articles/five-minutes.shtml">black magic</a> in Python.</p>
+
+<p>With that, you can use the getter/setter on the static variable.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
+</span><span class='line'><span class="mi">5</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
+</span><span class='line'><span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Non-ASCII Character in Python File]]></title>
+    <link href="http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file/"/>
+    <updated>2012-09-18T18:00:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file</id>
+    <content type="html"><![CDATA[<p>If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error:</p>
+
+<pre><code>Python Error: Non-ASCII character in file but no encoding declared
+</code></pre>
+
+<p>Python by default does not allow Non-ASCII characters in the file. You have to insert the following at the top of the Python file.</p>
+
+<pre><code>#!/usr/bin/env python
+# -*- coding: utf8 -*- 
+</code></pre>
+
+<p>This works on a <a href="http://www.python.org/dev/peps/pep-0263/">per file basis</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Paros - a mitmproxy with GUI for sniffing HTTP traffic]]></title>
+    <link href="http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/"/>
+    <updated>2012-09-15T01:47:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic</id>
+    <content type="html"><![CDATA[<p>I introduced <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/">mitmproxy for sniffing iPhone HTTP traffic</a> back at <a href="http://just2us.com">just2us.com</a>.</p>
+
+<p><a href="http://mitmproxy.org/">mitmproxy</a> is awesome, except that it isn&#8217;t very user friendly, as it is a text console interface. Many times, I have to figure what are the keys to move around or access certain function.</p>
+
+<p>That&#8217;s where <a href="http://www.parosproxy.org/">Paros</a> shines.</p>
+
+<p>This is how you setup up Paros to sniff iPhone HTTP Traffic:</p>
+
+<!-- more -->
+
+
+<h2>1. Install Paros</h2>
+
+<p>Paros runs on Java. <a href="http://www.parosproxy.org/download.shtml">Download</a> for <a href="http://www.parosproxy.org/install.shtml">install</a>.</p>
+
+<p>For Mac, download the Linux version.</p>
+
+<p>Unzip and run <code>paros.jar</code>.</p>
+
+<h2>2. Find out your machine IP</h2>
+
+<p>Find out the local IP for your machine. You need this for the next step.</p>
+
+<p>For Mac, run the command <code>ifconfig en1</code> and copy down the IP.</p>
+
+<h2>3. Setup your iPhone proxy</h2>
+
+<p>Make sure your iPhone is on the same network as the machine running Paros. eg. connect to the same Wifi</p>
+
+<p>On your iPhone, open <strong>General</strong> > <strong>Wi-Fi</strong> > Go to details for your Wifi network.</p>
+
+<p>From there, choose <strong>Manual</strong> for <strong>HTTP Proxy</strong>. Enter the <strong>machine IP</strong> for Server and <strong>8080</strong> for Port.</p>
+
+<p><img class="center" src="http://samwize.github.com/images/iphone-http-proxy-paros.png" width="360" title="iPhone network settings" ></p>
+
+<p>In the screenshot above, my machine IP is 192.168.1.68.</p>
+
+<h2>4. Start running your target app and sniff</h2>
+
+<p>Use your iPhone to run the app that you want to sniff the traffic.</p>
+
+<p>Paros interface will immediately show the URL sites the app connects to. The interface is pretty self explanatory so I won&#8217;t go on from here.</p>
+
+<p>Rock on from there!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Adding and Using Custom Font in iOS]]></title>
+    <link href="http://samwize.github.com/2012/09/14/adding-and-using-custom-font-in-ios/"/>
+    <updated>2012-09-14T00:13:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/14/adding-and-using-custom-font-in-ios</id>
+    <content type="html"><![CDATA[<p>Custom font can be easily added and used in iOS 3.2 or above. Yet it is a very popular <a href="http://stackoverflow.com/questions/360751/can-i-embed-a-custom-font-in-an-iphone-application">question</a> on for iOS Developers.</p>
+
+<p>Here are the steps:</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>Add the otf/ttf font into your Resources folder. The name of my font is <strong>BentonSansComp-Book.otf</strong></p></li>
+<li><p>Edit <strong>info.plist</strong> and add a key call <code>UIAppFonts</code> - value type should be <code>Array</code>. The friendly name for <code>UIAppFonts</code> is <code>Fonts provided by application</code>.</p></li>
+<li><p>In <code>item0</code> of the array enter the name of the font you added &#8211; in my case, <strong>BentonSansComp-Book.otf</strong></p></li>
+<li><p>Find the font name.</p>
+
+<p> IMPORTANT: The font name is not necessary the filename. Open with <strong>Font Book.app</strong> > <strong>Show font info</strong> > look for <strong>PostScript name</strong>. That&#8217;s the font name you should use. For my font, it happens that the filename == font name.</p></li>
+<li><p>Unfortunately, Xcode interface builder does not let you change to your custom font. So you got to code it!</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">myLabelView</span> <span class="nl">setFont:</span><span class="p">[</span><span class="n">UIFont</span> <span class="nl">fontWithName:</span><span class="s">@&quot;BentonSansComp-Book&quot;</span> <span class="nl">size:</span><span class="mi">16</span><span class="p">]];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sphinx – Documentation for Python]]></title>
+    <link href="http://samwize.github.com/2012/09/13/sphinx-documentation-for-python/"/>
+    <updated>2012-09-13T22:08:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/13/sphinx-documentation-for-python</id>
+    <content type="html"><![CDATA[<p>Python is a wonderful language also because of the awesome tools that are available.</p>
+
+<p>One of which is <a href="http://sphinx.pocoo.org/">Sphinx</a>. It is like markdown, but even more, with cross referencing of pages and autogeneration of doc for python code.</p>
+
+<p>Start with installing Sphinx.</p>
+
+<pre><code>$ sudo easy_install -U Sphinx
+</code></pre>
+
+<!-- more -->
+
+
+<p>Create sphinx docs in your project.</p>
+
+<pre><code>$ cd /path/to/project/docs/
+$ sphinx-quickstart
+</code></pre>
+
+<p>Write your documentation (eg. quick start guide) in your index.rst. Sphinx uses reStructured Text (a kind of text formatting).  Refer to this <a href="http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html">quick tutorial</a> and this <a href="https://github.com/ralsina/rst-cheatsheet">handy cheatsheet</a>.</p>
+
+<p><a href="http://sphinx.pocoo.org/markup/inline.html#cross-referencing-syntax">Cross reference</a> your documentation. You can link across to arbitrary location with <code>:ref:`my-label-name`</code> or across files with <code>:doc:`my-doc-name`</code>.</p>
+
+<pre><code>.. _my-label-name:
+
+Section to cross-reference
+--------------------------
+
+This is the text of the section.
+
+It refers to the section itself, see :ref:`my-label-name`.
+</code></pre>
+
+<p>Finally, generate the HTML files.</p>
+
+<pre><code>make html
+</code></pre>
+
+<p>Lastly, Sphinx can automatically generate your module and classes, using your docstrings. That way, you can write your documentation in your python files (and not again in Sphinx doc).</p>
+
+<p>To do that, you have to edit Sphinx&#8217;s <code>conf.py</code> and add your modules path to <code>sys.path</code>. Insert the following code in <code>conf.py</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s">&#39;..&#39;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With that, you can automatically generate doc for a class.</p>
+
+<pre><code>.. automodule:: mymodule.something
+
+.. autoclass:: MyClass
+    :members:
+</code></pre>
+
+<p>This is a short introduction guide to Sphinx. There’s obviously more, with cases of authors writing books using Sphinx!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hide "All My Files" in Mac's Finder]]></title>
+    <link href="http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder/"/>
+    <updated>2012-09-12T13:18:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder</id>
+    <content type="html"><![CDATA[<p>It took me a few months before I decide &#8220;All My Files&#8221; is a useless feature for Mac OS Lion.</p>
+
+<p>I was irked that it is the default view when you create new Finder window. And I was even more irked that the default arrangement by Kind shows my Adium chat log right at the top..</p>
+
+<!-- more -->
+
+
+<p>So I decided to change it.</p>
+
+<pre><code>Finder &gt; Preferences &gt; General &gt; New Finder windows show: Downloads
+
+Finder &gt; Preferences &gt; Sidebar &gt; Uncheck as Favorites
+</code></pre>
+
+<p>If I still want to access &#8220;All My Files&#8221;, I could still use the handy shortcut Shift+Cmd+F.</p>
+
+<p><img class="left" src="http://samwize.github.com/images/new-finder-windows-show.png" width="340" title="New Finder windows show" > <img class="left" src="http://samwize.github.com/images/hide-show-my-files-sidebar.png" width="340" title="Hide from sidebar" ></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to setup Octopress on Github Pages]]></title>
+    <link href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/"/>
+    <updated>2012-09-11T02:07:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages</id>
+    <content type="html"><![CDATA[<p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
+
+<p>As mentioned in the previous post, I have <a href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
+
+<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
+
+<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
+
+<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
+
+<pre><code># Here's how I found out
+rake new_post["Switched Wordpress to Octopress"]
+rbenv: version `1.9.3-p194' is not installed
+
+# Hence..
+rbenv install 1.9.3-p194
+rbenv global 1.9.3-p194
+</code></pre>
+
+<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
+
+<pre><code>gem install bundler
+rbenv rehash
+bundle install
+</code></pre>
+
+<h2>Deploy</h2>
+
+<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it&#8217;s free as long as you don&#8217;t mind pushing your &#8216;code&#8217; to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
+
+<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
+
+<ol>
+<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
+<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
+</ol>
+
+
+<p>To deploy:</p>
+
+<pre><code>rake generate
+rake deploy
+</code></pre>
+
+<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
+
+<p>So what about the source branch? You should also commit and push them.</p>
+
+<pre><code>git add .
+git commit -m 'your message'
+git push origin source
+</code></pre>
+
+<h2>Custom Domain</h2>
+
+<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
+
+<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
+</code></pre>
+
+<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
+
+<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
+
+<h2>New Post</h2>
+
+<p>This is my process whenever I have a new blog post.</p>
+
+<pre><code>rake new_post["My New Post"]
+
+# edit my-new-post.markdown with text editor
+
+rake preview
+
+# Open http://localhost:4000 for a preview
+# Edit and preview until satified
+
+# Ready to publish
+rake generate
+rake deploy
+
+# Commit source
+git add .
+git commit -m 'your message'
+git push origin source  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
+    <link href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <updated>2012-09-10T00:29:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
+
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
+
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
+<li><p>There isn&#8217;t a good &amp; free Wordpress editor for Mac</p></li>
+<li><p>I wish I can write in markdown or something</p></li>
+</ol>
+
+
+<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
+
+<blockquote><p>A blogging framework for hackers</p></blockquote>
+
+<p>It makes sense:</p>
+
+<ul>
+<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!</p></li>
+<li><p>Hacker prefers to write in markdown; it&#8217;s clear like code</p></li>
+</ul>
+
+
+<p>Switching wouldn&#8217;t count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
+
+<p>Time will tell if it&#8217;s worth.</p>
+]]></content>
+  </entry>
+  
+</feed>

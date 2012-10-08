@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Play! | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/play-/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Configure your local environment for Scala on Heroku]]></title>
+    <link href="http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku/"/>
+    <updated>2012-10-09T00:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku</id>
+    <content type="html"><![CDATA[<p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
+
+<p>If you know the basic of Heroku, and has got started with Typesafe's Scala + Play! framework, there is 1 more thing you need to know.</p>
+
+<p>You should know how to properly configure your local development environment.</p>
+
+<!-- more -->
+
+
+<h2>Add the start script plugin</h2>
+
+<p>Typesafe's <a href="https://github.com/typesafehub/xsbt-start-script-plugin">start script plugin</a> helps to generate a <code>target/start</code> script (you will use later).</p>
+
+<p>Create the file <code>project/build.sbt</code> with this</p>
+
+<pre><code>resolvers += Classpaths.typesafeResolver
+
+addSbtPlugin("com.typesafe.startscript" % "xsbt-start-script-plugin" % "0.5.3")
+</code></pre>
+
+<h2>Procfile</h2>
+
+<p>Create the file <code>Procfile</code> in the root folder. Enter this line:</p>
+
+<pre><code>web: target/start Web
+</code></pre>
+
+<h2>Build your app locally</h2>
+
+<p>You need to run this EVERYTIME before you run the app</p>
+
+<pre><code>$ sbt clean compile stage
+</code></pre>
+
+<h2>Run your app locally</h2>
+
+<p>Run your app using <a href="http://blog.daviddollar.org/2011/05/06/introducing-foreman.html">foreman</a></p>
+
+<pre><code>$ foreman run
+</code></pre>
+
+<p>The app will run on port 5000 (instead of usual 9000).</p>
+
+<p>Note: When you change your code, you need to exit, <code>sbt clean compile run</code>, then <code>foreman start</code> again..</p>
+
+<h2>Environment Variables (.env)</h2>
+
+<p>The <code>.env</code> file at root is for storing <a href="https://devcenter.heroku.com/articles/config-vars#local_setup">environment variables</a>. This file is in <code>.gitignore</code>, because it usually contains API credentials or environment specific settings.</p>
+
+<p>For example, credentials for mysql/redis/s3/etc is different between local and production environment.</p>
+
+<p>Enter your local environment variables in <code>.env</code> like this</p>
+
+<pre><code>S3_KEY=mykey
+S3_SECRET=mysecret
+</code></pre>
+
+<p>Enter your production environment variables using heroku command as such</p>
+
+<pre><code>$ heroku config:add S3_KEY=superkey
+$ heroku config:add S3_SECRET=supersecret
+</code></pre>
+
+<p>Then in your scala code, you can access the respective environment variables as such:</p>
+
+<p>``` scala</p>
+
+<pre><code>val s3Key = System.getenv("S3_KEY")
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

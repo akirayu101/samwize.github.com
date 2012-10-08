@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Blogging | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I bought samwize.com for 99 cents]]></title>
+    <link href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
+    <updated>2012-09-21T10:51:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
+    <content type="html"><![CDATA[<p>This blog is now given an official (domain) name since I <a href="/2012/09/10/switched-from-wordpress-to-octopress/">switched to Octopress</a> 2 weeks ago.</p>
+
+<p>The domain is bought from <a href="http://www.namecheap.com/">NameCheap</a> at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code <strong>WELOVEU</strong>)</p>
+
+<p>Wonder how I host this blog?</p>
+
+<!-- more -->
+
+
+<h2>Host blog on Github Pages</h2>
+
+<p>The blogging framework is using Octopress, and the baked webpages are hosted using <a href="/2012/09/11/how-to-setup-octopress-on-github-pages/">Github Pages</a> (Free!).</p>
+
+<p>To use my custom domain, I added <code>samwize.com</code> to the file <code>/source/CNAME</code> in Octopress.</p>
+
+<p>Since I am now using a top-level domain, I have to add an A record pointing to <code>204.232.175.78</code>. I also redirect <a href="http://www.samwize.com">www.samwize.com</a> to <a href="http://samwize.com">samwize.com</a>. My Namecheap host records looks like this:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> HOST NAME   </th>
+<th> IP ADDRESS/URL    </th>
+<th> RECORD TYPE       </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> @           </td>
+<td> 204.232.175.78    </td>
+<td> A (Address)       </td>
+</tr>
+<tr>
+<td></td>
+<td> www         </td>
+<td> samwize.com.      </td>
+<td> CNAME (Alias)     </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
+    <link href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <updated>2012-09-10T00:29:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
+
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
+
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
+<li><p>There isn't a good &amp; free Wordpress editor for Mac</p></li>
+<li><p>I wish I can write in markdown or something</p></li>
+</ol>
+
+
+<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
+
+<blockquote><p>A blogging framework for hackers</p></blockquote>
+
+<p>It makes sense:</p>
+
+<ul>
+<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!</p></li>
+<li><p>Hacker prefers to write in markdown; it's clear like code</p></li>
+</ul>
+
+
+<p>Switching wouldn't count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
+
+<p>Time will tell if it's worth.</p>
+]]></content>
+  </entry>
+  
+</feed>

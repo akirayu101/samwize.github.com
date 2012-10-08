@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-10-09T01:45:40+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress would not deploy]]></title>
+    <link href="http://samwize.github.com/2012/09/30/octopress-would-not-deploy/"/>
+    <updated>2012-09-30T21:59:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/30/octopress-would-not-deploy</id>
+    <content type="html"><![CDATA[<p>I encountered a problem when I did a <code>rake deploy</code>. Somehow it does not get deployed.</p>
+
+<p>The only error I got was:</p>
+
+<pre><code>The following paths are ignored by one of your .gitignore files:
+_deploy
+</code></pre>
+
+<!-- more -->
+
+
+<p>That's a strange error. And I verified the <code>public</code> and <code>_deploy</code> directories were generated correctly.</p>
+
+<p>It turns out to be an issue when you clone the repos. You <a href="https://github.com/imathis/octopress/issues/412">must setup the Github pages</a> again.</p>
+
+<pre><code>rake setup_github_pages 
+</code></pre>
+
+<p>Just that. Wasted a few hours. Hopes this help others.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress Table Stylesheet]]></title>
+    <link href="http://samwize.github.com/2012/09/24/octopress-table-stylesheet/"/>
+    <updated>2012-09-24T19:27:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/24/octopress-table-stylesheet</id>
+    <content type="html"><![CDATA[<p>Octopress has been very cool for the 2 weeks since I began using.</p>
+
+<p>My first hiccup came when I tried using table in <a href="/2012/09/21/i-bought-samwize-dot-com-for-99-cents/">this post</a>. Firstly, I have to figure out how to create table in Octopress. Yet after figuring out, the table doesn't get displayed! It's just not working.</p>
+
+<!-- more -->
+
+
+<h2>Usage</h2>
+
+<p>The first problem is with understanding how to create table in Octopress. They didn't really <a href="http://octopress.org/docs/">document</a> that, because they expect you to know <a href="http://daringfireball.net/projects/markdown/syntax#html">markdown inline HTML</a> can be used. That means writing:</p>
+
+<p>``` html</p>
+
+<table>
+    <tr>
+        <td>Column1</td>
+        <td>Column2</td>
+    </tr>
+    <tr>
+        <td>foo</td>
+        <td>foo</td>
+    </tr>
+</table>
+
+
+<p>  <br/>
+```</p>
+
+<p>However, that's not really nice, and defeats the point of <em>not writing in HTML</em>.</p>
+
+<p>Fortunately, you can do the same using extended markdown syntax like this:</p>
+
+<p>```
+| Column1     | Column2      |
+| ----------- | ------------ |
+| foo         | foo</p>
+
+<p>```</p>
+
+<p>But that still does not work. You will not see the table borders..</p>
+
+<p>I would say that's a bug with Octopress.</p>
+
+<h2>Table Stylesheet</h2>
+
+<p>As I inspect the generated HTML, the table tags are present, and correct.</p>
+
+<p>They are not showing because of the css stylesheet. <code>table</code>, <code>th</code> and <code>td</code> has <code>border-width</code> of ZERO! This <a href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/">post in chinese</a> provides a solution. Translated, it means:</p>
+
+<h3>Step 1. Add data-table.css</h3>
+
+<p>Add data-table.css to <code>source/stylesheets/</code>.</p>
+
+<p><div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
+<noscript><pre><code>* + table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}
+
+* + table th, * + table td {
+  border-style:dashed;
+  border-width:1px;
+  border-color:#e7e3e7;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+* + table th {
+  border-style:solid;
+  font-weight:bold;
+  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
+}
+
+* + table th[align=&quot;left&quot;], * + table td[align=&quot;left&quot;] {
+  text-align:left;
+}
+
+* + table th[align=&quot;right&quot;], * + table td[align=&quot;right&quot;] {
+  text-align:right;
+}
+
+* + table th[align=&quot;center&quot;], * + table td[align=&quot;center&quot;] {
+  text-align:center;
+}
+</code></pre></noscript></div>
+</p>
+
+<h3>Step 2. Add link header</h3>
+
+<p>In <code>source/_includes/head.html</code> insert this:</p>
+
+<p><code>html
+&lt;link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
+</code></p>
+
+<p>And now the table appears!</p>
+
+<p>PS: I am puzzled why Octopress does not ship with a default table stylesheet.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[I bought samwize.com for 99 cents]]></title>
+    <link href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
+    <updated>2012-09-21T10:51:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
+    <content type="html"><![CDATA[<p>This blog is now given an official (domain) name since I <a href="/2012/09/10/switched-from-wordpress-to-octopress/">switched to Octopress</a> 2 weeks ago.</p>
+
+<p>The domain is bought from <a href="http://www.namecheap.com/">NameCheap</a> at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code <strong>WELOVEU</strong>)</p>
+
+<p>Wonder how I host this blog?</p>
+
+<!-- more -->
+
+
+<h2>Host blog on Github Pages</h2>
+
+<p>The blogging framework is using Octopress, and the baked webpages are hosted using <a href="/2012/09/11/how-to-setup-octopress-on-github-pages/">Github Pages</a> (Free!).</p>
+
+<p>To use my custom domain, I added <code>samwize.com</code> to the file <code>/source/CNAME</code> in Octopress.</p>
+
+<p>Since I am now using a top-level domain, I have to add an A record pointing to <code>204.232.175.78</code>. I also redirect <a href="http://www.samwize.com">www.samwize.com</a> to <a href="http://samwize.com">samwize.com</a>. My Namecheap host records looks like this:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th> HOST NAME   </th>
+<th> IP ADDRESS/URL    </th>
+<th> RECORD TYPE       </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> @           </td>
+<td> 204.232.175.78    </td>
+<td> A (Address)       </td>
+</tr>
+<tr>
+<td></td>
+<td> www         </td>
+<td> samwize.com.      </td>
+<td> CNAME (Alias)     </td>
+</tr>
+</tbody>
+</table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to setup Octopress on Github Pages]]></title>
+    <link href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/"/>
+    <updated>2012-09-11T02:07:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages</id>
+    <content type="html"><![CDATA[<p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
+
+<p>As mentioned in the previous post, I have <a href="/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
+
+<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
+
+<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
+
+<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
+
+<pre><code># Here's how I found out
+rake new_post["Switched Wordpress to Octopress"]
+rbenv: version `1.9.3-p194' is not installed
+
+# Hence..
+rbenv install 1.9.3-p194
+rbenv global 1.9.3-p194
+</code></pre>
+
+<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
+
+<pre><code>gem install bundler
+rbenv rehash
+bundle install
+</code></pre>
+
+<h2>Deploy</h2>
+
+<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it's free as long as you don't mind pushing your 'code' to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
+
+<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
+
+<ol>
+<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
+<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
+</ol>
+
+
+<p>To deploy:</p>
+
+<pre><code>rake generate
+rake deploy
+</code></pre>
+
+<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
+
+<p>So what about the source branch? You should also commit and push them.</p>
+
+<pre><code>git add .
+git commit -m 'your message'
+git push origin source
+</code></pre>
+
+<h2>Custom Domain</h2>
+
+<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
+
+<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
+</code></pre>
+
+<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
+
+<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
+
+<h2>New Post</h2>
+
+<p>This is my process whenever I have a new blog post.</p>
+
+<pre><code>rake new_post["My New Post"]
+
+# edit my-new-post.markdown with text editor
+
+rake preview
+
+# Open http://localhost:4000 for a preview
+# Edit and preview until satified
+
+# Ready to publish
+rake generate
+rake deploy
+
+# Commit source
+git add .
+git commit -m 'your message'
+git push origin source  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
+    <link href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <updated>2012-09-10T00:29:00+08:00</updated>
+    <id>http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
+
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
+
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
+
+<!-- more -->
+
+
+<ol>
+<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
+<li><p>There isn't a good &amp; free Wordpress editor for Mac</p></li>
+<li><p>I wish I can write in markdown or something</p></li>
+</ol>
+
+
+<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
+
+<blockquote><p>A blogging framework for hackers</p></blockquote>
+
+<p>It makes sense:</p>
+
+<ul>
+<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!</p></li>
+<li><p>Hacker prefers to write in markdown; it's clear like code</p></li>
+</ul>
+
+
+<p>Switching wouldn't count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
+
+<p>Time will tell if it's worth.</p>
+]]></content>
+  </entry>
+  
+</feed>
