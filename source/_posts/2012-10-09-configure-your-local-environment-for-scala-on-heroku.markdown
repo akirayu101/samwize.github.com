@@ -76,3 +76,19 @@ Then in your scala code, you can access the respective environment variables as 
 ```
 
 
+## Better way to run your app locally ##
+
+You could use `.env` in your local development workspace as described in the above sections.
+
+However, it would inefficient to `sbt clean compile run` and then `foreman start` everytime you change your code and run.
+
+So the better way is to store directly in your computer's environment variables.
+
+	$ export S3_KEY=mykey
+
+To ensure it's stored
+
+	$ echo $S3_KEY
+
+With that, your could `sbt run` as per normal.
+

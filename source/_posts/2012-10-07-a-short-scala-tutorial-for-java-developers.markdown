@@ -8,7 +8,7 @@ categories: Scala
 
 This post is a tutorial guide for Java programmers who want to learn [Scala](http://www.scala-lang.org/). 
 
-I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some [baby steps](http://www.artima.com/scalazine/articles/steps.html) into the new language.
+I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some [baby steps](http://www.artima.com/scalazine/articles/steps.html) to learn the new language.
 
 The following post is what I have learnt. 
 
