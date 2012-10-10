@@ -8,7 +8,7 @@ categories: [Scala, Play!, Heroku]
 
 Heroku has a good [getting started guide with Scala](https://devcenter.heroku.com/articles/scala).
 
-If you know the basic of Heroku, and has got started with Typesafe's Scala + Play! framework, there is 1 more thing you need to know.
+If you know the basic of Heroku, and has started with Typesafe's Scala + Play! framework, there is 1 more thing you should to know.
 
 You should know how to properly configure your local development environment.
 
