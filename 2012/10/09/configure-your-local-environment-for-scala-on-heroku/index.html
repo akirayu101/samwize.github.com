@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Heroku has a good getting started guide with Scala. If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! &hellip;">
+  <meta name="description" content="Heroku has a good getting started guide with Scala. If you know the basic of Heroku, and has started with Typesafe&#8217;s Scala + Play! framework, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@
 
 <div class="entry-content"><p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
 
-<p>If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you need to know.</p>
+<p>If you know the basic of Heroku, and has started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you should to know.</p>
 
 <p>You should know how to properly configure your local development environment.</p>
 
@@ -177,7 +177,23 @@ $ heroku config:add S3_SECRET=supersecret
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Better way to run your app locally</h2>
 
+<p>You could use <code>.env</code> in your local development workspace as described in the above sections.</p>
+
+<p>However, it would inefficient to <code>sbt clean compile run</code> and then <code>foreman start</code> everytime you change your code and run.</p>
+
+<p>So the better way is to store directly in your computer&#8217;s environment variables.</p>
+
+<pre><code>$ export S3_KEY=mykey
+</code></pre>
+
+<p>To ensure it&#8217;s stored</p>
+
+<pre><code>$ echo $S3_KEY
+</code></pre>
+
+<p>With that, your could <code>sbt run</code> as per normal.</p>
 </div>
 
 

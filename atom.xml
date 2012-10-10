@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-09T01:45:40+08:00</updated>
+  <updated>2012-10-10T23:51:21+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -20,7 +20,7 @@
     <id>http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku</id>
     <content type="html"><![CDATA[<p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
 
-<p>If you know the basic of Heroku, and has got started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you need to know.</p>
+<p>If you know the basic of Heroku, and has started with Typesafe&#8217;s Scala + Play! framework, there is 1 more thing you should to know.</p>
 
 <p>You should know how to properly configure your local development environment.</p>
 
@@ -88,7 +88,23 @@ $ heroku config:add S3_SECRET=supersecret
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>Better way to run your app locally</h2>
 
+<p>You could use <code>.env</code> in your local development workspace as described in the above sections.</p>
+
+<p>However, it would inefficient to <code>sbt clean compile run</code> and then <code>foreman start</code> everytime you change your code and run.</p>
+
+<p>So the better way is to store directly in your computer&#8217;s environment variables.</p>
+
+<pre><code>$ export S3_KEY=mykey
+</code></pre>
+
+<p>To ensure it&#8217;s stored</p>
+
+<pre><code>$ echo $S3_KEY
+</code></pre>
+
+<p>With that, your could <code>sbt run</code> as per normal.</p>
 ]]></content>
   </entry>
   
@@ -99,7 +115,7 @@ $ heroku config:add S3_SECRET=supersecret
     <id>http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers</id>
     <content type="html"><![CDATA[<p>This post is a tutorial guide for Java programmers who want to learn <a href="http://www.scala-lang.org/">Scala</a>.</p>
 
-<p>I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some <a href="http://www.artima.com/scalazine/articles/steps.html">baby steps</a> into the new language.</p>
+<p>I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some <a href="http://www.artima.com/scalazine/articles/steps.html">baby steps</a> to learn the new language.</p>
 
 <p>The following post is what I have learnt.</p>
 

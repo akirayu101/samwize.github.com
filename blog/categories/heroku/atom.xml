@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Heroku | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-09T01:45:40+08:00</updated>
+  <updated>2012-10-10T23:51:21+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -20,7 +20,7 @@
     <id>http://samwize.github.com/2012/10/09/configure-your-local-environment-for-scala-on-heroku</id>
     <content type="html"><![CDATA[<p>Heroku has a good <a href="https://devcenter.heroku.com/articles/scala">getting started guide with Scala</a>.</p>
 
-<p>If you know the basic of Heroku, and has got started with Typesafe's Scala + Play! framework, there is 1 more thing you need to know.</p>
+<p>If you know the basic of Heroku, and has started with Typesafe's Scala + Play! framework, there is 1 more thing you should to know.</p>
 
 <p>You should know how to properly configure your local development environment.</p>
 
@@ -89,6 +89,24 @@ $ heroku config:add S3_SECRET=supersecret
 </code></pre>
 
 <p>```</p>
+
+<h2>Better way to run your app locally</h2>
+
+<p>You could use <code>.env</code> in your local development workspace as described in the above sections.</p>
+
+<p>However, it would inefficient to <code>sbt clean compile run</code> and then <code>foreman start</code> everytime you change your code and run.</p>
+
+<p>So the better way is to store directly in your computer's environment variables.</p>
+
+<pre><code>$ export S3_KEY=mykey
+</code></pre>
+
+<p>To ensure it's stored</p>
+
+<pre><code>$ echo $S3_KEY
+</code></pre>
+
+<p>With that, your could <code>sbt run</code> as per normal.</p>
 ]]></content>
   </entry>
   
