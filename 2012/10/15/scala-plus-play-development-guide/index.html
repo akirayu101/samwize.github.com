@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Unit Tests with CocoaPods - Junda Ong</title>
+  <title>Scala + Play! Development Guide - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="CocoaPods is a tool for managing dependecies for iOS and Mac OS X projects. Getting started with using CocoaPods is easy. The tricky part is getting &hellip;">
+  <meta name="description" content="This is a guide on using Typesafe Stack (basically on Scala + Play! Framework). It covers installation, start a project, setting up Eclipse and Git, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/">
+  <link rel="canonical" href="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Unit Tests With CocoaPods</h1>
+      <h1 class="entry-title">Scala + Play! Development Guide</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-01T23:41:00+08:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
+<time datetime="2012-10-15T16:02:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,23 +107,125 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://cocoapods.org/">CocoaPods</a> is a tool for managing dependecies for iOS and Mac OS X projects.</p>
+<div class="entry-content"><p>This is a guide on using Typesafe Stack (basically on Scala + Play! Framework).</p>
 
-<p><a href="http://cocoapods.org/">Getting started</a> with using CocoaPods is easy. The tricky part is getting used to opening Xcode workspace (eg. <code>App.xcworkspace</code>) instead of Xocde project. But that&#8217;s not what I want to covered in this post.</p>
-
-<p>One of the hurdle I encountered is getting unit testing to work after CocoaPods is setup.</p>
+<p>It covers installation, start a project, setting up Eclipse and Git, then deploying to Heroku.</p>
 
 <!-- more -->
 
 
-<p>Apparently, after you setup CocoaPods, it automatically configures your project&#8217;s main target to use the pods (dependecies). However, it does not configure the same for your unit tests target. So when you run your unit test, you will likely encounter errors like this:</p>
+<h2>Installation</h2>
 
-<pre><code>SomeLibrary.h not found
+<p>Install the <a href="http://typesafe.com/stack/download">stack</a>.</p>
+
+<pre><code>$ brew install scala sbt maven giter8
 </code></pre>
 
-<p>To fix, go to <strong>Project</strong> > <strong>Info</strong> > <strong>Configurations</strong> > change <code>Based on Configuration File</code> to <code>Pods</code>. Like this:</p>
+<p><code>sbt</code> is the <a href="http://typesafe.com/technology/sbt">Simple Build Tool</a> for managing Scala project. The sbt-version for this guide is 0.12.0.</p>
 
-<p><img class="center" src="/images/cocoapods-unit-test-configure.png"></p>
+<p><code>giter8</code> is for <a href="https://github.com/n8han/giter8">generating template projects</a>.</p>
+
+<p>If you have a 404 error when maven is being installed, you can <code>brew edit maven</code> and <a href="http://stackoverflow.com/questions/12757694/brew-install-maven-404-error">change the URL</a>.</p>
+
+<h2>Create a new project</h2>
+
+<p>Create a new project using <code>giter8</code> templates</p>
+
+<pre><code>$ g8 typesafehub/play-scala
+</code></pre>
+
+<h2>Run the project</h2>
+
+<p>Issue the 2 commands to run</p>
+
+<pre><code>$ sbt
+$ run
+</code></pre>
+
+<p>The web app will serve at http://localhost:9000/.</p>
+
+<p>You could as well issue a single command <code>sbt run</code>.</p>
+
+<h2>Run a console</h2>
+
+<p>You can also run a play console to do some testing.</p>
+
+<pre><code>$ sbt console
+</code></pre>
+
+<p>In the console, you could call any piece of your code directly and conveniently test out stuff.</p>
+
+<h2>Setup Eclipse</h2>
+
+<p>In order to open the project using Eclipse, do a</p>
+
+<pre><code>$ sbt eclipsify
+</code></pre>
+
+<p>You would of course download the <a href="http://typesafe.com/stack/scala_ide_download">Scala IDE</a> (Eclipse). I would rename to <code>Eclipse-scala</code> and put in my Applications folder.</p>
+
+<p>Open Eclipse, go to File > Import > General/Existing Project and select the scala project.</p>
+
+<p>Important: Everytime you added libraries and dependencies to the project, you need to <code>sbt eclipsify</code> again.</p>
+
+<h2>Git setup, and .gitignore</h2>
+
+<p>These are the files to ignore; the content of <code>.gitignore</code>:</p>
+
+<pre><code>logs
+project/project
+project/target
+target
+tmp
+.history
+/.settings/
+/.target/
+/bin/
+/eclipse/
+/.project
+/.classpath
+/.cache
+/.DS_Store
+</code></pre>
+
+<p>Then do <code>git init</code> and your first commit!</p>
+
+<pre><code>git init
+git add .
+git commit -m "Initial Commit"
+</code></pre>
+
+<h2>Scala</h2>
+
+<p>Before the next section on Play! Framework, make sure you are comfortable with Scala first.</p>
+
+<p>Even how much you about Scala being an easy to understand language, and much like Java, trust me. You need to read an introduction guide to Scala first.</p>
+
+<p>A good starting point would be a <a href="/2012/10/07/2012-10-07-a-short-scala-tutorial-for-java-developers/">Scala tutorial</a> from me (:</p>
+
+<h2>Play! Framework</h2>
+
+<p>It&#8217;s time to start actual development of your app.</p>
+
+<p>However, I am going to cut short here, as this post is merely a short guide to get you started.</p>
+
+<p>Head over to <a href="http://scala.playframework.org/documentation/">Play! framework documentation</a> for a tutorial. (You may skip the setup portion, and start with the <a href="http://scala.playframework.org/documentation/2.0.4/ScalaActions">Action</a>)</p>
+
+<h2>Deploy to Heroku</h2>
+
+<p>Heroku supports Play! 2 and Scala. A <a href="https://github.com/playframework/Play20/wiki/ProductionHeroku">wiki</a> on how to deploy to Heroku is available.</p>
+
+<p>You would firstly need to <a href="http://heroku.com/signup">register</a> a Heroku account, and then install <a href="http://toolbelt.heroku.com/">Toolbelt</a>.</p>
+
+<p>You must have setup git as described in the previous section.</p>
+
+<p>Create a heroku app and push to the server</p>
+
+<pre><code>heroku create
+git push heroku master
+</code></pre>
+
+<p>It will take quite some time to setup the heroku server on the first push. So wait till it says finish, and off you go!</p>
 </div>
 
 
@@ -146,12 +248,12 @@
   
 
 
-<time datetime="2012-10-01T23:41:00+08:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
+<time datetime="2012-10-15T16:02:00+08:00" pubdate data-updated="true">Oct 15<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/osx/'>OSX</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/play-/'>Play!</a>, <a class='category' href='/blog/categories/scala/'>Scala</a>
   
 </span>
 
@@ -160,7 +262,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -173,10 +275,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/30/octopress-would-not-deploy/" title="Previous Post: Octopress would not deploy">&laquo; Octopress would not deploy</a>
+        <a class="basic-alignment left" href="/2012/10/11/the-lean-startup/" title="Previous Post: The Lean Startup">&laquo; The Lean Startup</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/02/app-store-changes-in-ios6/" title="Next Post: App Store Changes in iOS6">App Store Changes in iOS6 &raquo;</a>
       
     </p>
   </footer>
@@ -255,8 +355,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/';
-        var disqus_url = 'http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/';
+        var disqus_identifier = 'http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/';
+        var disqus_url = 'http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/';
         var disqus_script = 'embed.js';
       
     (function () {

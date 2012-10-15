@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-10T23:55:45+08:00</updated>
+  <updated>2012-10-15T22:47:34+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,133 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scala + Play! Development Guide]]></title>
+    <link href="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/"/>
+    <updated>2012-10-15T16:02:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/15/scala-plus-play-development-guide</id>
+    <content type="html"><![CDATA[<p>This is a guide on using Typesafe Stack (basically on Scala + Play! Framework).</p>
+
+<p>It covers installation, start a project, setting up Eclipse and Git, then deploying to Heroku.</p>
+
+<!-- more -->
+
+
+<h2>Installation</h2>
+
+<p>Install the <a href="http://typesafe.com/stack/download">stack</a>.</p>
+
+<pre><code>$ brew install scala sbt maven giter8
+</code></pre>
+
+<p><code>sbt</code> is the <a href="http://typesafe.com/technology/sbt">Simple Build Tool</a> for managing Scala project. The sbt-version for this guide is 0.12.0.</p>
+
+<p><code>giter8</code> is for <a href="https://github.com/n8han/giter8">generating template projects</a>.</p>
+
+<p>If you have a 404 error when maven is being installed, you can <code>brew edit maven</code> and <a href="http://stackoverflow.com/questions/12757694/brew-install-maven-404-error">change the URL</a>.</p>
+
+<h2>Create a new project</h2>
+
+<p>Create a new project using <code>giter8</code> templates</p>
+
+<pre><code>$ g8 typesafehub/play-scala
+</code></pre>
+
+<h2>Run the project</h2>
+
+<p>Issue the 2 commands to run</p>
+
+<pre><code>$ sbt
+$ run
+</code></pre>
+
+<p>The web app will serve at http://localhost:9000/.</p>
+
+<p>You could as well issue a single command <code>sbt run</code>.</p>
+
+<h2>Run a console</h2>
+
+<p>You can also run a play console to do some testing.</p>
+
+<pre><code>$ sbt console
+</code></pre>
+
+<p>In the console, you could call any piece of your code directly and conveniently test out stuff.</p>
+
+<h2>Setup Eclipse</h2>
+
+<p>In order to open the project using Eclipse, do a</p>
+
+<pre><code>$ sbt eclipsify
+</code></pre>
+
+<p>You would of course download the <a href="http://typesafe.com/stack/scala_ide_download">Scala IDE</a> (Eclipse). I would rename to <code>Eclipse-scala</code> and put in my Applications folder.</p>
+
+<p>Open Eclipse, go to File > Import > General/Existing Project and select the scala project.</p>
+
+<p>Important: Everytime you added libraries and dependencies to the project, you need to <code>sbt eclipsify</code> again.</p>
+
+<h2>Git setup, and .gitignore</h2>
+
+<p>These are the files to ignore; the content of <code>.gitignore</code>:</p>
+
+<pre><code>logs
+project/project
+project/target
+target
+tmp
+.history
+/.settings/
+/.target/
+/bin/
+/eclipse/
+/.project
+/.classpath
+/.cache
+/.DS_Store
+</code></pre>
+
+<p>Then do <code>git init</code> and your first commit!</p>
+
+<pre><code>git init
+git add .
+git commit -m "Initial Commit"
+</code></pre>
+
+<h2>Scala</h2>
+
+<p>Before the next section on Play! Framework, make sure you are comfortable with Scala first.</p>
+
+<p>Even how much you about Scala being an easy to understand language, and much like Java, trust me. You need to read an introduction guide to Scala first.</p>
+
+<p>A good starting point would be a <a href="http://samwize.github.com/2012/10/07/2012-10-07-a-short-scala-tutorial-for-java-developers/">Scala tutorial</a> from me (:</p>
+
+<h2>Play! Framework</h2>
+
+<p>It&#8217;s time to start actual development of your app.</p>
+
+<p>However, I am going to cut short here, as this post is merely a short guide to get you started.</p>
+
+<p>Head over to <a href="http://scala.playframework.org/documentation/">Play! framework documentation</a> for a tutorial. (You may skip the setup portion, and start with the <a href="http://scala.playframework.org/documentation/2.0.4/ScalaActions">Action</a>)</p>
+
+<h2>Deploy to Heroku</h2>
+
+<p>Heroku supports Play! 2 and Scala. A <a href="https://github.com/playframework/Play20/wiki/ProductionHeroku">wiki</a> on how to deploy to Heroku is available.</p>
+
+<p>You would firstly need to <a href="http://heroku.com/signup">register</a> a Heroku account, and then install <a href="http://toolbelt.heroku.com/">Toolbelt</a>.</p>
+
+<p>You must have setup git as described in the previous section.</p>
+
+<p>Create a heroku app and push to the server</p>
+
+<pre><code>heroku create
+git push heroku master
+</code></pre>
+
+<p>It will take quite some time to setup the heroku server on the first push. So wait till it says finish, and off you go!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Lean Startup]]></title>
@@ -1568,107 +1695,6 @@ Finder &gt; Preferences &gt; Sidebar &gt; Uncheck as Favorites
 <p>If I still want to access &#8220;All My Files&#8221;, I could still use the handy shortcut Shift+Cmd+F.</p>
 
 <p><img class="left" src="http://samwize.github.com/images/new-finder-windows-show.png" width="340" title="New Finder windows show" > <img class="left" src="http://samwize.github.com/images/hide-show-my-files-sidebar.png" width="340" title="Hide from sidebar" ></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to setup Octopress on Github Pages]]></title>
-    <link href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/"/>
-    <updated>2012-09-11T02:07:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages</id>
-    <content type="html"><![CDATA[<p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
-
-<p>As mentioned in the previous post, I have <a href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
-
-<!-- more -->
-
-
-<h2>Setup</h2>
-
-<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
-
-<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
-
-<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
-
-<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
-
-<pre><code># Here's how I found out
-rake new_post["Switched Wordpress to Octopress"]
-rbenv: version `1.9.3-p194' is not installed
-
-# Hence..
-rbenv install 1.9.3-p194
-rbenv global 1.9.3-p194
-</code></pre>
-
-<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
-
-<pre><code>gem install bundler
-rbenv rehash
-bundle install
-</code></pre>
-
-<h2>Deploy</h2>
-
-<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it&#8217;s free as long as you don&#8217;t mind pushing your &#8216;code&#8217; to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
-
-<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
-
-<ol>
-<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
-<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
-</ol>
-
-
-<p>To deploy:</p>
-
-<pre><code>rake generate
-rake deploy
-</code></pre>
-
-<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
-
-<p>So what about the source branch? You should also commit and push them.</p>
-
-<pre><code>git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
-
-<h2>Custom Domain</h2>
-
-<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
-
-<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
-</code></pre>
-
-<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
-
-<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
-
-<h2>New Post</h2>
-
-<p>This is my process whenever I have a new blog post.</p>
-
-<pre><code>rake new_post["My New Post"]
-
-# edit my-new-post.markdown with text editor
-
-rake preview
-
-# Open http://localhost:4000 for a preview
-# Edit and preview until satified
-
-# Ready to publish
-rake generate
-rake deploy
-
-# Commit source
-git add .
-git commit -m 'your message'
-git push origin source  
-</code></pre>
 ]]></content>
   </entry>
   
