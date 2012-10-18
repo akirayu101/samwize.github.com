@@ -4,7 +4,7 @@ title: "Scala Tutorial (Part II)"
 date: 2012-10-18 22:14
 comments: true
 categories: [Scala, Play!]
-published: false
+published: true
 ---
 
 This is a continuation to [a short Scala tutorial](/2012-10/07/a-short-scala-tutorial-for-java-developers) and [Scala+Play Development Guide](2012/10/15/scala-plus-play-development-guide).
