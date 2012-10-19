@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Scala | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/scala/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-18T21:27:25+08:00</updated>
+  <updated>2012-10-19T23:14:14+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why I hate Scala]]></title>
+    <link href="http://samwize.github.com/2012/10/19/why-i-hate-scala/"/>
+    <updated>2012-10-19T21:44:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/19/why-i-hate-scala</id>
+    <content type="html"><![CDATA[<p>I spent about 2 weeks using Scala, before concluding that I hate the language.</p>
+
+<p>When I first wrote the first <a href="/2012/10/07/a-short-scala-tutorial-for-java-developers/">beginner guide to Scala</a>, I was in awe, and yet feeling a tinge of uneasiness.</p>
+
+<p>Then I spent a few days creating a Scala web application, resulting in a subsequent <a href="/2012/10/15/scala-plus-play-development-guide/">random guide to Scala programming</a>.</p>
+
+<p>After I am done with the project, I know I would not start another project in Scala at my own will.</p>
+
+<!-- more -->
+
+
+<p>There are many <a href="http://m-mansur-ashraf.blogspot.sg/2011/08/is-scala-really-too-complex-for-average_20.html">Scala</a> <a href="http://amplicate.com/hate/scala">haters</a>.</p>
+
+<p>Here's what I think:</p>
+
+<ul>
+<li><p>Scala is a powerful &amp; complex language.</p></li>
+<li><p>You could have dozens of custom operators like <code>&lt;/&gt;</code>, and <code>=:=</code>. That makes understanding code very difficult. Take a look at the <a href="http://www.flotsam.nl/dispatch-periodic-table.html">dispatch</a> (HTTP) library.</p></li>
+<li><p>Even simple usage requires explaining. There's too many concepts.</p></li>
+<li><p>Otherwise, it is a <a href="http://dispatch.databinder.net/">lack of explaining</a></p></li>
+<li><p>You will be constantly figuring out the language syntax</p></li>
+<li><p>Ecosystem not great; lack of support, docs</p></li>
+</ul>
+
+
+<p>It's damn hard to read Scala code.</p>
+
+<p>You can call me an average programmer for all I care. But let's say I am average, and I can't understand Scala, then Scala is not a universal language.</p>
+
+<p>Reading a <a href="http://blog.joda.org/2011/11/real-life-scala-feedback-from-yammer.html">real life feedback from Yammer</a>, it worries me even more. Some other things they said:</p>
+
+<ul>
+<li><p>Major version releases is backward incompatible</p></li>
+<li><p>High learning curve, slow to get productive</p></li>
+<li><p>To increase performance: Don't use for-loop, s.c.m/i.. wtf</p></li>
+<li><p>Compared 2 codebases, consensus is Java. Hence they switched back.</p></li>
+</ul>
+
+
+<p>I like Python better. And I always like one of <a href="http://c2.com/cgi/wiki?PythonPhilosophy">Python design philosophy</a></p>
+
+<blockquote><p>There should be one-- and preferably only one --obvious way to do it.</p></blockquote>
+
+<p>Scala has <em>too many ways</em>.</p>
+
+<p>You will not be able to comprehend easily. Never.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scala Tutorial (Part II)]]></title>
