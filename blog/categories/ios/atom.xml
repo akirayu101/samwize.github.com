@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-22T08:26:41+08:00</updated>
+  <updated>2012-10-23T22:31:06+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Error: Application Executable Missing Required Architecture]]></title>
+    <link href="http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/"/>
+    <updated>2012-10-23T22:20:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture</id>
+    <content type="html"><![CDATA[<p>I swear this is the most common error I have seen whenever I upload an iOS binary.</p>
+
+<blockquote><p>Error: application executable is missing a required architecture armv6</p></blockquote>
+
+<p>It occurs every time after Apple release a new iPhone (or architecture type).</p>
+
+<!-- more -->
+
+
+<p>In 2011, when I was using Xcode 4.2, when I think iPhone 4 was out, I need to <a href="http://stackoverflow.com/a/8538393/242682">change</a> the Architectures settings from <code>armv7</code> to <code>armv6 armv7</code>.</p>
+
+<p>There is another similar due to to "no architectures to compile for" which you can <a href="http://stackoverflow.com/a/5294634/242682">solve</a> by changing <code>VALID_ARCHS</code>.</p>
+
+<p>Now in 2012, with Xcode 4.5, with the new iPhone 5, and the phasing out of armv6 (used in the old generation of iPod and iPhone), it once again introduced the error.</p>
+
+<p>This time, you have to <a href="http://stackoverflow.com/a/12524366/242682">set</a> the deployment target to at least iOS 4.3.</p>
+
+<p>Well done Apple.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Updating App for iPhone 5]]></title>
@@ -125,11 +151,13 @@ return [UIImage imageNamed:imageName];
 
 <p>To run and test on a 4 inch iPhone, select <strong>Hardware</strong> > <strong>Device</strong> > <strong>iPhone (Retina 4-inch)</strong>.</p>
 
-<h2>8. Last words</h2>
+<h2>8. Last words..</h2>
 
 <p>It largely depends on how you code your existing apps.</p>
 
 <p>Use the above techniques as needed, and handily use the <a href="https://gist.github.com/3926123">Device class</a> methods.</p>
+
+<p>If you use any third party libraries, you would also need to update their libs with support for <code>armv7s</code> (a new architecture for iPhone5). Popular libs are already updated at this point of writing eg. Flurry, Google Admob, and other ad networks.</p>
 ]]></content>
   </entry>
   
@@ -260,31 +288,6 @@ dispatch_release(semaphore);
 
 
 <p>And as always, search algorithm is forever changing. Use your keywords effectively. Use unique (and not generic) keywords. Use singular form.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Unit Tests with CocoaPods]]></title>
-    <link href="http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods/"/>
-    <updated>2012-10-01T23:41:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/01/unit-tests-with-cocoapods</id>
-    <content type="html"><![CDATA[<p><a href="http://cocoapods.org/">CocoaPods</a> is a tool for managing dependecies for iOS and Mac OS X projects.</p>
-
-<p><a href="http://cocoapods.org/">Getting started</a> with using CocoaPods is easy. The tricky part is getting used to opening Xcode workspace (eg. <code>App.xcworkspace</code>) instead of Xocde project. But that's not what I want to covered in this post.</p>
-
-<p>One of the hurdle I encountered is getting unit testing to work after CocoaPods is setup.</p>
-
-<!-- more -->
-
-
-<p>Apparently, after you setup CocoaPods, it automatically configures your project's main target to use the pods (dependecies). However, it does not configure the same for your unit tests target. So when you run your unit test, you will likely encounter errors like this:</p>
-
-<pre><code>SomeLibrary.h not found
-</code></pre>
-
-<p>To fix, go to <strong>Project</strong> > <strong>Info</strong> > <strong>Configurations</strong> > change <code>Based on Configuration File</code> to <code>Pods</code>. Like this:</p>
-
-<p><img class="center" src="/images/cocoapods-unit-test-configure.png"></p>
 ]]></content>
   </entry>
   

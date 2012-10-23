@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to setup GHUnit with CocoaPods - Junda Ong</title>
+  <title>Error: Application Executable Missing Required Architecture - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="The installation guide for GHUnit is for installing the framework in the traditional way. As you might know, CocoaPods is the new way to handle &hellip;">
+  <meta name="description" content="I swear this is the most common error I have seen whenever I upload an iOS binary. Error: application executable is missing a required architecture &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/">
+  <link rel="canonical" href="http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">How to Setup GHUnit With CocoaPods</h1>
+      <h1 class="entry-title">Error: Application Executable Missing Required Architecture</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-04T23:21:00+08:00" pubdate data-updated="true">Oct 4<span>th</span>, 2012</time>
+<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,53 +107,24 @@
   </header>
 
 
-<div class="entry-content"><p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">installation guide for GHUnit</a> is for installing the framework in the traditional way.</p>
+<div class="entry-content"><p>I swear this is the most common error I have seen whenever I upload an iOS binary.</p>
 
-<p>As you might know, <a href="http://cocoapods.org/">CocoaPods</a> is the new way to handle dependencies. Of course, GHUnit is supported.</p>
+<blockquote><p>Error: application executable is missing a required architecture armv6</p></blockquote>
 
-<p>The is a lack of a guide on how you setup the two useful iOS libraries together.</p>
+<p>It occurs every time after Apple release a new iPhone (or architecture type).</p>
 
 <!-- more -->
 
 
-<p>It is similar to the <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">official guide</a>. I am going to point out the differences when need to.</p>
+<p>In 2011, when I was using Xcode 4.2, when I think iPhone 4 was out, I need to <a href="http://stackoverflow.com/a/8538393/242682">change</a> the Architectures settings from <code>armv7</code> to <code>armv6 armv7</code>.</p>
 
-<h2>Step 1 - Create Test Target</h2>
+<p>There is another similar due to to &#8220;no architectures to compile for&#8221; which you can <a href="http://stackoverflow.com/a/5294634/242682">solve</a> by changing <code>VALID_ARCHS</code>.</p>
 
-<p>This is the same. You create a completely new application target.</p>
+<p>Now in 2012, with Xcode 4.5, with the new iPhone 5, and the phasing out of armv6 (used in the old generation of iPod and iPhone), it once again introduced the error.</p>
 
-<p>I prefer to name it <code>AppGHTests</code>, as I might still be using <code>AppTests</code> for my <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">SenTestings</a>.</p>
+<p>This time, you have to <a href="http://stackoverflow.com/a/12524366/242682">set</a> the deployment target to at least iOS 4.3.</p>
 
-<p><img class="center" src="/images/xcode-ghunit-pods-new-target.png"></p>
-
-<h2>Step 2 - Configure Test Target</h2>
-
-<p>You DON&#8217;T have to download and copy <code>GHUnitIOS.framework</code> to your project since you are using CocoaPods. Instead, you should setup GHUnit pods.</p>
-
-<p>Edit the <code>Prodfile</code> and add GHUnitIOS.</p>
-
-<pre><code>platform :ios
-pod 'GHUnitIOS', '0.5.5'
-</code></pre>
-
-<p>Then install the pod as per normal.</p>
-
-<pre><code>$ pod install
-</code></pre>
-
-<p>Continue with the official guide to remove the unnecessary files, and edit <code>main.m</code> to replace the delegate class with <code>GHUnitIOSAppDelegate</code>.</p>
-
-<h2>Step 3 - Configure Pod for Test Target</h2>
-
-<p>This part is IMPORTANT. The new test target will not include the pods.</p>
-
-<p>You need to configure the target to be based on Pods project. Refer to <a href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">this post</a>.</p>
-
-<p>Lastly, add the <code>libPods.a</code> library to the test target.</p>
-
-<p><img class="center" src="/images/xcode-ghunit-pods-libpods.png"></p>
-
-<p>That&#8217;s it. Run the test target!</p>
+<p>Well done Apple.</p>
 </div>
 
 
@@ -176,7 +147,7 @@ pod 'GHUnitIOS', '0.5.5'
   
 
 
-<time datetime="2012-10-04T23:21:00+08:00" pubdate data-updated="true">Oct 4<span>th</span>, 2012</time>
+<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
       
 
 <span class="categories">
@@ -190,7 +161,7 @@ pod 'GHUnitIOS', '0.5.5'
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -203,10 +174,8 @@ pod 'GHUnitIOS', '0.5.5'
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/" title="Previous Post: SenTestingKit does not support wait for blocks">&laquo; SenTestingKit does not support wait for blocks</a>
+        <a class="basic-alignment left" href="/2012/10/22/updating-app-for-iphone-5/" title="Previous Post: Updating App for iPhone 5">&laquo; Updating App for iPhone 5</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/07/a-short-scala-tutorial-for-java-developers/" title="Next Post: A short Scala tutorial for Java Developers">A short Scala tutorial for Java Developers &raquo;</a>
       
     </p>
   </footer>
@@ -285,8 +254,8 @@ pod 'GHUnitIOS', '0.5.5'
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/';
-        var disqus_url = 'http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/';
+        var disqus_identifier = 'http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/';
+        var disqus_url = 'http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/';
         var disqus_script = 'embed.js';
       
     (function () {
