@@ -4,7 +4,7 @@ title: "Why I hate Scala"
 date: 2012-10-19 21:44
 comments: true
 categories: Scala
-published: false
+published: true
 ---
 
 I spent about 2 weeks using Scala, before concluding that I hate the language.

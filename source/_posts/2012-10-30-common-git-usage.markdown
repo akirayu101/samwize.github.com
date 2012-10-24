@@ -13,7 +13,7 @@ But it's not my fault. Git has too many commands, and I am not a command line gu
 
 However, there are times when you do need to run on the command line (eg. scripting or you just want to be *real fast*).
 
-These are my common use cases during development work flow. I don't cover expert stuff.
+These are my common use cases during development work flow. I don't cover [everything](http://ndpsoftware.com/git-cheatsheet.html), or expert stuff.
 
 <!-- more -->
 
@@ -45,6 +45,35 @@ Issue a `which git` and note the path of git. Assuming it is `/usr/bin/git`, you
 
 
 
+
+## On Color Options ##
+
+One of the most important [configuration](http://git-scm.com/book/en/Customizing-Git-Git-Configuration)
+
+	git config --global color.ui true
+
+With that, commands like `git diff` and `git log -p` looks better
+
+
+
+
+# What's changed ##
+
+Sometimes, you want to see what are the changes in your working directory (compared to HEAD/the last commit).
+
+	git diff somefile.py
+
+Or you want to see what are the overall changes between the last 2 commits 
+
+	git whatchanged -n 1
+
+Then the actual code changes
+
+	 git log -p somefile.py
+
+
+
+
 ## Added new files, Updated changes, or Deleted files ##
 
 If you have added new files or updated tracked files
@@ -58,6 +87,41 @@ If you have deleted files or updated tracked files
 You could do both in a single step
 
 	git add -A
+
+
+
+## What are my remotes/branches ##
+
+To know, 
+
+	cat .git/config
+
+Or you can [list](http://gitref.org/remotes/) the remotes
+
+	git remote -v
+
+
+
+## Update your repos ##
+
+It's a 2 step process. First you fetch the changes from a remote named `origin`
+
+	git fetch origin
+
+Then you merge a branch `master` to local
+
+	git merge origin/master
+
+Or Simply
+
+	git pull origin master
+
+If `origin` is a default remote and 'master' is default branch, you can drop it eg. `git pull`. 
+
+
+
+
+
 
 
 
@@ -126,28 +190,6 @@ This is usually when you accidentally commit [wrongly](http://stackoverflow.com/
 	git log
 	git reset --hard <sha1-commit-id>
 	git push origin HEAD --force
-
-
-
-
-## Update your repos ##
-
-It's a 2 step. First you fetch the changes from a remote call `origin`
-
-	git fetch origin
-
-Then you merge a branch `master` to local
-
-	git merge origin/master
-
-Or Simply
-
-	git pull origin master
-
-If `origin` is a default remote, you can drop it eg. `git fetch`. 
-
-
-
 
 
 
