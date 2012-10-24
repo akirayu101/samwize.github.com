@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Singleton/SharedInstance Template for iOS 5 (ARC and GCD) - Junda Ong</title>
+  <title>Simple GET/POST AFNetworking - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="The singleton pattern is widely used in iOS to have a global, static class. The most famous is [NSUserDefaults standardUserDefaults]. Over the years &hellip;">
+  <meta name="description" content="AFNetworking is the choice for iOS/Mac developers when it comes to choosing a HTTP library. ASIHTTPRequest used to be the choice, until 2011 when it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/">
+  <link rel="canonical" href="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Singleton/SharedInstance Template for iOS 5 (ARC and GCD)</h1>
+      <h1 class="entry-title">Simple GET/POST AFNetworking</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-29T19:35:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
+<time datetime="2012-10-25T00:32:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,16 +107,22 @@
   </header>
 
 
-<div class="entry-content"><p>The singleton pattern is widely used in iOS to have a global, static class.</p>
+<div class="entry-content"><p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
 
-<p>The most famous is <code>[NSUserDefaults standardUserDefaults]</code>.</p>
+<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
 
-<p>Over the years, the template for creating a singleton/SharedInstance has also changed. This is due to the introduction of new technologies in Apple&#8217;s SDK, particularly ARC and GDC.</p>
+<p>I am one of the many who is forced to switch camp.</p>
 
 <!-- more -->
 
 
-<p>The <a href="http://lukeredpath.co.uk/blog/a-note-on-objective-c-singletons.html">implementation</a> has simplified to:</p>
+<p>In many ways, it seems AFNetworking would be better. It uses blocks!</p>
+
+<p>However, I find the documentation lacking. It has an <a href="https://github.com/AFNetworking/AFNetworking">overview</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking">getting started</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Introduction-to-AFNetworking">introduction</a>, <a href="http://afnetworking.github.com/AFNetworking/">complete reference</a>, &#8230; But yet, it didn&#8217;t provide example on how you make a simple HTTP GET or POST.</p>
+
+<p>Here is how you do it:</p>
+
+<h2>GET</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -127,19 +133,36 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">sharedInstance</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">static</span> <span class="n">dispatch_once_t</span> <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">__strong</span> <span class="k">static</span> <span class="kt">id</span> <span class="n">_sharedObject</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
-</span><span class='line'>    <span class="n">_sharedObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span> <span class="c1">// or some other init method</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">_sharedObject</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;GET&quot;</span>
+</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pigs/&quot;</span>
+</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithRequest:</span><span class="n">request</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">registerHTTPOperationClass:</span><span class="p">[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">class</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">operation</span> <span class="nl">setCompletionBlockWithSuccess:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Print the response body in text</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Response: %@&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithData:</span><span class="n">responseObject</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Error: %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+</span><span class='line'><span class="p">}];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Nice piece of code added to my Xcode snippet.</p>
+<h2>POST</h2>
+
+<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
+</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
+</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span><span class="s">@&quot;piggy&quot;</span><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -162,7 +185,7 @@
   
 
 
-<time datetime="2012-09-29T19:35:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
+<time datetime="2012-10-25T00:32:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -176,7 +199,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -189,10 +212,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/28/api-design-rules-for-ios-slash-os-x/" title="Previous Post: API Design Rules for iOS/OS X">&laquo; API Design Rules for iOS/OS X</a>
+        <a class="basic-alignment left" href="/2012/10/24/good-strategy-bad-strategy/" title="Previous Post: Good Strategy, Bad Strategy">&laquo; Good Strategy, Bad Strategy</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/30/octopress-would-not-deploy/" title="Next Post: Octopress would not deploy">Octopress would not deploy &raquo;</a>
       
     </p>
   </footer>
@@ -271,8 +292,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/';
-        var disqus_url = 'http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/';
+        var disqus_identifier = 'http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/';
+        var disqus_url = 'http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/';
         var disqus_script = 'embed.js';
       
     (function () {

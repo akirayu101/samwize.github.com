@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-24T23:08:52+08:00</updated>
+  <updated>2012-10-25T00:49:41+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
+    <link href="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/"/>
+    <updated>2012-10-25T00:32:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/25/simple-get-post-afnetworking</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
+
+<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
+
+<p>I am one of the many who is forced to switch camp.</p>
+
+<!-- more -->
+
+
+<p>In many ways, it seems AFNetworking would be better. It uses blocks!</p>
+
+<p>However, I find the documentation lacking. It has an <a href="https://github.com/AFNetworking/AFNetworking">overview</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking">getting started</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Introduction-to-AFNetworking">introduction</a>, <a href="http://afnetworking.github.com/AFNetworking/">complete reference</a>, ... But yet, it didn't provide example on how you make a simple HTTP GET or POST.</p>
+
+<p>Here is how you do it:</p>
+
+<h2>GET</h2>
+
+<p>```objc</p>
+
+<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" 
+                                                        path:@"http://samwize.com/api/pigs/" 
+                                                  parameters:nil];
+AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+[httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    // Print the response body in text
+    NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    NSLog(@"Error: %@", error);
+}];
+</code></pre>
+
+<p>```</p>
+
+<h2>POST</h2>
+
+<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+
+<p>```objc</p>
+
+<pre><code>NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
+                                                        path:@"http://samwize.com/api/pig/" 
+                                                  parameters:@{@"name":@"piggy"}];
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Error: Application Executable Missing Required Architecture]]></title>
@@ -257,37 +312,6 @@ dispatch_release(semaphore);
 ```</p>
 
 <p>But if you mind, there are lots of <a href="http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing">other testing frameworks</a>, eg <a href="https://github.com/gabriel/gh-unit">GHUnit</a> supports asynchronous testing.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[App Store Changes in iOS6]]></title>
-    <link href="http://samwize.github.com/2012/10/02/app-store-changes-in-ios6/"/>
-    <updated>2012-10-02T22:22:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/02/app-store-changes-in-ios6</id>
-    <content type="html"><![CDATA[<p>iOS 6 has introduced a big change to how App Store works.</p>
-
-<p>The changes <a href="http://www.gamezebo.com/news/2012/09/25/ios-6-app-store-and-what-it-means-developers">means a lot to developers</a>, and affects how developers would write their app descriptions, screenshots, etc.</p>
-
-<p>Some of the changes are so breaking, that lightwoodgames said - <a href="http://www.lightwoodgames.com/blog/2012/09/everything-thats-wrong-with-the-app-store-in-ios-6/#.UGhVbaQe7UO">don't just put up with this!</a>.</p>
-
-<p>You could also refer to a <a href="http://www.apptamin.com/ASO_Cheat_Sheet-v2.pdf">simple cheatsheet</a>.</p>
-
-<p>Here's my short version of what you should take note of:</p>
-
-<!-- more -->
-
-
-<ol>
-<li><p>First screenshot is very important</p></li>
-<li><p>First 3 lines of description is still very prominent</p></li>
-<li><p>Fill up What's New section</p></li>
-<li><p>Enter your App Support URL</p></li>
-<li><p>Ask your users to 'like' on Facebook</p></li>
-</ol>
-
-
-<p>And as always, search algorithm is forever changing. Use your keywords effectively. Use unique (and not generic) keywords. Use singular form.</p>
 ]]></content>
   </entry>
   

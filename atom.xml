@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-24T23:08:52+08:00</updated>
+  <updated>2012-10-25T00:49:41+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
+    <link href="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/"/>
+    <updated>2012-10-25T00:32:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/25/simple-get-post-afnetworking</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
+
+<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
+
+<p>I am one of the many who is forced to switch camp.</p>
+
+<!-- more -->
+
+
+<p>In many ways, it seems AFNetworking would be better. It uses blocks!</p>
+
+<p>However, I find the documentation lacking. It has an <a href="https://github.com/AFNetworking/AFNetworking">overview</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking">getting started</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Introduction-to-AFNetworking">introduction</a>, <a href="http://afnetworking.github.com/AFNetworking/">complete reference</a>, &#8230; But yet, it didn&#8217;t provide example on how you make a simple HTTP GET or POST.</p>
+
+<p>Here is how you do it:</p>
+
+<h2>GET</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;GET&quot;</span>
+</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pigs/&quot;</span>
+</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithRequest:</span><span class="n">request</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">registerHTTPOperationClass:</span><span class="p">[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">class</span><span class="p">]];</span>
+</span><span class='line'><span class="p">[</span><span class="n">operation</span> <span class="nl">setCompletionBlockWithSuccess:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Print the response body in text</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Response: %@&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithData:</span><span class="n">responseObject</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Error: %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>POST</h2>
+
+<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
+</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
+</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span><span class="s">@&quot;piggy&quot;</span><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Good Strategy, Bad Strategy]]></title>
@@ -1903,64 +1967,6 @@ _deploy
 </tr>
 </tbody>
 </table>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to write Getter/Setter for static variables]]></title>
-    <link href="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/"/>
-    <updated>2012-09-20T14:14:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables</id>
-    <content type="html"><![CDATA[<p>In the last post, I blogged about how you should write <a href="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">Getter/Setter for member variables</a>.</p>
-
-<p>This is a follow-up for <strong>static variables</strong>, instead of instance variables.</p>
-
-<!-- more -->
-
-
-<p>I didn&#8217;t know the answer to that, until I searched around <a href="http://stackoverflow.com/questions/128573/using-property-on-classmethods">Stackoverflow</a>. There are a couple of ways around using @property on classmethods.</p>
-
-<p>The best answer for me is this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">_foo</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">__metaclass__</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-</span><span class='line'>        <span class="nd">@property</span>
-</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nd">@foo.setter</span>
-</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-</span><span class='line'>                <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It uses <code>__metaclass__</code>, some kind of <a href="http://www.voidspace.org.uk/python/articles/five-minutes.shtml">black magic</a> in Python.</p>
-
-<p>With that, you can use the getter/setter on the static variable.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
-</span><span class='line'><span class="mi">5</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
-</span><span class='line'><span class="mi">3</span>
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
