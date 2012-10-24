@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-25T00:49:41+08:00</updated>
+  <updated>2012-10-25T00:55:57+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -49,6 +49,7 @@ AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequ
 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Error: %@", error);
 }];
+[operation start];
 </code></pre>
 
 <p>```</p>
