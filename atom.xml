@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-25T00:55:57+08:00</updated>
+  <updated>2012-10-28T10:22:56+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
+    <link href="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
+    <updated>2012-10-28T10:05:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
+    <content type="html"><![CDATA[<p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
+
+<p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn&#8217;t get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
+
+<p>Then I found a gem in Mountain Lion.</p>
+
+<!-- more -->
+
+
+<p>It turns out the Wi-Fi Diagnostics Tool (app) in Mountain Lion is updated with new features. It has added a wifi stumbler to discover the wifi nearbys (ssid, channel, protocols, etc).</p>
+
+<p>To do a Wifi scan,</p>
+
+<ol>
+<li><p>Go to terminal and <code>open open /System/Library/CoreServices/Wi-Fi\ Diagnostics.app/</code></p></li>
+<li><p>Go to <strong>File</strong> > <strong>Network Utilities</strong></p></li>
+<li><p>Press Scan</p></li>
+</ol>
+
+
+<p><img src="http://samwize.github.com/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
+
+<p>That&#8217;s it. You got to see the details of wifi nearby.</p>
+
+<p>PS: I was looking for a uncongested, clear channel to use.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
@@ -66,16 +99,44 @@
 
 <h2>POST</h2>
 
-<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+<p>POST a urlencoded form <code>name=piggy</code> in the http body.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFFormURLParameterEncoding</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
 </span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
 </span><span class='line'>                                                  <span class="nl">parameters:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span><span class="s">@&quot;piggy&quot;</span><span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Similar to GET code ...</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>If you want to POST a json such as <code>{"name":"piggy"}</code>, you change the encoding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFJSONParameterEncoding</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to do a multi-part POST of an image, you do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">multipartFormRequestWithMethod:</span><span class="s">@&quot;POST&quot;</span> <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/photo&quot;</span> <span class="nl">parameters:</span><span class="nb">nil</span> <span class="nl">constructingBodyWithBlock:</span> <span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="o">&lt;</span><span class="n">AFMultipartFormData</span><span class="o">&gt;</span><span class="n">formData</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">formData</span> <span class="nl">appendPartWithFileData:</span><span class="n">imageData</span> <span class="nl">name:</span><span class="s">@&quot;avatar&quot;</span> <span class="nl">fileName:</span><span class="s">@&quot;avatar.jpg&quot;</span> <span class="nl">mimeType:</span><span class="s">@&quot;image/jpeg&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
 ]]></content>
   </entry>
   
@@ -1920,56 +1981,6 @@ _deploy
 <p>And now the table appears!</p>
 
 <p>PS: I am puzzled why Octopress does not ship with a default table stylesheet.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[I bought samwize.com for 99 cents]]></title>
-    <link href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
-    <updated>2012-09-21T10:51:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
-    <content type="html"><![CDATA[<p>This blog is now given an official (domain) name since I <a href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/">switched to Octopress</a> 2 weeks ago.</p>
-
-<p>The domain is bought from <a href="http://www.namecheap.com/">NameCheap</a> at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code <strong>WELOVEU</strong>)</p>
-
-<p>Wonder how I host this blog?</p>
-
-<!-- more -->
-
-
-<h2>Host blog on Github Pages</h2>
-
-<p>The blogging framework is using Octopress, and the baked webpages are hosted using <a href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/">Github Pages</a> (Free!).</p>
-
-<p>To use my custom domain, I added <code>samwize.com</code> to the file <code>/source/CNAME</code> in Octopress.</p>
-
-<p>Since I am now using a top-level domain, I have to add an A record pointing to <code>204.232.175.78</code>. I also redirect <a href="http://www.samwize.com">www.samwize.com</a> to <a href="http://samwize.com">samwize.com</a>. My Namecheap host records looks like this:</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th> HOST NAME   </th>
-<th> IP ADDRESS/URL    </th>
-<th> RECORD TYPE       </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> @           </td>
-<td> 204.232.175.78    </td>
-<td> A (Address)       </td>
-</tr>
-<tr>
-<td></td>
-<td> www         </td>
-<td> samwize.com.      </td>
-<td> CNAME (Alias)     </td>
-</tr>
-</tbody>
-</table>
-
 ]]></content>
   </entry>
   

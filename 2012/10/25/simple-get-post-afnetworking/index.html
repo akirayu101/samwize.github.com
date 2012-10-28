@@ -155,16 +155,44 @@
 
 <h2>POST</h2>
 
-<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+<p>POST a urlencoded form <code>name=piggy</code> in the http body.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFFormURLParameterEncoding</span><span class="p">];</span>
+</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
 </span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
 </span><span class='line'>                                                  <span class="nl">parameters:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span><span class="s">@&quot;piggy&quot;</span><span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Similar to GET code ...</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>If you want to POST a json such as <code>{"name":"piggy"}</code>, you change the encoding:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFJSONParameterEncoding</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you want to do a multi-part POST of an image, you do this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">multipartFormRequestWithMethod:</span><span class="s">@&quot;POST&quot;</span> <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/photo&quot;</span> <span class="nl">parameters:</span><span class="nb">nil</span> <span class="nl">constructingBodyWithBlock:</span> <span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="o">&lt;</span><span class="n">AFMultipartFormData</span><span class="o">&gt;</span><span class="n">formData</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">formData</span> <span class="nl">appendPartWithFileData:</span><span class="n">imageData</span> <span class="nl">name:</span><span class="s">@&quot;avatar&quot;</span> <span class="nl">fileName:</span><span class="s">@&quot;avatar.jpg&quot;</span> <span class="nl">mimeType:</span><span class="s">@&quot;image/jpeg&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="p">}];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
 </div>
 
 
@@ -217,6 +245,8 @@
         <a class="basic-alignment left" href="/2012/10/24/good-strategy-bad-strategy/" title="Previous Post: Good Strategy, Bad Strategy">&laquo; Good Strategy, Bad Strategy</a>
       
       
+        <a class="basic-alignment right" href="/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" title="Next Post: Wifi Scanner for Mac OSX (Mountain Lion)">Wifi Scanner for Mac OSX (Mountain Lion) &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -236,6 +266,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/">Wifi Scanner for Mac OSX (Mountain Lion)</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/10/25/simple-get-post-afnetworking/">Simple GET/POST AFNetworking</a>
       </li>
     
@@ -249,10 +283,6 @@
     
       <li class="post">
         <a href="/2012/10/22/updating-app-for-iphone-5/">Updating App for iPhone 5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/10/19/why-i-hate-scala/">Why I hate Scala</a>
       </li>
     
   </ul>

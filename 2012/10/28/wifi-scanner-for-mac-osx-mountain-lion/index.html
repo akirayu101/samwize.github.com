@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Xcode 4.5 Tips &amp; Tricks - Junda Ong</title>
+  <title>Wifi Scanner for Mac OSX (Mountain Lion) - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Some of my favorite Xcode tips &amp; tricks (tested on Xcode 4.5). Shortcut Catch All Exceptions Bring up breakpoint navigator (⌘6)
-Click + on the &hellip;">
+  <meta name="description" content="Mountain Lion comes with a Wifi Scanner that is much better than you expected. I tried out KisMAC at first, but couldn&#8217;t get it working. I hate &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Click + on the &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/">
+  <link rel="canonical" href="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -83,7 +82,7 @@ Click + on the &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Xcode 4.5 Tips &amp; Tricks</h1>
+      <h1 class="entry-title">Wifi Scanner for Mac OSX (Mountain Lion)</h1>
     
     
       <p class="meta">
@@ -99,7 +98,7 @@ Click + on the &hellip;">
   
 
 
-<time datetime="2012-09-26T01:16:00+08:00" pubdate data-updated="true">Sep 26<span>th</span>, 2012</time>
+<time datetime="2012-10-28T10:05:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -108,77 +107,31 @@ Click + on the &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Some of my favorite Xcode tips &amp; tricks (tested on Xcode 4.5).</p>
+<div class="entry-content"><p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
 
-<h2>Shortcut</h2>
+<p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn&#8217;t get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
 
-<p><img class="center" src="/images/xcode-shortcuts.png" title="xcode shortcuts" ></p>
+<p>Then I found a gem in Mountain Lion.</p>
 
 <!-- more -->
 
 
-<h2>Catch All Exceptions</h2>
+<p>It turns out the Wi-Fi Diagnostics Tool (app) in Mountain Lion is updated with new features. It has added a wifi stumbler to discover the wifi nearbys (ssid, channel, protocols, etc).</p>
+
+<p>To do a Wifi scan,</p>
 
 <ol>
-<li>Bring up breakpoint navigator (⌘6)</li>
-<li>Click + on the bottom left</li>
-<li>Add Exception Breakpoint</li>
+<li><p>Go to terminal and <code>open open /System/Library/CoreServices/Wi-Fi\ Diagnostics.app/</code></p></li>
+<li><p>Go to <strong>File</strong> > <strong>Network Utilities</strong></p></li>
+<li><p>Press Scan</p></li>
 </ol>
 
 
-<p><img class="center" src="/images/xcode-catch-all-exceptions.png" title="xcode catch exceptions" ></p>
+<p><img src="/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
 
-<p><em>Anyone knows the difference with <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">symbolic breakpoint</a>?</em></p>
+<p>That&#8217;s it. You got to see the details of wifi nearby.</p>
 
-<h2>NSLog, Auto Continue on Breakpoints</h2>
-
-<p>Breakpoints are so much powerful. Don&#8217;t limit to just pause on every breakpoint.</p>
-
-<p>You could set actions such as log a message under certain condition, or automatically continue. Or if you are not interested in the first 10 times of a while loop, you can ignore x times before pause. Or even have your Mac speaks out instead of traditional text logging.</p>
-
-<p>Edit a breakpoint for more options:</p>
-
-<p><img class="center" src="/images/xcode-nslog-on-breakpoints.png" title="breakpoints actions" ></p>
-
-<h2>Use of Tabs</h2>
-
-<ol>
-<li>Create new tabs with ⌘T</li>
-<li>Double click to edit tab name</li>
-<li>My workflow uses these tabs: Project Resources, Design, Coding 1, Coding 2, Build</li>
-</ol>
-
-
-<p><img class="center" src="/images/xcode-tabs-workflow.png" title="tabs for my workflow" ></p>
-
-<p>It&#8217;s totally up to you to organize your tabs, just like web browsing.</p>
-
-<h2>Use of Behaviours</h2>
-
-<p>Behaviours are hooks to Xcode for events like build, test, run, and search. You can find them in <strong>Preferences</strong> > <strong>Behaviours</strong>.</p>
-
-<p>These are my additional behaviours.</p>
-
-<p>Show Build tab when there is new issue:</p>
-
-<p><img class="center" src="/images/xcode-behaviour-build-new-issues.png" title="'Show Build tab when there is new issue'" ></p>
-
-<p>Show console when start running:</p>
-
-<p><img class="center" src="/images/xcode-behaviour-console.png" title="'Show console when start running'" ></p>
-
-<p>Show Debug tab when paused:</p>
-
-<p><img class="center" src="/images/xcode-behaviour-debug-tab.png" title="'Show Debug tab when paused'" ></p>
-
-<h2>More Reference</h2>
-
-<ol>
-<li><a href="http://developer.apple.com/videos/wwdc/2012/">WWDC 2012</a> - &#8220;Working Efficiently with Xcode&#8221; is an excellent introductory</li>
-<li><a href="http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Conceptual/Xcode4UserGuide/000-About_Xcode/about.html#//apple_ref/doc/uid/TP40010215-CH1-SW1">Xcode4 User Guide</a> - Complete, but way too much text</li>
-<li><a href="http://blog.gomiso.com/2012/02/07/work-efficiently-with-xcode/">miso blog</a> - from a developer</li>
-</ol>
-
+<p>PS: I was looking for a uncongested, clear channel to use.</p>
 </div>
 
 
@@ -201,12 +154,12 @@ Click + on the &hellip;">
   
 
 
-<time datetime="2012-09-26T01:16:00+08:00" pubdate data-updated="true">Sep 26<span>th</span>, 2012</time>
+<time datetime="2012-10-28T10:05:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mac/'>Mac</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/mac/'>Mac</a>
   
 </span>
 
@@ -215,7 +168,7 @@ Click + on the &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -228,10 +181,8 @@ Click + on the &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/24/octopress-table-stylesheet/" title="Previous Post: Octopress Table Stylesheet">&laquo; Octopress Table Stylesheet</a>
+        <a class="basic-alignment left" href="/2012/10/25/simple-get-post-afnetworking/" title="Previous Post: Simple GET/POST AFNetworking">&laquo; Simple GET/POST AFNetworking</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/28/api-design-rules-for-ios-slash-os-x/" title="Next Post: API Design Rules for iOS/OS X">API Design Rules for iOS/OS X &raquo;</a>
       
     </p>
   </footer>
@@ -310,8 +261,8 @@ Click + on the &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/';
-        var disqus_url = 'http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/';
+        var disqus_identifier = 'http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/';
+        var disqus_url = 'http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/';
         var disqus_script = 'embed.js';
       
     (function () {

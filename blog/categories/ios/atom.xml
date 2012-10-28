@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-25T00:55:57+08:00</updated>
+  <updated>2012-10-28T10:22:56+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -56,16 +56,42 @@ AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequ
 
 <h2>POST</h2>
 
-<p>POST is much the same as GET, except in the creation of <code>NSMutableURLRequest</code>.</p>
+<p>POST a urlencoded form <code>name=piggy</code> in the http body.</p>
 
 <p>```objc</p>
 
-<pre><code>NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
+<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+[httpClient setParameterEncoding:AFFormURLParameterEncoding];
+NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
                                                         path:@"http://samwize.com/api/pig/" 
                                                   parameters:@{@"name":@"piggy"}];
+
+// Similar to GET code ...
 </code></pre>
 
 <p>```</p>
+
+<p>If you want to POST a json such as <code>{"name":"piggy"}</code>, you change the encoding:</p>
+
+<p>```objc</p>
+
+<pre><code>[httpClient setParameterEncoding:AFJSONParameterEncoding];
+</code></pre>
+
+<p>```</p>
+
+<p>If you want to do a multi-part POST of an image, you do this:</p>
+
+<p>```objc
+NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:@"http://samwize.com/api/pig/photo" parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {</p>
+
+<pre><code>[formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+</code></pre>
+
+<p>}];
+```</p>
+
+<p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
 ]]></content>
   </entry>
   
