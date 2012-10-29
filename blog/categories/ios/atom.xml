@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-28T10:22:56+08:00</updated>
+  <updated>2012-10-29T23:56:42+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Guide to Multiple Device Resolutions]]></title>
+    <link href="http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions/"/>
+    <updated>2012-10-29T23:23:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions</id>
+    <content type="html"><![CDATA[<p>With every iOS updates and new release of devices from Apple, there are more things developers have to do.</p>
+
+<p>In order to support these new devices, you first need to understand these devices.</p>
+
+<!-- more -->
+
+
+<h2>Device Resolutions</h2>
+
+<p>Apple provides a <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">table matrix</a> on the App Icons, Screen size, and tool bar icon sizes for the various devices.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>             </th>
+<th> iPhone 5        </th>
+<th> iPhone (Retina)   </th>
+<th> iPhone        </th>
+<th> iPad (Retina) </th>
+<th> iPad          </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> App Icon    </td>
+<td> 114 x 114       </td>
+<td> 114 x 114         </td>
+<td> 57 x 57       </td>
+<td> 144 x 144     </td>
+<td> 72 x 72       </td>
+</tr>
+<tr>
+<td></td>
+<td> Default.png </td>
+<td> 640 x 1136      </td>
+<td> 640 x 960         </td>
+<td> 320 x 480     </td>
+<td> 1536 x 2008   </td>
+<td> 768 x 1004    </td>
+</tr>
+<tr>
+<td></td>
+<td> Toolbar icon</td>
+<td> 40 x 40         </td>
+<td> 40 x 40           </td>
+<td> 20 x 20       </td>
+<td> 40 x 40       </td>
+<td> 20 x 20       </td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Image Resource File</h2>
+
+<p>Apple introduced an easy way to load <a href="http://developer.apple.com/library/ios/#documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15">images</a> automatically for the devices.</p>
+
+<p>The rule goes like this:</p>
+
+<ul>
+<li><p>Standard: <code>&lt;ImageName&gt;&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
+<li><p>High resolution: <code>&lt;ImageName&gt;@2x&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
+</ul>
+
+
+<p>For <a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/LoadingResources/ImageSoundResources/ImageSoundResources.html#//apple_ref/doc/uid/10000051i-CH7-SW1">example</a>,</p>
+
+<ul>
+<li>MyImage.png - Default version of an image resource.</li>
+<li>MyImage@2x.png - High-resolution version of an image resource for devices with Retina displays.</li>
+<li>MyImage~iphone.png - Version of an image for iPhone and iPod touch.</li>
+<li>MyImage@2x~iphone.png - High-resolution version of an image for iPhone and iPod touch devices with Retina displays.</li>
+<li>MyImage~ipad.png - Version of an image for iPad</li>
+<li>MyImage@2x~ipad.png - High-resolution version of an image for iPad with Retina displays.</li>
+</ul>
+
+
+<p>With that knowledge, you could load a UIImage</p>
+
+<pre><code>UIImage *anImage = [UIImage imageNamed:@"MyImage"];
+</code></pre>
+
+<p>and the appropriate resource file will be loaded.</p>
+
+<h2>iPhone 5 - taller screen</h2>
+
+<p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
+
+<p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
@@ -295,50 +394,6 @@ pod 'GHUnitIOS', '0.5.5'
 <p><img class="center" src="/images/xcode-ghunit-pods-libpods.png"></p>
 
 <p>That's it. Run the test target!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SenTestingKit does not support wait for blocks]]></title>
-    <link href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
-    <updated>2012-10-03T00:21:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
-    <content type="html"><![CDATA[<p>I was using <a href="http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html">SenTestingKit</a>, the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.</p>
-
-<p>That's a waste.</p>
-
-<!-- more -->
-
-
-<p>Though there is <a href="https://gist.github.com/2254570">a workaround</a> using semaphore.</p>
-
-<p>``` objc
-- (void)testBlockMethod {</p>
-
-<pre><code>dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
-
-// Your block method eg. AFNetworking
-NSURL *url = [NSURL URLWithString:@"http://httpbin.org/ip"];
-NSURLRequest *request = [NSURLRequest requestWithURL:url];
-AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-    NSLog(@"IP Address: %@", [JSON valueForKeyPath:@"origin"]);
-    STAssertNotNil(JSON, @"JSON not loaded");
-    // Signal that block has completed
-    dispatch_semaphore_signal(semaphore);        
-} failure:nil];
-[operation start];
-
-// Run loop
-while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
-                             beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-dispatch_release(semaphore);    
-</code></pre>
-
-<p>}
-```</p>
-
-<p>But if you mind, there are lots of <a href="http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing">other testing frameworks</a>, eg <a href="https://github.com/gabriel/gh-unit">GHUnit</a> supports asynchronous testing.</p>
 ]]></content>
   </entry>
   

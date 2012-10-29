@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-10-28T10:22:56+08:00</updated>
+  <updated>2012-10-29T23:56:42+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Guide to Multiple Device Resolutions]]></title>
+    <link href="http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions/"/>
+    <updated>2012-10-29T23:23:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions</id>
+    <content type="html"><![CDATA[<p>With every iOS updates and new release of devices from Apple, there are more things developers have to do.</p>
+
+<p>In order to support these new devices, you first need to understand these devices.</p>
+
+<!-- more -->
+
+
+<h2>Device Resolutions</h2>
+
+<p>Apple provides a <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">table matrix</a> on the App Icons, Screen size, and tool bar icon sizes for the various devices.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>             </th>
+<th> iPhone 5        </th>
+<th> iPhone (Retina)   </th>
+<th> iPhone        </th>
+<th> iPad (Retina) </th>
+<th> iPad          </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td> App Icon    </td>
+<td> 114 x 114       </td>
+<td> 114 x 114         </td>
+<td> 57 x 57       </td>
+<td> 144 x 144     </td>
+<td> 72 x 72       </td>
+</tr>
+<tr>
+<td></td>
+<td> Default.png </td>
+<td> 640 x 1136      </td>
+<td> 640 x 960         </td>
+<td> 320 x 480     </td>
+<td> 1536 x 2008   </td>
+<td> 768 x 1004    </td>
+</tr>
+<tr>
+<td></td>
+<td> Toolbar icon</td>
+<td> 40 x 40         </td>
+<td> 40 x 40           </td>
+<td> 20 x 20       </td>
+<td> 40 x 40       </td>
+<td> 20 x 20       </td>
+</tr>
+</tbody>
+</table>
+
+
+<h2>Image Resource File</h2>
+
+<p>Apple introduced an easy way to load <a href="http://developer.apple.com/library/ios/#documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15">images</a> automatically for the devices.</p>
+
+<p>The rule goes like this:</p>
+
+<ul>
+<li><p>Standard: <code>&lt;ImageName&gt;&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
+<li><p>High resolution: <code>&lt;ImageName&gt;@2x&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
+</ul>
+
+
+<p>For <a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/LoadingResources/ImageSoundResources/ImageSoundResources.html#//apple_ref/doc/uid/10000051i-CH7-SW1">example</a>,</p>
+
+<ul>
+<li>MyImage.png - Default version of an image resource.</li>
+<li>MyImage@2x.png - High-resolution version of an image resource for devices with Retina displays.</li>
+<li>MyImage~iphone.png - Version of an image for iPhone and iPod touch.</li>
+<li>MyImage@2x~iphone.png - High-resolution version of an image for iPhone and iPod touch devices with Retina displays.</li>
+<li>MyImage~ipad.png - Version of an image for iPad</li>
+<li>MyImage@2x~ipad.png - High-resolution version of an image for iPad with Retina displays.</li>
+</ul>
+
+
+<p>With that knowledge, you could load a UIImage</p>
+
+<pre><code>UIImage *anImage = [UIImage imageNamed:@"MyImage"];
+</code></pre>
+
+<p>and the appropriate resource file will be loaded.</p>
+
+<h2>iPhone 5 - taller screen</h2>
+
+<p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
+
+<p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
@@ -1865,122 +1964,6 @@ _deploy
 <li><a href="http://blog.gomiso.com/2012/02/07/work-efficiently-with-xcode/">miso blog</a> - from a developer</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress Table Stylesheet]]></title>
-    <link href="http://samwize.github.com/2012/09/24/octopress-table-stylesheet/"/>
-    <updated>2012-09-24T19:27:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/24/octopress-table-stylesheet</id>
-    <content type="html"><![CDATA[<p>Octopress has been very cool for the 2 weeks since I began using.</p>
-
-<p>My first hiccup came when I tried using table in <a href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/">this post</a>. Firstly, I have to figure out how to create table in Octopress. Yet after figuring out, the table doesn&#8217;t get displayed! It&#8217;s just not working.</p>
-
-<!-- more -->
-
-
-<h2>Usage</h2>
-
-<p>The first problem is with understanding how to create table in Octopress. They didn&#8217;t really <a href="http://octopress.org/docs/">document</a> that, because they expect you to know <a href="http://daringfireball.net/projects/markdown/syntax#html">markdown inline HTML</a> can be used. That means writing:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;table&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Column1<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>Column2<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>foo<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;td&gt;</span>foo<span class="nt">&lt;/td&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
-</span><span class='line'><span class="nt">&lt;/table&gt;</span>    
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, that&#8217;s not really nice, and defeats the point of <em>not writing in HTML</em>.</p>
-
-<p>Fortunately, you can do the same using extended markdown syntax like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>| Column1     | Column2      |
-</span><span class='line'>| ----------- | ------------ |
-</span><span class='line'>| foo         | foo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But that still does not work. You will not see the table borders..</p>
-
-<p>I would say that&#8217;s a bug with Octopress.</p>
-
-<h2>Table Stylesheet</h2>
-
-<p>As I inspect the generated HTML, the table tags are present, and correct.</p>
-
-<p>They are not showing because of the css stylesheet. <code>table</code>, <code>th</code> and <code>td</code> has <code>border-width</code> of ZERO! This <a href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/">post in chinese</a> provides a solution. Translated, it means:</p>
-
-<h3>Step 1. Add data-table.css</h3>
-
-<p>Add data-table.css to <code>source/stylesheets/</code>.</p>
-
-<div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
-<noscript><pre><code>* + table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#e7e3e7;
-}
-
-* + table th, * + table td {
-  border-style:dashed;
-  border-width:1px;
-  border-color:#e7e3e7;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-* + table th {
-  border-style:solid;
-  font-weight:bold;
-  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
-}
-
-* + table th[align=&quot;left&quot;], * + table td[align=&quot;left&quot;] {
-  text-align:left;
-}
-
-* + table th[align=&quot;right&quot;], * + table td[align=&quot;right&quot;] {
-  text-align:right;
-}
-
-* + table th[align=&quot;center&quot;], * + table td[align=&quot;center&quot;] {
-  text-align:center;
-}
-</code></pre></noscript></div>
-
-
-<h3>Step 2. Add link header</h3>
-
-<p>In <code>source/_includes/head.html</code> insert this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;/stylesheets/data-table.css&quot;</span> <span class="na">media=</span><span class="s">&quot;screen, projection&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And now the table appears!</p>
-
-<p>PS: I am puzzled why Octopress does not ship with a default table stylesheet.</p>
 ]]></content>
   </entry>
   
