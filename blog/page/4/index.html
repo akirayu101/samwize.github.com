@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Paros - a mitmproxy with GUI for sniffing HTTP traffic - Junda Ong</title>
+  <title>Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I introduced mitmproxy for sniffing iPhone HTTP traffic back at just2us.com. mitmproxy is awesome, except that it isn&#8217;t very user friendly, as &hellip;">
+  <meta name="description" content="I started just2us.com 3 years ago, using it as a avenue for me to share about my apps and development guides. Over the last 3 years, I have been &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/">
+  <link rel="canonical" href="http://samwize.github.com/blog/page/4/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -77,12 +77,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Paros - a Mitmproxy With GUI for Sniffing HTTP Traffic</h1>
+      <h1 class="entry-title"><a href="/2012/09/10/switched-from-wordpress-to-octopress/">Switched Wordpress to Octopress</a></h1>
     
     
       <p class="meta">
@@ -98,125 +101,40 @@
   
 
 
-<time datetime="2012-09-15T01:47:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
+<time datetime="2012-09-10T00:29:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/2012/09/10/switched-from-wordpress-to-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I introduced <a href="http://blog.just2us.com/2012/05/sniff-iphone-http-traffic-using-mitmproxy/">mitmproxy for sniffing iPhone HTTP traffic</a> back at <a href="http://just2us.com">just2us.com</a>.</p>
+  <div class="entry-content"><p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
 
-<p><a href="http://mitmproxy.org/">mitmproxy</a> is awesome, except that it isn&#8217;t very user friendly, as it is a text console interface. Many times, I have to figure what are the keys to move around or access certain function.</p>
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
 
-<p>That&#8217;s where <a href="http://www.parosproxy.org/">Paros</a> shines.</p>
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
 
-<p>This is how you setup up Paros to sniff iPhone HTTP Traffic:</p>
-
-<!-- more -->
-
-
-<h2>1. Install Paros</h2>
-
-<p>Paros runs on Java. <a href="http://www.parosproxy.org/download.shtml">Download</a> for <a href="http://www.parosproxy.org/install.shtml">install</a>.</p>
-
-<p>For Mac, download the Linux version.</p>
-
-<p>Unzip and run <code>paros.jar</code>.</p>
-
-<h2>2. Find out your machine IP</h2>
-
-<p>Find out the local IP for your machine. You need this for the next step.</p>
-
-<p>For Mac, run the command <code>ifconfig en1</code> and copy down the IP.</p>
-
-<h2>3. Setup your iPhone proxy</h2>
-
-<p>Make sure your iPhone is on the same network as the machine running Paros. eg. connect to the same Wifi</p>
-
-<p>On your iPhone, open <strong>General</strong> > <strong>Wi-Fi</strong> > Go to details for your Wifi network.</p>
-
-<p>From there, choose <strong>Manual</strong> for <strong>HTTP Proxy</strong>. Enter the <strong>machine IP</strong> for Server and <strong>8080</strong> for Port.</p>
-
-<p><img class="center" src="/images/iphone-http-proxy-paros.png" width="360" title="iPhone network settings" ></p>
-
-<p>In the screenshot above, my machine IP is 192.168.1.68.</p>
-
-<h2>4. Start running your target app and sniff</h2>
-
-<p>Use your iPhone to run the app that you want to sniff the traffic.</p>
-
-<p>Paros interface will immediately show the URL sites the app connects to. The interface is pretty self explanatory so I won&#8217;t go on from here.</p>
-
-<p>Rock on from there!</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/2012/09/10/switched-from-wordpress-to-octopress/">Continue reading &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2012-09-15T01:47:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/ios/'>iOS</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2012/09/14/adding-and-using-custom-font-in-ios/" title="Previous Post: Adding and Using Custom Font in iOS">&laquo; Adding and Using Custom Font in iOS</a>
-      
-      
-        <a class="basic-alignment right" href="/2012/09/18/non-ascii-character-in-python-file/" title="Next Post: Non-ASCII Character in Python File">Non-ASCII Character in Python File &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -249,7 +167,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -266,7 +184,6 @@
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -281,10 +198,7 @@
       var disqus_shortname = 'just2us';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/';
-        var disqus_url = 'http://samwize.github.com/2012/09/15/paros-a-mitmproxy-with-gui-for-sniffing-http-traffic/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

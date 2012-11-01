@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Tools | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-11-01T23:58:35+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Common Git Usage]]></title>
+    <link href="http://samwize.github.com/2012/10/30/common-git-usage/"/>
+    <updated>2012-10-30T21:35:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/30/common-git-usage</id>
+    <content type="html"><![CDATA[<p>I am never good at using Git.</p>
+
+<p>But it's not my fault. Git has too many commands, and I am not a command line guy. That's why I usually use <a href="http://www.syntevo.com/smartgit/index.html">SmartGit</a>, a Git software with user interface that supports Mac.</p>
+
+<p>However, there are times when you have to run on the command line (eg. scripting or you just want to be <em>real fast</em>).</p>
+
+<p>These are my common use cases during development work flow. I don't cover <a href="http://ndpsoftware.com/git-cheatsheet.html">everything</a>, or advanced stuff.</p>
+
+<!-- more -->
+
+
+<h2>Push an existing repos to Github</h2>
+
+<p>Assuming you have a repos on github already, issue the following <a href="https://gist.github.com/868939">commands</a>:</p>
+
+<pre><code>cd existing_git_repo
+git remote add origin git@github.com:[user]/[reponame].git
+git push -u origin master
+</code></pre>
+
+<h2>Setup Github to remember password</h2>
+
+<p>The <a href="https://help.github.com/articles/set-up-git">instructions</a>. Basically,</p>
+
+<pre><code>git config --global user.name "Your Name Here"
+git config --global user.email "your_email@youremail.com"
+</code></pre>
+
+<p>Then download and setup <code>git-credential-osxkeychain</code>.</p>
+
+<pre><code>curl -s -O http://github-media-downloads.s3.amazonaws.com/osx/git-credential-osxkeychain
+chmod u+x git-credential-osxkeychain
+</code></pre>
+
+<p>Issue a <code>which git</code> and note the path of git. Assuming it is <code>/usr/bin/git</code>, you have have to move to <code>/usr/bin/</code> (IMPORTANT: less the git part!).</p>
+
+<pre><code>sudo mv git-credential-osxkeychain /usr/bin/
+</code></pre>
+
+<h2>On Color Options</h2>
+
+<p>One of the most important <a href="http://git-scm.com/book/en/Customizing-Git-Git-Configuration">configuration</a></p>
+
+<pre><code>git config --global color.ui true
+</code></pre>
+
+<p>With that, commands like <code>git diff</code> and <code>git log -p</code> looks better</p>
+
+<h1>What's changed</h1>
+
+<p>Sometimes, you want to see what are the changes in your working directory (compared to HEAD/the last commit).</p>
+
+<pre><code>git diff somefile.py
+</code></pre>
+
+<p>Or you want to see what are the overall changes between the last 2 commits</p>
+
+<pre><code>git whatchanged -n 1
+</code></pre>
+
+<p>Then the actual code changes</p>
+
+<pre><code> git log -p somefile.py
+</code></pre>
+
+<h2>Added new files, Updated changes, or Deleted files</h2>
+
+<p>If you have added new files or updated tracked files</p>
+
+<pre><code>git add .
+</code></pre>
+
+<p>If you have deleted files or updated tracked files</p>
+
+<pre><code>git add -u
+</code></pre>
+
+<p>You could do both in a single step</p>
+
+<pre><code>git add -A
+</code></pre>
+
+<h2>What are my remotes/branches</h2>
+
+<p>To know,</p>
+
+<pre><code>cat .git/config
+</code></pre>
+
+<p>Or you can <a href="http://gitref.org/remotes/">list</a> the remotes</p>
+
+<pre><code>git remote -v
+</code></pre>
+
+<h2>Update your repos</h2>
+
+<p>It's a 2 step process. First you fetch the changes from a remote named <code>origin</code></p>
+
+<pre><code>git fetch origin
+</code></pre>
+
+<p>Then you merge a branch <code>master</code> to local</p>
+
+<pre><code>git merge origin/master
+</code></pre>
+
+<p>Or Simply</p>
+
+<pre><code>git pull origin master
+</code></pre>
+
+<p>If <code>origin</code> is a default remote and 'master' is default branch, you can drop it eg. <code>git pull</code>.</p>
+
+<h2>Fix merge conflicts</h2>
+
+<p>This always happen when you work in teams. A very <a href="http://stackoverflow.com/questions/161813/how-do-i-fix-merge-conflicts-in-git">commmon</a> question.</p>
+
+<p>It usually goes like this.. You tried to update</p>
+
+<pre><code>git fetch
+git pull
+... not uptodate. Cannot merge.
+</code></pre>
+
+<p>So you commit your local changes</p>
+
+<pre><code>git add .
+git commit -m "some changes"
+...
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+
+<p>So you need to resolve the conflict</p>
+
+<pre><code>git mergetool -y
+</code></pre>
+
+<p>At this point you use the GUI (eg FileMerge) to resolve the conflicts and save. Then you commit</p>
+
+<pre><code>git add .
+git commit -m "fixed conflicts"
+git push
+</code></pre>
+
+<p>Done!</p>
+
+<h2>Revert a file during merge conflict</h2>
+
+<p>Say when you have a merge conflict, you know it should just take your file,</p>
+
+<pre><code>git checkout --ours filename.c
+</code></pre>
+
+<p>Or if you know yit should be their file,</p>
+
+<pre><code>git checkout --theirs filename.c
+</code></pre>
+
+<h2>Tagging</h2>
+
+<p>Useful when you want to <a href="http://git-scm.com/book/en/Git-Basics-Tagging">tag a version</a>.</p>
+
+<pre><code>git tag -a v1.2
+</code></pre>
+
+<p>If you want to push to the tag, it works similarly like a branch.</p>
+
+<pre><code>git push origin v1.2
+</code></pre>
+
+<h2>Delete a commit that has been pushed</h2>
+
+<p>This is usually when you accidentally commit <a href="http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit">wrongly</a>.</p>
+
+<pre><code>git log
+git reset --hard &lt;sha1-commit-id&gt;
+git push origin HEAD --force
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to setup Octopress on Github Pages - Junda Ong</title>
+  <title>Common Git Usage - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="This blog is hosted entirely on Github Pages, powered by the blogging framework for hacker - Octopress. As mentioned in the previous post, I have &hellip;">
+  <meta name="description" content="I am never good at using Git. But it&#8217;s not my fault. Git has too many commands, and I am not a command line guy. That&#8217;s why I usually use &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/">
+  <link rel="canonical" href="http://samwize.github.com/2012/10/30/common-git-usage/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">How to Setup Octopress on Github Pages</h1>
+      <h1 class="entry-title">Common Git Usage</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-11T02:07:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+<time datetime="2012-10-30T21:35:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,98 +107,183 @@
   </header>
 
 
-<div class="entry-content"><p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
+<div class="entry-content"><p>I am never good at using Git.</p>
 
-<p>As mentioned in the previous post, I have <a href="/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
+<p>But it&#8217;s not my fault. Git has too many commands, and I am not a command line guy. That&#8217;s why I usually use <a href="http://www.syntevo.com/smartgit/index.html">SmartGit</a>, a Git software with user interface that supports Mac.</p>
+
+<p>However, there are times when you have to run on the command line (eg. scripting or you just want to be <em>real fast</em>).</p>
+
+<p>These are my common use cases during development work flow. I don&#8217;t cover <a href="http://ndpsoftware.com/git-cheatsheet.html">everything</a>, or advanced stuff.</p>
 
 <!-- more -->
 
 
-<h2>Setup</h2>
+<h2>Push an existing repos to Github</h2>
 
-<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
+<p>Assuming you have a repos on github already, issue the following <a href="https://gist.github.com/868939">commands</a>:</p>
 
-<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
-
-<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
-
-<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
-
-<pre><code># Here's how I found out
-rake new_post["Switched Wordpress to Octopress"]
-rbenv: version `1.9.3-p194' is not installed
-
-# Hence..
-rbenv install 1.9.3-p194
-rbenv global 1.9.3-p194
+<pre><code>cd existing_git_repo
+git remote add origin git@github.com:[user]/[reponame].git
+git push -u origin master
 </code></pre>
 
-<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
+<h2>Setup Github to remember password</h2>
 
-<pre><code>gem install bundler
-rbenv rehash
-bundle install
+<p>The <a href="https://help.github.com/articles/set-up-git">instructions</a>. Basically,</p>
+
+<pre><code>git config --global user.name "Your Name Here"
+git config --global user.email "your_email@youremail.com"
 </code></pre>
 
-<h2>Deploy</h2>
+<p>Then download and setup <code>git-credential-osxkeychain</code>.</p>
 
-<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it&#8217;s free as long as you don&#8217;t mind pushing your &#8216;code&#8217; to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
-
-<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
-
-<ol>
-<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
-<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
-</ol>
-
-
-<p>To deploy:</p>
-
-<pre><code>rake generate
-rake deploy
+<pre><code>curl -s -O http://github-media-downloads.s3.amazonaws.com/osx/git-credential-osxkeychain
+chmod u+x git-credential-osxkeychain
 </code></pre>
 
-<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
+<p>Issue a <code>which git</code> and note the path of git. Assuming it is <code>/usr/bin/git</code>, you have have to move to <code>/usr/bin/</code> (IMPORTANT: less the git part!).</p>
 
-<p>So what about the source branch? You should also commit and push them.</p>
+<pre><code>sudo mv git-credential-osxkeychain /usr/bin/
+</code></pre>
+
+<h2>On Color Options</h2>
+
+<p>One of the most important <a href="http://git-scm.com/book/en/Customizing-Git-Git-Configuration">configuration</a></p>
+
+<pre><code>git config --global color.ui true
+</code></pre>
+
+<p>With that, commands like <code>git diff</code> and <code>git log -p</code> looks better</p>
+
+<h1>What&#8217;s changed</h1>
+
+<p>Sometimes, you want to see what are the changes in your working directory (compared to HEAD/the last commit).</p>
+
+<pre><code>git diff somefile.py
+</code></pre>
+
+<p>Or you want to see what are the overall changes between the last 2 commits</p>
+
+<pre><code>git whatchanged -n 1
+</code></pre>
+
+<p>Then the actual code changes</p>
+
+<pre><code> git log -p somefile.py
+</code></pre>
+
+<h2>Added new files, Updated changes, or Deleted files</h2>
+
+<p>If you have added new files or updated tracked files</p>
 
 <pre><code>git add .
-git commit -m 'your message'
-git push origin source
 </code></pre>
 
-<h2>Custom Domain</h2>
+<p>If you have deleted files or updated tracked files</p>
 
-<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
-
-<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
+<pre><code>git add -u
 </code></pre>
 
-<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
+<p>You could do both in a single step</p>
 
-<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
+<pre><code>git add -A
+</code></pre>
 
-<h2>New Post</h2>
+<h2>What are my remotes/branches</h2>
 
-<p>This is my process whenever I have a new blog post.</p>
+<p>To know,</p>
 
-<pre><code>rake new_post["My New Post"]
+<pre><code>cat .git/config
+</code></pre>
 
-# edit my-new-post.markdown with text editor
+<p>Or you can <a href="http://gitref.org/remotes/">list</a> the remotes</p>
 
-rake preview
+<pre><code>git remote -v
+</code></pre>
 
-# Open http://localhost:4000 for a preview
-# Edit and preview until satified
+<h2>Update your repos</h2>
 
-# Ready to publish
-rake generate
-rake deploy
+<p>It&#8217;s a 2 step process. First you fetch the changes from a remote named <code>origin</code></p>
 
-# Commit source
-git add .
-git commit -m 'your message'
-git push origin source  
+<pre><code>git fetch origin
+</code></pre>
+
+<p>Then you merge a branch <code>master</code> to local</p>
+
+<pre><code>git merge origin/master
+</code></pre>
+
+<p>Or Simply</p>
+
+<pre><code>git pull origin master
+</code></pre>
+
+<p>If <code>origin</code> is a default remote and &#8216;master&#8217; is default branch, you can drop it eg. <code>git pull</code>.</p>
+
+<h2>Fix merge conflicts</h2>
+
+<p>This always happen when you work in teams. A very <a href="http://stackoverflow.com/questions/161813/how-do-i-fix-merge-conflicts-in-git">commmon</a> question.</p>
+
+<p>It usually goes like this.. You tried to update</p>
+
+<pre><code>git fetch
+git pull
+... not uptodate. Cannot merge.
+</code></pre>
+
+<p>So you commit your local changes</p>
+
+<pre><code>git add .
+git commit -m "some changes"
+...
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+
+<p>So you need to resolve the conflict</p>
+
+<pre><code>git mergetool -y
+</code></pre>
+
+<p>At this point you use the GUI (eg FileMerge) to resolve the conflicts and save. Then you commit</p>
+
+<pre><code>git add .
+git commit -m "fixed conflicts"
+git push
+</code></pre>
+
+<p>Done!</p>
+
+<h2>Revert a file during merge conflict</h2>
+
+<p>Say when you have a merge conflict, you know it should just take your file,</p>
+
+<pre><code>git checkout --ours filename.c
+</code></pre>
+
+<p>Or if you know yit should be their file,</p>
+
+<pre><code>git checkout --theirs filename.c
+</code></pre>
+
+<h2>Tagging</h2>
+
+<p>Useful when you want to <a href="http://git-scm.com/book/en/Git-Basics-Tagging">tag a version</a>.</p>
+
+<pre><code>git tag -a v1.2
+</code></pre>
+
+<p>If you want to push to the tag, it works similarly like a branch.</p>
+
+<pre><code>git push origin v1.2
+</code></pre>
+
+<h2>Delete a commit that has been pushed</h2>
+
+<p>This is usually when you accidentally commit <a href="http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit">wrongly</a>.</p>
+
+<pre><code>git log
+git reset --hard &lt;sha1-commit-id&gt;
+git push origin HEAD --force
 </code></pre>
 </div>
 
@@ -222,12 +307,12 @@ git push origin source
   
 
 
-<time datetime="2012-09-11T02:07:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+<time datetime="2012-10-30T21:35:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/git/'>Git</a>, <a class='category' href='/blog/categories/tools/'>Tools</a>
   
 </span>
 
@@ -236,7 +321,7 @@ git push origin source
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/10/30/common-git-usage/" data-via="samwize" data-counturl="http://samwize.github.com/2012/10/30/common-git-usage/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -249,10 +334,8 @@ git push origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/10/switched-from-wordpress-to-octopress/" title="Previous Post: Switched Wordpress to Octopress">&laquo; Switched Wordpress to Octopress</a>
+        <a class="basic-alignment left" href="/2012/10/29/ios-guide-to-multiple-device-resolutions/" title="Previous Post: iOS Guide to Multiple Device Resolutions">&laquo; iOS Guide to Multiple Device Resolutions</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/12/hide-all-my-files-in-macs-finder/" title="Next Post: Hide "All My Files" in Mac's Finder">Hide "All My Files" in Mac's Finder &raquo;</a>
       
     </p>
   </footer>
@@ -331,8 +414,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/';
-        var disqus_url = 'http://samwize.github.com/2012/09/11/how-to-setup-octopress-on-github-pages/';
+        var disqus_identifier = 'http://samwize.github.com/2012/10/30/common-git-usage/';
+        var disqus_url = 'http://samwize.github.com/2012/10/30/common-git-usage/';
         var disqus_script = 'embed.js';
       
     (function () {
