@@ -3,7 +3,7 @@ layout: post
 title: "The Lean Startup"
 date: 2012-10-11 00:08
 comments: true
-categories: Books
+categories: [Books, Startups]
 published: true
 ---
 

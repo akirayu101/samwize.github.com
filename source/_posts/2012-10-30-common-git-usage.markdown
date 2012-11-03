@@ -4,16 +4,16 @@ title: "Common Git Usage"
 date: 2012-10-30 21:35
 comments: true
 categories: [Tools, Git]
-published: false
+published: true
 ---
 
-I admit I am never good at using Git.
+I am never good at using Git.
 
 But it's not my fault. Git has too many commands, and I am not a command line guy. That's why I usually use [SmartGit](http://www.syntevo.com/smartgit/index.html), a Git software with user interface that supports Mac.
 
-However, there are times when you do need to run on the command line (eg. scripting or you just want to be *real fast*).
+However, there are times when you have to run on the command line (eg. scripting or you just want to be *real fast*).
 
-These are my common use cases during development work flow. I don't cover [everything](http://ndpsoftware.com/git-cheatsheet.html), or expert stuff.
+These are my common use cases during development work flow. I don't cover [everything](http://ndpsoftware.com/git-cheatsheet.html), or advanced stuff.
 
 <!-- more -->
 
