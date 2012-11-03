@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-01T23:58:35+08:00</updated>
+  <updated>2012-11-03T21:38:55+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Mythical Team-Month]]></title>
+    <link href="http://samwize.github.com/2012/11/03/the-mythical-team-month/"/>
+    <updated>2012-11-03T21:22:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/03/the-mythical-team-month</id>
+    <content type="html"><![CDATA[<p>I came across this great slideshow about projects, teams and developers.</p>
+
+<script async class="speakerdeck-embed" data-id="4f5ba2cfe593e10022020dbb" data-ratio="1.3333333333333333" src="http://samwize.github.com//speakerdeck.com/assets/embed.js"></script>
+
+
+
+
+<!-- more -->
+
+
+<p>Some of the ideas are similar to <a href="http://samwize.github.com/2012/10/11/the-lean-startup/">The Lean Startup</a>.</p>
+
+<p>Other key takeaways for me are:</p>
+
+<h2>Consensus &amp; Feedback</h2>
+
+<ul>
+<li><p>Healthy agile teams <strong>run on consensus</strong></p></li>
+<li><p>Consensus doesn&#8217;t scale. More people = More connections. O(n<sup>2)</sup> Problem.</p></li>
+<li><p>Consensus corrects for the team&#8217;s needs</p></li>
+<li><p>Feedback corrects for the user&#8217;s needs</p></li>
+<li><p>Consensus &amp; Feedback => <strong>Competes for the same resources!</strong></p></li>
+</ul>
+
+
+<h2>A Great Developer</h2>
+
+<ul>
+<li><p>Empathetic = Defend users by adpoting their perspective</p></li>
+<li><p>Analytical = Break down large problems</p></li>
+<li><p>Visionary = Identify great ideas and simplify</p></li>
+<li><p>Scientific = Methodically attacks problems</p></li>
+<li><p>Creative = Dreams up new ideas</p></li>
+<li><p>Professional = Invests in long-term value &amp; maintainability</p></li>
+<li><p>Entrepreneurial = Kills failing projects</p></li>
+<li><p>Hungry = Relentlessly improves through learning, practicing and sharing</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Common Git Usage]]></title>
@@ -2060,17 +2106,6 @@ _deploy
 
 
 <p>Nice piece of code added to my Xcode snippet.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[API Design Rules for iOS/OS X]]></title>
-    <link href="http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x/"/>
-    <updated>2012-09-28T21:43:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x</id>
-    <content type="html"><![CDATA[<p>If you are designing an SDK/library/API, read these 25 rules by <a href="http://mattgemmell.com/2012/05/24/api-design/">Matt Gemmell</a>:</p>
-
-<p><a href="http://mattgemmell.com/2012/05/24/api-design/"><img class="center" src="http://samwize.github.com/images/ios-api-design-rules.jpeg"></a></p>
 ]]></content>
   </entry>
   
