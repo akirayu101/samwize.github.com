@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-03T21:44:47+08:00</updated>
+  <updated>2012-11-04T20:18:53+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Accessibility Guide for Developers]]></title>
+    <link href="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/"/>
+    <updated>2012-11-04T18:25:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers</id>
+    <content type="html"><![CDATA[<p>There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful labels and iOS VoiceOver will take care of it.</p>
+
+<p>I am guilty that I didn't take these simple steps whenever I release a new app, even though I know about it since iOS 3.. Sometimes, I need a <a href="http://mattgemmell.com/2012/10/26/ios-accessibility-heroes-and-villains/">reminder</a>.</p>
+
+<p>Treat this post as <em>another reminder</em>. And as a guide.</p>
+
+<!-- more -->
+
+
+<h2>Test with Accessibility Inspector</h2>
+
+<p>In <strong>iOS Simulator</strong> (NOT actual device), go to Settings > General > Accessibility and switch it on.</p>
+
+<p>You may now observe accessibility information for each UI element.</p>
+
+<h2>Define in Interface Builder</h2>
+
+<p>If you are using IB to build your UI, you can easily edit from the Identity Inspector. All <code>UIView</code> comes with accessibility attributes.</p>
+
+<p><img src="/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
+
+<ul>
+<li>Enable Accessibility</li>
+<li>Enter a label. This is what will be read with VoiceOver.</li>
+<li>Enter a hint, if the label could be ambiguous.</li>
+</ul>
+
+
+<h2>Change Programmatically</h2>
+
+<p>You can also change the label and hint programmatically.</p>
+
+<p>If you have a <code>UILabel</code>, it will read the text of the label. However if that is not descriptive, you could</p>
+
+<pre><code>mylabel.accessibilityLabel = @"Play the music";
+mylabel.accessibilityHint = @"Play the music right now";
+</code></pre>
+
+<h2>UITableViewCell</h2>
+
+<p>It is most likely a table view cell is made up of a couple of UI elements. However, it would be difficult to select the individual elements.</p>
+
+<p>Hence you could help be aggregating the labels and set the <code>UITableCellView</code> accessibility options.</p>
+
+<h2>UISlider</h2>
+
+<p>For slider, you may also want to set the value.</p>
+
+<pre><code>mySlider.accessibilityValue = @"Volume at 50%";
+</code></pre>
+
+<h2>Test on Device</h2>
+
+<p>Go to Settings > General > Accessibility > Enable VoiceOver.</p>
+
+<p>Test it out!</p>
+
+<h2>Advanced</h2>
+
+<p>I have merely list the <em>simple</em> steps I usually used.</p>
+
+<p>Apple has it's own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
+
+<p>Hope you be a hero!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Guide to Multiple Device Resolutions]]></title>
@@ -339,61 +411,6 @@ return [UIImage imageNamed:imageName];
 <p>Use the above techniques as needed, and handily use the <a href="https://gist.github.com/3926123">Device class</a> methods.</p>
 
 <p>If you use any third party libraries, you would also need to update their libs with support for <code>armv7s</code> (a new architecture for iPhone5). Popular libs are already updated at this point of writing eg. Flurry, Google Admob, and other ad networks.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to setup GHUnit with CocoaPods]]></title>
-    <link href="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/"/>
-    <updated>2012-10-04T23:21:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods</id>
-    <content type="html"><![CDATA[<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">installation guide for GHUnit</a> is for installing the framework in the traditional way.</p>
-
-<p>As you might know, <a href="http://cocoapods.org/">CocoaPods</a> is the new way to handle dependencies. Of course, GHUnit is supported.</p>
-
-<p>The is a lack of a guide on how you setup the two useful iOS libraries together.</p>
-
-<!-- more -->
-
-
-<p>It is similar to the <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">official guide</a>. I am going to point out the differences when need to.</p>
-
-<h2>Step 1 - Create Test Target</h2>
-
-<p>This is the same. You create a completely new application target.</p>
-
-<p>I prefer to name it <code>AppGHTests</code>, as I might still be using <code>AppTests</code> for my <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">SenTestings</a>.</p>
-
-<p><img class="center" src="/images/xcode-ghunit-pods-new-target.png"></p>
-
-<h2>Step 2 - Configure Test Target</h2>
-
-<p>You DON'T have to download and copy <code>GHUnitIOS.framework</code> to your project since you are using CocoaPods. Instead, you should setup GHUnit pods.</p>
-
-<p>Edit the <code>Prodfile</code> and add GHUnitIOS.</p>
-
-<pre><code>platform :ios
-pod 'GHUnitIOS', '0.5.5'
-</code></pre>
-
-<p>Then install the pod as per normal.</p>
-
-<pre><code>$ pod install
-</code></pre>
-
-<p>Continue with the official guide to remove the unnecessary files, and edit <code>main.m</code> to replace the delegate class with <code>GHUnitIOSAppDelegate</code>.</p>
-
-<h2>Step 3 - Configure Pod for Test Target</h2>
-
-<p>This part is IMPORTANT. The new test target will not include the pods.</p>
-
-<p>You need to configure the target to be based on Pods project. Refer to <a href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">this post</a>.</p>
-
-<p>Lastly, add the <code>libPods.a</code> library to the test target.</p>
-
-<p><img class="center" src="/images/xcode-ghunit-pods-libpods.png"></p>
-
-<p>That's it. Run the test target!</p>
 ]]></content>
   </entry>
   

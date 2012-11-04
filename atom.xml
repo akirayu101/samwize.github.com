@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-03T21:44:47+08:00</updated>
+  <updated>2012-11-04T20:18:53+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Accessibility Guide for Developers]]></title>
+    <link href="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/"/>
+    <updated>2012-11-04T18:25:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers</id>
+    <content type="html"><![CDATA[<p>There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful labels and iOS VoiceOver will take care of it.</p>
+
+<p>I am guilty that I didn&#8217;t take these simple steps whenever I release a new app, even though I know about it since iOS 3.. Sometimes, I need a <a href="http://mattgemmell.com/2012/10/26/ios-accessibility-heroes-and-villains/">reminder</a>.</p>
+
+<p>Treat this post as <em>another reminder</em>. And as a guide.</p>
+
+<!-- more -->
+
+
+<h2>Test with Accessibility Inspector</h2>
+
+<p>In <strong>iOS Simulator</strong> (NOT actual device), go to Settings > General > Accessibility and switch it on.</p>
+
+<p>You may now observe accessibility information for each UI element.</p>
+
+<h2>Define in Interface Builder</h2>
+
+<p>If you are using IB to build your UI, you can easily edit from the Identity Inspector. All <code>UIView</code> comes with accessibility attributes.</p>
+
+<p><img src="http://samwize.github.com/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
+
+<ul>
+<li>Enable Accessibility</li>
+<li>Enter a label. This is what will be read with VoiceOver.</li>
+<li>Enter a hint, if the label could be ambiguous.</li>
+</ul>
+
+
+<h2>Change Programmatically</h2>
+
+<p>You can also change the label and hint programmatically.</p>
+
+<p>If you have a <code>UILabel</code>, it will read the text of the label. However if that is not descriptive, you could</p>
+
+<pre><code>mylabel.accessibilityLabel = @"Play the music";
+mylabel.accessibilityHint = @"Play the music right now";
+</code></pre>
+
+<h2>UITableViewCell</h2>
+
+<p>It is most likely a table view cell is made up of a couple of UI elements. However, it would be difficult to select the individual elements.</p>
+
+<p>Hence you could help be aggregating the labels and set the <code>UITableCellView</code> accessibility options.</p>
+
+<h2>UISlider</h2>
+
+<p>For slider, you may also want to set the value.</p>
+
+<pre><code>mySlider.accessibilityValue = @"Volume at 50%";
+</code></pre>
+
+<h2>Test on Device</h2>
+
+<p>Go to Settings > General > Accessibility > Enable VoiceOver.</p>
+
+<p>Test it out!</p>
+
+<h2>Advanced</h2>
+
+<p>I have merely list the <em>simple</em> steps I usually used.</p>
+
+<p>Apple has it&#8217;s own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
+
+<p>Hope you be a hero!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[The Mythical Team-Month]]></title>
@@ -2063,47 +2135,6 @@ _deploy
 </code></pre>
 
 <p>Just that. Wasted a few hours. Hopes this help others.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Singleton/SharedInstance Template for iOS 5 (ARC and GCD)]]></title>
-    <link href="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/"/>
-    <updated>2012-09-29T19:35:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd</id>
-    <content type="html"><![CDATA[<p>The singleton pattern is widely used in iOS to have a global, static class.</p>
-
-<p>The most famous is <code>[NSUserDefaults standardUserDefaults]</code>.</p>
-
-<p>Over the years, the template for creating a singleton/SharedInstance has also changed. This is due to the introduction of new technologies in Apple&#8217;s SDK, particularly ARC and GDC.</p>
-
-<!-- more -->
-
-
-<p>The <a href="http://lukeredpath.co.uk/blog/a-note-on-objective-c-singletons.html">implementation</a> has simplified to:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">sharedInstance</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">static</span> <span class="n">dispatch_once_t</span> <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">__strong</span> <span class="k">static</span> <span class="kt">id</span> <span class="n">_sharedObject</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
-</span><span class='line'>    <span class="n">_sharedObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span> <span class="c1">// or some other init method</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">_sharedObject</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Nice piece of code added to my Xcode snippet.</p>
 ]]></content>
   </entry>
   

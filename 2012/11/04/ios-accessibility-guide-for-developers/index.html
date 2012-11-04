@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Scala - Junda Ong</title>
+  <title>iOS Accessibility Guide for Developers - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Category: Scala">
+  <meta name="description" content="There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.comblog/categories/scala/">
+  <link rel="canonical" href="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,92 +78,160 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Scala</h1>
+    
+      <h1 class="entry-title">iOS Accessibility Guide for Developers</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-04T18:25:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful labels and iOS VoiceOver will take care of it.</p>
 
-  
-  <h2>2012</h2>
+<p>I am guilty that I didn&#8217;t take these simple steps whenever I release a new app, even though I know about it since iOS 3.. Sometimes, I need a <a href="http://mattgemmell.com/2012/10/26/ios-accessibility-heroes-and-villains/">reminder</a>.</p>
 
-<article>
-  
-<h1><a href="/2012/10/19/why-i-hate-scala/">Why I hate Scala</a></h1>
-<time datetime="2012-10-19T21:44:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2012</span></time>
+<p>Treat this post as <em>another reminder</em>. And as a guide.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/scala/'>Scala</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<h2>Test with Accessibility Inspector</h2>
+
+<p>In <strong>iOS Simulator</strong> (NOT actual device), go to Settings > General > Accessibility and switch it on.</p>
+
+<p>You may now observe accessibility information for each UI element.</p>
+
+<h2>Define in Interface Builder</h2>
+
+<p>If you are using IB to build your UI, you can easily edit from the Identity Inspector. All <code>UIView</code> comes with accessibility attributes.</p>
+
+<p><img src="/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
+
+<ul>
+<li>Enable Accessibility</li>
+<li>Enter a label. This is what will be read with VoiceOver.</li>
+<li>Enter a hint, if the label could be ambiguous.</li>
+</ul>
 
 
+<h2>Change Programmatically</h2>
 
-<article>
-  
-<h1><a href="/2012/10/18/scala-tutorial-part-ii/">Scala Tutorial (Part II)</a></h1>
-<time datetime="2012-10-18T22:14:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>18</span> <span class='year'>2012</span></time>
+<p>You can also change the label and hint programmatically.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/play-/'>Play!</a>, <a class='category' href='/blog/categories/scala/'>Scala</a></span>
-</footer>
+<p>If you have a <code>UILabel</code>, it will read the text of the label. However if that is not descriptive, you could</p>
 
+<pre><code>mylabel.accessibilityLabel = @"Play the music";
+mylabel.accessibilityHint = @"Play the music right now";
+</code></pre>
 
-</article>
+<h2>UITableViewCell</h2>
 
+<p>It is most likely a table view cell is made up of a couple of UI elements. However, it would be difficult to select the individual elements.</p>
 
+<p>Hence you could help be aggregating the labels and set the <code>UITableCellView</code> accessibility options.</p>
 
-<article>
-  
-<h1><a href="/2012/10/15/scala-plus-play-development-guide/">Scala + Play! Development Guide</a></h1>
-<time datetime="2012-10-15T16:02:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+<h2>UISlider</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/play-/'>Play!</a>, <a class='category' href='/blog/categories/scala/'>Scala</a></span>
-</footer>
+<p>For slider, you may also want to set the value.</p>
 
+<pre><code>mySlider.accessibilityValue = @"Volume at 50%";
+</code></pre>
 
-</article>
+<h2>Test on Device</h2>
 
+<p>Go to Settings > General > Accessibility > Enable VoiceOver.</p>
 
+<p>Test it out!</p>
 
-<article>
-  
-<h1><a href="/2012/10/09/configure-your-local-environment-for-scala-on-heroku/">Configure your local environment for Scala on Heroku</a></h1>
-<time datetime="2012-10-09T00:35:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>09</span> <span class='year'>2012</span></time>
+<h2>Advanced</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/heroku/'>Heroku</a>, <a class='category' href='/blog/categories/play-/'>Play!</a>, <a class='category' href='/blog/categories/scala/'>Scala</a></span>
-</footer>
+<p>I have merely list the <em>simple</em> steps I usually used.</p>
 
+<p>Apple has it&#8217;s own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2012/10/07/a-short-scala-tutorial-for-java-developers/">A short Scala tutorial for Java Developers</a></h1>
-<time datetime="2012-10-07T21:10:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>07</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/scala/'>Scala</a></span>
-</footer>
-
-
-</article>
-
+<p>Hope you be a hero!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-04T18:25:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/" data-via="samwize" data-counturl="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/03/the-mythical-team-month/" title="Previous Post: The Mythical Team-Month">&laquo; The Mythical Team-Month</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -231,7 +299,10 @@
       var disqus_shortname = 'just2us';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/';
+        var disqus_url = 'http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
