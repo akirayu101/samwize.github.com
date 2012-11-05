@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Switched Wordpress to Octopress - Junda Ong</title>
+  <title>What is Python's Lambda and Closure - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I started just2us.com 3 years ago, using it as a avenue for me to share about my apps and development guides. Over the last 3 years, I have been &hellip;">
+  <meta name="description" content="Lambda is one line anonymous function constructed on the fly Closure is a function object that remembers values in enclosing scopes regardless of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/">
+  <link rel="canonical" href="http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Switched Wordpress to Octopress</h1>
+      <h1 class="entry-title">What Is Python's Lambda and Closure</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-10T00:29:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
+<time datetime="2012-11-05T20:06:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,37 +107,76 @@
   </header>
 
 
-<div class="entry-content"><p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
+<div class="entry-content"><p>Lambda is</p>
 
-<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
+<blockquote><p>one line anonymous function constructed on the fly</p></blockquote>
 
-<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
+<p>Closure is</p>
+
+<blockquote><p>a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory</p></blockquote>
 
 <!-- more -->
 
 
-<ol>
-<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
-<li><p>There isn&#8217;t a good &amp; free Wordpress editor for Mac</p></li>
-<li><p>I wish I can write in markdown or something</p></li>
-</ol>
+<h2>What is Lambda?</h2>
 
-
-<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
-
-<blockquote><p>A blogging framework for hackers</p></blockquote>
-
-<p>It makes sense:</p>
+<p><a href="http://www.diveintopython.net/power_of_introspection/lambda_functions.html">DiveIntoPython</a> gave a good definition. Lambda is</p>
 
 <ul>
-<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!</p></li>
-<li><p>Hacker prefers to write in markdown; it&#8217;s clear like code</p></li>
+<li>a one line function</li>
+<li>anonymous function (no name)</li>
+<li>a function that can be used anywhere a function is required</li>
+<li>it takes in arbitrary parameters</li>
+<li>and implicitly return as a single expression</li>
 </ul>
 
 
-<p>Switching wouldn&#8217;t count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
+<p>But most important, you need not use lambda.</p>
 
-<p>Time will tell if it&#8217;s worth.</p>
+<p>Lambda is a <strong>style</strong>. You need not use it.</p>
+
+<p>What&#8217;s more, if you need multiple lines, then consider a normal function. Python can pass function as parameter anyway.</p>
+
+<h2>Why do we have Lambda?</h2>
+
+<p>You might <a href="http://stackoverflow.com/questions/890128/python-lambda-why">wonder</a> why is there lambda in the first place.</p>
+
+<p>This post on <a href="http://python-history.blogspot.sg/2009/04/origins-of-pythons-functional-features.html">Python history</a> explained well.</p>
+
+<blockquote><p>In 1994, lambda operator was introduced for creating anonymous functions (as expressions). Lack of a better choice..</p></blockquote>
+
+<p>However, the choice of the terminology &#8220;lambda&#8221; had many unintended consequences. It doesn&#8217;t match the expectation from other languages. Hence it is usually considered &#8220;sorely lacking&#8221; in features. eg. It does not work with surrounding codes.</p>
+
+<p>Lambda is no closure like other languages.</p>
+
+<h2>What is Closure?</h2>
+
+<p>Best explained in <a href="http://www.shutupandship.com/2012/01/python-closures-explained.html">ShutUpAndShip</a>,</p>
+
+<blockquote><p>A CLOSURE is a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory.</p></blockquote>
+
+<p>In another shorter <a href="http://ynniv.com/blog/2007/08/closures-in-python.html">explanation</a>,</p>
+
+<blockquote><p>A closure is data attached to code</p></blockquote>
+
+<p>In Python,</p>
+
+<ul>
+<li>Methods are closures</li>
+<li>Functions are NOT closures</li>
+<li>Lambda is NOT closure</li>
+</ul>
+
+
+<h2>Huh? Method vs Function</h2>
+
+<p>In case you wonder what is the difference between <a href="http://stackoverflow.com/a/155633/242682">Method &amp; Function</a>,</p>
+
+<blockquote><p>A method is on an object. A function is independent of an object.</p></blockquote>
+
+<p>You define a <strong>function</strong> such as <code>def foo():</code>.</p>
+
+<p>You use a <strong>method</strong> of an object such as <code>obj.foo()</code>. <code>obj</code> is implicitly passed as the first parameter to the method <code>foo</code>. That&#8217;s why in a class, you have a <code>self</code> as the first param of a <em>method</em>.</p>
 </div>
 
 
@@ -160,12 +199,12 @@
   
 
 
-<time datetime="2012-09-10T00:29:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
+<time datetime="2012-11-05T20:06:00+08:00" pubdate data-updated="true">Nov 5<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/blogging/'>Blogging</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/python/'>Python</a>
   
 </span>
 
@@ -174,7 +213,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/" data-via="samwize" data-counturl="http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -187,8 +226,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/2012/11/04/ios-accessibility-guide-for-developers/" title="Previous Post: iOS Accessibility Guide for Developers">&laquo; iOS Accessibility Guide for Developers</a>
       
-        <a class="basic-alignment right" href="/2012/09/11/how-to-setup-octopress-on-github-pages/" title="Next Post: How to setup Octopress on Github Pages">How to setup Octopress on Github Pages &raquo;</a>
       
     </p>
   </footer>
@@ -267,8 +306,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/';
-        var disqus_url = 'http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/';
+        var disqus_identifier = 'http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/';
+        var disqus_url = 'http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/';
         var disqus_script = 'embed.js';
       
     (function () {
