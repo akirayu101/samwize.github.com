@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-05T20:27:33+08:00</updated>
+  <updated>2012-11-06T22:00:20+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[My Custom Localization and genstrings]]></title>
+    <link href="http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings/"/>
+    <updated>2012-11-06T21:49:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings</id>
+    <content type="html"><![CDATA[<p>This post is about some custom stuff I did for <a href="https://developer.apple.com/library/ios/#documentation/MacOSX/Conceptual/BPInternational/Articles/ChoosingLocalizations.html">localization</a>.</p>
+
+<p>It does not cover the <a href="http://www.raywenderlich.com/2876/how-to-localize-an-iphone-app-tutorial">basic</a> of how you localized an app, nor how to use the Apple provided <a href="http://spritebandits.wordpress.com/2012/01/25/ios-iphone-app-localization-genstrings-tips/">genstrings</a> tool.</p>
+
+<!-- more -->
+
+
+<p>I have some particular bad vibes with using <code>NSLocalizedString</code>. I hate it being 17 characters long, and the REQUIRED comment parameter that you MUST pass in, which usually is just <code>nil</code> for me.</p>
+
+<p>And so I have my own Macro called <code>Localized</code>.</p>
+
+<p>Which I improved to read from other table strings, and has an awesome recursive replacement.</p>
+
+<p>By doing that, I lose the use of <code>genstrings</code>, as it no longer uses <code>NSLocalizedString</code>. Unfortunately <code>genstrings</code> is closed source. But fortunately, some <a href="https://github.com/dunkelstern/Cocoa-Localisation-Helper">python helper</a> is around.</p>
+
+<p>And the result is at <a href="https://github.com/samwize/localized">https://github.com/samwize/localized</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Accessibility Guide for Developers]]></title>
@@ -289,128 +313,6 @@ NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST
 <p>This time, you have to <a href="http://stackoverflow.com/a/12524366/242682">set</a> the deployment target to at least iOS 4.3.</p>
 
 <p>Well done Apple.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Updating App for iPhone 5]]></title>
-    <link href="http://samwize.github.com/2012/10/22/updating-app-for-iphone-5/"/>
-    <updated>2012-10-22T01:14:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/22/updating-app-for-iphone-5</id>
-    <content type="html"><![CDATA[<p>This post is a guide to updating existing app for iPhone 5.</p>
-
-<p>As you already knew, the new iPhone 5 introduced a taller screen at 4 inch, while all iPhones before is at 3.5 inch.</p>
-
-<p>There are a couple of steps that you have to do to support the taller screen, and it really depends on how you develop your app in the first place. You might use all of the techniques below, or none.</p>
-
-<p>These techniques are inspired by <a href="http://stackoverflow.com/questions/12395200/how-to-develop-or-migrate-apps-for-iphone-5-screen-resolution">answers</a> <a href="http://stackoverflow.com/questions/12518879/extend-app-for-iphone-5-best-practice">on</a> <a href="http://stackoverflow.com/questions/12519110/what-to-name-images-for-iphone-5-screen-size">Stackoverflow</a>. The result is a <code>Device</code> class I created at <a href="https://gist.github.com/3926123">https://gist.github.com/3926123</a></p>
-
-<!-- more -->
-
-
-<h2>1. Default-568h@2x.png</h2>
-
-<p>There isn't a setting to specify a project supports iPhone 5. Instead, a presence of a <code>Default-568h@2x.png</code> signify that it supports iPhone 5.</p>
-
-<p>The size is 640 x 1136.</p>
-
-<p>Xcode 4.5 will actually offer to add one automatically.</p>
-
-<h2>2. Code to detect 4-inch screen</h2>
-
-<p>You can detect the 4-inch screen size with the following method:</p>
-
-<p>```objc
-/<em>* Returns true if it is a iPhone/iPod with 4 inch tall screen </em>/
-+(BOOL)isScreen4Inch {</p>
-
-<pre><code>if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    if (screenBounds.size.height == 568)
-        return YES;
-}
-return NO;
-</code></pre>
-
-<p>}
-```</p>
-
-<p>I have this in <code>Device.h</code>, so import and use.</p>
-
-<p>```objc
-if ([Device isScreen4Inch]) {</p>
-
-<pre><code>// Code for 4 inch
-</code></pre>
-
-<p>} else {</p>
-
-<pre><code>// Code for anything else (3.5 inch or iPad)
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>3. Use Auto Layout for iOS6</h2>
-
-<p>If you are supporting only iOS6 and above, you should use Auto Layout.</p>
-
-<p>You can read up a tutorial by <a href="http://www.raywenderlich.com/20881/beginning-auto-layout-part-1-of-2">Ray Wenderlich</a>.</p>
-
-<h2>4. Set auto resizing mask for pre iOS6</h2>
-
-<p>If you are still supporting pre iOS6, you still need auto resizing mask for your views to stretch and re-position automatically.</p>
-
-<p>Refer to <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/uiview_class/uiview/uiview.html">Apple UIView doc</a> on <code>UIViewAutoresizing</code>.</p>
-
-<p>This 'feature' was in iOS ever since iOS is available. If you design your apps mostly using Xcode Interface Builder, this would one of the most needed change.</p>
-
-<p>You could change a subview to auto resize its width/height, and fix it's margin to left/right/top/bottom.</p>
-
-<h2>5. Stretch Images</h2>
-
-<p>If you are using Xcode Interface Builder, change the UIImageView <code>mode</code> to <code>Scale to Fill</code> (or others).</p>
-
-<p>Then change the <code>Stretching</code> properties. The values are a fraction of the image size. For example, X and Y are 0.5, and Width and Height are 0.1, it means stretch the portion of the image at center with 10% width and height.</p>
-
-<p>Your images can also be <a href="http://mobiledevelopertips.com/user-interface/ios-5-uiimage-and-resizableimagewithcapinsets.html">stretched</a> with UIImage <code>resizableImageWithCapInsets:</code>.</p>
-
-<p>But that works only if your image has portion that can be stretched without distortion. If it doesn't, you have to create a new image <code>-568@2x</code> image, and use the trick covered next to load it automatically.</p>
-
-<h2>6. Load -568h@2x images</h2>
-
-<p>Unlike <code>@2x</code> which are loaded automatically for Retina Display, the <code>-568h@2x</code> are not loaded automatically for the taller iPhone (except the <code>Default-568h@2x.png</code>).</p>
-
-<p>I use a convenient method below:</p>
-
-<p>```objc
-+(UIImage<em>)imageNamedFor568h:(NSString</em>)imageName {</p>
-
-<pre><code>if ([Device isScreen4Inch]) {
-    NSString *imageNameFor568h = [NSString stringWithFormat:@"%@-568h.%@", [imageName stringByDeletingPathExtension], [imageName pathExtension]];
-    return [UIImage imageNamed:imageNameFor568h];
-}
-return [UIImage imageNamed:imageName];
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Using category, I introduced the method for UIImage.</p>
-
-<p>To use, I would have to change the methods <code>[UIImage imageName:@"foo.png"]</code> to <code>[UIImage imageNameFor568h:@"foo.png"]</code>.</p>
-
-<h2>7. iOS Simulator</h2>
-
-<p>To run and test on a 4 inch iPhone, select <strong>Hardware</strong> > <strong>Device</strong> > <strong>iPhone (Retina 4-inch)</strong>.</p>
-
-<h2>8. Last words..</h2>
-
-<p>It largely depends on how you code your existing apps.</p>
-
-<p>Use the above techniques as needed, and handily use the <a href="https://gist.github.com/3926123">Device class</a> methods.</p>
-
-<p>If you use any third party libraries, you would also need to update their libs with support for <code>armv7s</code> (a new architecture for iPhone5). Popular libs are already updated at this point of writing eg. Flurry, Google Admob, and other ad networks.</p>
 ]]></content>
   </entry>
   
