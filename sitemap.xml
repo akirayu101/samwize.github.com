@@ -32,6 +32,12 @@
     </url>
     <url>
         <loc>
+            http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/
+        </loc>
+        <lastmod>2012-11-07T22:56:07+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
             http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/
         </loc>
         <lastmod>2012-10-09T01:22:54+08:00</lastmod>
@@ -136,7 +142,7 @@
     </url>
     <url>
         <loc>http://samwize.github.com/2012/10/30/common-git-usage/</loc>
-        <lastmod>2012-11-01T23:58:01+08:00</lastmod>
+        <lastmod>2012-11-07T22:57:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.github.com/2012/11/03/the-mythical-team-month/</loc>
@@ -160,11 +166,11 @@
     </url>
     <url>
         <loc>http://samwize.github.com/blog/archives/</loc>
-        <lastmod>2012-11-06T22:00:01+08:00</lastmod>
+        <lastmod>2012-11-07T22:57:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.github.com/</loc>
-        <lastmod>2012-11-06T22:00:01+08:00</lastmod>
+        <lastmod>2012-11-07T22:57:49+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.github.com/quotes/</loc>

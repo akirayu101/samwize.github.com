@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tools | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/tools/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-06T22:00:20+08:00</updated>
+  <updated>2012-11-07T22:58:47+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -66,7 +66,7 @@ chmod u+x git-credential-osxkeychain
 
 <p>With that, commands like <code>git diff</code> and <code>git log -p</code> looks better</p>
 
-<h1>What's changed</h1>
+<h2>What's changed</h2>
 
 <p>Sometimes, you want to see what are the changes in your working directory (compared to HEAD/the last commit).</p>
 

@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to write Getter/Setter for static variables - Junda Ong</title>
+  <title>How you should write getter/setter for Python - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="In the last post, I blogged about how you should write Getter/Setter for member variables. This is a follow-up for static variables, instead of &hellip;">
+  <meta name="description" content="Coming from the Java world, I am used to writing getter/setter for every member variables that I want to expose. (truth is I made use of IDE to auto &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/">
+  <link rel="canonical" href="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">How to Write Getter/Setter for Static Variables</h1>
+      <h1 class="entry-title">How You Should Write Getter/setter for Python</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-20T14:14:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
+<time datetime="2012-09-19T18:49:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,16 +107,18 @@
   </header>
 
 
-<div class="entry-content"><p>In the last post, I blogged about how you should write <a href="/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">Getter/Setter for member variables</a>.</p>
+<div class="entry-content"><p>Coming from the Java world, I am used to writing getter/setter for every member variables that I want to expose. (truth is I made use of IDE to auto generate)</p>
 
-<p>This is a follow-up for <strong>static variables</strong>, instead of instance variables.</p>
+<p>I hate how much code Java has.</p>
+
+<p>With it&#8217;s philosophy of readable code, Python is different.</p>
 
 <!-- more -->
 
 
-<p>I didn&#8217;t know the answer to that, until I searched around <a href="http://stackoverflow.com/questions/128573/using-property-on-classmethods">Stackoverflow</a>. There are a couple of ways around using @property on classmethods.</p>
+<h3>Getter</h3>
 
-<p>The best answer for me is this:</p>
+<p>To write a getter for this member <code>foo</code>:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -126,36 +128,50 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">_foo</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span class='line'>    <span class="k">class</span> <span class="nc">__metaclass__</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-</span><span class='line'>        <span class="nd">@property</span>
-</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>      <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="mi">1</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="nd">@foo.setter</span>
-</span><span class='line'>        <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-</span><span class='line'>                <span class="n">cls</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class='line'>  <span class="nd">@property</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>      <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>It uses <code>__metaclass__</code>, some kind of <a href="http://www.voidspace.org.uk/python/articles/five-minutes.shtml">black magic</a> in Python.</p>
+<p>It uses an annotation <code>@property</code>. Then to access the property:</p>
 
-<p>With that, you can use the getter/setter on the static variable.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+</span><span class='line'><span class="k">print</span> <span class="n">my_class</span><span class="o">.</span><span class="n">foo</span>
+</span><span class='line'><span class="c"># 1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Setter</h3>
+
+<p>To set a memter, use the annotation <code>@foo.setter</code> (replace foo with your member name).</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
-</span><span class='line'><span class="mi">5</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'><span class="o">&gt;&gt;&gt;</span> <span class="n">MyClass</span><span class="o">.</span><span class="n">foo</span>
-</span><span class='line'><span class="mi">3</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@foo.setter</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span class='line'>      <span class="bp">self</span><span class="o">.</span><span class="n">_foo</span> <span class="o">=</span> <span class="n">value</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- http://stackoverflow.com/questions/6618002/python-property-versus-getters-and-setters -->
 
 </div>
 
@@ -179,7 +195,7 @@
   
 
 
-<time datetime="2012-09-20T14:14:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
+<time datetime="2012-09-19T18:49:00+08:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -193,7 +209,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -206,10 +222,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/19/how-you-should-write-getter-slash-setter-for-python/" title="Previous Post: How you should write getter/setter for Python">&laquo; How you should write getter/setter for Python</a>
+        <a class="basic-alignment left" href="/2012/09/18/non-ascii-character-in-python-file/" title="Previous Post: Non-ASCII Character in Python File">&laquo; Non-ASCII Character in Python File</a>
       
       
-        <a class="basic-alignment right" href="/2012/09/21/i-bought-samwize-dot-com-for-99-cents/" title="Next Post: I bought samwize.com for 99 cents">I bought samwize.com for 99 cents &raquo;</a>
+        <a class="basic-alignment right" href="/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/" title="Next Post: How to write Getter/Setter for static variables">How to write Getter/Setter for static variables &raquo;</a>
       
     </p>
   </footer>
@@ -288,8 +304,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/';
-        var disqus_url = 'http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/';
+        var disqus_identifier = 'http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/';
+        var disqus_url = 'http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/';
         var disqus_script = 'embed.js';
       
     (function () {
