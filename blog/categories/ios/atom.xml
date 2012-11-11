@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-07T22:58:47+08:00</updated>
+  <updated>2012-11-11T23:57:43+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -232,7 +232,7 @@ mylabel.accessibilityHint = @"Play the music right now";
 
 <p>```objc</p>
 
-<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
 NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" 
                                                         path:@"http://samwize.com/api/pigs/" 
                                                   parameters:nil];
@@ -255,7 +255,7 @@ AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequ
 
 <p>```objc</p>
 
-<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
 [httpClient setParameterEncoding:AFFormURLParameterEncoding];
 NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
                                                         path:@"http://samwize.com/api/pig/" 
@@ -287,6 +287,17 @@ NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST
 ```</p>
 
 <p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
+
+<h2>Pitfalls</h2>
+
+<p>Do not use <code>[[AFHTTPClient alloc] init]</code>, as that does not initialize a lot of stuff. Use <code>initWithBaseURL</code> instead.</p>
+
+<p>For instance, if in the above example (POST JSON) you had used init, the Content-Type will be</p>
+
+<pre><code>application/json; charset=(null) 
+</code></pre>
+
+<p>Charset should be <code>utf-8</code>, not <code>null</code>.</p>
 ]]></content>
   </entry>
   

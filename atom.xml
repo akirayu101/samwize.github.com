@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-07T22:58:47+08:00</updated>
+  <updated>2012-11-11T23:57:43+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -584,7 +584,7 @@ git push origin HEAD --force
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBaseURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://samwize.com/&quot;</span><span class="p">]];</span>
 </span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;GET&quot;</span>
 </span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pigs/&quot;</span>
 </span><span class='line'>                                                  <span class="nl">parameters:</span><span class="nb">nil</span><span class="p">];</span>
@@ -611,7 +611,7 @@ git push origin HEAD --force
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBaseURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://samwize.com/&quot;</span><span class="p">]];</span>
 </span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFFormURLParameterEncoding</span><span class="p">];</span>
 </span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
 </span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
@@ -640,6 +640,17 @@ git push origin HEAD --force
 
 
 <p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
+
+<h2>Pitfalls</h2>
+
+<p>Do not use <code>[[AFHTTPClient alloc] init]</code>, as that does not initialize a lot of stuff. Use <code>initWithBaseURL</code> instead.</p>
+
+<p>For instance, if in the above example (POST JSON) you had used init, the Content-Type will be</p>
+
+<pre><code>application/json; charset=(null) 
+</code></pre>
+
+<p>Charset should be <code>utf-8</code>, not <code>null</code>.</p>
 ]]></content>
   </entry>
   
