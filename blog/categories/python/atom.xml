@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-11T23:57:43+08:00</updated>
+  <updated>2012-11-12T23:16:00+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Python Unit Testing with nosetests]]></title>
+    <link href="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/"/>
+    <updated>2012-11-12T22:52:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests</id>
+    <content type="html"><![CDATA[<p><a href="http://nose.readthedocs.org/en/latest">nosetests</a> is Python favorite unit testing framework.</p>
+
+<p>It helps to collect tests from functions that has the word <code>test</code>, or subclasses from <code>unittest.TestCase</code>, etc.. Learn the <a href="https://nose.readthedocs.org/en/latest/writing_tests.html">different ways</a> that you can write test cases.</p>
+
+<!-- more -->
+
+
+<h2>How to use</h2>
+
+<p>Install,</p>
+
+<pre><code>sudo pip install nose
+</code></pre>
+
+<p>Then run,</p>
+
+<pre><code>nosetests
+</code></pre>
+
+<p>nosetests will automatically find tests to run in your project! Not necessary in /tests directory (but recommended).</p>
+
+<p>To print out the output,</p>
+
+<pre><code>nosetests --nocapture
+</code></pre>
+
+<p>To run only certain tests,</p>
+
+<pre><code>nosetests &lt;path/to/file&gt;:&lt;Test_Case&gt;.&lt;test_method&gt;
+nosetests test_web.py:TestWeb.test_checkout
+</code></pre>
+
+<p>To run a test file,</p>
+
+<pre><code>nosetests test_web.py
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What is Python's Lambda and Closure]]></title>
@@ -217,71 +261,6 @@ def foo(self, value):
 </code></pre>
 
 <p>This works on a <a href="http://www.python.org/dev/peps/pep-0263/">per file basis</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sphinx – Documentation for Python]]></title>
-    <link href="http://samwize.github.com/2012/09/13/sphinx-documentation-for-python/"/>
-    <updated>2012-09-13T22:08:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/13/sphinx-documentation-for-python</id>
-    <content type="html"><![CDATA[<p>Python is a wonderful language also because of the awesome tools that are available.</p>
-
-<p>One of which is <a href="http://sphinx.pocoo.org/">Sphinx</a>. It is like markdown, but even more, with cross referencing of pages and autogeneration of doc for python code.</p>
-
-<p>Start with installing Sphinx.</p>
-
-<pre><code>$ sudo easy_install -U Sphinx
-</code></pre>
-
-<!-- more -->
-
-
-<p>Create sphinx docs in your project.</p>
-
-<pre><code>$ cd /path/to/project/docs/
-$ sphinx-quickstart
-</code></pre>
-
-<p>Write your documentation (eg. quick start guide) in your index.rst. Sphinx uses reStructured Text (a kind of text formatting).  Refer to this <a href="http://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html">quick tutorial</a> and this <a href="https://github.com/ralsina/rst-cheatsheet">handy cheatsheet</a>.</p>
-
-<p><a href="http://sphinx.pocoo.org/markup/inline.html#cross-referencing-syntax">Cross reference</a> your documentation. You can link across to arbitrary location with <code>:ref:`my-label-name`</code> or across files with <code>:doc:`my-doc-name`</code>.</p>
-
-<pre><code>.. _my-label-name:
-
-Section to cross-reference
---------------------------
-
-This is the text of the section.
-
-It refers to the section itself, see :ref:`my-label-name`.
-</code></pre>
-
-<p>Finally, generate the HTML files.</p>
-
-<pre><code>make html
-</code></pre>
-
-<p>Lastly, Sphinx can automatically generate your module and classes, using your docstrings. That way, you can write your documentation in your python files (and not again in Sphinx doc).</p>
-
-<p>To do that, you have to edit Sphinx's <code>conf.py</code> and add your modules path to <code>sys.path</code>. Insert the following code in <code>conf.py</code>:</p>
-
-<p>``` python</p>
-
-<pre><code>sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), '..')))
-</code></pre>
-
-<p>```</p>
-
-<p>With that, you can automatically generate doc for a class.</p>
-
-<pre><code>.. automodule:: mymodule.something
-
-.. autoclass:: MyClass
-    :members:
-</code></pre>
-
-<p>This is a short introduction guide to Sphinx. There’s obviously more, with cases of authors writing books using Sphinx!</p>
 ]]></content>
   </entry>
   
