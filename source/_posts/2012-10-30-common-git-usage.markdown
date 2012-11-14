@@ -57,7 +57,7 @@ With that, commands like `git diff` and `git log -p` looks better
 
 
 
-# What's changed ##
+## What's changed ##
 
 Sometimes, you want to see what are the changes in your working directory (compared to HEAD/the last commit).
 

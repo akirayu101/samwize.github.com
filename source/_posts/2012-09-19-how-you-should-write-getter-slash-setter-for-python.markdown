@@ -4,7 +4,7 @@ title: "How you should write getter/setter for Python"
 date: 2012-09-19 18:49
 comments: true
 categories: Python
-published: false
+published: true
 ---
 
 Coming from the Java world, I am used to writing getter/setter for every member variables that I want to expose. (truth is I made use of IDE to auto generate)

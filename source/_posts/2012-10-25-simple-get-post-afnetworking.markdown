@@ -23,7 +23,7 @@ Here is how you do it:
 ## GET ##
 
 ```objc
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" 
                                                             path:@"http://samwize.com/api/pigs/" 
                                                       parameters:nil];
@@ -43,7 +43,7 @@ Here is how you do it:
 POST a urlencoded form `name=piggy` in the http body.
 
 ```objc    
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] init];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
     [httpClient setParameterEncoding:AFFormURLParameterEncoding];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
                                                             path:@"http://samwize.com/api/pig/" 
@@ -67,4 +67,16 @@ NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST
 ```
 
 This simple guide has been helped by [this](http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice), [this](http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded) and [this](http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking).
+
+
+## Pitfalls ##
+
+Do not use `[[AFHTTPClient alloc] init]`, as that does not initialize a lot of stuff. Use `initWithBaseURL` instead.
+
+For instance, if in the above example (POST JSON) you had used init, the Content-Type will be
+
+    application/json; charset=(null) 
+
+Charset should be `utf-8`, not `null`. 
+
 
