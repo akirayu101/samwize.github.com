@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Design - Junda Ong</title>
+  <title>iOS Adhoc Distribution with the new Xcode - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Category: Design">
+  <meta name="description" content="If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.comblog/categories/design/">
+  <link rel="canonical" href="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,36 +78,156 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Design</h1>
+    
+      <h1 class="entry-title">iOS Adhoc Distribution With the New Xcode</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-14T22:00:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
 
-  
-  <h2>2012</h2>
+<p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
 
-<article>
-  
-<h1><a href="/2012/09/28/api-design-rules-for-ios-slash-os-x/">API Design Rules for iOS/OS X</a></h1>
-<time datetime="2012-09-28T21:43:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>28</span> <span class='year'>2012</span></time>
+<p><strong>Adhoc distribution</strong> is the most complicated (the other 2 ways are very straight forward). Over the years, the process has also changed.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/design/'>Design</a>, <a class='category' href='/blog/categories/osx/'>OSX</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
+<p>This post is for development with Xcode 4.5.</p>
+
+<!-- more -->
 
 
-</article>
+<h2>In the past</h2>
 
+<p>In the early days (year 2008), the guide to Adhoc distribution was to create a new build configuration called &#8220;Adhoc&#8221;, in addition to &#8220;Debug&#8221; and &#8220;Release&#8221;.</p>
+
+<p>I know why it is necessary back then, but that is not necessary now. But some posts still <a href="http://diaryofacodemonkey.ruprect.com/2011/03/18/ad-hoc-app-distribution-with-xcode-4/">insisted</a> that.</p>
+
+<h2>The new way</h2>
+
+<p>With Xcode 4.5 (or perhaps earlier), Project Schemes is introduced. It provides more ways you can configure how you &#8220;Build&#8221;, &#8220;Run&#8221;, &#8220;Test&#8221;, &#8220;Analyse&#8221; and &#8220;Archive&#8221;. You can change the build configuration to &#8220;Debug&#8221; or &#8220;Release&#8221; as you wanted.</p>
+
+<p>You don&#8217;t need to touch them.</p>
+
+<p>To distribute Adhoc way, you only need to &#8220;Archive&#8221;.</p>
+
+<p>Then in Organizer, click on the &#8220;Distribute&#8221; button, and select &#8220;Save for Enterprise or Ad-Hoc Deployment&#8221;.</p>
+
+<p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
+
+<p><img src="/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
+
+<p>Save the <code>App.ipa</code>.</p>
+
+<p>To install, drag to iTunes and sync. That&#8217;s it!</p>
+
+<h2>Push Notification</h2>
+
+<p>Things get slightly more complicated if you are using Apple Push Notifications.</p>
+
+<p>To use push, there are 2 more certs needed for your server to communicate with Apple. One is <code>aps-development</code>, the other is <code>aps-production</code>.</p>
+
+<p>You use <code>aps-development</code> for running on device using &#8220;Debug&#8221; build configuration.</p>
+
+<p>You use <code>aps-production</code> for both Adhoc and App Store distribution.</p>
+
+<p>Not the other way round. Adhoc distributed apps will NOT get push when you use <code>aps-development</code>.</p>
+
+<p>Why?</p>
+
+<blockquote><p>Because Adhoc distributed apps will register device token to <strong>Apple production gateway</strong>, while your <code>aps-development</code> communicates with <strong>Apple sandbox gateway</strong>.</p></blockquote>
+
+<p>If you want Adhoc distributed apps to get push, you must send the push with <code>aps-production</code>. Adhoc is as good as production app, yet not on the App Store.</p>
+
+<h2>Conclusion</h2>
+
+<p>In the past, you need to create a new build configuration call &#8220;Adhoc&#8221;. But that is no longer needed as you can select which cert to re-sign after archiving.</p>
+
+<p>I will not cover wireless distribution today (though you may refer to <a href="http://blog.just2us.com/2010/12/wireless-ad-hoc-distribution-for-iphone-apps/">this method using dropbox</a>).</p>
+
+<p>Or you could use <a href="https://testflightapp.com/">TestFlight</a> which is the best in distributing ad hoc builds - with versioning and beta users management!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-14T22:00:00+08:00" pubdate data-updated="true">Nov 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/" data-via="samwize" data-counturl="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/11/13/which-ad-network-to-use-in-ios/" title="Previous Post: Which Ad Network to use in iOS?">&laquo; Which Ad Network to use in iOS?</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -175,7 +295,10 @@
       var disqus_shortname = 'just2us';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/';
+        var disqus_url = 'http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

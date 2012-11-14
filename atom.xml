@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-13T22:13:30+08:00</updated>
+  <updated>2012-11-14T22:39:59+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
+    <link href="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
+    <updated>2012-11-14T22:00:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
+    <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
+
+<p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
+
+<p><strong>Adhoc distribution</strong> is the most complicated (the other 2 ways are very straight forward). Over the years, the process has also changed.</p>
+
+<p>This post is for development with Xcode 4.5.</p>
+
+<!-- more -->
+
+
+<h2>In the past</h2>
+
+<p>In the early days (year 2008), the guide to Adhoc distribution was to create a new build configuration called &#8220;Adhoc&#8221;, in addition to &#8220;Debug&#8221; and &#8220;Release&#8221;.</p>
+
+<p>I know why it is necessary back then, but that is not necessary now. But some posts still <a href="http://diaryofacodemonkey.ruprect.com/2011/03/18/ad-hoc-app-distribution-with-xcode-4/">insisted</a> that.</p>
+
+<h2>The new way</h2>
+
+<p>With Xcode 4.5 (or perhaps earlier), Project Schemes is introduced. It provides more ways you can configure how you &#8220;Build&#8221;, &#8220;Run&#8221;, &#8220;Test&#8221;, &#8220;Analyse&#8221; and &#8220;Archive&#8221;. You can change the build configuration to &#8220;Debug&#8221; or &#8220;Release&#8221; as you wanted.</p>
+
+<p>You don&#8217;t need to touch them.</p>
+
+<p>To distribute Adhoc way, you only need to &#8220;Archive&#8221;.</p>
+
+<p>Then in Organizer, click on the &#8220;Distribute&#8221; button, and select &#8220;Save for Enterprise or Ad-Hoc Deployment&#8221;.</p>
+
+<p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
+
+<p><img src="http://samwize.github.com/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
+
+<p>Save the <code>App.ipa</code>.</p>
+
+<p>To install, drag to iTunes and sync. That&#8217;s it!</p>
+
+<h2>Push Notification</h2>
+
+<p>Things get slightly more complicated if you are using Apple Push Notifications.</p>
+
+<p>To use push, there are 2 more certs needed for your server to communicate with Apple. One is <code>aps-development</code>, the other is <code>aps-production</code>.</p>
+
+<p>You use <code>aps-development</code> for running on device using &#8220;Debug&#8221; build configuration.</p>
+
+<p>You use <code>aps-production</code> for both Adhoc and App Store distribution.</p>
+
+<p>Not the other way round. Adhoc distributed apps will NOT get push when you use <code>aps-development</code>.</p>
+
+<p>Why?</p>
+
+<blockquote><p>Because Adhoc distributed apps will register device token to <strong>Apple production gateway</strong>, while your <code>aps-development</code> communicates with <strong>Apple sandbox gateway</strong>.</p></blockquote>
+
+<p>If you want Adhoc distributed apps to get push, you must send the push with <code>aps-production</code>. Adhoc is as good as production app, yet not on the App Store.</p>
+
+<h2>Conclusion</h2>
+
+<p>In the past, you need to create a new build configuration call &#8220;Adhoc&#8221;. But that is no longer needed as you can select which cert to re-sign after archiving.</p>
+
+<p>I will not cover wireless distribution today (though you may refer to <a href="http://blog.just2us.com/2010/12/wireless-ad-hoc-distribution-for-iphone-apps/">this method using dropbox</a>).</p>
+
+<p>Or you could use <a href="https://testflightapp.com/">TestFlight</a> which is the best in distributing ad hoc builds - with versioning and beta users management!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Which Ad Network to use in iOS?]]></title>
@@ -2206,61 +2274,6 @@ $ heroku config:add S3_SECRET=supersecret
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to setup GHUnit with CocoaPods]]></title>
-    <link href="http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods/"/>
-    <updated>2012-10-04T23:21:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/04/how-to-setup-ghunit-with-cocoapods</id>
-    <content type="html"><![CDATA[<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">installation guide for GHUnit</a> is for installing the framework in the traditional way.</p>
-
-<p>As you might know, <a href="http://cocoapods.org/">CocoaPods</a> is the new way to handle dependencies. Of course, GHUnit is supported.</p>
-
-<p>The is a lack of a guide on how you setup the two useful iOS libraries together.</p>
-
-<!-- more -->
-
-
-<p>It is similar to the <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_install_ios_4.html">official guide</a>. I am going to point out the differences when need to.</p>
-
-<h2>Step 1 - Create Test Target</h2>
-
-<p>This is the same. You create a completely new application target.</p>
-
-<p>I prefer to name it <code>AppGHTests</code>, as I might still be using <code>AppTests</code> for my <a href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">SenTestings</a>.</p>
-
-<p><img class="center" src="http://samwize.github.com/images/xcode-ghunit-pods-new-target.png"></p>
-
-<h2>Step 2 - Configure Test Target</h2>
-
-<p>You DON&#8217;T have to download and copy <code>GHUnitIOS.framework</code> to your project since you are using CocoaPods. Instead, you should setup GHUnit pods.</p>
-
-<p>Edit the <code>Prodfile</code> and add GHUnitIOS.</p>
-
-<pre><code>platform :ios
-pod 'GHUnitIOS', '0.5.5'
-</code></pre>
-
-<p>Then install the pod as per normal.</p>
-
-<pre><code>$ pod install
-</code></pre>
-
-<p>Continue with the official guide to remove the unnecessary files, and edit <code>main.m</code> to replace the delegate class with <code>GHUnitIOSAppDelegate</code>.</p>
-
-<h2>Step 3 - Configure Pod for Test Target</h2>
-
-<p>This part is IMPORTANT. The new test target will not include the pods.</p>
-
-<p>You need to configure the target to be based on Pods project. Refer to <a href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">this post</a>.</p>
-
-<p>Lastly, add the <code>libPods.a</code> library to the test target.</p>
-
-<p><img class="center" src="http://samwize.github.com/images/xcode-ghunit-pods-libpods.png"></p>
-
-<p>That&#8217;s it. Run the test target!</p>
 ]]></content>
   </entry>
   

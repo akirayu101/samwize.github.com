@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-13T22:13:30+08:00</updated>
+  <updated>2012-11-14T22:39:59+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
+    <link href="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
+    <updated>2012-11-14T22:00:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
+    <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
+
+<p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
+
+<p><strong>Adhoc distribution</strong> is the most complicated (the other 2 ways are very straight forward). Over the years, the process has also changed.</p>
+
+<p>This post is for development with Xcode 4.5.</p>
+
+<!-- more -->
+
+
+<h2>In the past</h2>
+
+<p>In the early days (year 2008), the guide to Adhoc distribution was to create a new build configuration called "Adhoc", in addition to "Debug" and "Release".</p>
+
+<p>I know why it is necessary back then, but that is not necessary now. But some posts still <a href="http://diaryofacodemonkey.ruprect.com/2011/03/18/ad-hoc-app-distribution-with-xcode-4/">insisted</a> that.</p>
+
+<h2>The new way</h2>
+
+<p>With Xcode 4.5 (or perhaps earlier), Project Schemes is introduced. It provides more ways you can configure how you "Build", "Run", "Test", "Analyse" and "Archive". You can change the build configuration to "Debug" or "Release" as you wanted.</p>
+
+<p>You don't need to touch them.</p>
+
+<p>To distribute Adhoc way, you only need to "Archive".</p>
+
+<p>Then in Organizer, click on the "Distribute" button, and select "Save for Enterprise or Ad-Hoc Deployment".</p>
+
+<p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
+
+<p><img src="/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
+
+<p>Save the <code>App.ipa</code>.</p>
+
+<p>To install, drag to iTunes and sync. That's it!</p>
+
+<h2>Push Notification</h2>
+
+<p>Things get slightly more complicated if you are using Apple Push Notifications.</p>
+
+<p>To use push, there are 2 more certs needed for your server to communicate with Apple. One is <code>aps-development</code>, the other is <code>aps-production</code>.</p>
+
+<p>You use <code>aps-development</code> for running on device using "Debug" build configuration.</p>
+
+<p>You use <code>aps-production</code> for both Adhoc and App Store distribution.</p>
+
+<p>Not the other way round. Adhoc distributed apps will NOT get push when you use <code>aps-development</code>.</p>
+
+<p>Why?</p>
+
+<blockquote><p>Because Adhoc distributed apps will register device token to <strong>Apple production gateway</strong>, while your <code>aps-development</code> communicates with <strong>Apple sandbox gateway</strong>.</p></blockquote>
+
+<p>If you want Adhoc distributed apps to get push, you must send the push with <code>aps-production</code>. Adhoc is as good as production app, yet not on the App Store.</p>
+
+<h2>Conclusion</h2>
+
+<p>In the past, you need to create a new build configuration call "Adhoc". But that is no longer needed as you can select which cert to re-sign after archiving.</p>
+
+<p>I will not cover wireless distribution today (though you may refer to <a href="http://blog.just2us.com/2010/12/wireless-ad-hoc-distribution-for-iphone-apps/">this method using dropbox</a>).</p>
+
+<p>Or you could use <a href="https://testflightapp.com/">TestFlight</a> which is the best in distributing ad hoc builds - with versioning and beta users management!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Which Ad Network to use in iOS?]]></title>
@@ -318,99 +386,6 @@ mylabel.accessibilityHint = @"Play the music right now";
 <p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
 
 <p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
-    <link href="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/"/>
-    <updated>2012-10-25T00:32:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/25/simple-get-post-afnetworking</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
-
-<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
-
-<p>I am one of the many who is forced to switch camp.</p>
-
-<!-- more -->
-
-
-<p>In many ways, it seems AFNetworking would be better. It uses blocks!</p>
-
-<p>However, I find the documentation lacking. It has an <a href="https://github.com/AFNetworking/AFNetworking">overview</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking">getting started</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Introduction-to-AFNetworking">introduction</a>, <a href="http://afnetworking.github.com/AFNetworking/">complete reference</a>, ... But yet, it didn't provide example on how you make a simple HTTP GET or POST.</p>
-
-<p>Here is how you do it:</p>
-
-<h2>GET</h2>
-
-<p>```objc</p>
-
-<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
-NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" 
-                                                        path:@"http://samwize.com/api/pigs/" 
-                                                  parameters:nil];
-AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-[httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
-[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-    // Print the response body in text
-    NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-}];
-[operation start];
-</code></pre>
-
-<p>```</p>
-
-<h2>POST</h2>
-
-<p>POST a urlencoded form <code>name=piggy</code> in the http body.</p>
-
-<p>```objc</p>
-
-<pre><code>AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://samwize.com/"]];
-[httpClient setParameterEncoding:AFFormURLParameterEncoding];
-NSMutableURLRequest *request = [httpClient requestWithMethod:@"POST" 
-                                                        path:@"http://samwize.com/api/pig/" 
-                                                  parameters:@{@"name":@"piggy"}];
-
-// Similar to GET code ...
-</code></pre>
-
-<p>```</p>
-
-<p>If you want to POST a json such as <code>{"name":"piggy"}</code>, you change the encoding:</p>
-
-<p>```objc</p>
-
-<pre><code>[httpClient setParameterEncoding:AFJSONParameterEncoding];
-</code></pre>
-
-<p>```</p>
-
-<p>If you want to do a multi-part POST of an image, you do this:</p>
-
-<p>```objc
-NSMutableURLRequest *request = [httpClient multipartFormRequestWithMethod:@"POST" path:@"http://samwize.com/api/pig/photo" parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {</p>
-
-<pre><code>[formData appendPartWithFileData:imageData name:@"avatar" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
-</code></pre>
-
-<p>}];
-```</p>
-
-<p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
-
-<h2>Pitfalls</h2>
-
-<p>Do not use <code>[[AFHTTPClient alloc] init]</code>, as that does not initialize a lot of stuff. Use <code>initWithBaseURL</code> instead.</p>
-
-<p>For instance, if in the above example (POST JSON) you had used init, the Content-Type will be</p>
-
-<pre><code>application/json; charset=(null) 
-</code></pre>
-
-<p>Charset should be <code>utf-8</code>, not <code>null</code>.</p>
 ]]></content>
   </entry>
   
