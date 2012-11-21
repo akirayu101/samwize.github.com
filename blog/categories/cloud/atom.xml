@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cloud | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/cloud/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-11-21T21:57:52+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[GAE or Dotcloud?]]></title>
+    <link href="http://samwize.github.com/2012/11/21/gae-or-dotcloud/"/>
+    <updated>2012-11-21T00:02:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/21/gae-or-dotcloud</id>
+    <content type="html"><![CDATA[<p>I have been thinking which to use.</p>
+
+<p>I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And paying them ever since they started charging.</p>
+
+<p>I tried a few apps on Dotcloud, but never yet deployed any on production.</p>
+
+<!-- more -->
+
+
+<p>Here's what I think of them.</p>
+
+<h2>GAE</h2>
+
+<pre><code>+ Reliable
++ Great Docs
++ Great Community
++ On demand scaling
+
+- Some restrictions
+- User Agent has GAE..
+</code></pre>
+
+<h2>Dotcloud</h2>
+
+<pre><code>+ Shell access
++ Can use pip install
++ Can run worker processes
+
+- Too much things to handle
+- Easily use up workers/services - Redis, MySQL, Python, ...
+- Higher startup cost
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>As a one-man-show developer, my bet is on GAE.</p>
+
+<p>Though it is less flexible, it will save time and money.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-14T22:39:59+08:00</updated>
+  <updated>2012-11-21T21:57:52+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[GAE or Dotcloud?]]></title>
+    <link href="http://samwize.github.com/2012/11/21/gae-or-dotcloud/"/>
+    <updated>2012-11-21T00:02:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/21/gae-or-dotcloud</id>
+    <content type="html"><![CDATA[<p>I have been thinking which to use.</p>
+
+<p>I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And paying them ever since they started charging.</p>
+
+<p>I tried a few apps on Dotcloud, but never yet deployed any on production.</p>
+
+<!-- more -->
+
+
+<p>Here&#8217;s what I think of them.</p>
+
+<h2>GAE</h2>
+
+<pre><code>+ Reliable
++ Great Docs
++ Great Community
++ On demand scaling
+
+- Some restrictions
+- User Agent has GAE..
+</code></pre>
+
+<h2>Dotcloud</h2>
+
+<pre><code>+ Shell access
++ Can use pip install
++ Can run worker processes
+
+- Too much things to handle
+- Easily use up workers/services - Redis, MySQL, Python, ...
+- Higher startup cost
+</code></pre>
+
+<h2>Conclusion</h2>
+
+<p>As a one-man-show developer, my bet is on GAE.</p>
+
+<p>Though it is less flexible, it will save time and money.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
@@ -1750,530 +1796,6 @@ $ heroku config:add S3_SECRET=supersecret
 </code></pre>
 
 <p>With that, your could <code>sbt run</code> as per normal.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A short Scala tutorial for Java Developers]]></title>
-    <link href="http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers/"/>
-    <updated>2012-10-07T21:10:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers</id>
-    <content type="html"><![CDATA[<p>This post is a tutorial guide for Java programmers who want to learn <a href="http://www.scala-lang.org/">Scala</a>.</p>
-
-<p>I myself have programmed in Java for many years, yet jumping straight into Scala has made me clueless, and so I started to read some <a href="http://www.artima.com/scalazine/articles/steps.html">baby steps</a> to learn the new language.</p>
-
-<p>The following post is what I have learnt.</p>
-
-<!-- more -->
-
-
-<h2>Methods Declaration</h2>
-
-<p>We use an example of a max function to illustrate the different ways to declare a method.</p>
-
-<p>You do it like this, in a single line.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or, you can skip the return type (Int in this case) and let the compiler infer.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the method is more than a single line, you can wrap with curly braces.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// More lines of code ..</span>
-</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You might have already notice. The <code>return</code> keyword is actually optional in Scala.  If omitted, the last expression is the value that will be returned.</p>
-
-<p>To be verbose, you can specify the return type with the <code>return</code> keyword.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">max</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="o">)</span> <span class="n">y</span> <span class="k">else</span> <span class="n">x</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Method with 0 parameter is Special</h2>
-
-<p>If you have the following method</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="s">&quot;foo!&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You may call it in 2 ways</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">foo</span><span class="o">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Or simply</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">foo</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, there is a guideline when to use which style. If there is a side effect, you should use the parenthesis. In other words, a getter method can skip the parenthesis.</p>
-
-<h2>Method with 1 parameter is Special</h2>
-
-<p>Int has a method <code>to</code> that takes 1 parameter of Int to return a sequence.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mf">0.</span><span class="n">to</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can drop the . and ( ) and simplify to</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mi">0</span> <span class="n">to</span> <span class="mi">10</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This alone makes the Scala language beautiful in many ways.</p>
-
-<h2>Method names can contain .+*/</h2>
-
-<p>Surprisingly, Scala doesn&#8217;t have operators, and therefore no operator overloading.</p>
-
-<p>But it can have a method name &#8216;+&#8217;. So an expression <code>1 + 2</code> is actually</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mf">1.</span><span class="o">+(</span><span class="mi">2</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But since <em>Method with 1 parameter is Special</em> (read above), 1.+(2) can be simplified to</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>val and var declarations</h2>
-
-<p>To declare a variable,</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">foo</span> <span class="k">=</span> <span class="mi">1</span>
-</span><span class='line'><span class="n">foo</span> <span class="k">=</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To declare a value, which does not allow you to change/reassign,</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">foo</span> <span class="k">=</span> <span class="mi">1</span>
-</span><span class='line'><span class="c1">// foo = 2 is not possible</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Also, a semi-colon at the end of a line is optional.</p>
-
-<h2>Class constructor</h2>
-
-<p>The constructor is the class declaration itself, and any constructor parameters can be used in other methods</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// foo() uses color</span>
-</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Usage</span>
-</span><span class='line'><span class="k">val</span> <span class="n">c</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Color</span><span class="o">(</span><span class="s">&quot;Blue&quot;</span><span class="o">,</span> <span class="mi">1</span><span class="o">)</span>
-</span><span class='line'><span class="n">c</span><span class="o">.</span><span class="n">foo</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you need to have some code in the constructor, you could write it right in the class body, right after the declaration.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">color</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
-</span><span class='line'>      <span class="k">throw</span> <span class="k">new</span> <span class="nc">NullPointerException</span><span class="o">(</span><span class="s">&quot;Color is null&quot;</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="o">(</span><span class="n">index</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span>
-</span><span class='line'>      <span class="n">index</span> <span class="k">=</span> <span class="mi">0</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you have multiple constructors, you can add them with <code>this</code> method.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="k">this</span><span class="o">(</span><span class="n">color</span><span class="k">:</span><span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="k">this</span><span class="o">(</span><span class="n">color</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Usage</span>
-</span><span class='line'><span class="k">val</span> <span class="n">c</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Color</span><span class="o">(</span><span class="s">&quot;Blue&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Static/Singleton object</h2>
-
-<p>You cannot have static classes or variables in a class.</p>
-
-<p>Instead, if you want to add a static method, you have to use the <code>object</code> declaration, also known as Singleton objects.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">object</span> <span class="nc">Color</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">def</span> <span class="n">exclaim</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">&quot; color!&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Usage</span>
-</span><span class='line'><span class="nc">Color</span><span class="o">.</span><span class="n">exclaim</span><span class="o">(</span><span class="s">&quot;Pink&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="c1">// Prints &quot;Pink color!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can also use the static method in the class method.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Color</span><span class="o">(</span><span class="n">color</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">index</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">def</span> <span class="n">foo</span><span class="o">()</span> <span class="k">=</span> <span class="nc">Color</span><span class="o">.</span><span class="n">exclaim</span><span class="o">(</span><span class="n">color</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">object</span> <span class="nc">Color</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">def</span> <span class="n">exclaim</span><span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">println</span><span class="o">(</span><span class="n">s</span> <span class="o">+</span> <span class="s">&quot; color!&quot;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Interface is traits</h2>
-
-<p>In Java, you have <code>Interface</code>. In Scala, you use <code>traits</code>. Moreover, you can have non-abstract methods in <code>traits</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">trait</span> <span class="nc">Friendly</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="s">&quot;Hi&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To have a <code>class</code> implement the <code>traits</code>, you use the <code>extends</code> keyword. And if you need to override the method, you need to explicitly use <code>override def</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">Dog</span> <span class="k">extends</span> <span class="nc">Friendly</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="s">&quot;Woof&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Similar to Java, a class can extend 1 class and multiple traits.</p>
-
-<p>Another difference is that Scala can mix in traits at instantiation time. In the following, we create another trait and use the <code>with</code> keyword to instantiate a Dog with that trait.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">trait</span> <span class="nc">ExclamatoryGreeter</span> <span class="k">extends</span> <span class="nc">Friendly</span> <span class="o">{</span>
-</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">greet</span><span class="o">()</span> <span class="k">=</span> <span class="k">super</span><span class="o">.</span><span class="n">greet</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;!&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Usage</span>
-</span><span class='line'><span class="k">val</span> <span class="n">pup</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Dog</span> <span class="k">with</span> <span class="nc">ExclamatoryGreeter</span>
-</span><span class='line'><span class="n">println</span><span class="o">(</span><span class="n">pup</span><span class="o">.</span><span class="n">greet</span><span class="o">())</span>
-</span><span class='line'><span class="c1">// Prints &quot;Woof!&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Array does not use subscript [ ]</h2>
-
-<p>To access an array, you use ( ) instead of [ ]. It is not a matter of symbol choice. Scala uses ( ) because an array is an object with methods.</p>
-
-<p>To access the 4th element of an array, you write</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Behind the scene, it is in fact calling a method <code>apply</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">.</span><span class="n">apply</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Similarly, for setting an array element, you write</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="k">=</span> <span class="s">&quot;foo&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which is interpreted as</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">myArray</span><span class="o">.</span><span class="n">update</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;foo&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Functions are first class constructs</h2>
-
-<p>Java is <em>imperative</em> style. Scala is <em>imperative</em>, but excels in <em>functional</em> style too.</p>
-
-<p>Being a functional language, functions are first class constructs. We use an example of printing <code>args</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">args</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="n">arg</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The <code>foreach</code> is being passed a function</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">arg</span> <span class="k">=&gt;</span> <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above function has a few characteristics:</p>
-
-<ul>
-<li>It is an anonymous function (has no name)</li>
-<li>It get passed a single parameter named <code>arg</code> and the type is being inferred by compiler</li>
-<li>The main code is simply the <code>println</code></li>
-<li>Yeah, <code>=&gt;</code> is used, also call a right arrow</li>
-</ul>
-
-
-<p>A more complete example of an anonymous method with explicit parameter type</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// More code</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As we said, functions are first class constructs, so you basically could assign it to a variable</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">add</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-</span><span class='line'>  <span class="c1">// More code</span>
-</span><span class='line'>  <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Then use it</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">add</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
-</span><span class='line'><span class="c1">// returns 5</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>for arg in args</h2>
-
-<p>This is how you use <code>for (arg in args)</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">for</span> <span class="o">(</span><span class="n">arg</span> <span class="k">&lt;-</span> <span class="n">args</span><span class="o">)</span>
-</span><span class='line'>          <span class="n">println</span><span class="o">(</span><span class="n">arg</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Some characteristics:</p>
-
-<ul>
-<li>For each element in <code>args</code>, it is assigned to <code>arg</code> using <code>val (not</code>var`, so you can re-assign)</li>
-<li>Yeah, it is using a <code>&lt;-</code>, which you can interpret as &#8216;in&#8217;</li>
-<li>It is not a <code>&lt;=</code> because that would mean less-than-or-equal</li>
-</ul>
-
-
-<h2>Array, List, and Tuple</h2>
-
-<p>Much about immutability from Java is different in Scala.</p>
-
-<ul>
-<li>Array is mutable</li>
-<li>List is immutable</li>
-<li>Tuple is immutable, and can contain different types</li>
-</ul>
-
-
-<p>You can read more about <a href="http://www.scala-lang.org/api/current/scala/Array.html">Array</a> and <a href="http://www.scala-lang.org/api/current/scala/collection/immutable/List.html">List</a>.</p>
-
-<p>However, I would want to point out about Tuple, as that is never heard of in Java. In Java, when you want to return multiple objects, you will probably create a POJO (plain old java object) to contain the multiple objects. Using tuple, you can avoid POJO like classes.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">val</span> <span class="n">color</span> <span class="k">=</span> <span class="o">(</span><span class="s">&quot;blue&quot;</span><span class="o">,</span> <span class="mi">258</span><span class="o">,</span> <span class="-Symbol">&#39;b</span><span class="err">&#39;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can then access the tuple using a dot, underscore, and the one-based index of the element.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">println</span><span class="o">(</span><span class="n">color</span><span class="o">.</span><span class="n">_1</span><span class="o">)</span>
-</span><span class='line'><span class="c1">// Prints blue</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Set and Map</h2>
-
-<p>The way immutability works for Set and Map is different.</p>
-
-<p>To use a mutable Set, you import the mutable HashSet.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.mutable.HashSet</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">val</span> <span class="n">colorSet</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HashSet</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
-</span><span class='line'><span class="n">colorSet</span> <span class="o">+=</span> <span class="s">&quot;blue&quot;</span>
-</span><span class='line'><span class="n">colorSet</span> <span class="o">+=</span> <span class="o">(</span><span class="s">&quot;red&quot;</span><span class="o">,</span> <span class="s">&quot;green&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>To use an immutable Set, you import the <em>immutable version</em>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.immutable.HashSet</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">val</span> <span class="n">colorSet</span> <span class="k">=</span> <span class="nc">HashSet</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">&quot;blue&quot;</span><span class="o">,</span> <span class="s">&quot;red&quot;</span><span class="o">,</span> <span class="s">&quot;green&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Similarly for map, there is a mutable and immutable version. Let&#8217;s take a look at just the mutable HashMap.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">scala.collection.mutable.HashMap</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">val</span> <span class="n">colorMap</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">String</span><span class="o">]</span>
-</span><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Blue&quot;</span>
-</span><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;Red&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The expression <code>1 -&gt; "Blue"</code> means <code>1.-&gt;("Blue")</code>. The method <code>-&gt;</code> is available for any object in Scala, and it returns a 2-element tuple. So basically a 2-element tuple of (Int, String) is added to colorMap.</p>
-
-<p>You might think the equivalent is</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>However, that would not work as <code>+=</code> method will interpret as you want to add 2 elements - a Int and a String - where in fact you want to add a tuple (Int, String). Hence you need to add ( ) for the tuple</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="n">colorMap</span> <span class="o">+=</span> <span class="o">((</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can also create Map with a shorthand</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="mi">1</span> <span class="o">-&gt;</span> <span class="s">&quot;Blue&quot;</span><span class="o">,</span> <span class="mi">2</span> <span class="o">-&gt;</span> <span class="s">&quot;Red&quot;</span><span class="o">,</span> <span class="mi">3</span> <span class="o">-&gt;</span> <span class="s">&quot;Green&quot;</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Once again, that&#8217;s same as</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">var</span> <span class="n">a</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">&quot;Blue&quot;</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">&quot;Red&quot;</span><span class="o">),</span> <span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">&quot;Green&quot;</span><span class="o">)</span> <span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   

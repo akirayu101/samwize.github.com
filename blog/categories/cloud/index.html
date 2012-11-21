@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Singleton/SharedInstance Template for iOS 5 (ARC and GCD) - Junda Ong</title>
+  <title>Category: Cloud - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="The singleton pattern is widely used in iOS to have a global, static class. The most famous is [NSUserDefaults standardUserDefaults]. Over the years &hellip;">
+  <meta name="description" content="Category: Cloud">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/">
+  <link rel="canonical" href="http://samwize.github.comblog/categories/cloud/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,131 +78,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Singleton/SharedInstance Template for iOS 5 (ARC and GCD)</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-29T19:35:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Cloud</h1>
     
   </header>
-
-
-<div class="entry-content"><p>The singleton pattern is widely used in iOS to have a global, static class.</p>
-
-<p>The most famous is <code>[NSUserDefaults standardUserDefaults]</code>.</p>
-
-<p>Over the years, the template for creating a singleton/SharedInstance has also changed. This is due to the introduction of new technologies in Apple&#8217;s SDK, particularly ARC and GDC.</p>
-
-<!-- more -->
-
-
-<p>The <a href="http://lukeredpath.co.uk/blog/a-note-on-objective-c-singletons.html">implementation</a> has simplified to:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">sharedInstance</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="k">static</span> <span class="n">dispatch_once_t</span> <span class="n">pred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">__strong</span> <span class="k">static</span> <span class="kt">id</span> <span class="n">_sharedObject</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
-</span><span class='line'>  <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pred</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
-</span><span class='line'>    <span class="n">_sharedObject</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span> <span class="c1">// or some other init method</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">_sharedObject</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Nice piece of code added to my Xcode snippet.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/2012/11/21/gae-or-dotcloud/">GAE or Dotcloud?</a></h1>
+<time datetime="2012-11-21T00:02:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>21</span> <span class='year'>2012</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/cloud/'>Cloud</a></span>
+</footer>
 
 
-<time datetime="2012-09-29T19:35:00+08:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ios/'>iOS</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/" data-via="samwize" data-counturl="http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2012/09/28/api-design-rules-for-ios-slash-os-x/" title="Previous Post: API Design Rules for iOS/OS X">&laquo; API Design Rules for iOS/OS X</a>
-      
-      
-        <a class="basic-alignment right" href="/2012/09/30/octopress-would-not-deploy/" title="Next Post: Octopress would not deploy">Octopress would not deploy &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -270,10 +175,7 @@
       var disqus_shortname = 'just2us';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/';
-        var disqus_url = 'http://samwize.github.com/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
