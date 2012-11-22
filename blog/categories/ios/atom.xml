@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-21T21:57:52+08:00</updated>
+  <updated>2012-11-22T23:49:26+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WARNING: Do not use Base Internationalization in iOS 5]]></title>
+    <link href="http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
+    <updated>2012-11-22T21:57:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
+    <content type="html"><![CDATA[<p>iOS 5 does NOT support Base Internationalization.</p>
+
+<p>I learnt this the hard way (and partly Apple's fault).</p>
+
+<p>After upgrading my project to use Base Internationalization, I release a new version, and shortly, my users complained of startup crash.</p>
+
+<!-- more -->
+
+
+<h2>New release, crash on startup</h2>
+
+<p>You might be wondering:</p>
+
+<blockquote><p>Didn't you test your app?</p></blockquote>
+
+<p>I did test, <strong>but only with Simulator</strong>. I ran on Simulator with iOS 5, and also tested on my real device with iOS 6.0.</p>
+
+<p>It didn't crash on Simulator with iOS 5.</p>
+
+<p>However, on a real iPhone with iOS 5, it crashed on startup.</p>
+
+<p>Exception is raised from <code>[UINib instantiateWithOwner:options:]</code>, with the error log:</p>
+
+<pre><code>Terminating app due to uncaught exception 'NSInternalInconsistencyException', 
+reason: 'Could not load NIB in bundle: 'NSBundle 
+&lt;/var/mobile/Applications/***/***.app&gt; (loaded)' with name 'MainWindow''
+</code></pre>
+
+<p>This <a href="http://stackoverflow.com/questions/9075298/app-works-on-simulator-but-not-on-iphone">meant</a> that the app could not find <code>MainWindow.xib</code>.</p>
+
+<p>It is strange that the xib is not copied, especially when I am prudent to do clean build and run.</p>
+
+<h2>The culprit</h2>
+
+<p>Base Internationalization was introduced in iOS 6. It is an awesome feature because: instead of having N NIB files for N languages, you need just <strong>1 base NIB file</strong> with <strong>N localization.strings</strong>.</p>
+
+<p>The biggest change I had for the release was Base Internationalization.</p>
+
+<p>Researching into the problem, I realized Base Internationalization is supported only from iOS 6.</p>
+
+<p>Xcode will let you release the app with <em>any minimum deployment target</em>, without any warning. But once the app starts and load a xib, it will crash as it can't find the xib.</p>
+
+<h2>The Solution</h2>
+
+<p>The change is reversible.</p>
+
+<p>Select the XIB and look under File Inspector.</p>
+
+<p>You can change each of the <code>localization.strings</code> back to XIB. Then remove the Base (when prompted, copied it to English).</p>
+
+<h2>Lessons Learnt</h2>
+
+<ul>
+<li><p>Simulator is not exactly like real device</p></li>
+<li><p>Base Internationalization is awesome, but is not advised to be used</p></li>
+<li><p>Many users stick with iOS 5 because of Map app. Perhaps they will upgrade in ~2014 as Apple continues to improve.</p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
@@ -287,105 +353,6 @@ mylabel.accessibilityHint = @"Play the music right now";
 <p>Apple has it's own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
 
 <p>Hope you be a hero!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Guide to Multiple Device Resolutions]]></title>
-    <link href="http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions/"/>
-    <updated>2012-10-29T23:23:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions</id>
-    <content type="html"><![CDATA[<p>With every iOS updates and new release of devices from Apple, there are more things developers have to do.</p>
-
-<p>In order to support these new devices, you first need to understand these devices.</p>
-
-<!-- more -->
-
-
-<h2>Device Resolutions</h2>
-
-<p>Apple provides a <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">table matrix</a> on the App Icons, Screen size, and tool bar icon sizes for the various devices.</p>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>             </th>
-<th> iPhone 5        </th>
-<th> iPhone (Retina)   </th>
-<th> iPhone        </th>
-<th> iPad (Retina) </th>
-<th> iPad          </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> App Icon    </td>
-<td> 114 x 114       </td>
-<td> 114 x 114         </td>
-<td> 57 x 57       </td>
-<td> 144 x 144     </td>
-<td> 72 x 72       </td>
-</tr>
-<tr>
-<td></td>
-<td> Default.png </td>
-<td> 640 x 1136      </td>
-<td> 640 x 960         </td>
-<td> 320 x 480     </td>
-<td> 1536 x 2008   </td>
-<td> 768 x 1004    </td>
-</tr>
-<tr>
-<td></td>
-<td> Toolbar icon</td>
-<td> 40 x 40         </td>
-<td> 40 x 40           </td>
-<td> 20 x 20       </td>
-<td> 40 x 40       </td>
-<td> 20 x 20       </td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Image Resource File</h2>
-
-<p>Apple introduced an easy way to load <a href="http://developer.apple.com/library/ios/#documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15">images</a> automatically for the devices.</p>
-
-<p>The rule goes like this:</p>
-
-<ul>
-<li><p>Standard: <code>&lt;ImageName&gt;&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
-<li><p>High resolution: <code>&lt;ImageName&gt;@2x&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
-</ul>
-
-
-<p>For <a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/LoadingResources/ImageSoundResources/ImageSoundResources.html#//apple_ref/doc/uid/10000051i-CH7-SW1">example</a>,</p>
-
-<ul>
-<li>MyImage.png - Default version of an image resource.</li>
-<li>MyImage@2x.png - High-resolution version of an image resource for devices with Retina displays.</li>
-<li>MyImage~iphone.png - Version of an image for iPhone and iPod touch.</li>
-<li>MyImage@2x~iphone.png - High-resolution version of an image for iPhone and iPod touch devices with Retina displays.</li>
-<li>MyImage~ipad.png - Version of an image for iPad</li>
-<li>MyImage@2x~ipad.png - High-resolution version of an image for iPad with Retina displays.</li>
-</ul>
-
-
-<p>With that knowledge, you could load a UIImage</p>
-
-<pre><code>UIImage *anImage = [UIImage imageNamed:@"MyImage"];
-</code></pre>
-
-<p>and the appropriate resource file will be loaded.</p>
-
-<h2>iPhone 5 - taller screen</h2>
-
-<p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
-
-<p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
 ]]></content>
   </entry>
   
