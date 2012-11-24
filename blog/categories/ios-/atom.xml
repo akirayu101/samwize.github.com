@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS, | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/ios-/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-11-25T02:07:56+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Create Async Test with GHUnit]]></title>
+    <link href="http://samwize.github.com/2012/11/25/create-async-test-with-ghunit/"/>
+    <updated>2012-11-25T01:44:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/25/create-async-test-with-ghunit</id>
+    <content type="html"><![CDATA[<p>One of the <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
+
+<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_testing.html">ExampleAsyncTest</a> from GHUnit documentation provides a glimpse of what you need to do. However, it still lacks warning you on the <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common pitfalls</a>.</p>
+
+<p>This is step by step of how you can use GHUnit async test:</p>
+
+<!-- more -->
+
+
+<h2>Subclass GHAsyncTestCase instead</h2>
+
+<p>Change the interface class to use <code>GHAsyncTestCase</code>.</p>
+
+<p>``` objc</p>
+
+<pre><code>@interface ExampleAsyncTest : GHAsyncTestCase { }
+@end
+</code></pre>
+
+<p>```</p>
+
+<h2>Prepare and wait</h2>
+
+<p>Setup the test method with the asynchronous/block call like this:</p>
+
+<p>``` objc
+- (void)testAsync {</p>
+
+<pre><code>// Prepare asynchronous action
+[self prepare];
+
+// The method call with block
+static NSArray *_objects;
+[Query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    // IMPORTANT: Do not call any assert here
+    // If you want, do it after waitForStatus
+    // GHAssertEquals(...) will crash!
+
+    // Instead, we assign to a static var for testing later
+    _objects = objects;
+
+    // Notify that block method has completed
+    [self notify:kGHUnitWaitStatusSuccess forSelector:@selector(testObjectRelationships)];
+}];
+
+// Wait for block to finish, or timeout
+[self waitForStatus:kGHUnitWaitStatusSuccess timeout:10.0];
+
+// Do asserts here instead
+GHAssertEquals(99U, [_objects count], nil);
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>Pitfall: Assert in block</h2>
+
+<p>It is <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common</a> that you assert within the block.</p>
+
+<p>But that will just give the following exception when the test fails.</p>
+
+<pre><code>Terminating app due to uncaught exception 'GHTestFailureException', reason: ...
+</code></pre>
+
+<p>To make it work, you don't call any asserts within the block.</p>
+
+<p>Leave it until <code>waitForStatus</code> is unblocked.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[SenTestingKit does not support wait for blocks]]></title>
+    <link href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
+    <updated>2012-10-03T00:21:00+08:00</updated>
+    <id>http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
+    <content type="html"><![CDATA[<p>I was using <a href="http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html">SenTestingKit</a>, the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.</p>
+
+<p>That's a waste.</p>
+
+<!-- more -->
+
+
+<p>Though there is <a href="https://gist.github.com/2254570">a workaround</a> using semaphore.</p>
+
+<p>``` objc
+- (void)testBlockMethod {</p>
+
+<pre><code>dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);    
+
+// Your block method eg. AFNetworking
+NSURL *url = [NSURL URLWithString:@"http://httpbin.org/ip"];
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    NSLog(@"IP Address: %@", [JSON valueForKeyPath:@"origin"]);
+    STAssertNotNil(JSON, @"JSON not loaded");
+    // Signal that block has completed
+    dispatch_semaphore_signal(semaphore);        
+} failure:nil];
+[operation start];
+
+// Run loop
+while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                             beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+dispatch_release(semaphore);    
+</code></pre>
+
+<p>}
+```</p>
+
+<p>But if you mind, there are lots of <a href="http://stackoverflow.com/questions/4114083/ios-tests-specs-tdd-bdd-and-integration-acceptance-testing">other testing frameworks</a>, eg <a href="https://github.com/gabriel/gh-unit">GHUnit</a> supports asynchronous testing.</p>
+]]></content>
+  </entry>
+  
+</feed>

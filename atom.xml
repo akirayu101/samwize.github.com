@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.github.com/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-23T22:58:24+08:00</updated>
+  <updated>2012-11-25T02:07:56+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Create Async Test with GHUnit]]></title>
+    <link href="http://samwize.github.com/2012/11/25/create-async-test-with-ghunit/"/>
+    <updated>2012-11-25T01:44:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/25/create-async-test-with-ghunit</id>
+    <content type="html"><![CDATA[<p>One of the <a href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
+
+<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_testing.html">ExampleAsyncTest</a> from GHUnit documentation provides a glimpse of what you need to do. However, it still lacks warning you on the <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common pitfalls</a>.</p>
+
+<p>This is step by step of how you can use GHUnit async test:</p>
+
+<!-- more -->
+
+
+<h2>Subclass GHAsyncTestCase instead</h2>
+
+<p>Change the interface class to use <code>GHAsyncTestCase</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ExampleAsyncTest</span> : <span class="nc">GHAsyncTestCase</span> <span class="p">{</span> <span class="p">}</span>
+</span><span class='line'><span class="k">@end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Prepare and wait</h2>
+
+<p>Setup the test method with the asynchronous/block call like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testAsync</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Prepare asynchronous action</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">prepare</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// The method call with block</span>
+</span><span class='line'>    <span class="k">static</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">_objects</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">Query</span> <span class="nl">findObjectsInBackgroundWithBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// IMPORTANT: Do not call any assert here</span>
+</span><span class='line'>        <span class="c1">// If you want, do it after waitForStatus</span>
+</span><span class='line'>        <span class="c1">// GHAssertEquals(...) will crash!</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Instead, we assign to a static var for testing later</span>
+</span><span class='line'>        <span class="n">_objects</span> <span class="o">=</span> <span class="n">objects</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Notify that block method has completed</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span> <span class="nl">notify:</span><span class="n">kGHUnitWaitStatusSuccess</span> <span class="nl">forSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">testObjectRelationships</span><span class="p">)];</span>
+</span><span class='line'>    <span class="p">}];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Wait for block to finish, or timeout</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">waitForStatus:</span><span class="n">kGHUnitWaitStatusSuccess</span> <span class="nl">timeout:</span><span class="mf">10.0</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Do asserts here instead</span>
+</span><span class='line'>    <span class="n">GHAssertEquals</span><span class="p">(</span><span class="mi">99</span><span class="n">U</span><span class="p">,</span> <span class="p">[</span><span class="n">_objects</span> <span class="n">count</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Pitfall: Assert in block</h2>
+
+<p>It is <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common</a> that you assert within the block.</p>
+
+<p>But that will just give the following exception when the test fails.</p>
+
+<pre><code>Terminating app due to uncaught exception 'GHTestFailureException', reason: ...
+</code></pre>
+
+<p>To make it work, you don&#8217;t call any asserts within the block.</p>
+
+<p>Leave it until <code>waitForStatus</code> is unblocked.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[App Engine Unused Discounted Instance Hour]]></title>
@@ -1486,133 +1581,6 @@ val body = response.getResponseBody
 </code></pre>
 
 <p>HTTP should be that simple, and readable.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scala + Play! Development Guide]]></title>
-    <link href="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/"/>
-    <updated>2012-10-15T16:02:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/15/scala-plus-play-development-guide</id>
-    <content type="html"><![CDATA[<p>This is a guide on using Typesafe Stack (basically on Scala + Play! Framework).</p>
-
-<p>It covers installation, start a project, setting up Eclipse and Git, then deploying to Heroku.</p>
-
-<!-- more -->
-
-
-<h2>Installation</h2>
-
-<p>Install the <a href="http://typesafe.com/stack/download">stack</a>.</p>
-
-<pre><code>$ brew install scala sbt maven giter8
-</code></pre>
-
-<p><code>sbt</code> is the <a href="http://typesafe.com/technology/sbt">Simple Build Tool</a> for managing Scala project. The sbt-version for this guide is 0.12.0.</p>
-
-<p><code>giter8</code> is for <a href="https://github.com/n8han/giter8">generating template projects</a>.</p>
-
-<p>If you have a 404 error when maven is being installed, you can <code>brew edit maven</code> and <a href="http://stackoverflow.com/questions/12757694/brew-install-maven-404-error">change the URL</a>.</p>
-
-<h2>Create a new project</h2>
-
-<p>Create a new project using <code>giter8</code> templates</p>
-
-<pre><code>$ g8 typesafehub/play-scala
-</code></pre>
-
-<h2>Run the project</h2>
-
-<p>Issue the 2 commands to run</p>
-
-<pre><code>$ sbt
-$ run
-</code></pre>
-
-<p>The web app will serve at http://localhost:9000/.</p>
-
-<p>You could as well issue a single command <code>sbt run</code>.</p>
-
-<h2>Run a console</h2>
-
-<p>You can also run a play console to do some testing.</p>
-
-<pre><code>$ sbt console
-</code></pre>
-
-<p>In the console, you could call any piece of your code directly and conveniently test out stuff.</p>
-
-<h2>Setup Eclipse</h2>
-
-<p>In order to open the project using Eclipse, do a</p>
-
-<pre><code>$ sbt eclipsify
-</code></pre>
-
-<p>You would of course download the <a href="http://typesafe.com/stack/scala_ide_download">Scala IDE</a> (Eclipse). I would rename to <code>Eclipse-scala</code> and put in my Applications folder.</p>
-
-<p>Open Eclipse, go to File > Import > General/Existing Project and select the scala project.</p>
-
-<p>Important: Everytime you added libraries and dependencies to the project, you need to <code>sbt eclipsify</code> again.</p>
-
-<h2>Git setup, and .gitignore</h2>
-
-<p>These are the files to ignore; the content of <code>.gitignore</code>:</p>
-
-<pre><code>logs
-project/project
-project/target
-target
-tmp
-.history
-/.settings/
-/.target/
-/bin/
-/eclipse/
-/.project
-/.classpath
-/.cache
-/.DS_Store
-</code></pre>
-
-<p>Then do <code>git init</code> and your first commit!</p>
-
-<pre><code>git init
-git add .
-git commit -m "Initial Commit"
-</code></pre>
-
-<h2>Scala</h2>
-
-<p>Before the next section on Play! Framework, make sure you are comfortable with Scala first.</p>
-
-<p>Even how much you about Scala being an easy to understand language, and much like Java, trust me. You need to read an introduction guide to Scala first.</p>
-
-<p>A good starting point would be a <a href="http://samwize.github.com/2012/10/07/2012-10-07-a-short-scala-tutorial-for-java-developers/">Scala tutorial</a> from me (:</p>
-
-<h2>Play! Framework</h2>
-
-<p>It&#8217;s time to start actual development of your app.</p>
-
-<p>However, I am going to cut short here, as this post is merely a short guide to get you started.</p>
-
-<p>Head over to <a href="http://scala.playframework.org/documentation/">Play! framework documentation</a> for a tutorial. (You may skip the setup portion, and start with the <a href="http://scala.playframework.org/documentation/2.0.4/ScalaActions">Action</a>)</p>
-
-<h2>Deploy to Heroku</h2>
-
-<p>Heroku supports Play! 2 and Scala. A <a href="https://github.com/playframework/Play20/wiki/ProductionHeroku">wiki</a> on how to deploy to Heroku is available.</p>
-
-<p>You would firstly need to <a href="http://heroku.com/signup">register</a> a Heroku account, and then install <a href="http://toolbelt.heroku.com/">Toolbelt</a>.</p>
-
-<p>You must have setup git as described in the previous section.</p>
-
-<p>Create a heroku app and push to the server</p>
-
-<pre><code>heroku create
-git push heroku master
-</code></pre>
-
-<p>It will take quite some time to setup the heroku server on the first push. So wait till it says finish, and off you go!</p>
 ]]></content>
   </entry>
   
