@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Graphics | Junda Ong]]></title>
+  <link href="http://samwize.github.com/blog/categories/graphics/atom.xml" rel="self"/>
+  <link href="http://samwize.github.com/"/>
+  <updated>2012-11-27T00:18:03+08:00</updated>
+  <id>http://samwize.github.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
+    <link href="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/"/>
+    <updated>2012-11-26T23:42:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons</id>
+    <content type="html"><![CDATA[<p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
+
+<p>This post is to provide some of the tips in the making Apple's trademarked iPhone rounded icon.</p>
+
+<!-- more -->
+
+
+<h2>Understanding the resolutions</h2>
+
+<p>There is quite a number of different resolutions that is needed for 1 app.</p>
+
+<p>Refer to this <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">Apple document</a>.</p>
+
+<p>Note that every icon can be different in terms of how it looks. So in theory you can have a 57x57 that is totally different looking from your 512x512.</p>
+
+<h2>Icon Template</h2>
+
+<p>There are many template around. The most popular (now) is from <a href="http://appicontemplate.com/">http://appicontemplate.com/</a>.</p>
+
+<p>Using Photoshop smart objects, the template let you edit the biggest size, and it will automatically scale down to the smaller sizes, and export them automatically.</p>
+
+<h2>Rounded corner radius</h2>
+
+<p>If you are not using the template or need a specific resolution, it is important that you know the rounded corner radius for each of the icon reolution. This <a href="http://stackoverflow.com/a/10239376/242682">discussion</a> explained well.</p>
+
+<p>To summarize,</p>
+
+<blockquote><p>Rounded corner radius = icon length x 10/57</p></blockquote>
+
+<p>That is,</p>
+
+<ul>
+<li>Icon512.png - 512px - 89.825</li>
+<li>Icon.png - 57px - 10</li>
+<li>Icon@2x.png - 114px - 20</li>
+<li>Icon-72.png - 72px - 12.632</li>
+<li>Icon-72@2x.png - 144px - 25.263</li>
+<li>Icon-Small.png - 29px - 5.088</li>
+<li>Icon-Small@2x.png - 58px - 10.175</li>
+</ul>
+
+
+<h2>Mask</h2>
+
+<p>You can get a set of mask from within Xcode.</p>
+
+<p>Open the following directory.</p>
+
+<pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

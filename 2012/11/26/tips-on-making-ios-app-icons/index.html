@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Python Unit Testing with nosetests - Junda Ong</title>
+  <title>Tips on making iOS App Icons - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="nosetests is Python favorite unit testing framework. It helps to collect tests from functions that has the word test, or subclasses from unittest. &hellip;">
+  <meta name="description" content="Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions. This post is to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/">
+  <link rel="canonical" href="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Python Unit Testing With Nosetests</h1>
+      <h1 class="entry-title">Tips on Making iOS App Icons</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-11-12T22:52:00+08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
+<time datetime="2012-11-26T23:42:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,41 +107,55 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://nose.readthedocs.org/en/latest">nosetests</a> is Python favorite unit testing framework.</p>
+<div class="entry-content"><p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
 
-<p>It helps to collect tests from functions that has the word <code>test</code>, or subclasses from <code>unittest.TestCase</code>, etc.. Learn the <a href="https://nose.readthedocs.org/en/latest/writing_tests.html">different ways</a> that you can write test cases.</p>
+<p>This post is to provide some of the tips in the making Apple&#8217;s trademarked iPhone rounded icon.</p>
 
 <!-- more -->
 
 
-<h2>How to use</h2>
+<h2>Understanding the resolutions</h2>
 
-<p>Install,</p>
+<p>There is quite a number of different resolutions that is needed for 1 app.</p>
 
-<pre><code>sudo pip install nose
-</code></pre>
+<p>Refer to this <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">Apple document</a>.</p>
 
-<p>Then run,</p>
+<p>Note that every icon can be different in terms of how it looks. So in theory you can have a 57x57 that is totally different looking from your 512x512.</p>
 
-<pre><code>nosetests
-</code></pre>
+<h2>Icon Template</h2>
 
-<p>nosetests will automatically find tests to run in your project! Not necessary in /tests directory (but recommended).</p>
+<p>There are many template around. The most popular (now) is from <a href="http://appicontemplate.com/">http://appicontemplate.com/</a>.</p>
 
-<p>To print out the output,</p>
+<p>Using Photoshop smart objects, the template let you edit the biggest size, and it will automatically scale down to the smaller sizes, and export them automatically.</p>
 
-<pre><code>nosetests --nocapture
-</code></pre>
+<h2>Rounded corner radius</h2>
 
-<p>To run only certain tests,</p>
+<p>If you are not using the template or need a specific resolution, it is important that you know the rounded corner radius for each of the icon reolution. This <a href="http://stackoverflow.com/a/10239376/242682">discussion</a> explained well.</p>
 
-<pre><code>nosetests &lt;path/to/file&gt;:&lt;Test_Case&gt;.&lt;test_method&gt;
-nosetests test_web.py:TestWeb.test_checkout
-</code></pre>
+<p>To summarize,</p>
 
-<p>To run a test file,</p>
+<blockquote><p>Rounded corner radius = icon length x 10/57</p></blockquote>
 
-<pre><code>nosetests test_web.py
+<p>That is,</p>
+
+<ul>
+<li>Icon512.png - 512px - 89.825</li>
+<li>Icon.png - 57px - 10</li>
+<li>Icon@2x.png - 114px - 20</li>
+<li>Icon-72.png - 72px - 12.632</li>
+<li>Icon-72@2x.png - 144px - 25.263</li>
+<li>Icon-Small.png - 29px - 5.088</li>
+<li>Icon-Small@2x.png - 58px - 10.175</li>
+</ul>
+
+
+<h2>Mask</h2>
+
+<p>You can get a set of mask from within Xcode.</p>
+
+<p>Open the following directory.</p>
+
+<pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
 </code></pre>
 </div>
 
@@ -165,12 +179,12 @@ nosetests test_web.py:TestWeb.test_checkout
   
 
 
-<time datetime="2012-11-12T22:52:00+08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2012</time>
+<time datetime="2012-11-26T23:42:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/python/'>Python</a>
+    <a class='category' href='/blog/categories/graphics/'>Graphics</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
   
 </span>
 
@@ -179,7 +193,7 @@ nosetests test_web.py:TestWeb.test_checkout
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/" data-via="samwize" data-counturl="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/" data-via="samwize" data-counturl="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -192,10 +206,8 @@ nosetests test_web.py:TestWeb.test_checkout
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/11/06/my-custom-localization-and-genstrings/" title="Previous Post: My Custom Localization and genstrings">&laquo; My Custom Localization and genstrings</a>
+        <a class="basic-alignment left" href="/2012/11/25/create-async-test-with-ghunit/" title="Previous Post: Create Async Test with GHUnit">&laquo; Create Async Test with GHUnit</a>
       
-      
-        <a class="basic-alignment right" href="/2012/11/13/which-ad-network-to-use-in-ios/" title="Next Post: Which Ad Network to use in iOS?">Which Ad Network to use in iOS? &raquo;</a>
       
     </p>
   </footer>
@@ -274,8 +286,8 @@ nosetests test_web.py:TestWeb.test_checkout
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/';
-        var disqus_url = 'http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/';
+        var disqus_identifier = 'http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/';
+        var disqus_url = 'http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/';
         var disqus_script = 'embed.js';
       
     (function () {

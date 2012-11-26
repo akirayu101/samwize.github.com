@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.github.com/"/>
-  <updated>2012-11-25T02:07:56+08:00</updated>
+  <updated>2012-11-27T00:18:03+08:00</updated>
   <id>http://samwize.github.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
+    <link href="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/"/>
+    <updated>2012-11-26T23:42:00+08:00</updated>
+    <id>http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons</id>
+    <content type="html"><![CDATA[<p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
+
+<p>This post is to provide some of the tips in the making Apple's trademarked iPhone rounded icon.</p>
+
+<!-- more -->
+
+
+<h2>Understanding the resolutions</h2>
+
+<p>There is quite a number of different resolutions that is needed for 1 app.</p>
+
+<p>Refer to this <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">Apple document</a>.</p>
+
+<p>Note that every icon can be different in terms of how it looks. So in theory you can have a 57x57 that is totally different looking from your 512x512.</p>
+
+<h2>Icon Template</h2>
+
+<p>There are many template around. The most popular (now) is from <a href="http://appicontemplate.com/">http://appicontemplate.com/</a>.</p>
+
+<p>Using Photoshop smart objects, the template let you edit the biggest size, and it will automatically scale down to the smaller sizes, and export them automatically.</p>
+
+<h2>Rounded corner radius</h2>
+
+<p>If you are not using the template or need a specific resolution, it is important that you know the rounded corner radius for each of the icon reolution. This <a href="http://stackoverflow.com/a/10239376/242682">discussion</a> explained well.</p>
+
+<p>To summarize,</p>
+
+<blockquote><p>Rounded corner radius = icon length x 10/57</p></blockquote>
+
+<p>That is,</p>
+
+<ul>
+<li>Icon512.png - 512px - 89.825</li>
+<li>Icon.png - 57px - 10</li>
+<li>Icon@2x.png - 114px - 20</li>
+<li>Icon-72.png - 72px - 12.632</li>
+<li>Icon-72@2x.png - 144px - 25.263</li>
+<li>Icon-Small.png - 29px - 5.088</li>
+<li>Icon-Small@2x.png - 58px - 10.175</li>
+</ul>
+
+
+<h2>Mask</h2>
+
+<p>You can get a set of mask from within Xcode.</p>
+
+<p>Open the following directory.</p>
+
+<pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[WARNING: Do not use Base Internationalization in iOS 5]]></title>
@@ -281,78 +339,6 @@ reason: 'Could not load NIB in bundle: 'NSBundle
 <p>By doing that, I lose the use of <code>genstrings</code>, as it no longer uses <code>NSLocalizedString</code>. Unfortunately <code>genstrings</code> is closed source. But fortunately, some <a href="https://github.com/dunkelstern/Cocoa-Localisation-Helper">python helper</a> is around.</p>
 
 <p>And the result is at <a href="https://github.com/samwize/localized">https://github.com/samwize/localized</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Accessibility Guide for Developers]]></title>
-    <link href="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/"/>
-    <updated>2012-11-04T18:25:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers</id>
-    <content type="html"><![CDATA[<p>There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful labels and iOS VoiceOver will take care of it.</p>
-
-<p>I am guilty that I didn't take these simple steps whenever I release a new app, even though I know about it since iOS 3.. Sometimes, I need a <a href="http://mattgemmell.com/2012/10/26/ios-accessibility-heroes-and-villains/">reminder</a>.</p>
-
-<p>Treat this post as <em>another reminder</em>. And as a guide.</p>
-
-<!-- more -->
-
-
-<h2>Test with Accessibility Inspector</h2>
-
-<p>In <strong>iOS Simulator</strong> (NOT actual device), go to Settings > General > Accessibility and switch it on.</p>
-
-<p>You may now observe accessibility information for each UI element.</p>
-
-<h2>Define in Interface Builder</h2>
-
-<p>If you are using IB to build your UI, you can easily edit from the Identity Inspector. All <code>UIView</code> comes with accessibility attributes.</p>
-
-<p><img src="/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
-
-<ul>
-<li>Enable Accessibility</li>
-<li>Enter a label. This is what will be read with VoiceOver.</li>
-<li>Enter a hint, if the label could be ambiguous.</li>
-</ul>
-
-
-<h2>Change Programmatically</h2>
-
-<p>You can also change the label and hint programmatically.</p>
-
-<p>If you have a <code>UILabel</code>, it will read the text of the label. However if that is not descriptive, you could</p>
-
-<pre><code>mylabel.accessibilityLabel = @"Play the music";
-mylabel.accessibilityHint = @"Play the music right now";
-</code></pre>
-
-<h2>UITableViewCell</h2>
-
-<p>It is most likely a table view cell is made up of a couple of UI elements. However, it would be difficult to select the individual elements.</p>
-
-<p>Hence you could help be aggregating the labels and set the <code>UITableCellView</code> accessibility options.</p>
-
-<h2>UISlider</h2>
-
-<p>For slider, you may also want to set the value.</p>
-
-<pre><code>mySlider.accessibilityValue = @"Volume at 50%";
-</code></pre>
-
-<h2>Test on Device</h2>
-
-<p>Go to Settings > General > Accessibility > Enable VoiceOver.</p>
-
-<p>Test it out!</p>
-
-<h2>Advanced</h2>
-
-<p>I have merely list the <em>simple</em> steps I usually used.</p>
-
-<p>Apple has it's own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
-
-<p>Hope you be a hero!</p>
 ]]></content>
   </entry>
   
