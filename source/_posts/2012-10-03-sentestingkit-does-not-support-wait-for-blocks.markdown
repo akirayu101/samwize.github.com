@@ -3,7 +3,7 @@ layout: post
 title: "SenTestingKit does not support wait for blocks"
 date: 2012-10-03 00:21
 comments: true
-categories: iOS
+categories: iOS, Testing
 ---
 
 I was using [SenTestingKit](http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html), the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.

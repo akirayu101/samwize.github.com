@@ -37,6 +37,7 @@ If after adding support for iOS6 and your UITabBar is not working anymore eg. do
 You [need](http://stackoverflow.com/a/12627117/242682) to set the `window` object of your main xib to **Full Size at Launch**.
 
 
+
 ### Error: UIViewControllerHierarchyInconsistency ###
 
 This is again due to an older project. 

@@ -3,7 +3,7 @@ layout: post
 title: "Unit Tests with CocoaPods"
 date: 2012-10-01 23:41
 comments: true
-categories: [iOS, OSX]
+categories: [iOS, OSX, Testing]
 ---
 
 [CocoaPods](http://cocoapods.org/) is a tool for managing dependecies for iOS and Mac OS X projects. 
