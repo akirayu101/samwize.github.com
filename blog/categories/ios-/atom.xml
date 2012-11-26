@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: iOS, | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/ios-/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/ios-/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Create Async Test with GHUnit]]></title>
-    <link href="http://samwize.github.com/2012/11/25/create-async-test-with-ghunit/"/>
+    <link href="http://samwize.com/2012/11/25/create-async-test-with-ghunit/"/>
     <updated>2012-11-25T01:44:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/25/create-async-test-with-ghunit</id>
+    <id>http://samwize.com/2012/11/25/create-async-test-with-ghunit</id>
     <content type="html"><![CDATA[<p>One of the <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
 
 <p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_testing.html">ExampleAsyncTest</a> from GHUnit documentation provides a glimpse of what you need to do. However, it still lacks warning you on the <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common pitfalls</a>.</p>
@@ -90,9 +90,9 @@ GHAssertEquals(99U, [_objects count], nil);
   
   <entry>
     <title type="html"><![CDATA[SenTestingKit does not support wait for blocks]]></title>
-    <link href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
+    <link href="http://samwize.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks/"/>
     <updated>2012-10-03T00:21:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
+    <id>http://samwize.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks</id>
     <content type="html"><![CDATA[<p>I was using <a href="http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/UnitTesting/00-About_Unit_Testing/about.html">SenTestingKit</a>, the default unit testing framework from Apple, when I found out that it does not support tests that involve asynchronous methods, or blocks.</p>
 
 <p>That's a waste.</p>

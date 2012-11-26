@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Mac | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/mac/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
-    <link href="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
+    <link href="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
     <updated>2012-10-28T10:05:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
+    <id>http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
     <content type="html"><![CDATA[<p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
 
 <p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn't get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
@@ -48,9 +48,9 @@
   
   <entry>
     <title type="html"><![CDATA[Xcode 4.5 Tips &amp; Tricks]]></title>
-    <link href="http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/"/>
+    <link href="http://samwize.com/2012/09/26/xcode-4-dot-5-tips-and-tricks/"/>
     <updated>2012-09-26T01:16:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/26/xcode-4-dot-5-tips-and-tricks</id>
+    <id>http://samwize.com/2012/09/26/xcode-4-dot-5-tips-and-tricks</id>
     <content type="html"><![CDATA[<p>Some of my favorite Xcode tips &amp; tricks (tested on Xcode 4.5).</p>
 
 <h2>Shortcut</h2>
@@ -127,9 +127,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hide "All My Files" in Mac's Finder]]></title>
-    <link href="http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder/"/>
+    <link href="http://samwize.com/2012/09/12/hide-all-my-files-in-macs-finder/"/>
     <updated>2012-09-12T13:18:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/12/hide-all-my-files-in-macs-finder</id>
+    <id>http://samwize.com/2012/09/12/hide-all-my-files-in-macs-finder</id>
     <content type="html"><![CDATA[<p>It took me a few months before I decide "All My Files" is a useless feature for Mac OS Lion.</p>
 
 <p>I was irked that it is the default view when you create new Finder window. And I was even more irked that the default arrangement by Kind shows my Adium chat log right at the top..</p>

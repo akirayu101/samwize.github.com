@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Junda Ong]]></title>
-  <link href="http://samwize.github.com/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
-    <link href="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/"/>
+    <link href="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/"/>
     <updated>2012-11-26T23:42:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons</id>
+    <id>http://samwize.com/2012/11/26/tips-on-making-ios-app-icons</id>
     <content type="html"><![CDATA[<p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
 
 <p>This post is to provide some of the tips in the making Apple&#8217;s trademarked iPhone rounded icon.</p>
@@ -73,10 +73,10 @@
   
   <entry>
     <title type="html"><![CDATA[Create Async Test with GHUnit]]></title>
-    <link href="http://samwize.github.com/2012/11/25/create-async-test-with-ghunit/"/>
+    <link href="http://samwize.com/2012/11/25/create-async-test-with-ghunit/"/>
     <updated>2012-11-25T01:44:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/25/create-async-test-with-ghunit</id>
-    <content type="html"><![CDATA[<p>One of the <a href="http://samwize.github.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
+    <id>http://samwize.com/2012/11/25/create-async-test-with-ghunit</id>
+    <content type="html"><![CDATA[<p>One of the <a href="http://samwize.com/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
 
 <p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_testing.html">ExampleAsyncTest</a> from GHUnit documentation provides a glimpse of what you need to do. However, it still lacks warning you on the <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common pitfalls</a>.</p>
 
@@ -168,9 +168,9 @@
   
   <entry>
     <title type="html"><![CDATA[App Engine Unused Discounted Instance Hour]]></title>
-    <link href="http://samwize.github.com/2012/11/23/app-engine-unused-discounted-instance-hour/"/>
+    <link href="http://samwize.com/2012/11/23/app-engine-unused-discounted-instance-hour/"/>
     <updated>2012-11-23T22:48:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/23/app-engine-unused-discounted-instance-hour</id>
+    <id>http://samwize.com/2012/11/23/app-engine-unused-discounted-instance-hour</id>
     <content type="html"><![CDATA[<p>Google App Engine has this item - Discounted Instance Hour - which you can reserve a number of hours per week at a cheaper cost.</p>
 
 <p>Recently, I was looking at the Charge Sent per week, and one of the item is this:</p>
@@ -209,9 +209,9 @@ even if you don't use them during the billing period.
   
   <entry>
     <title type="html"><![CDATA[WARNING: Do not use Base Internationalization in iOS 5]]></title>
-    <link href="http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
+    <link href="http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
     <updated>2012-11-22T21:57:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
+    <id>http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
     <content type="html"><![CDATA[<p>iOS 5 does NOT support Base Internationalization.</p>
 
 <p>I learnt this the hard way (and partly Apple&#8217;s fault).</p>
@@ -275,9 +275,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[GAE or Dotcloud?]]></title>
-    <link href="http://samwize.github.com/2012/11/21/gae-or-dotcloud/"/>
+    <link href="http://samwize.com/2012/11/21/gae-or-dotcloud/"/>
     <updated>2012-11-21T00:02:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/21/gae-or-dotcloud</id>
+    <id>http://samwize.com/2012/11/21/gae-or-dotcloud</id>
     <content type="html"><![CDATA[<p>I have been thinking which to use.</p>
 
 <p>I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And paying them ever since they started charging.</p>
@@ -321,9 +321,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
-    <link href="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
+    <link href="http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
     <updated>2012-11-14T22:00:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
+    <id>http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
     <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
 
 <p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
@@ -353,7 +353,7 @@ reason: 'Could not load NIB in bundle: 'NSBundle
 
 <p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
 
-<p><img src="http://samwize.github.com/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
+<p><img src="http://samwize.com/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
 
 <p>Save the <code>App.ipa</code>.</p>
 
@@ -389,9 +389,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[Which Ad Network to use in iOS?]]></title>
-    <link href="http://samwize.github.com/2012/11/13/which-ad-network-to-use-in-ios/"/>
+    <link href="http://samwize.com/2012/11/13/which-ad-network-to-use-in-ios/"/>
     <updated>2012-11-13T21:24:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/13/which-ad-network-to-use-in-ios</id>
+    <id>http://samwize.com/2012/11/13/which-ad-network-to-use-in-ios</id>
     <content type="html"><![CDATA[<p>My experience with using ads in iOS goes as far back in 2008 when iOS is released. It was simple back then, but now, I have lost count of the number of ad networks.</p>
 
 <p>See what I mean:</p>
@@ -502,9 +502,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[Python Unit Testing with nosetests]]></title>
-    <link href="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/"/>
+    <link href="http://samwize.com/2012/11/12/python-unit-testing-with-nosetests/"/>
     <updated>2012-11-12T22:52:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests</id>
+    <id>http://samwize.com/2012/11/12/python-unit-testing-with-nosetests</id>
     <content type="html"><![CDATA[<p><a href="http://nose.readthedocs.org/en/latest">nosetests</a> is Python favorite unit testing framework.</p>
 
 <p>It helps to collect tests from functions that has the word <code>test</code>, or subclasses from <code>unittest.TestCase</code>, etc.. Learn the <a href="https://nose.readthedocs.org/en/latest/writing_tests.html">different ways</a> that you can write test cases.</p>
@@ -546,9 +546,9 @@ nosetests test_web.py:TestWeb.test_checkout
   
   <entry>
     <title type="html"><![CDATA[My Custom Localization and genstrings]]></title>
-    <link href="http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings/"/>
+    <link href="http://samwize.com/2012/11/06/my-custom-localization-and-genstrings/"/>
     <updated>2012-11-06T21:49:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings</id>
+    <id>http://samwize.com/2012/11/06/my-custom-localization-and-genstrings</id>
     <content type="html"><![CDATA[<p>This post is about some custom stuff I did for <a href="https://developer.apple.com/library/ios/#documentation/MacOSX/Conceptual/BPInternational/Articles/ChoosingLocalizations.html">localization</a>.</p>
 
 <p>It does not cover the <a href="http://www.raywenderlich.com/2876/how-to-localize-an-iphone-app-tutorial">basic</a> of how you localized an app, nor how to use the Apple provided <a href="http://spritebandits.wordpress.com/2012/01/25/ios-iphone-app-localization-genstrings-tips/">genstrings</a> tool.</p>
@@ -570,9 +570,9 @@ nosetests test_web.py:TestWeb.test_checkout
   
   <entry>
     <title type="html"><![CDATA[What is Python's Lambda and Closure]]></title>
-    <link href="http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/"/>
+    <link href="http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure/"/>
     <updated>2012-11-05T20:06:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure</id>
+    <id>http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure</id>
     <content type="html"><![CDATA[<p>Lambda is</p>
 
 <blockquote><p>one line anonymous function constructed on the fly</p></blockquote>
@@ -648,9 +648,9 @@ nosetests test_web.py:TestWeb.test_checkout
   
   <entry>
     <title type="html"><![CDATA[iOS Accessibility Guide for Developers]]></title>
-    <link href="http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers/"/>
+    <link href="http://samwize.com/2012/11/04/ios-accessibility-guide-for-developers/"/>
     <updated>2012-11-04T18:25:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/04/ios-accessibility-guide-for-developers</id>
+    <id>http://samwize.com/2012/11/04/ios-accessibility-guide-for-developers</id>
     <content type="html"><![CDATA[<p>There are some simple steps you can take to make your iOS app friendly to the visually impaired users. All you need is to provide more meaningful labels and iOS VoiceOver will take care of it.</p>
 
 <p>I am guilty that I didn&#8217;t take these simple steps whenever I release a new app, even though I know about it since iOS 3.. Sometimes, I need a <a href="http://mattgemmell.com/2012/10/26/ios-accessibility-heroes-and-villains/">reminder</a>.</p>
@@ -670,7 +670,7 @@ nosetests test_web.py:TestWeb.test_checkout
 
 <p>If you are using IB to build your UI, you can easily edit from the Identity Inspector. All <code>UIView</code> comes with accessibility attributes.</p>
 
-<p><img src="http://samwize.github.com/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
+<p><img src="http://samwize.com/images/xcode-accessibility-inspector.png" title="Accessibility Inspector" ></p>
 
 <ul>
 <li>Enable Accessibility</li>
@@ -720,15 +720,15 @@ mylabel.accessibilityHint = @"Play the music right now";
   
   <entry>
     <title type="html"><![CDATA[The Mythical Team-Month]]></title>
-    <link href="http://samwize.github.com/2012/11/03/the-mythical-team-month/"/>
+    <link href="http://samwize.com/2012/11/03/the-mythical-team-month/"/>
     <updated>2012-11-03T21:22:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/03/the-mythical-team-month</id>
+    <id>http://samwize.com/2012/11/03/the-mythical-team-month</id>
     <content type="html"><![CDATA[<p>I came across this great slideshow about projects, teams and developers.</p>
 
-<script async class="speakerdeck-embed" data-id="4f5ba2cfe593e10022020dbb" data-ratio="1.3333333333333333" src="http://samwize.github.com//speakerdeck.com/assets/embed.js"></script>
+<script async class="speakerdeck-embed" data-id="4f5ba2cfe593e10022020dbb" data-ratio="1.3333333333333333" src="http://samwize.com//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>Some of the ideas are similar to <a href="http://samwize.github.com/2012/10/11/the-lean-startup/">The Lean Startup</a>.</p>
+<p>Some of the ideas are similar to <a href="http://samwize.com/2012/10/11/the-lean-startup/">The Lean Startup</a>.</p>
 
 <p>Other key takeaways for me are:</p>
 
@@ -764,9 +764,9 @@ mylabel.accessibilityHint = @"Play the music right now";
   
   <entry>
     <title type="html"><![CDATA[Common Git Usage]]></title>
-    <link href="http://samwize.github.com/2012/10/30/common-git-usage/"/>
+    <link href="http://samwize.com/2012/10/30/common-git-usage/"/>
     <updated>2012-10-30T21:35:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/30/common-git-usage</id>
+    <id>http://samwize.com/2012/10/30/common-git-usage</id>
     <content type="html"><![CDATA[<p>I am never good at using Git.</p>
 
 <p>But it&#8217;s not my fault. Git has too many commands, and I am not a command line guy. That&#8217;s why I usually use <a href="http://www.syntevo.com/smartgit/index.html">SmartGit</a>, a Git software with user interface that supports Mac.</p>
@@ -950,9 +950,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[iOS Guide to Multiple Device Resolutions]]></title>
-    <link href="http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions/"/>
+    <link href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/"/>
     <updated>2012-10-29T23:23:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/29/ios-guide-to-multiple-device-resolutions</id>
+    <id>http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions</id>
     <content type="html"><![CDATA[<p>With every iOS updates and new release of devices from Apple, there are more things developers have to do.</p>
 
 <p>In order to support these new devices, you first need to understand these devices.</p>
@@ -1049,9 +1049,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
-    <link href="http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
+    <link href="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
     <updated>2012-10-28T10:05:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
+    <id>http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
     <content type="html"><![CDATA[<p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
 
 <p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn&#8217;t get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
@@ -1072,7 +1072,7 @@ git push origin HEAD --force
 </ol>
 
 
-<p><img src="http://samwize.github.com/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
+<p><img src="http://samwize.com/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
 
 <p>That&#8217;s it. You got to see the details of wifi nearby.</p>
 
@@ -1082,9 +1082,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
-    <link href="http://samwize.github.com/2012/10/25/simple-get-post-afnetworking/"/>
+    <link href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/"/>
     <updated>2012-10-25T00:32:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/25/simple-get-post-afnetworking</id>
+    <id>http://samwize.com/2012/10/25/simple-get-post-afnetworking</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
 
 <p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
@@ -1187,9 +1187,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Good Strategy, Bad Strategy]]></title>
-    <link href="http://samwize.github.com/2012/10/24/good-strategy-bad-strategy/"/>
+    <link href="http://samwize.com/2012/10/24/good-strategy-bad-strategy/"/>
     <updated>2012-10-24T22:02:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/24/good-strategy-bad-strategy</id>
+    <id>http://samwize.com/2012/10/24/good-strategy-bad-strategy</id>
     <content type="html"><![CDATA[<p>This is a review of the book <a href="http://www.bookdepository.co.uk/Good-Strategybad-Strategy-Richard-Rumelt/9781846684814?a_aid=Just2me">Good Strategy, Bad Strategy</a>.</p>
 
 <p>The first 20% of the book is still okay. But I could not read beyond that, as it is long winded, and used too many examples from US Military strategies.</p>
@@ -1263,9 +1263,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Error: Application Executable Missing Required Architecture]]></title>
-    <link href="http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture/"/>
+    <link href="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/"/>
     <updated>2012-10-23T22:20:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/23/error-application-executable-missing-required-architecture</id>
+    <id>http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture</id>
     <content type="html"><![CDATA[<p>I swear this is the most common error I have seen whenever I upload an iOS binary.</p>
 
 <blockquote><p>Error: application executable is missing a required architecture armv6</p></blockquote>
@@ -1289,9 +1289,9 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Updating App for iPhone 5]]></title>
-    <link href="http://samwize.github.com/2012/10/22/updating-app-for-iphone-5/"/>
+    <link href="http://samwize.com/2012/10/22/updating-app-for-iphone-5/"/>
     <updated>2012-10-22T01:14:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/22/updating-app-for-iphone-5</id>
+    <id>http://samwize.com/2012/10/22/updating-app-for-iphone-5</id>
     <content type="html"><![CDATA[<p>This post is a guide to updating existing app for iPhone 5.</p>
 
 <p>As you already knew, the new iPhone 5 introduced a taller screen at 4 inch, while all iPhones before is at 3.5 inch.</p>
@@ -1420,14 +1420,14 @@ git push origin HEAD --force
   
   <entry>
     <title type="html"><![CDATA[Why I hate Scala]]></title>
-    <link href="http://samwize.github.com/2012/10/19/why-i-hate-scala/"/>
+    <link href="http://samwize.com/2012/10/19/why-i-hate-scala/"/>
     <updated>2012-10-19T21:44:00+08:00</updated>
-    <id>http://samwize.github.com/2012/10/19/why-i-hate-scala</id>
+    <id>http://samwize.com/2012/10/19/why-i-hate-scala</id>
     <content type="html"><![CDATA[<p>I spent about 2 weeks using Scala, before concluding that I hate the language.</p>
 
-<p>When I first wrote the first <a href="http://samwize.github.com/2012/10/07/a-short-scala-tutorial-for-java-developers/">beginner guide to Scala</a>, I was in awe, and yet feeling a tinge of uneasiness.</p>
+<p>When I first wrote the first <a href="http://samwize.com/2012/10/07/a-short-scala-tutorial-for-java-developers/">beginner guide to Scala</a>, I was in awe, and yet feeling a tinge of uneasiness.</p>
 
-<p>Then I spent a few days creating a Scala web application, resulting in a subsequent <a href="http://samwize.github.com/2012/10/15/scala-plus-play-development-guide/">random guide to Scala programming</a>.</p>
+<p>Then I spent a few days creating a Scala web application, resulting in a subsequent <a href="http://samwize.com/2012/10/15/scala-plus-play-development-guide/">random guide to Scala programming</a>.</p>
 
 <p>After I am done with the project, I know I would not start another project in Scala at my own will.</p>
 

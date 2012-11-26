@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/ios/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
-    <link href="http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons/"/>
+    <link href="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/"/>
     <updated>2012-11-26T23:42:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/26/tips-on-making-ios-app-icons</id>
+    <id>http://samwize.com/2012/11/26/tips-on-making-ios-app-icons</id>
     <content type="html"><![CDATA[<p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
 
 <p>This post is to provide some of the tips in the making Apple's trademarked iPhone rounded icon.</p>
@@ -73,9 +73,9 @@
   
   <entry>
     <title type="html"><![CDATA[WARNING: Do not use Base Internationalization in iOS 5]]></title>
-    <link href="http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
+    <link href="http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
     <updated>2012-11-22T21:57:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
+    <id>http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
     <content type="html"><![CDATA[<p>iOS 5 does NOT support Base Internationalization.</p>
 
 <p>I learnt this the hard way (and partly Apple's fault).</p>
@@ -139,9 +139,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
-    <link href="http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
+    <link href="http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
     <updated>2012-11-14T22:00:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
+    <id>http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
     <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
 
 <p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
@@ -207,9 +207,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[Which Ad Network to use in iOS?]]></title>
-    <link href="http://samwize.github.com/2012/11/13/which-ad-network-to-use-in-ios/"/>
+    <link href="http://samwize.com/2012/11/13/which-ad-network-to-use-in-ios/"/>
     <updated>2012-11-13T21:24:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/13/which-ad-network-to-use-in-ios</id>
+    <id>http://samwize.com/2012/11/13/which-ad-network-to-use-in-ios</id>
     <content type="html"><![CDATA[<p>My experience with using ads in iOS goes as far back in 2008 when iOS is released. It was simple back then, but now, I have lost count of the number of ad networks.</p>
 
 <p>See what I mean:</p>
@@ -320,9 +320,9 @@ reason: 'Could not load NIB in bundle: 'NSBundle
   
   <entry>
     <title type="html"><![CDATA[My Custom Localization and genstrings]]></title>
-    <link href="http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings/"/>
+    <link href="http://samwize.com/2012/11/06/my-custom-localization-and-genstrings/"/>
     <updated>2012-11-06T21:49:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/06/my-custom-localization-and-genstrings</id>
+    <id>http://samwize.com/2012/11/06/my-custom-localization-and-genstrings</id>
     <content type="html"><![CDATA[<p>This post is about some custom stuff I did for <a href="https://developer.apple.com/library/ios/#documentation/MacOSX/Conceptual/BPInternational/Articles/ChoosingLocalizations.html">localization</a>.</p>
 
 <p>It does not cover the <a href="http://www.raywenderlich.com/2876/how-to-localize-an-iphone-app-tutorial">basic</a> of how you localized an app, nor how to use the Apple provided <a href="http://spritebandits.wordpress.com/2012/01/25/ios-iphone-app-localization-genstrings-tips/">genstrings</a> tool.</p>

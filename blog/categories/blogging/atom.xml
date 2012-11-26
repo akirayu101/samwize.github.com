@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Blogging | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/blogging/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/blogging/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[I bought samwize.com for 99 cents]]></title>
-    <link href="http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
+    <link href="http://samwize.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents/"/>
     <updated>2012-09-21T10:51:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
+    <id>http://samwize.com/2012/09/21/i-bought-samwize-dot-com-for-99-cents</id>
     <content type="html"><![CDATA[<p>This blog is now given an official (domain) name since I <a href="/2012/09/10/switched-from-wordpress-to-octopress/">switched to Octopress</a> 2 weeks ago.</p>
 
 <p>The domain is bought from <a href="http://www.namecheap.com/">NameCheap</a> at 99 cents for first year, thereafter $10.69/yr. This is a special promo given after they won the best registrar from lifehackers. (promo code <strong>WELOVEU</strong>)</p>
@@ -65,9 +65,9 @@
   
   <entry>
     <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
-    <link href="http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
+    <link href="http://samwize.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
     <updated>2012-09-10T00:29:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/10/switched-from-wordpress-to-octopress</id>
+    <id>http://samwize.com/2012/09/10/switched-from-wordpress-to-octopress</id>
     <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
 
 <p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>

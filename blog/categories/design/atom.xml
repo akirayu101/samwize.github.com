@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Design | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/design/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/design/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[API Design Rules for iOS/OS X]]></title>
-    <link href="http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x/"/>
+    <link href="http://samwize.com/2012/09/28/api-design-rules-for-ios-slash-os-x/"/>
     <updated>2012-09-28T21:43:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/28/api-design-rules-for-ios-slash-os-x</id>
+    <id>http://samwize.com/2012/09/28/api-design-rules-for-ios-slash-os-x</id>
     <content type="html"><![CDATA[<p>If you are designing an SDK/library/API, read these 25 rules by <a href="http://mattgemmell.com/2012/05/24/api-design/">Matt Gemmell</a>:</p>
 
 <p><a href="http://mattgemmell.com/2012/05/24/api-design/"><img class="center" src="/images/ios-api-design-rules.jpeg"></a></p>

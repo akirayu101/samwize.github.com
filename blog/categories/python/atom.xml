@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Python | Junda Ong]]></title>
-  <link href="http://samwize.github.com/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://samwize.github.com/"/>
-  <updated>2012-11-27T00:18:03+08:00</updated>
-  <id>http://samwize.github.com/</id>
+  <link href="http://samwize.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2012-11-27T00:20:56+08:00</updated>
+  <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Python Unit Testing with nosetests]]></title>
-    <link href="http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests/"/>
+    <link href="http://samwize.com/2012/11/12/python-unit-testing-with-nosetests/"/>
     <updated>2012-11-12T22:52:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/12/python-unit-testing-with-nosetests</id>
+    <id>http://samwize.com/2012/11/12/python-unit-testing-with-nosetests</id>
     <content type="html"><![CDATA[<p><a href="http://nose.readthedocs.org/en/latest">nosetests</a> is Python favorite unit testing framework.</p>
 
 <p>It helps to collect tests from functions that has the word <code>test</code>, or subclasses from <code>unittest.TestCase</code>, etc.. Learn the <a href="https://nose.readthedocs.org/en/latest/writing_tests.html">different ways</a> that you can write test cases.</p>
@@ -59,9 +59,9 @@ nosetests test_web.py:TestWeb.test_checkout
   
   <entry>
     <title type="html"><![CDATA[What is Python's Lambda and Closure]]></title>
-    <link href="http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure/"/>
+    <link href="http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure/"/>
     <updated>2012-11-05T20:06:00+08:00</updated>
-    <id>http://samwize.github.com/2012/11/05/what-is-pythons-lambda-and-closure</id>
+    <id>http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure</id>
     <content type="html"><![CDATA[<p>Lambda is</p>
 
 <blockquote><p>one line anonymous function constructed on the fly</p></blockquote>
@@ -137,9 +137,9 @@ nosetests test_web.py:TestWeb.test_checkout
   
   <entry>
     <title type="html"><![CDATA[How to write Getter/Setter for static variables]]></title>
-    <link href="http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/"/>
+    <link href="http://samwize.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables/"/>
     <updated>2012-09-20T14:14:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables</id>
+    <id>http://samwize.com/2012/09/20/how-to-write-getter-slash-setter-for-static-variables</id>
     <content type="html"><![CDATA[<p>In the last post, I blogged about how you should write <a href="/2012/09/19/how-you-should-write-getter-slash-setter-for-python/">Getter/Setter for member variables</a>.</p>
 
 <p>This is a follow-up for <strong>static variables</strong>, instead of instance variables.</p>
@@ -184,9 +184,9 @@ MyClass.foo
   
   <entry>
     <title type="html"><![CDATA[How you should write getter/setter for Python]]></title>
-    <link href="http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/"/>
+    <link href="http://samwize.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/"/>
     <updated>2012-09-19T18:49:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python</id>
+    <id>http://samwize.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python</id>
     <content type="html"><![CDATA[<p>Coming from the Java world, I am used to writing getter/setter for every member variables that I want to expose. (truth is I made use of IDE to auto generate)</p>
 
 <p>I hate how much code Java has.</p>
@@ -246,9 +246,9 @@ def foo(self, value):
   
   <entry>
     <title type="html"><![CDATA[Non-ASCII Character in Python File]]></title>
-    <link href="http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file/"/>
+    <link href="http://samwize.com/2012/09/18/non-ascii-character-in-python-file/"/>
     <updated>2012-09-18T18:00:00+08:00</updated>
-    <id>http://samwize.github.com/2012/09/18/non-ascii-character-in-python-file</id>
+    <id>http://samwize.com/2012/09/18/non-ascii-character-in-python-file</id>
     <content type="html"><![CDATA[<p>If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error:</p>
 
 <pre><code>Python Error: Non-ASCII character in file but no encoding declared
