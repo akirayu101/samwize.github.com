@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-11-27T00:20:56+08:00</updated>
+  <updated>2012-11-28T23:32:06+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to migrate SVN to Git]]></title>
+    <link href="http://samwize.com/2012/11/28/how-to-migrate-svn-to-git/"/>
+    <updated>2012-11-28T23:10:00+08:00</updated>
+    <id>http://samwize.com/2012/11/28/how-to-migrate-svn-to-git</id>
+    <content type="html"><![CDATA[<p>My biggest problem with SVN is that I don&#8217;t have good Mac software supporting SVN. For Git, I have the free <a href="http://www.sourcetreeapp.com/">SourceTree</a> app.</p>
+
+<p>Hence I decided to migrate some of my ancient repos that were still on SVN.</p>
+
+<p>It is actually easy.</p>
+
+<!-- more -->
+
+
+<p>It is basically just 1 command to clone the svn repos to your local working directory. The operation will maintain the logs.</p>
+
+<pre><code>git svn clone -s http://my.svnserver.com/svn/myapp/ MyAppGit
+</code></pre>
+
+<p>The <code>-s</code> command will clone just the trunk. If you don&#8217;t use the stand trunk, tag, branch, you can <code>-s</code> and it will clone the whole repos.</p>
+
+<p>You can verify all logs are there with <code>git log</code>.</p>
+
+<p>Next, maintain the same ignore configurations.</p>
+
+<pre><code>git svn create-ignore
+</code></pre>
+
+<p>Lastly, add the new remote to your git repos (eg Github).</p>
+
+<pre><code>git remote add origin https://github.com/samwize/myapp.git
+git push -u origin master
+</code></pre>
+
+<p>That&#8217;s all!</p>
+
+<p>You may also want to refer to <a href="http://samwize.com/2012/10/30/common-git-usage/">some common Git usage</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
@@ -68,6 +108,19 @@
 
 <pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
 </code></pre>
+
+<p>But there is also a <a href="http://stackoverflow.com/a/1834558/242682">way</a> to programmatically set a round corner masking:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">masksToBounds</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">lightGrayColor</span><span class="p">].</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderWidth</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
@@ -1415,60 +1468,6 @@ git push origin HEAD --force
 <p>Use the above techniques as needed, and handily use the <a href="https://gist.github.com/3926123">Device class</a> methods.</p>
 
 <p>If you use any third party libraries, you would also need to update their libs with support for <code>armv7s</code> (a new architecture for iPhone5). Popular libs are already updated at this point of writing eg. Flurry, Google Admob, and other ad networks.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Why I hate Scala]]></title>
-    <link href="http://samwize.com/2012/10/19/why-i-hate-scala/"/>
-    <updated>2012-10-19T21:44:00+08:00</updated>
-    <id>http://samwize.com/2012/10/19/why-i-hate-scala</id>
-    <content type="html"><![CDATA[<p>I spent about 2 weeks using Scala, before concluding that I hate the language.</p>
-
-<p>When I first wrote the first <a href="http://samwize.com/2012/10/07/a-short-scala-tutorial-for-java-developers/">beginner guide to Scala</a>, I was in awe, and yet feeling a tinge of uneasiness.</p>
-
-<p>Then I spent a few days creating a Scala web application, resulting in a subsequent <a href="http://samwize.com/2012/10/15/scala-plus-play-development-guide/">random guide to Scala programming</a>.</p>
-
-<p>After I am done with the project, I know I would not start another project in Scala at my own will.</p>
-
-<!-- more -->
-
-
-<p>There are many <a href="http://m-mansur-ashraf.blogspot.sg/2011/08/is-scala-really-too-complex-for-average_20.html">Scala</a> <a href="http://amplicate.com/hate/scala">haters</a>.</p>
-
-<p>Here&#8217;s what I think:</p>
-
-<ul>
-<li><p>Scala is a powerful &amp; complex language.</p></li>
-<li><p>You could have dozens of custom operators like <code>&lt;/&gt;</code>, and <code>=:=</code>. That makes understanding code very difficult. Take a look at the <a href="http://www.flotsam.nl/dispatch-periodic-table.html">dispatch</a> (HTTP) library.</p></li>
-<li><p>Even simple usage requires explaining. There&#8217;s too many concepts.</p></li>
-<li><p>Otherwise, it is a <a href="http://dispatch.databinder.net/">lack of explaining</a></p></li>
-<li><p>You will be constantly figuring out the language syntax</p></li>
-<li><p>Ecosystem not great; lack of support, docs</p></li>
-</ul>
-
-
-<p>It&#8217;s damn hard to read Scala code.</p>
-
-<p>You can call me an average programmer for all I care. But let&#8217;s say I am average, and I can&#8217;t understand Scala, then Scala is not a universal language.</p>
-
-<p>Reading a <a href="http://blog.joda.org/2011/11/real-life-scala-feedback-from-yammer.html">real life feedback from Yammer</a>, it worries me even more. Some other things they said:</p>
-
-<ul>
-<li><p>Major version releases is backward incompatible</p></li>
-<li><p>High learning curve, slow to get productive</p></li>
-<li><p>To increase performance: Don&#8217;t use for-loop, s.c.m/i.. wtf</p></li>
-<li><p>Compared 2 codebases, consensus is Java. Hence they switched back.</p></li>
-</ul>
-
-
-<p>I like Python better. And I always like one of <a href="http://c2.com/cgi/wiki?PythonPhilosophy">Python design philosophy</a></p>
-
-<blockquote><p>There should be one&#8211; and preferably only one &#8211;obvious way to do it.</p></blockquote>
-
-<p>Scala has <em>too many ways</em>.</p>
-
-<p>You will not be able to comprehend easily. Never.</p>
 ]]></content>
   </entry>
   

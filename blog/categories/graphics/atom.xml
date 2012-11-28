@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Graphics | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/graphics/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-11-27T00:20:56+08:00</updated>
+  <updated>2012-11-28T23:32:06+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -68,6 +68,18 @@
 
 <pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
 </code></pre>
+
+<p>But there is also a <a href="http://stackoverflow.com/a/1834558/242682">way</a> to programmatically set a round corner masking:</p>
+
+<p>```objc</p>
+
+<pre><code>imageView.layer.cornerRadius = 10.0;
+imageView.layer.masksToBounds = YES;
+imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+imageView.layer.borderWidth = 1.0;
+</code></pre>
+
+<p>```</p>
 ]]></content>
   </entry>
   

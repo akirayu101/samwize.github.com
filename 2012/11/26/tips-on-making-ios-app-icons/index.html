@@ -157,6 +157,19 @@
 
 <pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
 </code></pre>
+
+<p>But there is also a <a href="http://stackoverflow.com/a/1834558/242682">way</a> to programmatically set a round corner masking:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">masksToBounds</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">lightGrayColor</span><span class="p">].</span><span class="n">CGColor</span><span class="p">;</span>
+</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderWidth</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -209,6 +222,8 @@
         <a class="basic-alignment left" href="/2012/11/25/create-async-test-with-ghunit/" title="Previous Post: Create Async Test with GHUnit">&laquo; Create Async Test with GHUnit</a>
       
       
+        <a class="basic-alignment right" href="/2012/11/28/how-to-migrate-svn-to-git/" title="Next Post: How to migrate SVN to Git">How to migrate SVN to Git &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -228,6 +243,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/11/28/how-to-migrate-svn-to-git/">How to migrate SVN to Git</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/11/26/tips-on-making-ios-app-icons/">Tips on making iOS App Icons</a>
       </li>
     
@@ -241,10 +260,6 @@
     
       <li class="post">
         <a href="/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/">WARNING: Do not use Base Internationalization in iOS 5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/11/21/gae-or-dotcloud/">GAE or Dotcloud?</a>
       </li>
     
   </ul>
