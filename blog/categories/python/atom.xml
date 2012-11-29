@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-11-28T23:32:06+08:00</updated>
+  <updated>2012-11-29T22:32:22+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Phewtick API - Message to any user you want]]></title>
+    <link href="http://samwize.com/2012/11/29/phewtick-api-message-to-any-user/"/>
+    <updated>2012-11-29T22:18:00+08:00</updated>
+    <id>http://samwize.com/2012/11/29/phewtick-api-message-to-any-user</id>
+    <content type="html"><![CDATA[<p>I wrote a <a href="https://github.com/samwize/phewtick-hack">Phewtick Hack</a> a few days ago.</p>
+
+<p><img src="http://www.phewtick.com/img/home_main.png" title="Phewtick" ></p>
+
+<p>It started out as a hack via their RESTful API to automatically scan QR code and get Phewtick points ($$$).</p>
+
+<p>Today, Phewtick released a new <a href="https://itunes.apple.com/sg/app/phewtick/id487158487?mt=8">version 3.2.0</a>, which includes 2 new features: timeline and messaging.</p>
+
+<p>I took a look at their API (again)..</p>
+
+<!-- more -->
+
+
+<p>Shockingly,</p>
+
+<ul>
+<li><p>The timeline shows not only the friends I met with, but also the friends that my friends met with!</p></li>
+<li><p>The messaging API allows me to send to anyone!</p></li>
+</ul>
+
+
+<p>This <a href="https://github.com/samwize/phewtick-hack">python code</a> will allow you to spam Phewtick user id 123456.</p>
+
+<p><code>python
+from phew import *
+message(0, 123456, "Meow~")
+</code></p>
+
+<p>I could easily spam everyone in Phewtick with 2 lines of code.</p>
+
+<p>```python
+for id in range(0,1000000):</p>
+
+<pre><code>message(0, id, "Meow~")
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Python Unit Testing with nosetests]]></title>
@@ -241,26 +286,6 @@ def foo(self, value):
 
 <!-- http://stackoverflow.com/questions/6618002/python-property-versus-getters-and-setters -->
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Non-ASCII Character in Python File]]></title>
-    <link href="http://samwize.com/2012/09/18/non-ascii-character-in-python-file/"/>
-    <updated>2012-09-18T18:00:00+08:00</updated>
-    <id>http://samwize.com/2012/09/18/non-ascii-character-in-python-file</id>
-    <content type="html"><![CDATA[<p>If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error:</p>
-
-<pre><code>Python Error: Non-ASCII character in file but no encoding declared
-</code></pre>
-
-<p>Python by default does not allow Non-ASCII characters in the file. You have to insert the following at the top of the Python file.</p>
-
-<pre><code>#!/usr/bin/env python
-# -*- coding: utf8 -*- 
-</code></pre>
-
-<p>This works on a <a href="http://www.python.org/dev/peps/pep-0263/">per file basis</a>.</p>
 ]]></content>
   </entry>
   
