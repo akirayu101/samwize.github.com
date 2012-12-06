@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-11-29T22:32:22+08:00</updated>
+  <updated>2012-12-06T22:04:49+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[7 iOS Custom Popup Views]]></title>
+    <link href="http://samwize.com/2012/12/06/7-ios-custom-popup-views/"/>
+    <updated>2012-12-06T21:38:00+08:00</updated>
+    <id>http://samwize.com/2012/12/06/7-ios-custom-popup-views</id>
+    <content type="html"><![CDATA[<p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
+
+<p>Nonetheless, others are good depending on your use.</p>
+
+<p>Here are 7 custom popup views for iOS:</p>
+
+<!-- more -->
+
+
+<h2>UAModalPanel: Simple dismissiable popup</h2>
+
+<p><a href="https://github.com/coneybeare/UAModalPanel">https://github.com/coneybeare/UAModalPanel</a></p>
+
+<p><img src="https://github.com/coneybeare/UAModalPanel/raw/master/_README_ASSETS/UAModalPanel.jpg"></p>
+
+<h2>RNBlurModalView: With a blurred background</h2>
+
+<p><a href="https://github.com/rnystrom/RNBlurModalView">https://github.com/rnystrom/RNBlurModalView</a></p>
+
+<p><img src="https://github.com/rnystrom/RNBlurModalView/raw/master/images/image.jpg"></p>
+
+<h2>ALPopupView: Facebook-like popup</h2>
+
+<p><a href="http://www.mobilebricks.com/ios/alpopupview">http://www.mobilebricks.com/ios/alpopupview</a> ($19)</p>
+
+<p><img src="http://iosmix.com/sites/default/files/styles/default/public/full_1185_0.png"></p>
+
+<h2>FPPopover: iPad-like popovers for iPhone</h2>
+
+<p><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/</a></p>
+
+<p><img src="http://www.50pixels.com/blog/wp-content/uploads/2012/05/framedscreenshot11.png"></p>
+
+<h2>WEPopover: Another iPad-like popover</h2>
+
+<p><a href="https://github.com/PaulSolt/WEPopover">https://github.com/PaulSolt/WEPopover</a></p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/1f240a003f5d854c5400f9001ca9b35084185281/687474703a2f2f7061756c736f6c742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031312f30342f6950686f6e652e6a7067"></p>
+
+<h2>CMPopTipView: Bubble Tooltip</h2>
+
+<p><a href="https://github.com/chrismiles/CMPopTipView">https://github.com/chrismiles/CMPopTipView</a></p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/d953577314aafa7c65d1eb3b15f7fd73c9946d1e/687474703a2f2f6661726d352e7374617469632e666c69636b722e636f6d2f343030352f353139313634313033305f326239336134613535392e6a7067"></p>
+
+<h2>Android-like Toast</h2>
+
+<p><a href="https://github.com/scalessec/Toast">https://github.com/scalessec/Toast</a></p>
+
+<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn't update.</p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/3b536e7781bd1d4bc3c409dd460ef6a10d99e3ce/687474703a2f2f692e696d6775722e636f6d2f6f4d32386c2e706e67"></p>
+
+<h2>Cocoacontrols - for more popups!</h2>
+
+<p><a href="http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup">http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
@@ -327,30 +391,6 @@ reason: 'Could not load NIB in bundle: 'NSBundle
 <p>Because of that, MoPub often serve the same ad. I seldom see Admob/Adsense ads. I rather have variety in my inventory.</p>
 
 <p>To play safe, I do a 50-50 split.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[My Custom Localization and genstrings]]></title>
-    <link href="http://samwize.com/2012/11/06/my-custom-localization-and-genstrings/"/>
-    <updated>2012-11-06T21:49:00+08:00</updated>
-    <id>http://samwize.com/2012/11/06/my-custom-localization-and-genstrings</id>
-    <content type="html"><![CDATA[<p>This post is about some custom stuff I did for <a href="https://developer.apple.com/library/ios/#documentation/MacOSX/Conceptual/BPInternational/Articles/ChoosingLocalizations.html">localization</a>.</p>
-
-<p>It does not cover the <a href="http://www.raywenderlich.com/2876/how-to-localize-an-iphone-app-tutorial">basic</a> of how you localized an app, nor how to use the Apple provided <a href="http://spritebandits.wordpress.com/2012/01/25/ios-iphone-app-localization-genstrings-tips/">genstrings</a> tool.</p>
-
-<!-- more -->
-
-
-<p>I have some particular bad vibes with using <code>NSLocalizedString</code>. I hate it being 17 characters long, and the REQUIRED comment parameter that you MUST pass in, which usually is just <code>nil</code> for me.</p>
-
-<p>And so I have my own Macro called <code>Localized</code>.</p>
-
-<p>Which I improved to read from other table strings, and has an awesome recursive replacement.</p>
-
-<p>By doing that, I lose the use of <code>genstrings</code>, as it no longer uses <code>NSLocalizedString</code>. Unfortunately <code>genstrings</code> is closed source. But fortunately, some <a href="https://github.com/dunkelstern/Cocoa-Localisation-Helper">python helper</a> is around.</p>
-
-<p>And the result is at <a href="https://github.com/samwize/localized">https://github.com/samwize/localized</a>.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I introduced mitmproxy for sniffing iPhone HTTP traffic back at just2us.com. mitmproxy is awesome, except that it isn&#8217;t very user friendly, as &hellip;">
+  <meta name="description" content="If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error: Python Error: Non-ASCII character &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/09/18/non-ascii-character-in-python-file/">Non-ASCII Character in Python File</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-18T18:00:00+08:00" pubdate data-updated="true">Sep 18<span>th</span>, 2012</time>
+        
+         | <a href="/2012/09/18/non-ascii-character-in-python-file/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you have non-ASCII characters eg. chinese in your python source code, you would encounter the following error:</p>
+
+<pre><code>Python Error: Non-ASCII character in file but no encoding declared
+</code></pre>
+
+<p>Python by default does not allow Non-ASCII characters in the file. You have to insert the following at the top of the Python file.</p>
+
+<pre><code>#!/usr/bin/env python
+# -*- coding: utf8 -*- 
+</code></pre>
+
+<p>This works on a <a href="http://www.python.org/dev/peps/pep-0263/">per file basis</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -376,6 +425,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/12/06/7-ios-custom-popup-views/">7 iOS Custom Popup Views</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/11/29/phewtick-api-message-to-any-user/">Phewtick API - Message to any user you want</a>
       </li>
     
@@ -389,10 +442,6 @@
     
       <li class="post">
         <a href="/2012/11/25/create-async-test-with-ghunit/">Create Async Test with GHUnit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/11/23/app-engine-unused-discounted-instance-hour/">App Engine Unused Discounted Instance Hour</a>
       </li>
     
   </ul>

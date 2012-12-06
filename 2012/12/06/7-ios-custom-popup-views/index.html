@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>GAE or Dotcloud? - Junda Ong</title>
+  <title>7 iOS Custom Popup Views - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I have been thinking which to use. I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And &hellip;">
+  <meta name="description" content="I was researching on popup/modal views to use, and finally decided on RNBlurModalView, which has a nicer blurred background effect. Nonetheless, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/11/21/gae-or-dotcloud/">
+  <link rel="canonical" href="http://samwize.com/2012/12/06/7-ios-custom-popup-views/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">GAE or Dotcloud?</h1>
+      <h1 class="entry-title">7 iOS Custom Popup Views</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-11-21T00:02:00+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+<time datetime="2012-12-06T21:38:00+08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,44 +107,62 @@
   </header>
 
 
-<div class="entry-content"><p>I have been thinking which to use.</p>
+<div class="entry-content"><p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
 
-<p>I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And paying them ever since they started charging.</p>
+<p>Nonetheless, others are good depending on your use.</p>
 
-<p>I tried a few apps on Dotcloud, but never yet deployed any on production.</p>
+<p>Here are 7 custom popup views for iOS:</p>
 
 <!-- more -->
 
 
-<p>Here&#8217;s what I think of them.</p>
+<h2>UAModalPanel: Simple dismissiable popup</h2>
 
-<h2>GAE</h2>
+<p><a href="https://github.com/coneybeare/UAModalPanel">https://github.com/coneybeare/UAModalPanel</a></p>
 
-<pre><code>+ Reliable
-+ Great Docs
-+ Great Community
-+ On demand scaling
+<p><img src="https://github.com/coneybeare/UAModalPanel/raw/master/_README_ASSETS/UAModalPanel.jpg"></p>
 
-- Some restrictions
-- User Agent has GAE..
-</code></pre>
+<h2>RNBlurModalView: With a blurred background</h2>
 
-<h2>Dotcloud</h2>
+<p><a href="https://github.com/rnystrom/RNBlurModalView">https://github.com/rnystrom/RNBlurModalView</a></p>
 
-<pre><code>+ Shell access
-+ Can use pip install
-+ Can run worker processes
+<p><img src="https://github.com/rnystrom/RNBlurModalView/raw/master/images/image.jpg"></p>
 
-- Too much things to handle
-- Easily use up workers/services - Redis, MySQL, Python, ...
-- Higher startup cost
-</code></pre>
+<h2>ALPopupView: Facebook-like popup</h2>
 
-<h2>Conclusion</h2>
+<p><a href="http://www.mobilebricks.com/ios/alpopupview">http://www.mobilebricks.com/ios/alpopupview</a> ($19)</p>
 
-<p>As a one-man-show developer, my bet is on GAE.</p>
+<p><img src="http://iosmix.com/sites/default/files/styles/default/public/full_1185_0.png"></p>
 
-<p>Though it is less flexible, it will save time and money.</p>
+<h2>FPPopover: iPad-like popovers for iPhone</h2>
+
+<p><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/</a></p>
+
+<p><img src="http://www.50pixels.com/blog/wp-content/uploads/2012/05/framedscreenshot11.png"></p>
+
+<h2>WEPopover: Another iPad-like popover</h2>
+
+<p><a href="https://github.com/PaulSolt/WEPopover">https://github.com/PaulSolt/WEPopover</a></p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/1f240a003f5d854c5400f9001ca9b35084185281/687474703a2f2f7061756c736f6c742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031312f30342f6950686f6e652e6a7067"></p>
+
+<h2>CMPopTipView: Bubble Tooltip</h2>
+
+<p><a href="https://github.com/chrismiles/CMPopTipView">https://github.com/chrismiles/CMPopTipView</a></p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/d953577314aafa7c65d1eb3b15f7fd73c9946d1e/687474703a2f2f6661726d352e7374617469632e666c69636b722e636f6d2f343030352f353139313634313033305f326239336134613535392e6a7067"></p>
+
+<h2>Android-like Toast</h2>
+
+<p><a href="https://github.com/scalessec/Toast">https://github.com/scalessec/Toast</a></p>
+
+<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn&#8217;t update.</p>
+
+<p><img src="https://a248.e.akamai.net/camo.github.com/3b536e7781bd1d4bc3c409dd460ef6a10d99e3ce/687474703a2f2f692e696d6775722e636f6d2f6f4d32386c2e706e67"></p>
+
+<h2>Cocoacontrols - for more popups!</h2>
+
+<p><a href="http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup">http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup</a></p>
 </div>
 
 
@@ -167,12 +185,12 @@
   
 
 
-<time datetime="2012-11-21T00:02:00+08:00" pubdate data-updated="true">Nov 21<span>st</span>, 2012</time>
+<time datetime="2012-12-06T21:38:00+08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cloud/'>Cloud</a>
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
   
 </span>
 
@@ -181,7 +199,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/11/21/gae-or-dotcloud/" data-via="samwize" data-counturl="http://samwize.com/2012/11/21/gae-or-dotcloud/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/12/06/7-ios-custom-popup-views/" data-via="samwize" data-counturl="http://samwize.com/2012/12/06/7-ios-custom-popup-views/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -194,10 +212,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/" title="Previous Post: iOS Adhoc Distribution with the new Xcode">&laquo; iOS Adhoc Distribution with the new Xcode</a>
+        <a class="basic-alignment left" href="/2012/11/29/phewtick-api-message-to-any-user/" title="Previous Post: Phewtick API - Message to any user you want">&laquo; Phewtick API - Message to any user you want</a>
       
-      
-        <a class="basic-alignment right" href="/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/" title="Next Post: WARNING: Do not use Base Internationalization in iOS 5">WARNING: Do not use Base Internationalization in iOS 5 &raquo;</a>
       
     </p>
   </footer>
@@ -276,8 +292,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/11/21/gae-or-dotcloud/';
-        var disqus_url = 'http://samwize.com/2012/11/21/gae-or-dotcloud/';
+        var disqus_identifier = 'http://samwize.com/2012/12/06/7-ios-custom-popup-views/';
+        var disqus_url = 'http://samwize.com/2012/12/06/7-ios-custom-popup-views/';
         var disqus_script = 'embed.js';
       
     (function () {
