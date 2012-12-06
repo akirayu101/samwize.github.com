@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-12-06T22:04:49+08:00</updated>
+  <updated>2012-12-06T22:31:03+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -27,47 +27,37 @@
 <!-- more -->
 
 
-<h2>UAModalPanel: Simple dismissiable popup</h2>
-
-<p><a href="https://github.com/coneybeare/UAModalPanel">https://github.com/coneybeare/UAModalPanel</a></p>
+<h2><a href="https://github.com/coneybeare/UAModalPanel">UAModalPanel: Simple dismissiable popup</a></h2>
 
 <p><img src="https://github.com/coneybeare/UAModalPanel/raw/master/_README_ASSETS/UAModalPanel.jpg"></p>
 
-<h2>RNBlurModalView: With a blurred background</h2>
-
-<p><a href="https://github.com/rnystrom/RNBlurModalView">https://github.com/rnystrom/RNBlurModalView</a></p>
+<h2><a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView: With a blurred background</a></h2>
 
 <p><img src="https://github.com/rnystrom/RNBlurModalView/raw/master/images/image.jpg"></p>
 
-<h2>ALPopupView: Facebook-like popup</h2>
+<h2><a href="https://github.com/martinjuhasz/MJPopupViewController">MJPopupViewController: With different transition effects</a></h2>
 
-<p><a href="http://www.mobilebricks.com/ios/alpopupview">http://www.mobilebricks.com/ios/alpopupview</a> ($19)</p>
+<p><img src="https://raw.github.com/martinjuhasz/MJPopupViewController/master/assets/demo2.png"></p>
+
+<h2><a href="http://www.mobilebricks.com/ios/alpopupview">ALPopupView: Facebook-like popup</a> ($19)</h2>
 
 <p><img src="http://iosmix.com/sites/default/files/styles/default/public/full_1185_0.png"></p>
 
-<h2>FPPopover: iPad-like popovers for iPhone</h2>
-
-<p><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/</a></p>
+<h2><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">FPPopover: iPad-like popovers for iPhone</a></h2>
 
 <p><img src="http://www.50pixels.com/blog/wp-content/uploads/2012/05/framedscreenshot11.png"></p>
 
-<h2>WEPopover: Another iPad-like popover</h2>
-
-<p><a href="https://github.com/PaulSolt/WEPopover">https://github.com/PaulSolt/WEPopover</a></p>
+<h2><a href="https://github.com/PaulSolt/WEPopover">WEPopover: Another iPad-like popover</a></h2>
 
 <p><img src="https://a248.e.akamai.net/camo.github.com/1f240a003f5d854c5400f9001ca9b35084185281/687474703a2f2f7061756c736f6c742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031312f30342f6950686f6e652e6a7067"></p>
 
-<h2>CMPopTipView: Bubble Tooltip</h2>
-
-<p><a href="https://github.com/chrismiles/CMPopTipView">https://github.com/chrismiles/CMPopTipView</a></p>
+<h2><a href="https://github.com/chrismiles/CMPopTipView">CMPopTipView: Bubble Tooltip</a></h2>
 
 <p><img src="https://a248.e.akamai.net/camo.github.com/d953577314aafa7c65d1eb3b15f7fd73c9946d1e/687474703a2f2f6661726d352e7374617469632e666c69636b722e636f6d2f343030352f353139313634313033305f326239336134613535392e6a7067"></p>
 
-<h2>Android-like Toast</h2>
+<h2><a href="https://github.com/scalessec/Toast">Android-like Toast</a></h2>
 
-<p><a href="https://github.com/scalessec/Toast">https://github.com/scalessec/Toast</a></p>
-
-<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn&#8217;t update.</p>
+<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn&#8217;t update..</p>
 
 <p><img src="https://a248.e.akamai.net/camo.github.com/3b536e7781bd1d4bc3c409dd460ef6a10d99e3ce/687474703a2f2f692e696d6775722e636f6d2f6f4d32386c2e706e67"></p>
 
