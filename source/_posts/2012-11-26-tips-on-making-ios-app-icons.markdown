@@ -57,4 +57,11 @@ Open the following directory.
 
 	open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
 
+But there is also a [way](http://stackoverflow.com/a/1834558/242682) to programmatically set a round corner masking:
 
+```objc
+	imageView.layer.cornerRadius = 10.0;
+	imageView.layer.masksToBounds = YES;
+	imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+	imageView.layer.borderWidth = 1.0;
+```
