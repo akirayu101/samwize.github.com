@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-12-06T22:31:03+08:00</updated>
+  <updated>2012-12-07T23:59:59+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Enable NSZombie for Debugging Crashes]]></title>
+    <link href="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/"/>
+    <updated>2012-12-07T23:50:00+08:00</updated>
+    <id>http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes</id>
+    <content type="html"><![CDATA[<p>I posted a tip before on how you can <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">find the real cause of exception in Xcode</a>.</p>
+
+<p>There is another feature which you can enable to help in debugging.</p>
+
+<p><code>NSZombie</code> is an option that helps to trace overreleasing of objects.</p>
+
+<!-- more -->
+
+
+<p>Sometimes you might encounter exceptions <code>objc_msgSend</code>, which no matter how many times you Continue, an exception is thrown. That is a good sign get help from the zombie.</p>
+
+<p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
+
+<p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[7 iOS Custom Popup Views]]></title>
@@ -1337,82 +1359,6 @@ git push origin HEAD --force
 </code></pre>
 
 <p>Charset should be <code>utf-8</code>, not <code>null</code>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Good Strategy, Bad Strategy]]></title>
-    <link href="http://samwize.com/2012/10/24/good-strategy-bad-strategy/"/>
-    <updated>2012-10-24T22:02:00+08:00</updated>
-    <id>http://samwize.com/2012/10/24/good-strategy-bad-strategy</id>
-    <content type="html"><![CDATA[<p>This is a review of the book <a href="http://www.bookdepository.co.uk/Good-Strategybad-Strategy-Richard-Rumelt/9781846684814?a_aid=Just2me">Good Strategy, Bad Strategy</a>.</p>
-
-<p>The first 20% of the book is still okay. But I could not read beyond that, as it is long winded, and used too many examples from US Military strategies.</p>
-
-<p>Nonetheless, here&#8217;s what I learnt:</p>
-
-<!-- more -->
-
-
-<h3>The Problem</h3>
-
-<p>Definition of Strategy - We don&#8217;t really understand it.</p>
-
-<p>Confused, and &#8220;strategy&#8221; became a verbal tic. eg. IT Strategy, Low-price Strategy, &#8230;</p>
-
-<p>A word that can mean anything has lost its bite.</p>
-
-<p>We need a redefintion. A real understanding of Strategy.</p>
-
-<h3>Core of strategy work</h3>
-
-<p>= Discover critical factor in a situation + Design a way of coordinating and focusing actions
-= Recognise Challenges + Approach to overcome them</p>
-
-<p>A <strong>leader&#8217;s most important responsibility</strong> is working on strategy.</p>
-
-<p>Mastering the shift from others defining your goals, to being the architect of the organisation purposes and objectives.</p>
-
-<h3>A good strategy</h3>
-
-<ul>
-<li><p>Selects the path, identifying the how, why and where leadership and determination are to be applied</p></li>
-<li><p>Say &#8220;NO&#8221; to wide variety of actions and interests</p></li>
-<li><p>It&#8217;s as much as what an organisation does not do, as what it does</p></li>
-</ul>
-
-
-<p>Why so much bad strategy?</p>
-
-<p>Strategy involves focus, and choice; Most people have unwillness or inability to choose</p>
-
-<h3>Kernel</h3>
-
-<p>A logical structure:</p>
-
-<p>1) Diagnosis - Simplify and identify the critical</p>
-
-<p>2) Guiding policy - Overall approach</p>
-
-<p>3) Coherent actions - Steps that work together</p>
-
-<p>Example (Apple by Steve Jobs in 1998):</p>
-
-<blockquote><p>Challenge: Product lineup was too complicated. Too many price points and too much markup.</p>
-
-<p>Action: Cut all except 1 laptop, Cut distributors, Cut development</p></blockquote>
-
-<p>When PC is dominated by Microsoft, Apple Strategy is &#8220;to wait for the next big thing&#8221;</p>
-
-<p>Apple eventually released the iPhone</p>
-
-<h3>What I didn&#8217;t read..</h3>
-
-<p>After finished Part I, I merely browsed Part II and III..</p>
-
-<p>Part II - Sources of Power - I don&#8217;t read. Not necessary. Using leverage, advantage, dynamics, focus, growth, etc..</p>
-
-<p>Part III - Not sure what&#8217;s the conclusion</p>
 ]]></content>
   </entry>
   

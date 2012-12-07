@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iOS Guide to Multiple Device Resolutions - Junda Ong</title>
+  <title>Enable NSZombie for Debugging Crashes - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="With every iOS updates and new release of devices from Apple, there are more things developers have to do. In order to support these new devices, you &hellip;">
+  <meta name="description" content="I posted a tip before on how you can find the real cause of exception in Xcode. There is another feature which you can enable to help in debugging. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">
+  <link rel="canonical" href="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">iOS Guide to Multiple Device Resolutions</h1>
+      <h1 class="entry-title">Enable NSZombie for Debugging Crashes</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-29T23:23:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2012-12-07T23:50:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,97 +107,20 @@
   </header>
 
 
-<div class="entry-content"><p>With every iOS updates and new release of devices from Apple, there are more things developers have to do.</p>
+<div class="entry-content"><p>I posted a tip before on how you can <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">find the real cause of exception in Xcode</a>.</p>
 
-<p>In order to support these new devices, you first need to understand these devices.</p>
+<p>There is another feature which you can enable to help in debugging.</p>
+
+<p><code>NSZombie</code> is an option that helps to trace overreleasing of objects.</p>
 
 <!-- more -->
 
 
-<h2>Device Resolutions</h2>
+<p>Sometimes you might encounter exceptions <code>objc_msgSend</code>, which no matter how many times you Continue, an exception is thrown. That is a good sign get help from the zombie.</p>
 
-<p>Apple provides a <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">table matrix</a> on the App Icons, Screen size, and tool bar icon sizes for the various devices.</p>
+<p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th>             </th>
-<th> iPhone 5        </th>
-<th> iPhone (Retina)   </th>
-<th> iPhone        </th>
-<th> iPad (Retina) </th>
-<th> iPad          </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> App Icon    </td>
-<td> 114 x 114       </td>
-<td> 114 x 114         </td>
-<td> 57 x 57       </td>
-<td> 144 x 144     </td>
-<td> 72 x 72       </td>
-</tr>
-<tr>
-<td></td>
-<td> Default.png </td>
-<td> 640 x 1136      </td>
-<td> 640 x 960         </td>
-<td> 320 x 480     </td>
-<td> 1536 x 2008   </td>
-<td> 768 x 1004    </td>
-</tr>
-<tr>
-<td></td>
-<td> Toolbar icon</td>
-<td> 40 x 40         </td>
-<td> 40 x 40           </td>
-<td> 20 x 20       </td>
-<td> 40 x 40       </td>
-<td> 20 x 20       </td>
-</tr>
-</tbody>
-</table>
-
-
-<h2>Image Resource File</h2>
-
-<p>Apple introduced an easy way to load <a href="http://developer.apple.com/library/ios/#documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15">images</a> automatically for the devices.</p>
-
-<p>The rule goes like this:</p>
-
-<ul>
-<li><p>Standard: <code>&lt;ImageName&gt;&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
-<li><p>High resolution: <code>&lt;ImageName&gt;@2x&lt;device_modifier&gt;.&lt;filename_extension&gt;</code></p></li>
-</ul>
-
-
-<p>For <a href="http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/LoadingResources/ImageSoundResources/ImageSoundResources.html#//apple_ref/doc/uid/10000051i-CH7-SW1">example</a>,</p>
-
-<ul>
-<li>MyImage.png - Default version of an image resource.</li>
-<li>MyImage@2x.png - High-resolution version of an image resource for devices with Retina displays.</li>
-<li>MyImage~iphone.png - Version of an image for iPhone and iPod touch.</li>
-<li>MyImage@2x~iphone.png - High-resolution version of an image for iPhone and iPod touch devices with Retina displays.</li>
-<li>MyImage~ipad.png - Version of an image for iPad</li>
-<li>MyImage@2x~ipad.png - High-resolution version of an image for iPad with Retina displays.</li>
-</ul>
-
-
-<p>With that knowledge, you could load a UIImage</p>
-
-<pre><code>UIImage *anImage = [UIImage imageNamed:@"MyImage"];
-</code></pre>
-
-<p>and the appropriate resource file will be loaded.</p>
-
-<h2>iPhone 5 - taller screen</h2>
-
-<p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
-
-<p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
+<p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
 </div>
 
 
@@ -220,7 +143,7 @@
   
 
 
-<time datetime="2012-10-29T23:23:00+08:00" pubdate data-updated="true">Oct 29<span>th</span>, 2012</time>
+<time datetime="2012-12-07T23:50:00+08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -234,7 +157,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/" data-via="samwize" data-counturl="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/" data-via="samwize" data-counturl="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -247,10 +170,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" title="Previous Post: Wifi Scanner for Mac OSX (Mountain Lion)">&laquo; Wifi Scanner for Mac OSX (Mountain Lion)</a>
+        <a class="basic-alignment left" href="/2012/12/06/7-ios-custom-popup-views/" title="Previous Post: 7 iOS Custom Popup Views">&laquo; 7 iOS Custom Popup Views</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/30/common-git-usage/" title="Next Post: Common Git Usage">Common Git Usage &raquo;</a>
       
     </p>
   </footer>
@@ -329,8 +250,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/';
-        var disqus_url = 'http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/';
+        var disqus_identifier = 'http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/';
+        var disqus_url = 'http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/';
         var disqus_script = 'embed.js';
       
     (function () {
