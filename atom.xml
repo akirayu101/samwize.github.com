@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-12-15T22:41:56+08:00</updated>
+  <updated>2013-01-11T23:34:45+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Devices Cheat Sheet]]></title>
+    <link href="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/"/>
+    <updated>2013-01-11T23:21:00+08:00</updated>
+    <id>http://samwize.com/2013/01/11/ios-devices-cheat-sheet</id>
+    <content type="html"><![CDATA[<p>Not long ago, I posted about <a href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">a guide to iOS multiple devices resolutions</a>.</p>
+
+<p>There is a similar, but more complete <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a> from Ivo.</p>
+
+<p>Here is 1 of the table:</p>
+
+<p><img class="center" src="http://samwize.com/images/ios-device-resolutions.png"></p>
+
+<p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Enable NSZombie for Debugging Crashes]]></title>
@@ -1262,111 +1279,6 @@ git push origin HEAD --force
 <p>That&#8217;s it. You got to see the details of wifi nearby.</p>
 
 <p>PS: I was looking for a uncongested, clear channel to use.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Simple GET/POST AFNetworking]]></title>
-    <link href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/"/>
-    <updated>2012-10-25T00:32:00+08:00</updated>
-    <id>http://samwize.com/2012/10/25/simple-get-post-afnetworking</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> is the choice for iOS/Mac developers when it comes to choosing a HTTP library.</p>
-
-<p><a href="http://allseeing-i.com/ASIHTTPRequest/">ASIHTTPRequest</a> used to be the choice, until 2011 when it became inactive.</p>
-
-<p>I am one of the many who is forced to switch camp.</p>
-
-<!-- more -->
-
-
-<p>In many ways, it seems AFNetworking would be better. It uses blocks!</p>
-
-<p>However, I find the documentation lacking. It has an <a href="https://github.com/AFNetworking/AFNetworking">overview</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking">getting started</a>, <a href="https://github.com/AFNetworking/AFNetworking/wiki/Introduction-to-AFNetworking">introduction</a>, <a href="http://afnetworking.github.com/AFNetworking/">complete reference</a>, &#8230; But yet, it didn&#8217;t provide example on how you make a simple HTTP GET or POST.</p>
-
-<p>Here is how you do it:</p>
-
-<h2>GET</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBaseURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://samwize.com/&quot;</span><span class="p">]];</span>
-</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;GET&quot;</span>
-</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pigs/&quot;</span>
-</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithRequest:</span><span class="n">request</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">registerHTTPOperationClass:</span><span class="p">[</span><span class="n">AFHTTPRequestOperation</span> <span class="n">class</span><span class="p">]];</span>
-</span><span class='line'><span class="p">[</span><span class="n">operation</span> <span class="nl">setCompletionBlockWithSuccess:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="kt">id</span> <span class="n">responseObject</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Print the response body in text</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Response: %@&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="n">NSString</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithData:</span><span class="n">responseObject</span> <span class="nl">encoding:</span><span class="n">NSUTF8StringEncoding</span><span class="p">]);</span>
-</span><span class='line'><span class="p">}</span> <span class="nl">failure:</span><span class="o">^</span><span class="p">(</span><span class="n">AFHTTPRequestOperation</span> <span class="o">*</span><span class="n">operation</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;Error: %@&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
-</span><span class='line'><span class="p">}];</span>
-</span><span class='line'><span class="p">[</span><span class="n">operation</span> <span class="n">start</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>POST</h2>
-
-<p>POST a urlencoded form <code>name=piggy</code> in the http body.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">AFHTTPClient</span> <span class="o">*</span><span class="n">httpClient</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AFHTTPClient</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithBaseURL:</span><span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="s">@&quot;http://samwize.com/&quot;</span><span class="p">]];</span>
-</span><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFFormURLParameterEncoding</span><span class="p">];</span>
-</span><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">requestWithMethod:</span><span class="s">@&quot;POST&quot;</span>
-</span><span class='line'>                                                        <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/&quot;</span>
-</span><span class='line'>                                                  <span class="nl">parameters:</span><span class="err">@</span><span class="p">{</span><span class="s">@&quot;name&quot;</span><span class="o">:</span><span class="s">@&quot;piggy&quot;</span><span class="p">}];</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// Similar to GET code ...</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you want to POST a json such as <code>{"name":"piggy"}</code>, you change the encoding:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">httpClient</span> <span class="nl">setParameterEncoding:</span><span class="n">AFJSONParameterEncoding</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you want to do a multi-part POST of an image, you do this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">request</span> <span class="o">=</span> <span class="p">[</span><span class="n">httpClient</span> <span class="nl">multipartFormRequestWithMethod:</span><span class="s">@&quot;POST&quot;</span> <span class="nl">path:</span><span class="s">@&quot;http://samwize.com/api/pig/photo&quot;</span> <span class="nl">parameters:</span><span class="nb">nil</span> <span class="nl">constructingBodyWithBlock:</span> <span class="o">^</span><span class="p">(</span><span class="kt">id</span> <span class="o">&lt;</span><span class="n">AFMultipartFormData</span><span class="o">&gt;</span><span class="n">formData</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">formData</span> <span class="nl">appendPartWithFileData:</span><span class="n">imageData</span> <span class="nl">name:</span><span class="s">@&quot;avatar&quot;</span> <span class="nl">fileName:</span><span class="s">@&quot;avatar.jpg&quot;</span> <span class="nl">mimeType:</span><span class="s">@&quot;image/jpeg&quot;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}];</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This simple guide has been helped by <a href="http://stackoverflow.com/questions/9927945/afnetworking-post-to-rest-webservice">this</a>, <a href="http://stackoverflow.com/questions/9275333/afnetworking-post-request-with-application-x-www-form-urlencoded">this</a> and <a href="http://stackoverflow.com/questions/8468065/is-there-an-example-of-afhttpclient-posting-json-with-afnetworking">this</a>.</p>
-
-<h2>Pitfalls</h2>
-
-<p>Do not use <code>[[AFHTTPClient alloc] init]</code>, as that does not initialize a lot of stuff. Use <code>initWithBaseURL</code> instead.</p>
-
-<p>For instance, if in the above example (POST JSON) you had used init, the Content-Type will be</p>
-
-<pre><code>application/json; charset=(null) 
-</code></pre>
-
-<p>Charset should be <code>utf-8</code>, not <code>null</code>.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2012-12-15T22:41:56+08:00</updated>
+  <updated>2013-01-11T23:34:45+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Devices Cheat Sheet]]></title>
+    <link href="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/"/>
+    <updated>2013-01-11T23:21:00+08:00</updated>
+    <id>http://samwize.com/2013/01/11/ios-devices-cheat-sheet</id>
+    <content type="html"><![CDATA[<p>Not long ago, I posted about <a href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">a guide to iOS multiple devices resolutions</a>.</p>
+
+<p>There is a similar, but more complete <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a> from Ivo.</p>
+
+<p>Here is 1 of the table:</p>
+
+<p><img class="center" src="/images/ios-device-resolutions.png"></p>
+
+<p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Enable NSZombie for Debugging Crashes]]></title>
@@ -230,74 +247,6 @@ reason: 'Could not load NIB in bundle: 'NSBundle
 <li><p>Many users stick with iOS 5 because of Map app. Perhaps they will upgrade in ~2014 as Apple continues to improve.</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
-    <link href="http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
-    <updated>2012-11-14T22:00:00+08:00</updated>
-    <id>http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
-    <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
-
-<p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
-
-<p><strong>Adhoc distribution</strong> is the most complicated (the other 2 ways are very straight forward). Over the years, the process has also changed.</p>
-
-<p>This post is for development with Xcode 4.5.</p>
-
-<!-- more -->
-
-
-<h2>In the past</h2>
-
-<p>In the early days (year 2008), the guide to Adhoc distribution was to create a new build configuration called "Adhoc", in addition to "Debug" and "Release".</p>
-
-<p>I know why it is necessary back then, but that is not necessary now. But some posts still <a href="http://diaryofacodemonkey.ruprect.com/2011/03/18/ad-hoc-app-distribution-with-xcode-4/">insisted</a> that.</p>
-
-<h2>The new way</h2>
-
-<p>With Xcode 4.5 (or perhaps earlier), Project Schemes is introduced. It provides more ways you can configure how you "Build", "Run", "Test", "Analyse" and "Archive". You can change the build configuration to "Debug" or "Release" as you wanted.</p>
-
-<p>You don't need to touch them.</p>
-
-<p>To distribute Adhoc way, you only need to "Archive".</p>
-
-<p>Then in Organizer, click on the "Distribute" button, and select "Save for Enterprise or Ad-Hoc Deployment".</p>
-
-<p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
-
-<p><img src="/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
-
-<p>Save the <code>App.ipa</code>.</p>
-
-<p>To install, drag to iTunes and sync. That's it!</p>
-
-<h2>Push Notification</h2>
-
-<p>Things get slightly more complicated if you are using Apple Push Notifications.</p>
-
-<p>To use push, there are 2 more certs needed for your server to communicate with Apple. One is <code>aps-development</code>, the other is <code>aps-production</code>.</p>
-
-<p>You use <code>aps-development</code> for running on device using "Debug" build configuration.</p>
-
-<p>You use <code>aps-production</code> for both Adhoc and App Store distribution.</p>
-
-<p>Not the other way round. Adhoc distributed apps will NOT get push when you use <code>aps-development</code>.</p>
-
-<p>Why?</p>
-
-<blockquote><p>Because Adhoc distributed apps will register device token to <strong>Apple production gateway</strong>, while your <code>aps-development</code> communicates with <strong>Apple sandbox gateway</strong>.</p></blockquote>
-
-<p>If you want Adhoc distributed apps to get push, you must send the push with <code>aps-production</code>. Adhoc is as good as production app, yet not on the App Store.</p>
-
-<h2>Conclusion</h2>
-
-<p>In the past, you need to create a new build configuration call "Adhoc". But that is no longer needed as you can select which cert to re-sign after archiving.</p>
-
-<p>I will not cover wireless distribution today (though you may refer to <a href="http://blog.just2us.com/2010/12/wireless-ad-hoc-distribution-for-iphone-apps/">this method using dropbox</a>).</p>
-
-<p>Or you could use <a href="https://testflightapp.com/">TestFlight</a> which is the best in distributing ad hoc builds - with versioning and beta users management!</p>
 ]]></content>
   </entry>
   
