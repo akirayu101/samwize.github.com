@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-01-11T23:34:45+08:00</updated>
+  <updated>2013-01-14T22:17:30+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[It takes 18 weeks to build a mobile app]]></title>
+    <link href="http://samwize.com/2013/01/14/it-takes-18-weeks-to-build-a-mobile-app/"/>
+    <updated>2013-01-14T23:36:00+08:00</updated>
+    <id>http://samwize.com/2013/01/14/it-takes-18-weeks-to-build-a-mobile-app</id>
+    <content type="html"><![CDATA[<p>This is a <a href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app">research</a> from surveying 100 mobile developers.</p>
+
+<p></p></p>
+
+<div style="width:600px;background-color:#fff;padding:10px 20px 20px;font:14px/21px HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, sans-serif;">
+<h3 style="color:#da5024;clear:both;">How long does it take to make a mobile app?</h3>
+<p><a href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app"><img alt="Kinvey Backend as a Service" src="http://www.kinvey.com/blog/images/2013/01/how-long-does-it-take-to-build-an-app-kinvey.jpg" width="600" /></a></p>
+<div style="width:100%;text-align:center;margin-top:5px;">From: <a style="text-decoration:none;color:#da5024;" href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app">Kinvey Backend as a Service</a></div>
+</div>
+
+
+<p>
+
+<p>Interesting to note is that 18 weeks =</p>
+<ul>
+<li>time to build 1.3 Boeing 777</li>
+<li>time to build 1/231 of Giza Pyramid</li>
+<li>time to take Apollo 11 to the moon</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Devices Cheat Sheet]]></title>
@@ -1246,39 +1274,6 @@ git push origin HEAD --force
 <p>Unfortunately, for the taller iPhone 5, it does not automatically load <code>MyImage@2x~iphone5.png</code>.</p>
 
 <p>You could use a <a href="http://stackoverflow.com/questions/5088945/use-2x-retina-images-for-ipad-in-universal-app-and-does-apple-prefer-native-ap">handy</a> UIImage category to load.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
-    <link href="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
-    <updated>2012-10-28T10:05:00+08:00</updated>
-    <id>http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
-    <content type="html"><![CDATA[<p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
-
-<p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn&#8217;t get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
-
-<p>Then I found a gem in Mountain Lion.</p>
-
-<!-- more -->
-
-
-<p>It turns out the Wi-Fi Diagnostics Tool (app) in Mountain Lion is updated with new features. It has added a wifi stumbler to discover the wifi nearbys (ssid, channel, protocols, etc).</p>
-
-<p>To do a Wifi scan,</p>
-
-<ol>
-<li><p>Go to terminal and <code>open open /System/Library/CoreServices/Wi-Fi\ Diagnostics.app/</code></p></li>
-<li><p>Go to <strong>File</strong> > <strong>Network Utilities</strong></p></li>
-<li><p>Press Scan</p></li>
-</ol>
-
-
-<p><img src="http://samwize.com/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
-
-<p>That&#8217;s it. You got to see the details of wifi nearby.</p>
-
-<p>PS: I was looking for a uncongested, clear channel to use.</p>
 ]]></content>
   </entry>
   
