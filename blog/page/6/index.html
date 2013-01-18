@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Unit Tests with CocoaPods - Junda Ong</title>
+  <title>Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="CocoaPods is a tool for managing dependecies for iOS and Mac OS X projects. Getting started with using CocoaPods is easy. The tricky part is getting &hellip;">
+  <meta name="description" content="I started just2us.com 3 years ago, using it as a avenue for me to share about my apps and development guides. Over the last 3 years, I have been &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/">
+  <link rel="canonical" href="http://samwize.com/blog/page/6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -77,12 +77,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">Unit Tests With CocoaPods</h1>
+      <h1 class="entry-title"><a href="/2012/09/10/switched-from-wordpress-to-octopress/">Switched Wordpress to Octopress</a></h1>
     
     
       <p class="meta">
@@ -98,98 +101,40 @@
   
 
 
-<time datetime="2012-10-01T23:41:00+08:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
+<time datetime="2012-09-10T00:29:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/2012/09/10/switched-from-wordpress-to-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://cocoapods.org/">CocoaPods</a> is a tool for managing dependecies for iOS and Mac OS X projects.</p>
+  <div class="entry-content"><p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
 
-<p><a href="http://cocoapods.org/">Getting started</a> with using CocoaPods is easy. The tricky part is getting used to opening Xcode workspace (eg. <code>App.xcworkspace</code>) instead of Xocde project. But that&#8217;s not what I want to covered in this post.</p>
+<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
 
-<p>One of the hurdle I encountered is getting unit testing to work after CocoaPods is setup.</p>
+<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
 
-<!-- more -->
-
-
-<p>Apparently, after you setup CocoaPods, it automatically configures your project&#8217;s main target to use the pods (dependecies). However, it does not configure the same for your unit tests target. So when you run your unit test, you will likely encounter errors like this:</p>
-
-<pre><code>SomeLibrary.h not found
-</code></pre>
-
-<p>To fix, go to <strong>Project</strong> > <strong>Info</strong> > <strong>Configurations</strong> > change <code>Based on Configuration File</code> to <code>Pods</code>. Like this:</p>
-
-<p><img class="center" src="/images/cocoapods-unit-test-configure.png"></p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/2012/09/10/switched-from-wordpress-to-octopress/">Continue reading &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2012-10-01T23:41:00+08:00" pubdate data-updated="true">Oct 1<span>st</span>, 2012</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/osx/'>OSX</a>, <a class='category' href='/blog/categories/testing/'>Testing</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/" data-via="samwize" data-counturl="http://samwize.com/2012/10/01/unit-tests-with-cocoapods/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="/blog/archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/2012/09/30/octopress-would-not-deploy/" title="Previous Post: Octopress would not deploy">&laquo; Octopress would not deploy</a>
-      
-      
-        <a class="basic-alignment right" href="/2012/10/02/app-store-changes-in-ios6/" title="Next Post: App Store Changes in iOS6">App Store Changes in iOS6 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -222,7 +167,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -239,7 +184,6 @@
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -254,10 +198,7 @@
       var disqus_shortname = 'just2us';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/10/01/unit-tests-with-cocoapods/';
-        var disqus_url = 'http://samwize.com/2012/10/01/unit-tests-with-cocoapods/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
