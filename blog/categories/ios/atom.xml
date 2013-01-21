@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-01-19T00:38:00+08:00</updated>
+  <updated>2013-01-22T00:11:20+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to replicate iOS Crash feedback from Apple]]></title>
+    <link href="http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/"/>
+    <updated>2013-01-22T00:00:00+08:00</updated>
+    <id>http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple</id>
+    <content type="html"><![CDATA[<p>If you submit an iOS app to Apple, and they get back to you with the unfortunate news that your app crashed.. you have to (of course) fix the bug and resubmit again.</p>
+
+<p>To help you, Apple engineers will</p>
+
+<ul>
+<li>explain how they did it,</li>
+<li>attach a screenshot, and</li>
+<li>attach a crashlog</li>
+</ul>
+
+
+<p>This is what you should do.</p>
+
+<!-- more -->
+
+
+<p>Open Xcode > Organizer > Devices > Library > Device Logs > select <strong>Import</strong> at the bottom to open the crashlog file. This will <a href="https://developer.apple.com/library/ios/#technotes/tn2008/tn2151.html">symobolicate</a> the crash report and let you know which line of code failed.</p>
+
+<p>If you still do not understand why, you could install the same IPA into your device.</p>
+
+<p>To do so, in Xcode > Organizer > Archives > Your app > Distribute > <a href="http://developer.apple.com/library/ios/#qa/qa1764/_index.html">Save for Enterprise or Ad-Hoc Deployment</a>, double click and sync with iTunes. Your device will now run the same copy that you submitted to Apple.</p>
+
+<p>Hopefully, you can then squash the bug.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Developer Tips 2013]]></title>
@@ -144,76 +175,6 @@
 <h2>Cocoacontrols - for more popups!</h2>
 
 <p><a href="http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup">http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tips on making iOS App Icons]]></title>
-    <link href="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/"/>
-    <updated>2012-11-26T23:42:00+08:00</updated>
-    <id>http://samwize.com/2012/11/26/tips-on-making-ios-app-icons</id>
-    <content type="html"><![CDATA[<p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
-
-<p>This post is to provide some of the tips in the making Apple's trademarked iPhone rounded icon.</p>
-
-<!-- more -->
-
-
-<h2>Understanding the resolutions</h2>
-
-<p>There is quite a number of different resolutions that is needed for 1 app.</p>
-
-<p>Refer to this <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">Apple document</a>.</p>
-
-<p>Note that every icon can be different in terms of how it looks. So in theory you can have a 57x57 that is totally different looking from your 512x512.</p>
-
-<h2>Icon Template</h2>
-
-<p>There are many template around. The most popular (now) is from <a href="http://appicontemplate.com/">http://appicontemplate.com/</a>.</p>
-
-<p>Using Photoshop smart objects, the template let you edit the biggest size, and it will automatically scale down to the smaller sizes, and export them automatically.</p>
-
-<h2>Rounded corner radius</h2>
-
-<p>If you are not using the template or need a specific resolution, it is important that you know the rounded corner radius for each of the icon reolution. This <a href="http://stackoverflow.com/a/10239376/242682">discussion</a> explained well.</p>
-
-<p>To summarize,</p>
-
-<blockquote><p>Rounded corner radius = icon length x 10/57</p></blockquote>
-
-<p>That is,</p>
-
-<ul>
-<li>Icon512.png - 512px - 89.825</li>
-<li>Icon.png - 57px - 10</li>
-<li>Icon@2x.png - 114px - 20</li>
-<li>Icon-72.png - 72px - 12.632</li>
-<li>Icon-72@2x.png - 144px - 25.263</li>
-<li>Icon-Small.png - 29px - 5.088</li>
-<li>Icon-Small@2x.png - 58px - 10.175</li>
-</ul>
-
-
-<h2>Mask</h2>
-
-<p>You can get a set of mask from within Xcode.</p>
-
-<p>Open the following directory.</p>
-
-<pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
-</code></pre>
-
-<p>But there is also a <a href="http://stackoverflow.com/a/1834558/242682">way</a> to programmatically set a round corner masking:</p>
-
-<p>```objc</p>
-
-<pre><code>imageView.layer.cornerRadius = 10.0;
-imageView.layer.masksToBounds = YES;
-imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-imageView.layer.borderWidth = 1.0;
-</code></pre>
-
-<p>```</p>
 ]]></content>
   </entry>
   

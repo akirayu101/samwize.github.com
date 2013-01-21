@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Design - Junda Ong</title>
+  <title>How to replicate iOS Crash feedback from Apple - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Category: Design">
+  <meta name="description" content="If you submit an iOS app to Apple, and they get back to you with the unfortunate news that your app crashed.. you have to (of course) fix the bug and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.comblog/categories/design/">
+  <link rel="canonical" href="http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,36 +78,119 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Design</h1>
+    
+      <h1 class="entry-title">How to Replicate iOS Crash Feedback From Apple</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T00:00:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>If you submit an iOS app to Apple, and they get back to you with the unfortunate news that your app crashed.. you have to (of course) fix the bug and resubmit again.</p>
 
-  
-  <h2>2012</h2>
+<p>To help you, Apple engineers will</p>
 
-<article>
-  
-<h1><a href="/2012/09/28/api-design-rules-for-ios-slash-os-x/">API Design Rules for iOS/OS X</a></h1>
-<time datetime="2012-09-28T21:43:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>28</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/design/'>Design</a>, <a class='category' href='/blog/categories/osx/'>OSX</a>, <a class='category' href='/blog/categories/ios/'>iOS</a></span>
-</footer>
+<ul>
+<li>explain how they did it,</li>
+<li>attach a screenshot, and</li>
+<li>attach a crashlog</li>
+</ul>
 
 
-</article>
+<p>This is what you should do.</p>
 
+<!-- more -->
+
+
+<p>Open Xcode > Organizer > Devices > Library > Device Logs > select <strong>Import</strong> at the bottom to open the crashlog file. This will <a href="https://developer.apple.com/library/ios/#technotes/tn2008/tn2151.html">symobolicate</a> the crash report and let you know which line of code failed.</p>
+
+<p>If you still do not understand why, you could install the same IPA into your device.</p>
+
+<p>To do so, in Xcode > Organizer > Archives > Your app > Distribute > <a href="http://developer.apple.com/library/ios/#qa/qa1764/_index.html">Save for Enterprise or Ad-Hoc Deployment</a>, double click and sync with iTunes. Your device will now run the same copy that you submitted to Apple.</p>
+
+<p>Hopefully, you can then squash the bug.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Junda</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-22T00:00:00+08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/" data-via="samwize" data-counturl="http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/01/18/ios-developer-tips-2013/" title="Previous Post: iOS Developer Tips 2013">&laquo; iOS Developer Tips 2013</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -175,7 +258,10 @@
       var disqus_shortname = 'just2us';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/';
+        var disqus_url = 'http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
