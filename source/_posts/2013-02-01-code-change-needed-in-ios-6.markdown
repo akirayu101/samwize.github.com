@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Code Change Needed in iOS 6"
-date: 2012-10-30 00:03
+date: 2013-02-01 00:03
 comments: true
 categories: iOS
-published: false
+published: true
 ---
 
 ## presentModalViewController ##
