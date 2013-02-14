@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Wifi Scanner for Mac OSX (Mountain Lion) - Junda Ong</title>
+  <title>Code Change Needed in iOS 6 - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Mountain Lion comes with a Wifi Scanner that is much better than you expected. I tried out KisMAC at first, but couldn&#8217;t get it working. I hate &hellip;">
+  <meta name="description" content="Some tips on your iOS code change needed for supporting iOS 6. presentModalViewController Starting from iOS 6, UIViewController deprecated this: - ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/">
+  <link rel="canonical" href="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Wifi Scanner for Mac OSX (Mountain Lion)</h1>
+      <h1 class="entry-title">Code Change Needed in iOS 6</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-28T10:05:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2012</time>
+<time datetime="2013-02-01T00:03:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,31 +107,50 @@
   </header>
 
 
-<div class="entry-content"><p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
-
-<p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn&#8217;t get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
-
-<p>Then I found a gem in Mountain Lion.</p>
+<div class="entry-content"><p>Some tips on your iOS code change needed for supporting iOS 6.</p>
 
 <!-- more -->
 
 
-<p>It turns out the Wi-Fi Diagnostics Tool (app) in Mountain Lion is updated with new features. It has added a wifi stumbler to discover the wifi nearbys (ssid, channel, protocols, etc).</p>
+<h2>presentModalViewController</h2>
 
-<p>To do a Wifi scan,</p>
+<p>Starting from iOS 6, <code>UIViewController</code> deprecated this:</p>
+
+<pre><code>- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
+</code></pre>
+
+<p>Starting from iOS 5, the replacement is:</p>
+
+<pre><code>- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
+</code></pre>
+
+<p>If you <em>really</em> need to support the older iOS 4 and below, and mix in the new replacement, you would need to <a href="http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated">check</a> using <code>respondsToSelector</code>.</p>
+
+<pre><code>if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
+    [self presentViewController:navController animated:YES completion:nil];
+else
+    [self presentModalViewController:navController animated:YES];
+</code></pre>
+
+<h2>For older xib</h2>
+
+<h3>Tab Bar not working</h3>
+
+<p>If after adding support for iOS6 and your UITabBar is not working anymore eg. does not respond to taps, it could be due to the xib from an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/a/12627117/242682">need</a> to set the <code>window</code> object of your main xib to <strong>Full Size at Launch</strong>.</p>
+
+<h3>Error: UIViewControllerHierarchyInconsistency</h3>
+
+<p>This is again due to an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/questions/12434937/uiviewcontrollerhierarchyinconsistency-when-trying-to-present-a-modal-view-contr/12450770#12450770">need</a> to do this:</p>
 
 <ol>
-<li><p>Go to terminal and <code>open open /System/Library/CoreServices/Wi-Fi\ Diagnostics.app/</code></p></li>
-<li><p>Go to <strong>File</strong> > <strong>Network Utilities</strong></p></li>
-<li><p>Press Scan</p></li>
+<li><p>Move main <strong>View</strong> out of <strong>View Controller</strong>:</p></li>
+<li><p>Delete <strong>View Controller</strong> from the XIB (it is not necessary since File&#8217;s Owner should be of its Class already)</p></li>
 </ol>
 
-
-<p><img src="/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
-
-<p>That&#8217;s it. You got to see the details of wifi nearby.</p>
-
-<p>PS: I was looking for a uncongested, clear channel to use.</p>
 </div>
 
 
@@ -154,12 +173,12 @@
   
 
 
-<time datetime="2012-10-28T10:05:00+08:00" pubdate data-updated="true">Oct 28<span>th</span>, 2012</time>
+<time datetime="2013-02-01T00:03:00+08:00" pubdate data-updated="true">Feb 1<span>st</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mac/'>Mac</a>
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
   
 </span>
 
@@ -168,7 +187,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" data-via="samwize" data-counturl="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/" data-via="samwize" data-counturl="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -181,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/25/simple-get-post-afnetworking/" title="Previous Post: Simple GET/POST AFNetworking">&laquo; Simple GET/POST AFNetworking</a>
+        <a class="basic-alignment left" href="/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/" title="Previous Post: How to replicate iOS Crash feedback from Apple">&laquo; How to replicate iOS Crash feedback from Apple</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/29/ios-guide-to-multiple-device-resolutions/" title="Next Post: iOS Guide to Multiple Device Resolutions">iOS Guide to Multiple Device Resolutions &raquo;</a>
       
     </p>
   </footer>
@@ -263,8 +280,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/';
-        var disqus_url = 'http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/';
+        var disqus_identifier = 'http://samwize.com/2013/02/01/code-change-needed-in-ios-6/';
+        var disqus_url = 'http://samwize.com/2013/02/01/code-change-needed-in-ios-6/';
         var disqus_script = 'embed.js';
       
     (function () {

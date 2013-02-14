@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-01-22T00:11:20+08:00</updated>
+  <updated>2013-02-14T23:28:29+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Code Change Needed in iOS 6]]></title>
+    <link href="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/"/>
+    <updated>2013-02-01T00:03:00+08:00</updated>
+    <id>http://samwize.com/2013/02/01/code-change-needed-in-ios-6</id>
+    <content type="html"><![CDATA[<p>Some tips on your iOS code change needed for supporting iOS 6.</p>
+
+<!-- more -->
+
+
+<h2>presentModalViewController</h2>
+
+<p>Starting from iOS 6, <code>UIViewController</code> deprecated this:</p>
+
+<pre><code>- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
+</code></pre>
+
+<p>Starting from iOS 5, the replacement is:</p>
+
+<pre><code>- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
+</code></pre>
+
+<p>If you <em>really</em> need to support the older iOS 4 and below, and mix in the new replacement, you would need to <a href="http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated">check</a> using <code>respondsToSelector</code>.</p>
+
+<pre><code>if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
+    [self presentViewController:navController animated:YES completion:nil];
+else
+    [self presentModalViewController:navController animated:YES];
+</code></pre>
+
+<h2>For older xib</h2>
+
+<h3>Tab Bar not working</h3>
+
+<p>If after adding support for iOS6 and your UITabBar is not working anymore eg. does not respond to taps, it could be due to the xib from an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/a/12627117/242682">need</a> to set the <code>window</code> object of your main xib to <strong>Full Size at Launch</strong>.</p>
+
+<h3>Error: UIViewControllerHierarchyInconsistency</h3>
+
+<p>This is again due to an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/questions/12434937/uiviewcontrollerhierarchyinconsistency-when-trying-to-present-a-modal-view-contr/12450770#12450770">need</a> to do this:</p>
+
+<ol>
+<li><p>Move main <strong>View</strong> out of <strong>View Controller</strong>:</p></li>
+<li><p>Delete <strong>View Controller</strong> from the XIB (it is not necessary since File&#8217;s Owner should be of its Class already)</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to replicate iOS Crash feedback from Apple]]></title>
@@ -1009,50 +1061,6 @@ mylabel.accessibilityHint = @"Play the music right now";
 <p>Apple has it&#8217;s own <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Making_Application_Accessible/Making_Application_Accessible.html#//apple_ref/doc/uid/TP40008785-CH102-SW5">complete guide</a> on how you should approach the topic, including custom views and <code>UIAccessibilityPostNotification</code>. <a href="http://mattgemmell.com/2010/12/19/accessibility-for-iphone-and-ipad-apps/">Matt Gemmell</a> also covers the topic.</p>
 
 <p>Hope you be a hero!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Mythical Team-Month]]></title>
-    <link href="http://samwize.com/2012/11/03/the-mythical-team-month/"/>
-    <updated>2012-11-03T21:22:00+08:00</updated>
-    <id>http://samwize.com/2012/11/03/the-mythical-team-month</id>
-    <content type="html"><![CDATA[<p>I came across this great slideshow about projects, teams and developers.</p>
-
-<script async class="speakerdeck-embed" data-id="4f5ba2cfe593e10022020dbb" data-ratio="1.3333333333333333" src="http://samwize.com//speakerdeck.com/assets/embed.js"></script>
-
-
-<p>Some of the ideas are similar to <a href="http://samwize.com/2012/10/11/the-lean-startup/">The Lean Startup</a>.</p>
-
-<p>Other key takeaways for me are:</p>
-
-<!-- more -->
-
-
-<h2>Consensus &amp; Feedback</h2>
-
-<ul>
-<li><p>Healthy agile teams <strong>run on consensus</strong></p></li>
-<li><p>Consensus doesn&#8217;t scale. More people = More connections. O(n<sup>2)</sup> Problem.</p></li>
-<li><p>Consensus corrects for the team&#8217;s needs</p></li>
-<li><p>Feedback corrects for the user&#8217;s needs</p></li>
-<li><p>Consensus &amp; Feedback => <strong>Competes for the same resources!</strong></p></li>
-</ul>
-
-
-<h2>A Great Developer</h2>
-
-<ul>
-<li><p>Empathetic = Defend users by adpoting their perspective</p></li>
-<li><p>Analytical = Break down large problems</p></li>
-<li><p>Visionary = Identify great ideas and simplify</p></li>
-<li><p>Scientific = Methodically attacks problems</p></li>
-<li><p>Creative = Dreams up new ideas</p></li>
-<li><p>Professional = Invests in long-term value &amp; maintainability</p></li>
-<li><p>Entrepreneurial = Kills failing projects</p></li>
-<li><p>Hungry = Relentlessly improves through learning, practicing and sharing</p></li>
-</ul>
-
 ]]></content>
   </entry>
   

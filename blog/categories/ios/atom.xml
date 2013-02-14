@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-01-22T00:11:20+08:00</updated>
+  <updated>2013-02-14T23:28:29+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Code Change Needed in iOS 6]]></title>
+    <link href="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/"/>
+    <updated>2013-02-01T00:03:00+08:00</updated>
+    <id>http://samwize.com/2013/02/01/code-change-needed-in-ios-6</id>
+    <content type="html"><![CDATA[<p>Some tips on your iOS code change needed for supporting iOS 6.</p>
+
+<!-- more -->
+
+
+<h2>presentModalViewController</h2>
+
+<p>Starting from iOS 6, <code>UIViewController</code> deprecated this:</p>
+
+<pre><code>- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
+</code></pre>
+
+<p>Starting from iOS 5, the replacement is:</p>
+
+<pre><code>- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
+</code></pre>
+
+<p>If you <em>really</em> need to support the older iOS 4 and below, and mix in the new replacement, you would need to <a href="http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated">check</a> using <code>respondsToSelector</code>.</p>
+
+<pre><code>if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
+    [self presentViewController:navController animated:YES completion:nil];
+else
+    [self presentModalViewController:navController animated:YES];
+</code></pre>
+
+<h2>For older xib</h2>
+
+<h3>Tab Bar not working</h3>
+
+<p>If after adding support for iOS6 and your UITabBar is not working anymore eg. does not respond to taps, it could be due to the xib from an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/a/12627117/242682">need</a> to set the <code>window</code> object of your main xib to <strong>Full Size at Launch</strong>.</p>
+
+<h3>Error: UIViewControllerHierarchyInconsistency</h3>
+
+<p>This is again due to an older project.</p>
+
+<p>You <a href="http://stackoverflow.com/questions/12434937/uiviewcontrollerhierarchyinconsistency-when-trying-to-present-a-modal-view-contr/12450770#12450770">need</a> to do this:</p>
+
+<ol>
+<li><p>Move main <strong>View</strong> out of <strong>View Controller</strong>:</p></li>
+<li><p>Delete <strong>View Controller</strong> from the XIB (it is not necessary since File's Owner should be of its Class already)</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to replicate iOS Crash feedback from Apple]]></title>
@@ -113,68 +165,6 @@
 <p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
 
 <p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[7 iOS Custom Popup Views]]></title>
-    <link href="http://samwize.com/2012/12/06/7-ios-custom-popup-views/"/>
-    <updated>2012-12-06T21:38:00+08:00</updated>
-    <id>http://samwize.com/2012/12/06/7-ios-custom-popup-views</id>
-    <content type="html"><![CDATA[<p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
-
-<p>Nonetheless, others are good depending on your use.</p>
-
-<p>Here are 7 custom popup views for iOS:</p>
-
-<!-- more -->
-
-
-<h2><a href="https://github.com/coneybeare/UAModalPanel">UAModalPanel: Simple dismissiable popup</a></h2>
-
-<p><img src="https://github.com/coneybeare/UAModalPanel/raw/master/_README_ASSETS/UAModalPanel.jpg"></p>
-
-<h2><a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView: With a blurred background</a></h2>
-
-<p><img src="https://github.com/rnystrom/RNBlurModalView/raw/master/images/image.jpg"></p>
-
-<h2><a href="https://github.com/martinjuhasz/MJPopupViewController">MJPopupViewController: With different transition effects</a></h2>
-
-<p><img src="https://raw.github.com/martinjuhasz/MJPopupViewController/master/assets/demo2.png"></p>
-
-<h2><a href="http://www.mobilebricks.com/ios/alpopupview">ALPopupView: Facebook-like popup</a> ($19)</h2>
-
-<p><img src="http://iosmix.com/sites/default/files/styles/default/public/full_1185_0.png"></p>
-
-<h2><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">FPPopover: iPad-like popovers for iPhone</a></h2>
-
-<p><img src="http://www.50pixels.com/blog/wp-content/uploads/2012/05/framedscreenshot11.png"></p>
-
-<h2><a href="https://github.com/PaulSolt/WEPopover">WEPopover: Another iPad-like popover</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/1f240a003f5d854c5400f9001ca9b35084185281/687474703a2f2f7061756c736f6c742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031312f30342f6950686f6e652e6a7067"></p>
-
-<h2><a href="https://github.com/chrismiles/CMPopTipView">CMPopTipView: Bubble Tooltip</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/d953577314aafa7c65d1eb3b15f7fd73c9946d1e/687474703a2f2f6661726d352e7374617469632e666c69636b722e636f6d2f343030352f353139313634313033305f326239336134613535392e6a7067"></p>
-
-<h2><a href="https://github.com/scalessec/Toast">Android-like Toast</a></h2>
-
-<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn't update..</p>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/3b536e7781bd1d4bc3c409dd460ef6a10d99e3ce/687474703a2f2f692e696d6775722e636f6d2f6f4d32386c2e706e67"></p>
-
-<h2><a href="https://github.com/m1entus/WCAlertView">WCAlertView: UIALertView with blocks</a></h2>
-
-<p><img src="https://raw.github.com/m1entus/WCAlertView/master/Screens/7thumb.png"></p>
-
-<h2><a href="https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets">UIAlertView and UIActionSheet with blocks</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/945fddfea4fd0fd04729eef08e616fcb270475a0/687474703a2f2f626c6f672e636f646563726f707065722e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031322f30312f694f532d53696d756c61746f722d53637265656e2d73686f742d4a616e2d32302d323031322d342e32382e31382d504d2d323030783330302e706e67"></p>
-
-<h2>Cocoacontrols - for more popups!</h2>
-
-<p><a href="http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup">http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup</a></p>
 ]]></content>
   </entry>
   
