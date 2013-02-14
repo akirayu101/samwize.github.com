@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Error: Application Executable Missing Required Architecture - Junda Ong</title>
+  <title>Migrating old Mac to new Mac - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I swear this is the most common error I have seen whenever I upload an iOS binary. Error: application executable is missing a required architecture &hellip;">
+  <meta name="description" content="I did a migration using the Migration Assistant app when I bought a new iMac (late 2012 27&#8221; model). I decided to migrate everything (instead of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/">
+  <link rel="canonical" href="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Error: Application Executable Missing Required Architecture</h1>
+      <h1 class="entry-title">Migrating Old Mac to New Mac</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
+<time datetime="2013-02-14T23:29:00+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,24 +107,65 @@
   </header>
 
 
-<div class="entry-content"><p>I swear this is the most common error I have seen whenever I upload an iOS binary.</p>
+<div class="entry-content"><p>I did a migration using the <strong>Migration Assistant</strong> app when I bought a new iMac (late 2012 27&#8221; model).</p>
 
-<blockquote><p>Error: application executable is missing a required architecture armv6</p></blockquote>
+<p>I decided to migrate everything (instead of a fresh install) as I DON&#8217;T want to:</p>
 
-<p>It occurs every time after Apple release a new iPhone (or architecture type).</p>
+<ul>
+<li>reinstall hundreds of apps</li>
+<li>setup the system preferences</li>
+<li>manually transfer files</li>
+</ul>
+
+
+<p>But migration is not perfect (though I think it is much efficient than doing a fresh install).</p>
+
+<p>Here are some tips that you will be interested to know.</p>
 
 <!-- more -->
 
 
-<p>In 2011, when I was using Xcode 4.2, when I think iPhone 4 was out, I need to <a href="http://stackoverflow.com/a/8538393/242682">change</a> the Architectures settings from <code>armv7</code> to <code>armv6 armv7</code>.</p>
+<h2>1. Create a new user with a different username</h2>
 
-<p>There is another similar due to to &#8220;no architectures to compile for&#8221; which you can <a href="http://stackoverflow.com/a/5294634/242682">solve</a> by changing <code>VALID_ARCHS</code>.</p>
+<p>In your new iMac, when you start the OS the first time, it is compulsory for you to create a new user account.</p>
 
-<p>Now in 2012, with Xcode 4.5, with the new iPhone 5, and the phasing out of armv6 (used in the old generation of iPod and iPhone), it once again introduced the error.</p>
+<p>This is temporary. Once you migrated, the account will be deleted.</p>
 
-<p>This time, you have to <a href="http://stackoverflow.com/a/12524366/242682">set</a> the deployment target to at least iOS 4.3.</p>
+<p>Don&#8217;t create a user account with the same username as that from the old Mac, as that will cause a conflict, and you have to start over at some point in the migration. This tip could save you 10 minutes.</p>
 
-<p>Well done Apple.</p>
+<h2>2. Transfer medium using cross cable</h2>
+
+<p>This is up to you. For me, I choose to connect the 2 Macs using a cross ethernet cable.</p>
+
+<p>It took 8 hours to migrate nearly 500 GB of data.</p>
+
+<h2>3. Most things are good</h2>
+
+<p>Once migrated, most things are good.</p>
+
+<p>Your applications are there. Your OS settings are intact. Your files are there.</p>
+
+<p>In the next sections, it tells some of the things that were broken.</p>
+
+<h2>4. Dropbox</h2>
+
+<p>Your dropbox folder is there, but it is not synced.</p>
+
+<p>You have to reinstall Dropbox, and they will resync like old times.</p>
+
+<h2>5. Git</h2>
+
+<p>Your <code>git</code> command cannot be recognized. Simply <a href="http://git-scm.com/download/mac">download</a> and install again.</p>
+
+<h2>6. Octopress</h2>
+
+<p>It is best you go through this <a href="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/">octopress setup guide</a> again.</p>
+
+<p>Explicitly, you do need to install OS X GCC Compiler and bundle install.</p>
+
+<h2>7. More..</h2>
+
+<p>More to be updated as I use my new iMac :)</p>
 </div>
 
 
@@ -147,12 +188,12 @@
   
 
 
-<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
+<time datetime="2013-02-14T23:29:00+08:00" pubdate data-updated="true">Feb 14<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/mac/'>Mac</a>
   
 </span>
 
@@ -161,7 +202,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/" data-via="samwize" data-counturl="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/" data-via="samwize" data-counturl="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -174,10 +215,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/22/updating-app-for-iphone-5/" title="Previous Post: Updating App for iPhone 5">&laquo; Updating App for iPhone 5</a>
+        <a class="basic-alignment left" href="/2013/02/01/code-change-needed-in-ios-6/" title="Previous Post: Code Change Needed in iOS 6">&laquo; Code Change Needed in iOS 6</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/24/good-strategy-bad-strategy/" title="Next Post: Good Strategy, Bad Strategy">Good Strategy, Bad Strategy &raquo;</a>
       
     </p>
   </footer>
@@ -256,8 +295,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/';
-        var disqus_url = 'http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/';
+        var disqus_identifier = 'http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/';
+        var disqus_url = 'http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/';
         var disqus_script = 'embed.js';
       
     (function () {

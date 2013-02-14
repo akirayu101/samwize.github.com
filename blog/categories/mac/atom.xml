@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-02-14T23:28:29+08:00</updated>
+  <updated>2013-02-14T23:44:59+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Migrating old Mac to new Mac]]></title>
+    <link href="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/"/>
+    <updated>2013-02-14T23:29:00+08:00</updated>
+    <id>http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac</id>
+    <content type="html"><![CDATA[<p>I did a migration using the <strong>Migration Assistant</strong> app when I bought a new iMac (late 2012 27" model).</p>
+
+<p>I decided to migrate everything (instead of a fresh install) as I DON'T want to:</p>
+
+<ul>
+<li>reinstall hundreds of apps</li>
+<li>setup the system preferences</li>
+<li>manually transfer files</li>
+</ul>
+
+
+<p>But migration is not perfect (though I think it is much efficient than doing a fresh install).</p>
+
+<p>Here are some tips that you will be interested to know.</p>
+
+<!-- more -->
+
+
+<h2>1. Create a new user with a different username</h2>
+
+<p>In your new iMac, when you start the OS the first time, it is compulsory for you to create a new user account.</p>
+
+<p>This is temporary. Once you migrated, the account will be deleted.</p>
+
+<p>Don't create a user account with the same username as that from the old Mac, as that will cause a conflict, and you have to start over at some point in the migration. This tip could save you 10 minutes.</p>
+
+<h2>2. Transfer medium using cross cable</h2>
+
+<p>This is up to you. For me, I choose to connect the 2 Macs using a cross ethernet cable.</p>
+
+<p>It took 8 hours to migrate nearly 500 GB of data.</p>
+
+<h2>3. Most things are good</h2>
+
+<p>Once migrated, most things are good.</p>
+
+<p>Your applications are there. Your OS settings are intact. Your files are there.</p>
+
+<p>In the next sections, it tells some of the things that were broken.</p>
+
+<h2>4. Dropbox</h2>
+
+<p>Your dropbox folder is there, but it is not synced.</p>
+
+<p>You have to reinstall Dropbox, and they will resync like old times.</p>
+
+<h2>5. Git</h2>
+
+<p>Your <code>git</code> command cannot be recognized. Simply <a href="http://git-scm.com/download/mac">download</a> and install again.</p>
+
+<h2>6. Octopress</h2>
+
+<p>It is best you go through this <a href="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/">octopress setup guide</a> again.</p>
+
+<p>Explicitly, you do need to install OS X GCC Compiler and bundle install.</p>
+
+<h2>7. More..</h2>
+
+<p>More to be updated as I use my new iMac :)</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
