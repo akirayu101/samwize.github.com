@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-02-14T23:44:59+08:00</updated>
+  <updated>2013-02-16T20:24:59+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Apple Trackpad 4 finger swipe up/down not working]]></title>
+    <link href="http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working/"/>
+    <updated>2013-02-15T00:06:00+08:00</updated>
+    <id>http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working</id>
+    <content type="html"><![CDATA[<p>When my new iMac was delivered, the only unsatisfactory I had was with the faulty trackpad. It can click, but can't move the cursor at all! I sent it for servicing and got a replacement after a few days.</p>
+
+<p>Anyway, this post isn't about a new iMac with a faulty trackpad.</p>
+
+<p>What happened is that when I use the new and working trackpad, I realized the 4 finger swipe up/down gestures were not working (therefore I can't do Expose and Mission Control).</p>
+
+<!-- more -->
+
+
+<p>The fix is rather trivial:</p>
+
+<p>Go to Preferences > Trackpad > More Gestures > Mission Control and change <strong>Swipe up with four fingers</strong> to <strong>Swipe up with three fingers</strong>.</p>
+
+<p>Try it now and it should work.</p>
+
+<p>Now, change it back to <strong>Swipe up with four fingers</strong>, and it works too!</p>
+
+<p>Do the same trick for App Expose.</p>
+
+<p>Finally, go to Point &amp; Click to re-enable <strong>Three Finger Drag</strong>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migrating old Mac to new Mac]]></title>
@@ -74,7 +102,11 @@
 
 <p>Explicitly, you do need to install OS X GCC Compiler and bundle install.</p>
 
-<h2>7. More..</h2>
+<h2>7. Eclipse</h2>
+
+<p>If you open and encounter an error, simply <a href="http://www.eclipse.org/downloads/">reinstall</a>.</p>
+
+<h2>8. More..</h2>
 
 <p>More to be updated as I use my new iMac :)</p>
 ]]></content>

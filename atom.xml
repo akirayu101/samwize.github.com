@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-02-14T23:44:59+08:00</updated>
+  <updated>2013-02-16T20:24:59+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Apple Trackpad 4 finger swipe up/down not working]]></title>
+    <link href="http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working/"/>
+    <updated>2013-02-15T00:06:00+08:00</updated>
+    <id>http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working</id>
+    <content type="html"><![CDATA[<p>When my new iMac was delivered, the only unsatisfactory I had was with the faulty trackpad. It can click, but can&#8217;t move the cursor at all! I sent it for servicing and got a replacement after a few days.</p>
+
+<p>Anyway, this post isn&#8217;t about a new iMac with a faulty trackpad.</p>
+
+<p>What happened is that when I use the new and working trackpad, I realized the 4 finger swipe up/down gestures were not working (therefore I can&#8217;t do Expose and Mission Control).</p>
+
+<!-- more -->
+
+
+<p>The fix is rather trivial:</p>
+
+<p>Go to Preferences > Trackpad > More Gestures > Mission Control and change <strong>Swipe up with four fingers</strong> to <strong>Swipe up with three fingers</strong>.</p>
+
+<p>Try it now and it should work.</p>
+
+<p>Now, change it back to <strong>Swipe up with four fingers</strong>, and it works too!</p>
+
+<p>Do the same trick for App Expose.</p>
+
+<p>Finally, go to Point &amp; Click to re-enable <strong>Three Finger Drag</strong>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migrating old Mac to new Mac]]></title>
@@ -74,7 +102,11 @@
 
 <p>Explicitly, you do need to install OS X GCC Compiler and bundle install.</p>
 
-<h2>7. More..</h2>
+<h2>7. Eclipse</h2>
+
+<p>If you open and encounter an error, simply <a href="http://www.eclipse.org/downloads/">reinstall</a>.</p>
+
+<h2>8. More..</h2>
 
 <p>More to be updated as I use my new iMac :)</p>
 ]]></content>
@@ -978,84 +1010,6 @@ nosetests test_web.py:TestWeb.test_checkout
 <p>By doing that, I lose the use of <code>genstrings</code>, as it no longer uses <code>NSLocalizedString</code>. Unfortunately <code>genstrings</code> is closed source. But fortunately, some <a href="https://github.com/dunkelstern/Cocoa-Localisation-Helper">python helper</a> is around.</p>
 
 <p>And the result is at <a href="https://github.com/samwize/localized">https://github.com/samwize/localized</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What is Python's Lambda and Closure]]></title>
-    <link href="http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure/"/>
-    <updated>2012-11-05T20:06:00+08:00</updated>
-    <id>http://samwize.com/2012/11/05/what-is-pythons-lambda-and-closure</id>
-    <content type="html"><![CDATA[<p>Lambda is</p>
-
-<blockquote><p>one line anonymous function constructed on the fly</p></blockquote>
-
-<p>Closure is</p>
-
-<blockquote><p>a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory</p></blockquote>
-
-<!-- more -->
-
-
-<h2>What is Lambda?</h2>
-
-<p><a href="http://www.diveintopython.net/power_of_introspection/lambda_functions.html">DiveIntoPython</a> gave a good definition. Lambda is</p>
-
-<ul>
-<li>a one line function</li>
-<li>anonymous function (no name)</li>
-<li>a function that can be used anywhere a function is required</li>
-<li>it takes in arbitrary parameters</li>
-<li>and implicitly return as a single expression</li>
-</ul>
-
-
-<p>But most important, you need not use lambda.</p>
-
-<p>Lambda is a <strong>style</strong>. You need not use it.</p>
-
-<p>What&#8217;s more, if you need multiple lines, then consider a normal function. Python can pass function as parameter anyway.</p>
-
-<h2>Why do we have Lambda?</h2>
-
-<p>You might <a href="http://stackoverflow.com/questions/890128/python-lambda-why">wonder</a> why is there lambda in the first place.</p>
-
-<p>This post on <a href="http://python-history.blogspot.sg/2009/04/origins-of-pythons-functional-features.html">Python history</a> explained well.</p>
-
-<blockquote><p>In 1994, lambda operator was introduced for creating anonymous functions (as expressions). Lack of a better choice..</p></blockquote>
-
-<p>However, the choice of the terminology &#8220;lambda&#8221; had many unintended consequences. It doesn&#8217;t match the expectation from other languages. Hence it is usually considered &#8220;sorely lacking&#8221; in features. eg. It does not work with surrounding codes.</p>
-
-<p>Lambda is no closure like other languages.</p>
-
-<h2>What is Closure?</h2>
-
-<p>Best explained in <a href="http://www.shutupandship.com/2012/01/python-closures-explained.html">ShutUpAndShip</a>,</p>
-
-<blockquote><p>A CLOSURE is a function object that remembers values in enclosing scopes regardless of whether those scopes are still present in memory.</p></blockquote>
-
-<p>In another shorter <a href="http://ynniv.com/blog/2007/08/closures-in-python.html">explanation</a>,</p>
-
-<blockquote><p>A closure is data attached to code</p></blockquote>
-
-<p>In Python,</p>
-
-<ul>
-<li>Methods are closures</li>
-<li>Functions are NOT closures</li>
-<li>Lambda is NOT closure</li>
-</ul>
-
-
-<h2>Huh? Method vs Function</h2>
-
-<p>In case you wonder what is the difference between <a href="http://stackoverflow.com/a/155633/242682">Method &amp; Function</a>,</p>
-
-<blockquote><p>A method is on an object. A function is independent of an object.</p></blockquote>
-
-<p>You define a <strong>function</strong> such as <code>def foo():</code>.</p>
-
-<p>You use a <strong>method</strong> of an object such as <code>obj.foo()</code>. <code>obj</code> is implicitly passed as the first parameter to the method <code>foo</code>. That&#8217;s why in a class, you have a <code>self</code> as the first param of a <em>method</em>.</p>
 ]]></content>
   </entry>
   
