@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | Junda Ong]]></title>
+  <link href="http://samwize.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2013-02-16T20:51:21+08:00</updated>
+  <id>http://samwize.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sample GET/POST using Google AppEngine Java HttpConnection]]></title>
+    <link href="http://samwize.com/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/"/>
+    <updated>2013-02-16T20:26:00+08:00</updated>
+    <id>http://samwize.com/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection</id>
+    <content type="html"><![CDATA[<p>A sample code on basic usage of HTTP GET/POST is always helpful.</p>
+
+<p>I wrote once for <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">AFNetworking</a> (for iOS), which I subsequently referred to it myself. Hence, I am now writing for Google App Engine (Java).</p>
+
+<p>Google provided <a href="https://developers.google.com/appengine/docs/java/urlfetch/usingjavanet">documentation</a> on http connection, but it is incomplete. Here's my version.</p>
+
+<!-- more -->
+
+
+<h2>GET</h2>
+
+<p>In my example, I want to get a JSON response for a Comment resource.</p>
+
+<p>I showed how I set my custom headers, especially the Content-Type header. Then I read the response body by using <code>BufferedReader</code>, finally parse the string to <code>JSONObject</code>.</p>
+
+<p>```java</p>
+
+<pre><code>try {
+    URL url = new URL("https://api.myserver.com/v1/comments");
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestProperty("X-Custom-Header", "xxx");
+    connection.setRequestProperty("Content-Type", "application/json");
+
+    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+        // OK
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuffer res = new StringBuffer(); 
+        String line;
+        while ((line = reader.readLine()) != null) {
+            res.append(line);
+        }
+        reader.close();
+
+        JSONObject jsonObj = new JSONObject(res);
+        String count = jsonObj.getInt("count");
+        ...
+
+    } else {
+        // Server returned HTTP error code.
+    }
+
+} catch (Exception e) {
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>POST</h2>
+
+<p>Similarly, this is how you POST data.</p>
+
+<p>```java</p>
+
+<pre><code>try {
+    URL url = new URL("https://api.myserver.com/v1/comments");
+    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    connection.setRequestProperty("X-Custom-Header", "xxx");
+    connection.setRequestProperty("Content-Type", "application/json");
+
+    // POST the http body data
+    connection.setDoOutput(true);
+    connection.setRequestMethod("POST");
+    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+    writer.write("{\"comment\": \"awesome tutorial\"}");
+    writer.close();
+
+    if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+        // OK
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuffer res = new StringBuffer(); 
+        String line;
+        while ((line = reader.readLine()) != null) {
+            res.append(line);
+        }
+        reader.close();
+
+        JSONObject jsonObj = new JSONObject(res);
+        String count = jsonObj.getInt("count");
+        ...
+
+    } else {
+        // Server returned HTTP error code.
+    }
+
+} catch (Exception e) {
+}
+</code></pre>
+
+<p>```</p>
+
+<h2>Pitfalls</h2>
+
+<p>Google AppEngine always append to your <a href="http://stackoverflow.com/questions/13226598/how-to-remove-the-google-app-engine-default-header-when-fetching-a-url">User-Agent header</a>, so as to identify the http request is from a particular AppEngine app. This is a bane because if you are crawling some website, they could easily block you since you can't spoof your user-agent.</p>
+]]></content>
+  </entry>
+  
+</feed>

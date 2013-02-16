@@ -235,16 +235,22 @@
         <lastmod>2013-02-15T00:13:20+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://samwize.com/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/
+        </loc>
+        <lastmod>2013-02-16T20:51:15+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://samwize.com/about/</loc>
         <lastmod>2012-10-09T01:22:54+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.com/blog/archives/</loc>
-        <lastmod>2013-02-15T00:13:20+08:00</lastmod>
+        <lastmod>2013-02-16T20:51:15+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.com/</loc>
-        <lastmod>2013-02-15T00:13:20+08:00</lastmod>
+        <lastmod>2013-02-16T20:51:15+08:00</lastmod>
     </url>
     <url>
         <loc>http://samwize.com/quotes/</loc>
