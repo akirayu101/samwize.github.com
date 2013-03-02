@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-02-16T20:51:21+08:00</updated>
+  <updated>2013-03-02T23:57:05+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -102,9 +102,9 @@
 
 <p>Explicitly, you do need to install OS X GCC Compiler and bundle install.</p>
 
-<h2>7. Eclipse</h2>
+<h2>7. Eclipse, and Plugins</h2>
 
-<p>If you open and encounter an error, simply <a href="http://www.eclipse.org/downloads/">reinstall</a>.</p>
+<p>If you open and encounter an error, simply <a href="http://www.eclipse.org/downloads/">reinstall</a>. You need to install Google Plugin for Eclipse too if you are using.</p>
 
 <h2>8. More..</h2>
 

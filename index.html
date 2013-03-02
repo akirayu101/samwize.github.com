@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="A sample code on basic usage of HTTP GET/POST is always helpful. I wrote once for AFNetworking (for iOS), which I subsequently referred to it myself &hellip;">
+  <meta name="description" content="In a previous post, I wrote about a simple usage of AFNetworking, the de facto HTTP library for iOS. This post, I will show how you can use &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/02/queue-http-operations-with-afnetworking/">Queue HTTP Operations With AFNetworking</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-02T22:55:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
+        
+         | <a href="/2013/03/02/queue-http-operations-with-afnetworking/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
+
+<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
+
+<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, &#8230;</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/03/02/queue-http-operations-with-afnetworking/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -526,53 +573,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/06/7-ios-custom-popup-views/">7 iOS Custom Popup Views</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-06T21:38:00+08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
-        
-         | <a href="/2012/12/06/7-ios-custom-popup-views/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
-
-<p>Nonetheless, others are good depending on your use.</p>
-
-<p>Here are 7 custom popup views for iOS:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/06/7-ios-custom-popup-views/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -588,6 +588,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/03/02/queue-http-operations-with-afnetworking/">Queue HTTP Operations with AFNetworking</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/">Sample GET/POST using Google AppEngine Java HttpConnection</a>
       </li>
     
@@ -601,10 +605,6 @@
     
       <li class="post">
         <a href="/2013/02/01/code-change-needed-in-ios-6/">Code Change Needed in iOS 6</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/">How to replicate iOS Crash feedback from Apple</a>
       </li>
     
   </ul>

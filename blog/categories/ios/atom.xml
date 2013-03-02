@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-02-16T20:51:21+08:00</updated>
+  <updated>2013-03-02T23:57:05+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Queue HTTP Operations with AFNetworking]]></title>
+    <link href="http://samwize.com/2013/03/02/queue-http-operations-with-afnetworking/"/>
+    <updated>2013-03-02T22:55:00+08:00</updated>
+    <id>http://samwize.com/2013/03/02/queue-http-operations-with-afnetworking</id>
+    <content type="html"><![CDATA[<p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
+
+<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
+
+<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, ...</p>
+
+<!-- more -->
+
+
+<p>Adding operations to a queue is rather simple.</p>
+
+<p>You will be using <code>NSOperationQueue</code>, which is part of Apple's <a href="http://developer.apple.com/library/ios/#documentation/cocoa/Reference/NSOperationQueue_class/Reference/Reference.html">Foundation framework</a>.</p>
+
+<p>You will be adding <code>NSOperation</code> to the queue. Not surprisingly, classes such as <code>AFHTTPRequestOperation</code> subclass <code>NSOperation</code>.</p>
+
+<h2>Adding an operation to a queue</h2>
+
+<p>```objc
+// Create a http operation
+NSURL <em>url = [NSURL URLWithString:@"http://samwize.com/api/cars/"];
+NSURLRequest </em>request = [NSURLRequest requestWithURL:url];
+AFHTTPRequestOperation <em>operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+[httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+[operation setCompletionBlockWithSuccess:<sup>(AFHTTPRequestOperation</sup> </em>operation, id responseObject) {</p>
+
+<pre><code>// Print the response body in text
+NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+</code></pre>
+
+<p>} failure:<sup>(AFHTTPRequestOperation</sup> <em>operation, NSError </em>error) {</p>
+
+<pre><code>NSLog(@"Error: %@", error);
+</code></pre>
+
+<p>}];</p>
+
+<p>// Add the operation to a queue
+// It will start once added
+NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+[operationQueue addOperation:operation];
+```</p>
+
+<p>As you can see, it is just 2 more lines of code.</p>
+
+<h2>Adding multiple operations and run them concurrently</h2>
+
+<p><code>objc
+NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+// Set the max number of concurrent operations (threads)
+[operationQueue setMaxConcurrentOperationCount:3];
+[operationQueue addOperations:@[operation1, operation2, operation3] waitUntilFinished:NO];
+</code></p>
+
+<h2>Adding Dependencies</h2>
+
+<p>Let's say we have 2 operations, and we want <code>operation2</code> to start only after <code>operation1</code> has finish.</p>
+
+<p>```objc
+NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
+// Make operation2 depend on operation1
+[operation2 addDependency:operation1];
+[operationQueue addOperations:@[operation1, operation2, operation3] waitUntilFinished:NO];</p>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Code Change Needed in iOS 6]]></title>
@@ -143,28 +215,6 @@ else
 <p><img class="center" src="/images/ios-device-resolutions.png"></p>
 
 <p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Enable NSZombie for Debugging Crashes]]></title>
-    <link href="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/"/>
-    <updated>2012-12-07T23:50:00+08:00</updated>
-    <id>http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes</id>
-    <content type="html"><![CDATA[<p>I posted a tip before on how you can <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">find the real cause of exception in Xcode</a>.</p>
-
-<p>There is another feature which you can enable to help in debugging.</p>
-
-<p><code>NSZombie</code> is an option that helps to trace overreleasing of objects.</p>
-
-<!-- more -->
-
-
-<p>Sometimes you might encounter exceptions <code>objc_msgSend</code>, which no matter how many times you Continue, an exception is thrown. That is a good sign get help from the zombie.</p>
-
-<p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
-
-<p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
 ]]></content>
   </entry>
   
