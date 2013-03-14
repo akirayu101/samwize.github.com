@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-15T02:06:20+08:00</updated>
+  <updated>2013-03-15T02:08:58+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -35,7 +35,7 @@ NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:url];
 // POST the username password
 [requestObj setHTTPMethod:@"POST"];
 NSString *postString = [NSString stringWithFormat:@"username=%@&amp;password=%@", @"samwize", @"secret"];
-NSData *data = [ NSData dataWithBytes:[postString UTF8String] length:[postString length]];
+NSData *data = [postString dataUsingEncoding: NSUTF8StringEncoding]; 
 [requestObj setHTTPBody:data];
 
 // Load the request
