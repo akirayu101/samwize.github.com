@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>iOS Devices Cheat Sheet - Junda Ong</title>
+  <title>POST Request to UIWebView - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Not long ago, I posted about a guide to iOS multiple devices resolutions. There is a similar, but more complete cheat sheet from Ivo. Here is 1 of &hellip;">
+  <meta name="description" content="In the last post, I wrote about how you can automatically fill in username and password in a UIWebView. This post, I will teach you how you can &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/">
+  <link rel="canonical" href="http://samwize.com/2013/03/15/post-request-to-uiwebview/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">iOS Devices Cheat Sheet</h1>
+      <h1 class="entry-title">POST Request to UIWebView</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2013-01-11T23:21:00+08:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
+<time datetime="2013-03-15T01:58:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,15 +107,46 @@
   </header>
 
 
-<div class="entry-content"><p>Not long ago, I posted about <a href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">a guide to iOS multiple devices resolutions</a>.</p>
+<div class="entry-content"><p>In the last post, I wrote about <a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
 
-<p>There is a similar, but more complete <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a> from Ivo.</p>
+<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
 
-<p>Here is 1 of the table:</p>
+<p>It turns out to be simple if the login uses a simple form POST.</p>
 
-<p><img class="center" src="/images/ios-device-resolutions.png"></p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Setup the URL</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">loginUrl</span> <span class="o">=</span> <span class="s">@&quot;https://just2us.com/login&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">loginUrl</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">requestObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// POST the username password</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPMethod:</span><span class="s">@&quot;POST&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">postString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;username=%@&amp;password=%@&quot;</span><span class="p">,</span> <span class="s">@&quot;samwize&quot;</span><span class="p">,</span> <span class="s">@&quot;secret&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="n">NSData</span> <span class="nl">dataWithBytes:</span><span class="p">[</span><span class="n">postString</span> <span class="n">UTF8String</span><span class="p">]</span> <span class="nl">length:</span><span class="p">[</span><span class="n">postString</span> <span class="n">length</span><span class="p">]];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPBody:</span><span class="n">data</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Load the request</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">webview</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">loadRequest:</span><span class="n">requestObj</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
 </div>
 
 
@@ -138,7 +169,7 @@
   
 
 
-<time datetime="2013-01-11T23:21:00+08:00" pubdate data-updated="true">Jan 11<span>th</span>, 2013</time>
+<time datetime="2013-03-15T01:58:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -152,7 +183,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/" data-via="samwize" data-counturl="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/03/15/post-request-to-uiwebview/" data-via="samwize" data-counturl="http://samwize.com/2013/03/15/post-request-to-uiwebview/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -165,10 +196,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/12/07/enable-nszombie-for-debugging-crashes/" title="Previous Post: Enable NSZombie for Debugging Crashes">&laquo; Enable NSZombie for Debugging Crashes</a>
+        <a class="basic-alignment left" href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/" title="Previous Post: Auto fill Username &amp; Password fields in UIWebView">&laquo; Auto fill Username &amp; Password fields in UIWebView</a>
       
-      
-        <a class="basic-alignment right" href="/2013/01/14/it-takes-18-weeks-to-build-a-mobile-app/" title="Next Post: It takes 18 weeks to build a mobile app">It takes 18 weeks to build a mobile app &raquo;</a>
       
     </p>
   </footer>
@@ -247,8 +276,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2013/01/11/ios-devices-cheat-sheet/';
-        var disqus_url = 'http://samwize.com/2013/01/11/ios-devices-cheat-sheet/';
+        var disqus_identifier = 'http://samwize.com/2013/03/15/post-request-to-uiwebview/';
+        var disqus_url = 'http://samwize.com/2013/03/15/post-request-to-uiwebview/';
         var disqus_script = 'embed.js';
       
     (function () {

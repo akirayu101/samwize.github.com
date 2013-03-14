@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-14T23:49:30+08:00</updated>
+  <updated>2013-03-15T02:04:48+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[POST Request to UIWebView]]></title>
+    <link href="http://samwize.com/2013/03/15/post-request-to-uiwebview/"/>
+    <updated>2013-03-15T01:58:00+08:00</updated>
+    <id>http://samwize.com/2013/03/15/post-request-to-uiwebview</id>
+    <content type="html"><![CDATA[<p>In the last post, I wrote about <a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
+
+<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
+
+<p>It turns out to be simple if the login uses a simple form POST.</p>
+
+<p>```objc
+- (void)login {</p>
+
+<pre><code>// Setup the URL
+NSString *loginUrl = @"https://just2us.com/login";
+NSURL *url = [NSURL URLWithString:loginUrl];    
+NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:url];
+
+// POST the username password
+[requestObj setHTTPMethod:@"POST"];
+NSString *postString = [NSString stringWithFormat:@"username=%@&amp;password=%@", @"samwize", @"secret"];
+NSData *data = [ NSData dataWithBytes:[postString UTF8String] length:[postString length]];
+[requestObj setHTTPBody:data];
+
+// Load the request
+self.webview.delegate = self;
+[self.webview loadRequest:requestObj];
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Auto fill Username &amp; Password fields in UIWebView]]></title>
+    <link href="http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/"/>
+    <updated>2013-03-15T01:46:00+08:00</updated>
+    <id>http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview</id>
+    <content type="html"><![CDATA[<p>If you use <code>UIWebView</code> and would like to automatically fill in the username and password (or any other text input fields), you could do so by executing Javascript on the webview.</p>
+
+<p>I first learnt about this from <a href="http://stackoverflow.com/a/9722805/242682">stackoverflow</a>, and has edited slightly.</p>
+
+<p>The technique is to implement <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIWebViewDelegate_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UIWebViewDelegate"><code>UIWebViewDelegate</code></a> and execute some Javascript in <code>webViewDidFinishLoad</code>.</p>
+
+<p>```objc
+- (void)webViewDidFinishLoad:(UIWebView *)webView {</p>
+
+<pre><code>// Auto fill the username and password text fields, assuming the HTML has
+// &lt;input type="text" name="username"&gt; and
+// &lt;input type="text" name="password"&gt;
+NSString *savedUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"USERNAME"];
+NSString *savedPassword = [[NSUserDefaults standardUserDefaults] objectForKey:@"PASSWORD"];
+if (savedUsername.length != 0 &amp;&amp; savedPassword.length != 0) {
+    // Create js strings
+    NSString *loadUsernameJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='username']\"); \
+                                for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = '%@';}", savedUsername];
+    NSString *loadPasswordJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='password']\"); \
+                                for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = '%@';}", savedPassword];
+    // Runs the JS
+    [self.webview stringByEvaluatingJavaScriptFromString: loadUsernameJS];
+    [self.webview stringByEvaluatingJavaScriptFromString: loadPasswordJS];
+}
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Set User Agent for UIWebView]]></title>
@@ -159,70 +230,6 @@ else
 <li><p>Delete <strong>View Controller</strong> from the XIB (it is not necessary since File's Owner should be of its Class already)</p></li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to replicate iOS Crash feedback from Apple]]></title>
-    <link href="http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple/"/>
-    <updated>2013-01-22T00:00:00+08:00</updated>
-    <id>http://samwize.com/2013/01/22/how-to-replicate-ios-crash-feedback-from-apple</id>
-    <content type="html"><![CDATA[<p>If you submit an iOS app to Apple, and they get back to you with the unfortunate news that your app crashed.. you have to (of course) fix the bug and resubmit again.</p>
-
-<p>To help you, Apple engineers will</p>
-
-<ul>
-<li>explain how they did it,</li>
-<li>attach a screenshot, and</li>
-<li>attach a crashlog</li>
-</ul>
-
-
-<p>This is what you should do.</p>
-
-<!-- more -->
-
-
-<p>Open Xcode > Organizer > Devices > Library > Device Logs > select <strong>Import</strong> at the bottom to open the crashlog file. This will <a href="https://developer.apple.com/library/ios/#technotes/tn2008/tn2151.html">symobolicate</a> the crash report and let you know which line of code failed.</p>
-
-<p>If you still do not understand why, you could install the same IPA into your device.</p>
-
-<p>To do so, in Xcode > Organizer > Archives > Your app > Distribute > <a href="http://developer.apple.com/library/ios/#qa/qa1764/_index.html">Save for Enterprise or Ad-Hoc Deployment</a>, double click and sync with iTunes. Your device will now run the same copy that you submitted to Apple.</p>
-
-<p>Hopefully, you can then squash the bug.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Developer Tips 2013]]></title>
-    <link href="http://samwize.com/2013/01/18/ios-developer-tips-2013/"/>
-    <updated>2013-01-18T21:47:00+08:00</updated>
-    <id>http://samwize.com/2013/01/18/ios-developer-tips-2013</id>
-    <content type="html"><![CDATA[<p>If you are starting out iOS development, there are some good tips for you from Stuart Hall:</p>
-
-<p><a href="http://stuartkhall.com/posts/ios-development-tips-i-would-want-if-i-was-starting-out-today">http://stuartkhall.com/posts/ios-development-tips-i-would-want-if-i-was-starting-out-today</a></p>
-
-<p>There is only one point which I don't agree on:</p>
-
-<blockquote><p>Story Boards Are Just For Rapid Prototypes</p></blockquote>
-
-<!-- more -->
-
-
-<p>The choice between "Story Boards" vs "Code the UI" depends very much on your app requirements.</p>
-
-<p>For simple apps that use the stock UI components, Story Board is really useful because</p>
-
-<ol>
-<li><p>Drag and drop to design = very quick and easy to make UI changes</p></li>
-<li><p>Support Auto Layout easily = Design iPad and iPhone at the same time easily</p></li>
-<li><p>Xcode support = Beautiful UI is possible with powerful customizable features</p></li>
-</ol>
-
-
-<p>In each version of iOS, Apple has made Story Board (XIB) and Xcode support much better. They kept improving. They value Story Board.</p>
-
-<p>Hence, you will be missing out a lot if you didn't even bother trying it out.</p>
 ]]></content>
   </entry>
   

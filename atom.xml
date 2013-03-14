@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-14T23:49:30+08:00</updated>
+  <updated>2013-03-15T02:04:48+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[POST Request to UIWebView]]></title>
+    <link href="http://samwize.com/2013/03/15/post-request-to-uiwebview/"/>
+    <updated>2013-03-15T01:58:00+08:00</updated>
+    <id>http://samwize.com/2013/03/15/post-request-to-uiwebview</id>
+    <content type="html"><![CDATA[<p>In the last post, I wrote about <a href="http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
+
+<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
+
+<p>It turns out to be simple if the login uses a simple form POST.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Setup the URL</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">loginUrl</span> <span class="o">=</span> <span class="s">@&quot;https://just2us.com/login&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">loginUrl</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">requestObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// POST the username password</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPMethod:</span><span class="s">@&quot;POST&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">postString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;username=%@&amp;password=%@&quot;</span><span class="p">,</span> <span class="s">@&quot;samwize&quot;</span><span class="p">,</span> <span class="s">@&quot;secret&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span> <span class="n">NSData</span> <span class="nl">dataWithBytes:</span><span class="p">[</span><span class="n">postString</span> <span class="n">UTF8String</span><span class="p">]</span> <span class="nl">length:</span><span class="p">[</span><span class="n">postString</span> <span class="n">length</span><span class="p">]];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPBody:</span><span class="n">data</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">// Load the request</span>
+</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">webview</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">loadRequest:</span><span class="n">requestObj</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Auto fill Username &amp; Password fields in UIWebView]]></title>
+    <link href="http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/"/>
+    <updated>2013-03-15T01:46:00+08:00</updated>
+    <id>http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview</id>
+    <content type="html"><![CDATA[<p>If you use <code>UIWebView</code> and would like to automatically fill in the username and password (or any other text input fields), you could do so by executing Javascript on the webview.</p>
+
+<p>I first learnt about this from <a href="http://stackoverflow.com/a/9722805/242682">stackoverflow</a>, and has edited slightly.</p>
+
+<p>The technique is to implement <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIWebViewDelegate_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UIWebViewDelegate"><code>UIWebViewDelegate</code></a> and execute some Javascript in <code>webViewDidFinishLoad</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">webViewDidFinishLoad:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="nv">webView</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Auto fill the username and password text fields, assuming the HTML has</span>
+</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt; and</span>
+</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedUsername</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;USERNAME&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedPassword</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;PASSWORD&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">savedUsername</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">savedPassword</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Create js strings</span>
+</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadUsernameJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;username&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
+</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedUsername</span><span class="p">];</span>
+</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadPasswordJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;password&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
+</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedPassword</span><span class="p">];</span>
+</span><span class='line'>        <span class="c1">// Runs the JS</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadUsernameJS</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadPasswordJS</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Set User Agent for UIWebView]]></title>
@@ -986,120 +1084,6 @@ reason: 'Could not load NIB in bundle: 'NSBundle
 <li><p>Many users stick with iOS 5 because of Map app. Perhaps they will upgrade in ~2014 as Apple continues to improve.</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[GAE or Dotcloud?]]></title>
-    <link href="http://samwize.com/2012/11/21/gae-or-dotcloud/"/>
-    <updated>2012-11-21T00:02:00+08:00</updated>
-    <id>http://samwize.com/2012/11/21/gae-or-dotcloud</id>
-    <content type="html"><![CDATA[<p>I have been thinking which to use.</p>
-
-<p>I am already using Google App Engine (Java) for a few years, running a couple of web apps on production. And paying them ever since they started charging.</p>
-
-<p>I tried a few apps on Dotcloud, but never yet deployed any on production.</p>
-
-<!-- more -->
-
-
-<p>Here&#8217;s what I think of them.</p>
-
-<h2>GAE</h2>
-
-<pre><code>+ Reliable
-+ Great Docs
-+ Great Community
-+ On demand scaling
-
-- Some restrictions
-- User Agent has GAE..
-</code></pre>
-
-<h2>Dotcloud</h2>
-
-<pre><code>+ Shell access
-+ Can use pip install
-+ Can run worker processes
-
-- Too much things to handle
-- Easily use up workers/services - Redis, MySQL, Python, ...
-- Higher startup cost
-</code></pre>
-
-<h2>Conclusion</h2>
-
-<p>As a one-man-show developer, my bet is on GAE.</p>
-
-<p>Though it is less flexible, it will save time and money.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Adhoc Distribution with the new Xcode]]></title>
-    <link href="http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode/"/>
-    <updated>2012-11-14T22:00:00+08:00</updated>
-    <id>http://samwize.com/2012/11/14/ios-adhoc-distribution-with-the-new-xcode</id>
-    <content type="html"><![CDATA[<p>If you are an iOS developer, you are probably familiar with the 3 ways to install an app - Run/debug on device, Ad hoc distribution, and App Store distribution.</p>
-
-<p>For each of the 3 ways, Apple provisioning portal has provided the provisioning certs you must use to sign the binary.</p>
-
-<p><strong>Adhoc distribution</strong> is the most complicated (the other 2 ways are very straight forward). Over the years, the process has also changed.</p>
-
-<p>This post is for development with Xcode 4.5.</p>
-
-<!-- more -->
-
-
-<h2>In the past</h2>
-
-<p>In the early days (year 2008), the guide to Adhoc distribution was to create a new build configuration called &#8220;Adhoc&#8221;, in addition to &#8220;Debug&#8221; and &#8220;Release&#8221;.</p>
-
-<p>I know why it is necessary back then, but that is not necessary now. But some posts still <a href="http://diaryofacodemonkey.ruprect.com/2011/03/18/ad-hoc-app-distribution-with-xcode-4/">insisted</a> that.</p>
-
-<h2>The new way</h2>
-
-<p>With Xcode 4.5 (or perhaps earlier), Project Schemes is introduced. It provides more ways you can configure how you &#8220;Build&#8221;, &#8220;Run&#8221;, &#8220;Test&#8221;, &#8220;Analyse&#8221; and &#8220;Archive&#8221;. You can change the build configuration to &#8220;Debug&#8221; or &#8220;Release&#8221; as you wanted.</p>
-
-<p>You don&#8217;t need to touch them.</p>
-
-<p>To distribute Adhoc way, you only need to &#8220;Archive&#8221;.</p>
-
-<p>Then in Organizer, click on the &#8220;Distribute&#8221; button, and select &#8220;Save for Enterprise or Ad-Hoc Deployment&#8221;.</p>
-
-<p>Select the Adhoc provisioning cert (you would need to download from Apple portal, and install to Xcode).</p>
-
-<p><img src="http://samwize.com/images/xcode-distribute-adhoc-enterprise.png" title="Adhoc Distribution" ></p>
-
-<p>Save the <code>App.ipa</code>.</p>
-
-<p>To install, drag to iTunes and sync. That&#8217;s it!</p>
-
-<h2>Push Notification</h2>
-
-<p>Things get slightly more complicated if you are using Apple Push Notifications.</p>
-
-<p>To use push, there are 2 more certs needed for your server to communicate with Apple. One is <code>aps-development</code>, the other is <code>aps-production</code>.</p>
-
-<p>You use <code>aps-development</code> for running on device using &#8220;Debug&#8221; build configuration.</p>
-
-<p>You use <code>aps-production</code> for both Adhoc and App Store distribution.</p>
-
-<p>Not the other way round. Adhoc distributed apps will NOT get push when you use <code>aps-development</code>.</p>
-
-<p>Why?</p>
-
-<blockquote><p>Because Adhoc distributed apps will register device token to <strong>Apple production gateway</strong>, while your <code>aps-development</code> communicates with <strong>Apple sandbox gateway</strong>.</p></blockquote>
-
-<p>If you want Adhoc distributed apps to get push, you must send the push with <code>aps-production</code>. Adhoc is as good as production app, yet not on the App Store.</p>
-
-<h2>Conclusion</h2>
-
-<p>In the past, you need to create a new build configuration call &#8220;Adhoc&#8221;. But that is no longer needed as you can select which cert to re-sign after archiving.</p>
-
-<p>I will not cover wireless distribution today (though you may refer to <a href="http://blog.just2us.com/2010/12/wireless-ad-hoc-distribution-for-iphone-apps/">this method using dropbox</a>).</p>
-
-<p>Or you could use <a href="https://testflightapp.com/">TestFlight</a> which is the best in distributing ad hoc builds - with versioning and beta users management!</p>
 ]]></content>
   </entry>
   
