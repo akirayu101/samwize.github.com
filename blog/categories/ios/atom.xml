@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-02T23:57:05+08:00</updated>
+  <updated>2013-03-14T23:49:30+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Set User Agent for UIWebView]]></title>
+    <link href="http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/"/>
+    <updated>2013-03-14T23:46:00+08:00</updated>
+    <id>http://samwize.com/2013/03/14/set-user-agent-for-uiwebview</id>
+    <content type="html"><![CDATA[<p>There is a very easy (but not documented) way to set the User Agent header for HTTP requests sent via <code>UIWebView</code>.</p>
+
+<p>I find saw the solution from <a href="http://www.mphweb.com/en/blog/easily-set-user-agent-uiwebview">mphweb</a>.</p>
+
+<p>Basically, you just set register it with <code>NSUserDefaults</code>.</p>
+
+<p>```objc
++ (void)initialize {</p>
+
+<pre><code>// Set user agent (the only problem is that we can't modify the User-Agent later in the program)
+NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Your desired user agent", @"UserAgent", nil];
+[[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+[dictionnary release];
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Queue HTTP Operations with AFNetworking]]></title>
@@ -198,23 +223,6 @@ else
 <p>In each version of iOS, Apple has made Story Board (XIB) and Xcode support much better. They kept improving. They value Story Board.</p>
 
 <p>Hence, you will be missing out a lot if you didn't even bother trying it out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Devices Cheat Sheet]]></title>
-    <link href="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/"/>
-    <updated>2013-01-11T23:21:00+08:00</updated>
-    <id>http://samwize.com/2013/01/11/ios-devices-cheat-sheet</id>
-    <content type="html"><![CDATA[<p>Not long ago, I posted about <a href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">a guide to iOS multiple devices resolutions</a>.</p>
-
-<p>There is a similar, but more complete <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a> from Ivo.</p>
-
-<p>Here is 1 of the table:</p>
-
-<p><img class="center" src="/images/ios-device-resolutions.png"></p>
-
-<p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
 ]]></content>
   </entry>
   

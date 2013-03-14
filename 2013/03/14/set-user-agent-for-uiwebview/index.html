@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress would not deploy - Junda Ong</title>
+  <title>Set User Agent for UIWebView - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I encountered a problem when I did a rake deploy. Somehow it does not get deployed. The only error I got was: The following paths are ignored by one &hellip;">
+  <meta name="description" content="There is a very easy (but not documented) way to set the User Agent header for HTTP requests sent via UIWebView. I find saw the solution from mphweb &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/09/30/octopress-would-not-deploy/">
+  <link rel="canonical" href="http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Octopress Would Not Deploy</h1>
+      <h1 class="entry-title">Set User Agent for UIWebView</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-30T21:59:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2013-03-14T23:46:00+08:00" pubdate data-updated="true">Mar 14<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,25 +107,26 @@
   </header>
 
 
-<div class="entry-content"><p>I encountered a problem when I did a <code>rake deploy</code>. Somehow it does not get deployed.</p>
+<div class="entry-content"><p>There is a very easy (but not documented) way to set the User Agent header for HTTP requests sent via <code>UIWebView</code>.</p>
 
-<p>The only error I got was:</p>
+<p>I find saw the solution from <a href="http://www.mphweb.com/en/blog/easily-set-user-agent-uiwebview">mphweb</a>.</p>
 
-<pre><code>The following paths are ignored by one of your .gitignore files:
-_deploy
-</code></pre>
+<p>Basically, you just set register it with <code>NSUserDefaults</code>.</p>
 
-<!-- more -->
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initialize</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Set user agent (the only problem is that we can&#39;t modify the User-Agent later in the program)</span>
+</span><span class='line'>    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionnary</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjectsAndKeys:</span><span class="s">@&quot;Your desired user agent&quot;</span><span class="p">,</span> <span class="s">@&quot;UserAgent&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">registerDefaults:</span><span class="n">dictionnary</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">dictionnary</span> <span class="n">release</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-
-<p>That&#8217;s a strange error. And I verified the <code>public</code> and <code>_deploy</code> directories were generated correctly.</p>
-
-<p>It turns out to be an issue when you clone the repos. You <a href="https://github.com/imathis/octopress/issues/412">must setup the Github pages</a> again.</p>
-
-<pre><code>rake setup_github_pages 
-</code></pre>
-
-<p>Just that. Wasted a few hours. Hopes this help others.</p>
 </div>
 
 
@@ -148,12 +149,12 @@ _deploy
   
 
 
-<time datetime="2012-09-30T21:59:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2012</time>
+<time datetime="2013-03-14T23:46:00+08:00" pubdate data-updated="true">Mar 14<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/ios/'>iOS</a>
   
 </span>
 
@@ -162,7 +163,7 @@ _deploy
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/09/30/octopress-would-not-deploy/" data-via="samwize" data-counturl="http://samwize.com/2012/09/30/octopress-would-not-deploy/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/" data-via="samwize" data-counturl="http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -175,10 +176,8 @@ _deploy
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/29/singleton-slash-sharedinstance-template-for-ios-5-arc-and-gcd/" title="Previous Post: Singleton/SharedInstance Template for iOS 5 (ARC and GCD)">&laquo; Singleton/SharedInstance Template for iOS 5 (ARC and GCD)</a>
+        <a class="basic-alignment left" href="/2013/03/02/queue-http-operations-with-afnetworking/" title="Previous Post: Queue HTTP Operations with AFNetworking">&laquo; Queue HTTP Operations with AFNetworking</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/01/unit-tests-with-cocoapods/" title="Next Post: Unit Tests with CocoaPods">Unit Tests with CocoaPods &raquo;</a>
       
     </p>
   </footer>
@@ -257,8 +256,8 @@ _deploy
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/09/30/octopress-would-not-deploy/';
-        var disqus_url = 'http://samwize.com/2012/09/30/octopress-would-not-deploy/';
+        var disqus_identifier = 'http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/';
+        var disqus_url = 'http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/';
         var disqus_script = 'embed.js';
       
     (function () {
