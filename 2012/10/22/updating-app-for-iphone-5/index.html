@@ -126,7 +126,13 @@
 
 <p>Xcode 4.5 will actually offer to add one automatically.</p>
 
-<h2>2. Code to detect 4-inch screen</h2>
+<h2>2. Set to Full Screen at launch for MainWindow.xib</h2>
+
+<p>If your tab bar didn&#8217;t work properly (such as don&#8217;t respond to click) after you added <code>Default-568h@2x.png</code>, then it is likely due to the nib configuration.</p>
+
+<p>You have to go to interface builder, select the window object, and <a href="http://stackoverflow.com/a/12699347/242682">enable</a> <code>Full Screen at launch</code>.</p>
+
+<h2>3. Code to detect 4-inch screen</h2>
 
 <p>You can detect the 4-inch screen size with the following method:</p>
 
@@ -166,13 +172,13 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>3. Use Auto Layout for iOS6</h2>
+<h2>4. Use Auto Layout for iOS6</h2>
 
 <p>If you are supporting only iOS6 and above, you should use Auto Layout.</p>
 
 <p>You can read up a tutorial by <a href="http://www.raywenderlich.com/20881/beginning-auto-layout-part-1-of-2">Ray Wenderlich</a>.</p>
 
-<h2>4. Set auto resizing mask for pre iOS6</h2>
+<h2>5. Set auto resizing mask for pre iOS6</h2>
 
 <p>If you are still supporting pre iOS6, you still need auto resizing mask for your views to stretch and re-position automatically.</p>
 
@@ -182,7 +188,7 @@
 
 <p>You could change a subview to auto resize its width/height, and fix it&#8217;s margin to left/right/top/bottom.</p>
 
-<h2>5. Stretch Images</h2>
+<h2>6. Stretch Images</h2>
 
 <p>If you are using Xcode Interface Builder, change the UIImageView <code>mode</code> to <code>Scale to Fill</code> (or others).</p>
 
@@ -192,7 +198,7 @@
 
 <p>But that works only if your image has portion that can be stretched without distortion. If it doesn&#8217;t, you have to create a new image <code>-568@2x</code> image, and use the trick covered next to load it automatically.</p>
 
-<h2>6. Load -568h@2x images</h2>
+<h2>7. Load -568h@2x images</h2>
 
 <p>Unlike <code>@2x</code> which are loaded automatically for Retina Display, the <code>-568h@2x</code> are not loaded automatically for the taller iPhone (except the <code>Default-568h@2x.png</code>).</p>
 
@@ -219,11 +225,11 @@
 
 <p>To use, I would have to change the methods <code>[UIImage imageName:@"foo.png"]</code> to <code>[UIImage imageNameFor568h:@"foo.png"]</code>.</p>
 
-<h2>7. iOS Simulator</h2>
+<h2>8. iOS Simulator</h2>
 
 <p>To run and test on a 4 inch iPhone, select <strong>Hardware</strong> > <strong>Device</strong> > <strong>iPhone (Retina 4-inch)</strong>.</p>
 
-<h2>8. Last words..</h2>
+<h2>9. Last words..</h2>
 
 <p>It largely depends on how you code your existing apps.</p>
 
