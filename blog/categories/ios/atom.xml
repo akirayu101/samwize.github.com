@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-17T12:31:59+08:00</updated>
+  <updated>2013-03-29T15:24:33+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to run iOS 4.3 Simulator on Mountain Lion?]]></title>
+    <link href="http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/"/>
+    <updated>2013-03-29T15:23:00+08:00</updated>
+    <id>http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion</id>
+    <content type="html"><![CDATA[<p>You can't.</p>
+
+<p>This is a <a href="http://stackoverflow.com/questions/11651773/install-simulator-sdk-4-3-to-xcode-4-4-on-mountain-lion">Mountain Lion issue</a>. Apple somehow broke it, and so even if you manage to download and install the simulator, you can't run it.</p>
+
+<p>Apple recommend you to test on a real device.</p>
+
+<p>I'm sorry.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[POST Request to UIWebView]]></title>
@@ -178,58 +193,6 @@ NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
 [operationQueue addOperations:@[operation1, operation2, operation3] waitUntilFinished:NO];</p>
 
 <p>```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Code Change Needed in iOS 6]]></title>
-    <link href="http://samwize.com/2013/02/01/code-change-needed-in-ios-6/"/>
-    <updated>2013-02-01T00:03:00+08:00</updated>
-    <id>http://samwize.com/2013/02/01/code-change-needed-in-ios-6</id>
-    <content type="html"><![CDATA[<p>Some tips on your iOS code change needed for supporting iOS 6.</p>
-
-<!-- more -->
-
-
-<h2>presentModalViewController</h2>
-
-<p>Starting from iOS 6, <code>UIViewController</code> deprecated this:</p>
-
-<pre><code>- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
-</code></pre>
-
-<p>Starting from iOS 5, the replacement is:</p>
-
-<pre><code>- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
-</code></pre>
-
-<p>If you <em>really</em> need to support the older iOS 4 and below, and mix in the new replacement, you would need to <a href="http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated">check</a> using <code>respondsToSelector</code>.</p>
-
-<pre><code>if ([self respondsToSelector:@selector(presentViewController:animated:completion:)])
-    [self presentViewController:navController animated:YES completion:nil];
-else
-    [self presentModalViewController:navController animated:YES];
-</code></pre>
-
-<h2>For older xib</h2>
-
-<h3>Tab Bar not working</h3>
-
-<p>If after adding support for iOS6 and your UITabBar is not working anymore eg. does not respond to taps, it could be due to the xib from an older project.</p>
-
-<p>You <a href="http://stackoverflow.com/a/12627117/242682">need</a> to set the <code>window</code> object of your main xib to <strong>Full Size at Launch</strong>.</p>
-
-<h3>Error: UIViewControllerHierarchyInconsistency</h3>
-
-<p>This is again due to an older project.</p>
-
-<p>You <a href="http://stackoverflow.com/questions/12434937/uiviewcontrollerhierarchyinconsistency-when-trying-to-present-a-modal-view-contr/12450770#12450770">need</a> to do this:</p>
-
-<ol>
-<li><p>Move main <strong>View</strong> out of <strong>View Controller</strong>:</p></li>
-<li><p>Delete <strong>View Controller</strong> from the XIB (it is not necessary since File's Owner should be of its Class already)</p></li>
-</ol>
-
 ]]></content>
   </entry>
   

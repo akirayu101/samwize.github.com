@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-03-17T12:31:59+08:00</updated>
+  <updated>2013-03-29T15:24:33+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to run iOS 4.3 Simulator on Mountain Lion?]]></title>
+    <link href="http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/"/>
+    <updated>2013-03-29T15:23:00+08:00</updated>
+    <id>http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion</id>
+    <content type="html"><![CDATA[<p>You can&#8217;t.</p>
+
+<p>This is a <a href="http://stackoverflow.com/questions/11651773/install-simulator-sdk-4-3-to-xcode-4-4-on-mountain-lion">Mountain Lion issue</a>. Apple somehow broke it, and so even if you manage to download and install the simulator, you can&#8217;t run it.</p>
+
+<p>Apple recommend you to test on a real device.</p>
+
+<p>I&#8217;m sorry.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Clean install iMac on Mountain Lion]]></title>
+    <link href="http://samwize.com/2013/03/27/clean-install-imac-on-mountain-lion/"/>
+    <updated>2013-03-27T21:54:00+08:00</updated>
+    <id>http://samwize.com/2013/03/27/clean-install-imac-on-mountain-lion</id>
+    <content type="html"><![CDATA[<p>I posted about how I <a href="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/">migrate an old Mac to a new Mac</a> in a previous post.</p>
+
+<p>After migration, I also wanted to do a clean install on the old Mac, and bring it to factory settings, but with the latest OS X (Mountain Lion for me).</p>
+
+<p>It is very easy.</p>
+
+<!-- more -->
+
+
+<blockquote></blockquote>
+
+<p>The steps:</p>
+
+<ul>
+<li><p>Restart computer and press <strong>Command + R</strong> while it restart to get to a menu screen</p></li>
+<li><p>Select <strong>Disk Utility</strong> > Macintosh HD (your startup volume) > Erase</p></li>
+<li><p>Go back to menu screen and select <strong>Install Mac OS X</strong></p></li>
+</ul>
+
+
+<p>Follow through and it will be done!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[POST Request to UIWebView]]></title>
@@ -977,113 +1021,6 @@ git push -u origin master
 <p>To make it work, you don&#8217;t call any asserts within the block.</p>
 
 <p>Leave it until <code>waitForStatus</code> is unblocked.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[App Engine Unused Discounted Instance Hour]]></title>
-    <link href="http://samwize.com/2012/11/23/app-engine-unused-discounted-instance-hour/"/>
-    <updated>2012-11-23T22:48:00+08:00</updated>
-    <id>http://samwize.com/2012/11/23/app-engine-unused-discounted-instance-hour</id>
-    <content type="html"><![CDATA[<p>Google App Engine has this item - Discounted Instance Hour - which you can reserve a number of hours per week at a cheaper cost.</p>
-
-<p>Recently, I was looking at the Charge Sent per week, and one of the item is this:</p>
-
-<blockquote><p>Unused Discounted Instance Hour - Used XXX hours</p></blockquote>
-
-<!-- more -->
-
-
-<p>The item cost a big part of my weekly charges. I was puzzled at first: How did I used XXX hours out of an item that said is unused?</p>
-
-<p>Then I went to my Billing Settings, and saw this:</p>
-
-<pre><code>Discounted Instance Hours: YYY Hours
-
-Committing to a number of instance hours for a weekly billing period in advance can 
-help lower your bill. You will be charged $0.05 per hour for the hours you commit to here, 
-even if you don't use them during the billing period.
-</code></pre>
-
-<p>I have set YYY hours per week as a <strong>Reserved</strong> Discounted Instance Hours.</p>
-
-<p>Even if I don&#8217;t use them, they are charged!</p>
-
-<h2>Lesson Learnt</h2>
-
-<p>At times, you should monitor the weekly usage.</p>
-
-<p>If the <strong>Unused Discounted Instance Hour</strong> is very high (much higher than what is being used), then you should adjust it from Billing Settings.</p>
-
-<p>I have wasted quite some money paying for instance hours that I didn&#8217;t use..</p>
-
-<p>(I set the reserved instance hours very high initially because there was a period of peak, but now it has gone down, yet I didn&#8217;t adjust..)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[WARNING: Do not use Base Internationalization in iOS 5]]></title>
-    <link href="http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5/"/>
-    <updated>2012-11-22T21:57:00+08:00</updated>
-    <id>http://samwize.com/2012/11/22/warning-do-not-use-base-internationalization-in-ios-5</id>
-    <content type="html"><![CDATA[<p>iOS 5 does NOT support Base Internationalization.</p>
-
-<p>I learnt this the hard way (and partly Apple&#8217;s fault).</p>
-
-<p>After upgrading my project to use Base Internationalization, I release a new version, and shortly, my users complained of startup crash.</p>
-
-<!-- more -->
-
-
-<h2>New release, crash on startup</h2>
-
-<p>You might be wondering:</p>
-
-<blockquote><p>Didn&#8217;t you test your app?</p></blockquote>
-
-<p>I did test, <strong>but only with Simulator</strong>. I ran on Simulator with iOS 5, and also tested on my real device with iOS 6.0.</p>
-
-<p>It didn&#8217;t crash on Simulator with iOS 5.</p>
-
-<p>However, on a real iPhone with iOS 5, it crashed on startup.</p>
-
-<p>Exception is raised from <code>[UINib instantiateWithOwner:options:]</code>, with the error log:</p>
-
-<pre><code>Terminating app due to uncaught exception 'NSInternalInconsistencyException', 
-reason: 'Could not load NIB in bundle: 'NSBundle 
-&lt;/var/mobile/Applications/***/***.app&gt; (loaded)' with name 'MainWindow''
-</code></pre>
-
-<p>This <a href="http://stackoverflow.com/questions/9075298/app-works-on-simulator-but-not-on-iphone">meant</a> that the app could not find <code>MainWindow.xib</code>.</p>
-
-<p>It is strange that the xib is not copied, especially when I am prudent to do clean build and run.</p>
-
-<h2>The culprit</h2>
-
-<p>Base Internationalization was introduced in iOS 6. It is an awesome feature because: instead of having N NIB files for N languages, you need just <strong>1 base NIB file</strong> with <strong>N localization.strings</strong>.</p>
-
-<p>The biggest change I had for the release was Base Internationalization.</p>
-
-<p>Researching into the problem, I realized Base Internationalization is supported only from iOS 6.</p>
-
-<p>Xcode will let you release the app with <em>any minimum deployment target</em>, without any warning. But once the app starts and load a xib, it will crash as it can&#8217;t find the xib.</p>
-
-<h2>The Solution</h2>
-
-<p>The change is reversible.</p>
-
-<p>Select the XIB and look under File Inspector.</p>
-
-<p>You can change each of the <code>localization.strings</code> back to XIB. Then remove the Base (when prompted, copied it to English).</p>
-
-<h2>Lessons Learnt</h2>
-
-<ul>
-<li><p>Simulator is not exactly like real device</p></li>
-<li><p>Base Internationalization is awesome, but is not advised to be used</p></li>
-<li><p>Many users stick with iOS 5 because of Map app. Perhaps they will upgrade in ~2014 as Apple continues to improve.</p></li>
-</ul>
-
 ]]></content>
   </entry>
   
