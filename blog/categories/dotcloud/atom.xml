@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Dotcloud | Junda Ong]]></title>
+  <link href="http://samwize.com/blog/categories/dotcloud/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2013-04-02T00:25:12+08:00</updated>
+  <id>http://samwize.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Transfer Away Dotcloud Data using FTP]]></title>
+    <link href="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/"/>
+    <updated>2013-04-01T23:41:00+08:00</updated>
+    <id>http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp</id>
+    <content type="html"><![CDATA[<p>If you have data on Dotcloud server that you want to transfer away via FTP directly, you can't, because Dotcloud don't provide FTP to the instances.</p>
+
+<p>This is about the best way I know of transfering data, first by transferring to your own FTP server:</p>
+
+<!-- more -->
+
+
+<p>```
+// SSH to your dotcloud instance
+dotcloud run www</p>
+
+<p>// ZIP the data eg. html
+tar -C $HOME -czf html.tar.gz ./current/html</p>
+
+<p>// curl
+curl -u myusername:mypassword -sST html.tar.gz ftp://myserver.com
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

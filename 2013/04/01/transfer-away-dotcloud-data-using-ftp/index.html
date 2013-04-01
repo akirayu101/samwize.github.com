@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tips on making iOS App Icons - Junda Ong</title>
+  <title>Transfer Away Dotcloud Data using FTP - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions. This post is to &hellip;">
+  <meta name="description" content="If you have data on Dotcloud server that you want to transfer away via FTP directly, you can&#8217;t, because Dotcloud don&#8217;t provide FTP to the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/">
+  <link rel="canonical" href="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Tips on Making iOS App Icons</h1>
+      <h1 class="entry-title">Transfer Away Dotcloud Data Using FTP</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-11-26T23:42:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+<time datetime="2013-04-01T23:41:00+08:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,68 +107,33 @@
   </header>
 
 
-<div class="entry-content"><p>Making a beautiful iOS app icon takes some hard work. Even more work now that there are more devices with different resolutions.</p>
+<div class="entry-content"><p>If you have data on Dotcloud server that you want to transfer away via FTP directly, you can&#8217;t, because Dotcloud don&#8217;t provide FTP to the instances.</p>
 
-<p>This post is to provide some of the tips in the making Apple&#8217;s trademarked iPhone rounded icon.</p>
+<p>This is about the best way I know of transfering data, first by transferring to your own FTP server:</p>
 
 <!-- more -->
 
 
-<h2>Understanding the resolutions</h2>
-
-<p>There is quite a number of different resolutions that is needed for 1 app.</p>
-
-<p>Refer to this <a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/IconsImages/IconsImages.html#//apple_ref/doc/uid/TP40006556-CH14-SW1">Apple document</a>.</p>
-
-<p>Note that every icon can be different in terms of how it looks. So in theory you can have a 57x57 that is totally different looking from your 512x512.</p>
-
-<h2>Icon Template</h2>
-
-<p>There are many template around. The most popular (now) is from <a href="http://appicontemplate.com/">http://appicontemplate.com/</a>.</p>
-
-<p>Using Photoshop smart objects, the template let you edit the biggest size, and it will automatically scale down to the smaller sizes, and export them automatically.</p>
-
-<h2>Rounded corner radius</h2>
-
-<p>If you are not using the template or need a specific resolution, it is important that you know the rounded corner radius for each of the icon reolution. This <a href="http://stackoverflow.com/a/10239376/242682">discussion</a> explained well.</p>
-
-<p>To summarize,</p>
-
-<blockquote><p>Rounded corner radius = icon length x 10/57</p></blockquote>
-
-<p>That is,</p>
-
-<ul>
-<li>Icon512.png - 512px - 89.825</li>
-<li>Icon.png - 57px - 10</li>
-<li>Icon@2x.png - 114px - 20</li>
-<li>Icon-72.png - 72px - 12.632</li>
-<li>Icon-72@2x.png - 144px - 25.263</li>
-<li>Icon-Small.png - 29px - 5.088</li>
-<li>Icon-Small@2x.png - 58px - 10.175</li>
-</ul>
 
 
-<h2>Mask</h2>
-
-<p>You can get a set of mask from within Xcode.</p>
-
-<p>Open the following directory.</p>
-
-<pre><code>open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/System/Library/PrivateFrameworks/MobileIcons.framework
-</code></pre>
-
-<p>But there is also a <a href="http://stackoverflow.com/a/1834558/242682">way</a> to programmatically set a round corner masking:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">cornerRadius</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">;</span>
-</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">masksToBounds</span> <span class="o">=</span> <span class="n">YES</span><span class="p">;</span>
-</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">lightGrayColor</span><span class="p">].</span><span class="n">CGColor</span><span class="p">;</span>
-</span><span class='line'><span class="n">imageView</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">borderWidth</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// SSH to your dotcloud instance
+</span><span class='line'>dotcloud run www
+</span><span class='line'>
+</span><span class='line'>// ZIP the data eg. html
+</span><span class='line'>tar -C $HOME -czf html.tar.gz ./current/html
+</span><span class='line'>
+</span><span class='line'>// curl
+</span><span class='line'>curl -u myusername:mypassword -sST html.tar.gz ftp://myserver.com</span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
@@ -192,12 +157,12 @@
   
 
 
-<time datetime="2012-11-26T23:42:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
+<time datetime="2013-04-01T23:41:00+08:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/graphics/'>Graphics</a>, <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/dotcloud/'>Dotcloud</a>
   
 </span>
 
@@ -206,7 +171,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/" data-via="samwize" data-counturl="http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/" data-via="samwize" data-counturl="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -219,10 +184,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/11/25/create-async-test-with-ghunit/" title="Previous Post: Create Async Test with GHUnit">&laquo; Create Async Test with GHUnit</a>
+        <a class="basic-alignment left" href="/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/" title="Previous Post: How to run iOS 4.3 Simulator on Mountain Lion?">&laquo; How to run iOS 4.3 Simulator on Mountain Lion?</a>
       
-      
-        <a class="basic-alignment right" href="/2012/11/28/how-to-migrate-svn-to-git/" title="Next Post: How to migrate SVN to Git">How to migrate SVN to Git &raquo;</a>
       
     </p>
   </footer>
@@ -301,8 +264,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/';
-        var disqus_url = 'http://samwize.com/2012/11/26/tips-on-making-ios-app-icons/';
+        var disqus_identifier = 'http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/';
+        var disqus_url = 'http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/';
         var disqus_script = 'embed.js';
       
     (function () {
