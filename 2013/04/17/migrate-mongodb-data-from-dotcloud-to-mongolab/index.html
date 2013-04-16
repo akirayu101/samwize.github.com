@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to setup Octopress on Github Pages - Junda Ong</title>
+  <title>Migrate mongodb data from Dotcloud to MongoLab - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="This blog is hosted entirely on Github Pages, powered by the blogging framework for hacker - Octopress. As mentioned in the previous post, I have &hellip;">
+  <meta name="description" content="Similar to how you transfer data away from Dotcloud, you can do the same for your mongodb database. I have been moving away from Dotcloud as they no &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/">
+  <link rel="canonical" href="http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">How to Setup Octopress on Github Pages</h1>
+      <h1 class="entry-title">Migrate Mongodb Data From Dotcloud to MongoLab</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-09-11T02:07:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+<time datetime="2013-04-17T02:50:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,99 +107,44 @@
   </header>
 
 
-<div class="entry-content"><p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
+<div class="entry-content"><p>Similar to how you <a href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/">transfer data away from Dotcloud</a>, you can do the same for your mongodb database.</p>
 
-<p>As mentioned in the previous post, I have <a href="/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
+<p>I have been moving away from Dotcloud as they no longer provide free sandbox app.</p>
 
 <!-- more -->
 
 
-<h2>Setup</h2>
-
-<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
-
-<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
-
-<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
-
-<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
-
-<pre><code># Here's how I found out
-rake new_post["Switched Wordpress to Octopress"]
-rbenv: version `1.9.3-p194' is not installed
-
-# Hence..
-rbenv install 1.9.3-p194
-rbenv global 1.9.3-p194
-</code></pre>
-
-<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
-
-<pre><code>gem install bundler
-rbenv rehash
-bundle install
-</code></pre>
-
-<h2>Deploy</h2>
-
-<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it&#8217;s free as long as you don&#8217;t mind pushing your &#8216;code&#8217; to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
-
-<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
-
-<ol>
-<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
-<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
-</ol>
 
 
-<p>To deploy:</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// ssh into mongo db instance first
+</span><span class='line'>dot cloud run db
+</span><span class='line'>
+</span><span class='line'>// dump the data, then transfer via ftp
+</span><span class='line'>mongodump -h mongo.MYAPP.dotcloud.com:MYPORT -u root -p MYPASSWORD -d MYDBNAME
+</span><span class='line'>tar -czf MYDBNAME.tgz dump
+</span><span class='line'>curl -u myftpusername:myftppassword -sST MYDBNAME.tgz ftp://myftpdomain.com</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>rake generate
-rake deploy
-</code></pre>
 
-<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
+<p>I use FTP, but if you prefer S3, you could do <a href="http://icodesnip.com/snippet/bash/dotcloud-mongodb-backup-script">this</a>.</p>
 
-<p>So what about the source branch? You should also commit and push them.</p>
+<p>Download the tgz and unzip to get a dump directory.</p>
 
-<pre><code>git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
+<p>Create a database in mongolab.</p>
 
-<h2>Custom Domain</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// On local machine, do a mongorestore to mongolab
+</span><span class='line'>mongorestore -h xxx037077.mongolab.com:37077 -d MYDBNAME -u root -p MYPASSWORD2 dump/MYAPP/</span></code></pre></td></tr></table></div></figure>
 
-<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
 
-<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
-</code></pre>
 
-<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
-
-<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
-
-<h2>New Post</h2>
-
-<p>This is my process whenever I have a new blog post.</p>
-
-<pre><code>rake new_post["My New Post"]
-
-# edit my-new-post.markdown with text editor
-
-rake preview
-
-# Open http://localhost:4000 for a preview
-# Edit and preview until satified
-
-# Ready to publish
-rake generate
-rake deploy
-
-# Commit source
-git add .
-git commit -m 'your message'
-git push origin source  
-</code></pre>
 </div>
 
 
@@ -222,12 +167,12 @@ git push origin source
   
 
 
-<time datetime="2012-09-11T02:07:00+08:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+<time datetime="2013-04-17T02:50:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/dotcloud/'>Dotcloud</a>
   
 </span>
 
@@ -236,7 +181,7 @@ git push origin source
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/" data-via="samwize" data-counturl="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/" data-via="samwize" data-counturl="http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -249,10 +194,8 @@ git push origin source
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/09/10/switched-from-wordpress-to-octopress/" title="Previous Post: Switched Wordpress to Octopress">&laquo; Switched Wordpress to Octopress</a>
+        <a class="basic-alignment left" href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/" title="Previous Post: Transfer Away Dotcloud Data using FTP">&laquo; Transfer Away Dotcloud Data using FTP</a>
       
-      
-        <a class="basic-alignment right" href="/2012/09/12/hide-all-my-files-in-macs-finder/" title="Next Post: Hide "All My Files" in Mac's Finder">Hide "All My Files" in Mac's Finder &raquo;</a>
       
     </p>
   </footer>
@@ -331,8 +274,8 @@ git push origin source
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/';
-        var disqus_url = 'http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/';
+        var disqus_identifier = 'http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/';
+        var disqus_url = 'http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/';
         var disqus_script = 'embed.js';
       
     (function () {

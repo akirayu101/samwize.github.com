@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Dotcloud | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/dotcloud/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-02T00:25:12+08:00</updated>
+  <updated>2013-04-17T02:59:59+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Migrate mongodb data from Dotcloud to MongoLab]]></title>
+    <link href="http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/"/>
+    <updated>2013-04-17T02:50:00+08:00</updated>
+    <id>http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab</id>
+    <content type="html"><![CDATA[<p>Similar to how you <a href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/">transfer data away from Dotcloud</a>, you can do the same for your mongodb database.</p>
+
+<p>I have been moving away from Dotcloud as they no longer provide free sandbox app.</p>
+
+<!-- more -->
+
+
+<p>```
+// ssh into mongo db instance first
+dot cloud run db</p>
+
+<p>// dump the data, then transfer via ftp
+mongodump -h mongo.MYAPP.dotcloud.com:MYPORT -u root -p MYPASSWORD -d MYDBNAME
+tar -czf MYDBNAME.tgz dump
+curl -u myftpusername:myftppassword -sST MYDBNAME.tgz ftp://myftpdomain.com
+```</p>
+
+<p>I use FTP, but if you prefer S3, you could do <a href="http://icodesnip.com/snippet/bash/dotcloud-mongodb-backup-script">this</a>.</p>
+
+<p>Download the tgz and unzip to get a dump directory.</p>
+
+<p>Create a database in mongolab.</p>
+
+<p><code>
+// On local machine, do a mongorestore to mongolab
+mongorestore -h xxx037077.mongolab.com:37077 -d MYDBNAME -u root -p MYPASSWORD2 dump/MYAPP/
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Transfer Away Dotcloud Data using FTP]]></title>
