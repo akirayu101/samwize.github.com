@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Create Async Test with GHUnit - Junda Ong</title>
+  <title>s3cmd broken pipe error (errno 32) - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="One of the greatest feature with GHUnit is that it supports unit tests that perform asynchronous stuff. The ExampleAsyncTest from GHUnit &hellip;">
+  <meta name="description" content="If you use s3cmd and encountered [Errno 32] Broken pipe as you try to put an object in a bucket, understand that this is a very very bad error &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/11/25/create-async-test-with-ghunit/">
+  <link rel="canonical" href="http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Create Async Test With GHUnit</h1>
+      <h1 class="entry-title">S3cmd Broken Pipe Error (Errno 32)</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-11-25T01:44:00+08:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+<time datetime="2013-04-21T13:26:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,31 +107,43 @@
   </header>
 
 
-<div class="entry-content"><p>One of the <a href="/2012/10/03/sentestingkit-does-not-support-wait-for-blocks">greatest</a> feature with GHUnit is that it supports unit tests that perform asynchronous stuff.</p>
+<div class="entry-content"><p>If you use <a href="http://s3tools.org/s3cmd">s3cmd</a> and encountered <code>[Errno 32] Broken pipe</code> as you try to put an object in a bucket, understand that this is a <em>very very bad error message</em>.</p>
 
-<p>The <a href="http://gabriel.github.com/gh-unit/docs/appledoc_include/guide_testing.html">ExampleAsyncTest</a> from GHUnit documentation provides a glimpse of what you need to do. However, it still lacks warning you on the <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common pitfalls</a>.</p>
+<p><a href="http://jeremyshapiro.com/blog/2011/02/errno-32-broken-pipe-in-s3cmd/">Jeremy</a> blogged about this and attributed the error to <strong>a typo in the bucket name</strong>.</p>
 
-<p>This is step by step of how you can use GHUnit async test:</p>
+<p>Others attributed it to <strong>no permission</strong>, <strong>file too big</strong>, etc..</p>
+
+<p>I attributed it to <strong>incorrect permission policy</strong>.</p>
 
 <!-- more -->
 
 
-<h2>Subclass GHAsyncTestCase instead</h2>
+<p>I was trying to create a new security group, and adding a new user, and restrict his access to only 1 of my S3 bucket. When you create a new security group, you can <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html">edit the policy</a>.</p>
 
-<p>Change the interface class to use <code>GHAsyncTestCase</code>.</p>
+<p>You might change to this, thinking it allows all action on <code>example_bucket</code>:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>WRONG Policy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">@interface</span> <span class="nc">ExampleAsyncTest</span> : <span class="nc">GHAsyncTestCase</span> <span class="p">{</span> <span class="p">}</span>
-</span><span class='line'><span class="k">@end</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;Statement&quot;</span><span class="p">:[{</span>
+</span><span class='line'>     <span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="s2">&quot;arn:aws:s3:::example_bucket&quot;</span>
+</span><span class='line'>   <span class="p">}]</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Prepare and wait</h2>
+<p>You are wrong (though I say Amazon and it&#8217;s documentation to blame).</p>
 
-<p>Setup the test method with the asynchronous/block call like this:</p>
+<p>The <a href="http://stackoverflow.com/a/6955864/242682">correct way</a> is to have multiple statements like this:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>Correct Policy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -155,45 +167,56 @@
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testAsync</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Prepare asynchronous action</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="n">prepare</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// The method call with block</span>
-</span><span class='line'>    <span class="k">static</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">_objects</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">Query</span> <span class="nl">findObjectsInBackgroundWithBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">NSArray</span> <span class="o">*</span><span class="n">objects</span><span class="p">,</span> <span class="n">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// IMPORTANT: Do not call any assert here</span>
-</span><span class='line'>        <span class="c1">// If you want, do it after waitForStatus</span>
-</span><span class='line'>        <span class="c1">// GHAssertEquals(...) will crash!</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Instead, we assign to a static var for testing later</span>
-</span><span class='line'>        <span class="n">_objects</span> <span class="o">=</span> <span class="n">objects</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Notify that block method has completed</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span> <span class="nl">notify:</span><span class="n">kGHUnitWaitStatusSuccess</span> <span class="nl">forSelector:</span><span class="k">@selector</span><span class="p">(</span><span class="n">testObjectRelationships</span><span class="p">)];</span>
-</span><span class='line'>    <span class="p">}];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// Wait for block to finish, or timeout</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span> <span class="nl">waitForStatus:</span><span class="n">kGHUnitWaitStatusSuccess</span> <span class="nl">timeout:</span><span class="mf">10.0</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// Do asserts here instead</span>
-</span><span class='line'>    <span class="n">GHAssertEquals</span><span class="p">(</span><span class="mi">99</span><span class="n">U</span><span class="p">,</span> <span class="p">[</span><span class="n">_objects</span> <span class="n">count</span><span class="p">],</span> <span class="nb">nil</span><span class="p">);</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:ListBucketMultipartUploads&quot;</span>
+</span><span class='line'>      <span class="p">],</span>
+</span><span class='line'>      <span class="nt">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:s3:::example_bucket&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Condition&quot;</span><span class="p">:</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s2">&quot;s3:AbortMultipartUpload&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:DeleteObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:DeleteObjectVersion&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectVersion&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectVersionAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObjectAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObjectAclVersion&quot;</span>
+</span><span class='line'>      <span class="p">],</span>
+</span><span class='line'>      <span class="nt">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:s3:::example_bucket/*&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Condition&quot;</span><span class="p">:</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>Pitfall: Assert in block</h2>
+<p>You need to split into 2 resources.</p>
 
-<p>It is <a href="http://stackoverflow.com/questions/7613761/why-does-a-false-assertion-in-async-test-in-ghunit-crash-the-app-instead-of-just">common</a> that you assert within the block.</p>
+<ol>
+<li><p><code>arn:aws:s3:::example_bucket</code> - allow to list objects in the bucket</p></li>
+<li><p><code>arn:aws:s3:::example_bucket/*</code> - allow to Get/Put/etc the objects in the bucket</p></li>
+</ol>
 
-<p>But that will just give the following exception when the test fails.</p>
 
-<pre><code>Terminating app due to uncaught exception 'GHTestFailureException', reason: ...
-</code></pre>
-
-<p>To make it work, you don&#8217;t call any asserts within the block.</p>
-
-<p>Leave it until <code>waitForStatus</code> is unblocked.</p>
+<p>It&#8217;s subtle..</p>
 </div>
 
 
@@ -216,12 +239,12 @@
   
 
 
-<time datetime="2012-11-25T01:44:00+08:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+<time datetime="2013-04-21T13:26:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/testing/'>Testing</a>, <a class='category' href='/blog/categories/ios-/'>iOS,</a>
+    <a class='category' href='/blog/categories/aws/'>AWS</a>
   
 </span>
 
@@ -230,7 +253,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/11/25/create-async-test-with-ghunit/" data-via="samwize" data-counturl="http://samwize.com/2012/11/25/create-async-test-with-ghunit/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/" data-via="samwize" data-counturl="http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -243,10 +266,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/11/23/app-engine-unused-discounted-instance-hour/" title="Previous Post: App Engine Unused Discounted Instance Hour">&laquo; App Engine Unused Discounted Instance Hour</a>
+        <a class="basic-alignment left" href="/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/" title="Previous Post: Migrate mongodb data from Dotcloud to MongoLab">&laquo; Migrate mongodb data from Dotcloud to MongoLab</a>
       
-      
-        <a class="basic-alignment right" href="/2012/11/26/tips-on-making-ios-app-icons/" title="Next Post: Tips on making iOS App Icons">Tips on making iOS App Icons &raquo;</a>
       
     </p>
   </footer>
@@ -325,8 +346,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/11/25/create-async-test-with-ghunit/';
-        var disqus_url = 'http://samwize.com/2012/11/25/create-async-test-with-ghunit/';
+        var disqus_identifier = 'http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/';
+        var disqus_url = 'http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/';
         var disqus_script = 'embed.js';
       
     (function () {

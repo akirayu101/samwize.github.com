@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-17T02:59:59+08:00</updated>
+  <updated>2013-04-21T13:38:54+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[s3cmd broken pipe error (errno 32)]]></title>
+    <link href="http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32/"/>
+    <updated>2013-04-21T13:26:00+08:00</updated>
+    <id>http://samwize.com/2013/04/21/s3cmd-broken-pipe-error-errno-32</id>
+    <content type="html"><![CDATA[<p>If you use <a href="http://s3tools.org/s3cmd">s3cmd</a> and encountered <code>[Errno 32] Broken pipe</code> as you try to put an object in a bucket, understand that this is a <em>very very bad error message</em>.</p>
+
+<p><a href="http://jeremyshapiro.com/blog/2011/02/errno-32-broken-pipe-in-s3cmd/">Jeremy</a> blogged about this and attributed the error to <strong>a typo in the bucket name</strong>.</p>
+
+<p>Others attributed it to <strong>no permission</strong>, <strong>file too big</strong>, etc..</p>
+
+<p>I attributed it to <strong>incorrect permission policy</strong>.</p>
+
+<!-- more -->
+
+
+<p>I was trying to create a new security group, and adding a new user, and restrict his access to only 1 of my S3 bucket. When you create a new security group, you can <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html">edit the policy</a>.</p>
+
+<p>You might change to this, thinking it allows all action on <code>example_bucket</code>:</p>
+
+<figure class='code'><figcaption><span>WRONG Policy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;Statement&quot;</span><span class="p">:[{</span>
+</span><span class='line'>     <span class="nt">&quot;Effect&quot;</span><span class="p">:</span><span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="nt">&quot;Action&quot;</span><span class="p">:</span><span class="s2">&quot;*&quot;</span><span class="p">,</span>
+</span><span class='line'>     <span class="nt">&quot;Resource&quot;</span><span class="p">:</span><span class="s2">&quot;arn:aws:s3:::example_bucket&quot;</span>
+</span><span class='line'>   <span class="p">}]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You are wrong (though I say Amazon and it&#8217;s documentation to blame).</p>
+
+<p>The <a href="http://stackoverflow.com/a/6955864/242682">correct way</a> is to have multiple statements like this:</p>
+
+<figure class='code'><figcaption><span>Correct Policy</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s2">&quot;s3:ListBucket&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetBucketLocation&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:ListBucketMultipartUploads&quot;</span>
+</span><span class='line'>      <span class="p">],</span>
+</span><span class='line'>      <span class="nt">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:s3:::example_bucket&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Condition&quot;</span><span class="p">:</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Action&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s2">&quot;s3:AbortMultipartUpload&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:DeleteObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:DeleteObjectVersion&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectVersion&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:GetObjectVersionAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObject&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObjectAcl&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;s3:PutObjectAclVersion&quot;</span>
+</span><span class='line'>      <span class="p">],</span>
+</span><span class='line'>      <span class="nt">&quot;Resource&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:s3:::example_bucket/*&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nt">&quot;Condition&quot;</span><span class="p">:</span> <span class="p">{}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You need to split into 2 resources.</p>
+
+<ol>
+<li><p><code>arn:aws:s3:::example_bucket</code> - allow to list objects in the bucket</p></li>
+<li><p><code>arn:aws:s3:::example_bucket/*</code> - allow to Get/Put/etc the objects in the bucket</p></li>
+</ol>
+
+
+<p>It&#8217;s subtle..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migrate mongodb data from Dotcloud to MongoLab]]></title>
@@ -897,46 +1015,6 @@ else
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to migrate SVN to Git]]></title>
-    <link href="http://samwize.com/2012/11/28/how-to-migrate-svn-to-git/"/>
-    <updated>2012-11-28T23:10:00+08:00</updated>
-    <id>http://samwize.com/2012/11/28/how-to-migrate-svn-to-git</id>
-    <content type="html"><![CDATA[<p>My biggest problem with SVN is that I don&#8217;t have good Mac software supporting SVN. For Git, I have the free <a href="http://www.sourcetreeapp.com/">SourceTree</a> app.</p>
-
-<p>Hence I decided to migrate some of my ancient repos that were still on SVN.</p>
-
-<p>It is actually easy.</p>
-
-<!-- more -->
-
-
-<p>It is basically just 1 command to clone the svn repos to your local working directory. The operation will maintain the logs.</p>
-
-<pre><code>git svn clone -s http://my.svnserver.com/svn/myapp/ MyAppGit
-</code></pre>
-
-<p>The <code>-s</code> command will clone just the trunk. If you don&#8217;t use the stand trunk, tag, branch, you can <code>-s</code> and it will clone the whole repos.</p>
-
-<p>You can verify all logs are there with <code>git log</code>.</p>
-
-<p>Next, maintain the same ignore configurations.</p>
-
-<pre><code>git svn create-ignore
-</code></pre>
-
-<p>Lastly, add the new remote to your git repos (eg Github).</p>
-
-<pre><code>git remote add origin https://github.com/samwize/myapp.git
-git push -u origin master
-</code></pre>
-
-<p>That&#8217;s all!</p>
-
-<p>You may also want to refer to <a href="http://samwize.com/2012/10/30/common-git-usage/">some common Git usage</a>.</p>
 ]]></content>
   </entry>
   
