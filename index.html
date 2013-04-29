@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="If you use s3cmd and encountered [Errno 32] Broken pipe as you try to put an object in a bucket, understand that this is a very very bad error &hellip;">
+  <meta name="description" content="Apple has long announced uniqueIdentifier UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier. So &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,97 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/26/what-is-the-replacement-for-ios-udid/">What Is the Replacement for iOS UDID?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-26T00:11:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time>
+        
+         | <a href="/2013/04/26/what-is-the-replacement-for-ios-udid/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
+
+<p>So what you have do?</p>
+
+<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
+
+<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/04/24/android-developement-refresher-2013/">Android Developement Refresher 2013</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-24T23:13:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2013</time>
+        
+         | <a href="/2013/04/24/android-developement-refresher-2013/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It has been nearly 3 years since I stopped Android development.</p>
+
+<p>A lot has changed since the days of version 1.6. Now it is 4.x!</p>
+
+<p>Trying to do a little bit of compiling and setting up stuff these days, and I had some hiccups. This is a refresher guide on some topics.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/04/24/android-developement-refresher-2013/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -523,100 +614,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/02/queue-http-operations-with-afnetworking/">Queue HTTP Operations With AFNetworking</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-02T22:55:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
-        
-         | <a href="/2013/03/02/queue-http-operations-with-afnetworking/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
-
-<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
-
-<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, &#8230;</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/03/02/queue-http-operations-with-afnetworking/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/">Sample GET/POST Using Google AppEngine Java HttpConnection</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-16T20:26:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2013</time>
-        
-         | <a href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A sample code on basic usage of HTTP GET/POST is always helpful.</p>
-
-<p>I wrote once for <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">AFNetworking</a> (for iOS), which I subsequently referred to it myself. Hence, I am now writing for Google App Engine (Java).</p>
-
-<p>Google provided <a href="https://developers.google.com/appengine/docs/java/urlfetch/usingjavanet">documentation</a> on http connection, but it is incomplete. Here&#8217;s my version.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -632,6 +629,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/04/26/what-is-the-replacement-for-ios-udid/">What is the replacement for iOS UDID?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/24/android-developement-refresher-2013/">Android Developement Refresher 2013</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/21/s3cmd-broken-pipe-error-errno-32/">s3cmd broken pipe error (errno 32)</a>
       </li>
     
@@ -641,14 +646,6 @@
     
       <li class="post">
         <a href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/">Transfer Away Dotcloud Data using FTP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/">How to run iOS 4.3 Simulator on Mountain Lion?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/27/clean-install-imac-on-mountain-lion/">Clean install iMac on Mountain Lion</a>
       </li>
     
   </ul>

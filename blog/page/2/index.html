@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="When my new iMac was delivered, the only unsatisfactory I had was with the faulty trackpad. It can click, but can&#8217;t move the cursor at all! I &hellip;">
+  <meta name="description" content="In a previous post, I wrote about a simple usage of AFNetworking, the de facto HTTP library for iOS. This post, I will show how you can use &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/02/queue-http-operations-with-afnetworking/">Queue HTTP Operations With AFNetworking</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-02T22:55:00+08:00" pubdate data-updated="true">Mar 2<span>nd</span>, 2013</time>
+        
+         | <a href="/2013/03/02/queue-http-operations-with-afnetworking/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
+
+<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
+
+<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, &#8230;</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/03/02/queue-http-operations-with-afnetworking/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/">Sample GET/POST Using Google AppEngine Java HttpConnection</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-16T20:26:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2013</time>
+        
+         | <a href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A sample code on basic usage of HTTP GET/POST is always helpful.</p>
+
+<p>I wrote once for <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">AFNetworking</a> (for iOS), which I subsequently referred to it myself. Hence, I am now writing for Google App Engine (Java).</p>
+
+<p>Google provided <a href="https://developers.google.com/appengine/docs/java/urlfetch/usingjavanet">documentation</a> on http connection, but it is incomplete. Here&#8217;s my version.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -479,104 +573,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/12/06/7-ios-custom-popup-views/">7 iOS Custom Popup Views</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-06T21:38:00+08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
-        
-         | <a href="/2012/12/06/7-ios-custom-popup-views/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
-
-<p>Nonetheless, others are good depending on your use.</p>
-
-<p>Here are 7 custom popup views for iOS:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/06/7-ios-custom-popup-views/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/29/phewtick-api-message-to-any-user/">Phewtick API - Message to Any User You Want</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-29T22:18:00+08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
-        
-         | <a href="/2012/11/29/phewtick-api-message-to-any-user/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I wrote a <a href="https://github.com/samwize/phewtick-hack">Phewtick Hack</a> a few days ago.</p>
-
-<p><img src="http://www.phewtick.com/img/home_main.png" title="Phewtick" ></p>
-
-<p>It started out as a hack via their RESTful API to automatically scan QR code and get Phewtick points ($$$).</p>
-
-<p>Today, Phewtick released a new <a href="https://itunes.apple.com/sg/app/phewtick/id487158487?mt=8">version 3.2.0</a>, which includes 2 new features: timeline and messaging.</p>
-
-<p>I took a look at their API (again)..</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/29/phewtick-api-message-to-any-user/">Continue reading &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -594,6 +590,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/04/26/what-is-the-replacement-for-ios-udid/">What is the replacement for iOS UDID?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/04/24/android-developement-refresher-2013/">Android Developement Refresher 2013</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/21/s3cmd-broken-pipe-error-errno-32/">s3cmd broken pipe error (errno 32)</a>
       </li>
     
@@ -603,14 +607,6 @@
     
       <li class="post">
         <a href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/">Transfer Away Dotcloud Data using FTP</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/">How to run iOS 4.3 Simulator on Mountain Lion?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/03/27/clean-install-imac-on-mountain-lion/">Clean install iMac on Mountain Lion</a>
       </li>
     
   </ul>

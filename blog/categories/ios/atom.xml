@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-21T13:42:29+08:00</updated>
+  <updated>2013-04-30T00:16:22+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What is the replacement for iOS UDID?]]></title>
+    <link href="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/"/>
+    <updated>2013-04-26T00:11:00+08:00</updated>
+    <id>http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid</id>
+    <content type="html"><![CDATA[<p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
+
+<p>So what you have do?</p>
+
+<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
+
+<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to run iOS 4.3 Simulator on Mountain Lion?]]></title>
@@ -121,78 +136,6 @@ NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:@"Your 
 
 <p>}
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Queue HTTP Operations with AFNetworking]]></title>
-    <link href="http://samwize.com/2013/03/02/queue-http-operations-with-afnetworking/"/>
-    <updated>2013-03-02T22:55:00+08:00</updated>
-    <id>http://samwize.com/2013/03/02/queue-http-operations-with-afnetworking</id>
-    <content type="html"><![CDATA[<p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
-
-<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
-
-<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, ...</p>
-
-<!-- more -->
-
-
-<p>Adding operations to a queue is rather simple.</p>
-
-<p>You will be using <code>NSOperationQueue</code>, which is part of Apple's <a href="http://developer.apple.com/library/ios/#documentation/cocoa/Reference/NSOperationQueue_class/Reference/Reference.html">Foundation framework</a>.</p>
-
-<p>You will be adding <code>NSOperation</code> to the queue. Not surprisingly, classes such as <code>AFHTTPRequestOperation</code> subclass <code>NSOperation</code>.</p>
-
-<h2>Adding an operation to a queue</h2>
-
-<p>```objc
-// Create a http operation
-NSURL <em>url = [NSURL URLWithString:@"http://samwize.com/api/cars/"];
-NSURLRequest </em>request = [NSURLRequest requestWithURL:url];
-AFHTTPRequestOperation <em>operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-[httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
-[operation setCompletionBlockWithSuccess:<sup>(AFHTTPRequestOperation</sup> </em>operation, id responseObject) {</p>
-
-<pre><code>// Print the response body in text
-NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-</code></pre>
-
-<p>} failure:<sup>(AFHTTPRequestOperation</sup> <em>operation, NSError </em>error) {</p>
-
-<pre><code>NSLog(@"Error: %@", error);
-</code></pre>
-
-<p>}];</p>
-
-<p>// Add the operation to a queue
-// It will start once added
-NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-[operationQueue addOperation:operation];
-```</p>
-
-<p>As you can see, it is just 2 more lines of code.</p>
-
-<h2>Adding multiple operations and run them concurrently</h2>
-
-<p><code>objc
-NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-// Set the max number of concurrent operations (threads)
-[operationQueue setMaxConcurrentOperationCount:3];
-[operationQueue addOperations:@[operation1, operation2, operation3] waitUntilFinished:NO];
-</code></p>
-
-<h2>Adding Dependencies</h2>
-
-<p>Let's say we have 2 operations, and we want <code>operation2</code> to start only after <code>operation1</code> has finish.</p>
-
-<p>```objc
-NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-// Make operation2 depend on operation1
-[operation2 addDependency:operation1];
-[operationQueue addOperations:@[operation1, operation2, operation3] waitUntilFinished:NO];</p>
-
-<p>```</p>
 ]]></content>
   </entry>
   

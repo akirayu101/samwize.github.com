@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-21T13:42:29+08:00</updated>
+  <updated>2013-04-30T00:16:22+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What is the replacement for iOS UDID?]]></title>
+    <link href="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/"/>
+    <updated>2013-04-26T00:11:00+08:00</updated>
+    <id>http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid</id>
+    <content type="html"><![CDATA[<p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
+
+<p>So what you have do?</p>
+
+<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
+
+<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Android Developement Refresher 2013]]></title>
+    <link href="http://samwize.com/2013/04/24/android-developement-refresher-2013/"/>
+    <updated>2013-04-24T23:13:00+08:00</updated>
+    <id>http://samwize.com/2013/04/24/android-developement-refresher-2013</id>
+    <content type="html"><![CDATA[<p>It has been nearly 3 years since I stopped Android development.</p>
+
+<p>A lot has changed since the days of version 1.6. Now it is 4.x!</p>
+
+<p>Trying to do a little bit of compiling and setting up stuff these days, and I had some hiccups. This is a refresher guide on some topics.</p>
+
+<!-- more -->
+
+
+<h2>App Signing</h2>
+
+<p>The <a href="http://developer.android.com/tools/publishing/app-signing.html">long guide</a> from Google didn&#8217;t explictly said:</p>
+
+<ul>
+<li><p>When you build your app, it will be automatically signed with your <code>debug.keystore</code>, which will be created in <code>/bin/myapp.apk</code>.</p></li>
+<li><p>You can take that SIGNED apk and install on any real devices</p></li>
+<li><p>Don&#8217;t be <a href="http://stackoverflow.com/q/4835925/242682">confused</a> with <code>Export Unsigned ..</code> option. Even if the device &#8220;allow installation of non-Marketed applciation&#8221;, the apk must be SIGNED</p></li>
+<li><p>Linking all up, you can take the SIGNED apk from <code>/bin/myapp.apk</code> and email to your real device to install</p></li>
+</ul>
+
+
+<h2>Maps</h2>
+
+<p>No longer a Map View class.</p>
+
+<p>You have to read the <a href="http://developer.android.com/google/play-services/maps.html">Android guide</a>, and <a href="https://developers.google.com/maps/documentation/android/start#installing_the_google_maps_android_v2_api">setup Google Maps API V2 key</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[s3cmd broken pipe error (errno 32)]]></title>
@@ -905,116 +954,6 @@ else
 <p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
 
 <p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[7 iOS Custom Popup Views]]></title>
-    <link href="http://samwize.com/2012/12/06/7-ios-custom-popup-views/"/>
-    <updated>2012-12-06T21:38:00+08:00</updated>
-    <id>http://samwize.com/2012/12/06/7-ios-custom-popup-views</id>
-    <content type="html"><![CDATA[<p>I was researching on popup/modal views to use, and finally decided on <a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView</a>, which has a nicer blurred background effect.</p>
-
-<p>Nonetheless, others are good depending on your use.</p>
-
-<p>Here are 7 custom popup views for iOS:</p>
-
-<!-- more -->
-
-
-<h2><a href="https://github.com/coneybeare/UAModalPanel">UAModalPanel: Simple dismissiable popup</a></h2>
-
-<p><img src="https://github.com/coneybeare/UAModalPanel/raw/master/_README_ASSETS/UAModalPanel.jpg"></p>
-
-<h2><a href="https://github.com/rnystrom/RNBlurModalView">RNBlurModalView: With a blurred background</a></h2>
-
-<p><img src="https://github.com/rnystrom/RNBlurModalView/raw/master/images/image.jpg"></p>
-
-<h2><a href="https://github.com/martinjuhasz/MJPopupViewController">MJPopupViewController: With different transition effects</a></h2>
-
-<p><img src="https://raw.github.com/martinjuhasz/MJPopupViewController/master/assets/demo2.png"></p>
-
-<h2><a href="http://www.mobilebricks.com/ios/alpopupview">ALPopupView: Facebook-like popup</a> ($19)</h2>
-
-<p><img src="http://iosmix.com/sites/default/files/styles/default/public/full_1185_0.png"></p>
-
-<h2><a href="http://www.50pixels.com/blog/labs/open-library-fppopover-ipad-like-popovers-for-iphone/">FPPopover: iPad-like popovers for iPhone</a></h2>
-
-<p><img src="http://www.50pixels.com/blog/wp-content/uploads/2012/05/framedscreenshot11.png"></p>
-
-<h2><a href="https://github.com/PaulSolt/WEPopover">WEPopover: Another iPad-like popover</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/1f240a003f5d854c5400f9001ca9b35084185281/687474703a2f2f7061756c736f6c742e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031312f30342f6950686f6e652e6a7067"></p>
-
-<h2><a href="https://github.com/chrismiles/CMPopTipView">CMPopTipView: Bubble Tooltip</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/d953577314aafa7c65d1eb3b15f7fd73c9946d1e/687474703a2f2f6661726d352e7374617469632e666c69636b722e636f6d2f343030352f353139313634313033305f326239336134613535392e6a7067"></p>
-
-<h2><a href="https://github.com/scalessec/Toast">Android-like Toast</a></h2>
-
-<p>PS: I created <a href="https://github.com/samwize/JDToaster">JDToaster 2 years ago</a>, which unfortunately I didn&#8217;t update..</p>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/3b536e7781bd1d4bc3c409dd460ef6a10d99e3ce/687474703a2f2f692e696d6775722e636f6d2f6f4d32386c2e706e67"></p>
-
-<h2><a href="https://github.com/m1entus/WCAlertView">WCAlertView: UIALertView with blocks</a></h2>
-
-<p><img src="https://raw.github.com/m1entus/WCAlertView/master/Screens/7thumb.png"></p>
-
-<h2><a href="https://github.com/gpambrozio/BlockAlertsAnd-ActionSheets">UIAlertView and UIActionSheet with blocks</a></h2>
-
-<p><img src="https://a248.e.akamai.net/camo.github.com/945fddfea4fd0fd04729eef08e616fcb270475a0/687474703a2f2f626c6f672e636f646563726f707065722e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031322f30312f694f532d53696d756c61746f722d53637265656e2d73686f742d4a616e2d32302d323031322d342e32382e31382d504d2d323030783330302e706e67"></p>
-
-<h2>Cocoacontrols - for more popups!</h2>
-
-<p><a href="http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup">http://www.cocoacontrols.com/search?utf8=%E2%9C%93&amp;q=popup</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Phewtick API - Message to any user you want]]></title>
-    <link href="http://samwize.com/2012/11/29/phewtick-api-message-to-any-user/"/>
-    <updated>2012-11-29T22:18:00+08:00</updated>
-    <id>http://samwize.com/2012/11/29/phewtick-api-message-to-any-user</id>
-    <content type="html"><![CDATA[<p>I wrote a <a href="https://github.com/samwize/phewtick-hack">Phewtick Hack</a> a few days ago.</p>
-
-<p><img src="http://www.phewtick.com/img/home_main.png" title="Phewtick" ></p>
-
-<p>It started out as a hack via their RESTful API to automatically scan QR code and get Phewtick points ($$$).</p>
-
-<p>Today, Phewtick released a new <a href="https://itunes.apple.com/sg/app/phewtick/id487158487?mt=8">version 3.2.0</a>, which includes 2 new features: timeline and messaging.</p>
-
-<p>I took a look at their API (again)..</p>
-
-<!-- more -->
-
-
-<p>Shockingly,</p>
-
-<ul>
-<li><p>The timeline shows not only the friends I met with, but also the friends that my friends met with!</p></li>
-<li><p>The messaging API allows me to send to anyone!</p></li>
-</ul>
-
-
-<p>This <a href="https://github.com/samwize/phewtick-hack">python code</a> will allow you to spam Phewtick user id 123456.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">phew</span> <span class="kn">import</span> <span class="o">*</span>
-</span><span class='line'><span class="n">message</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">123456</span><span class="p">,</span> <span class="s">&quot;Meow~&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I could easily spam everyone in Phewtick with 2 lines of code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000000</span><span class="p">):</span>
-</span><span class='line'>  <span class="n">message</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="s">&quot;Meow~&quot;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   
