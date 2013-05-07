@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Error: Application Executable Missing Required Architecture - Junda Ong</title>
+  <title>Why an Android app is not supported for a particular device? - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="I swear this is the most common error I have seen whenever I upload an iOS binary. Error: application executable is missing a required architecture &hellip;">
+  <meta name="description" content="This is what happend to my Android app. It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device). But after I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/">
+  <link rel="canonical" href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Error: Application Executable Missing Required Architecture</h1>
+      <h1 class="entry-title">Why an Android App Is Not Supported for a Particular Device?</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
+<time datetime="2013-05-07T22:46:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,24 +107,28 @@
   </header>
 
 
-<div class="entry-content"><p>I swear this is the most common error I have seen whenever I upload an iOS binary.</p>
+<div class="entry-content"><p>This is what happend to my Android app.</p>
 
-<blockquote><p>Error: application executable is missing a required architecture armv6</p></blockquote>
+<p>It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device).</p>
 
-<p>It occurs every time after Apple release a new iPhone (or architecture type).</p>
+<p>But after I upload the APK to Google Play Store, I could not find the app using the tablet!</p>
 
 <!-- more -->
 
 
-<p>In 2011, when I was using Xcode 4.2, when I think iPhone 4 was out, I need to <a href="http://stackoverflow.com/a/8538393/242682">change</a> the Architectures settings from <code>armv7</code> to <code>armv6 armv7</code>.</p>
+<p>After researching, I realized it is to do with the features and permissions declared in the manifest file.</p>
 
-<p>There is another similar due to to &#8220;no architectures to compile for&#8221; which you can <a href="http://stackoverflow.com/a/5294634/242682">solve</a> by changing <code>VALID_ARCHS</code>.</p>
+<p>The documentation that you must read is on the <a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#market-feature-filtering">uses-feature element</a>.</p>
 
-<p>Now in 2012, with Xcode 4.5, with the new iPhone 5, and the phasing out of armv6 (used in the old generation of iPod and iPhone), it once again introduced the error.</p>
+<p>Key takeaway:</p>
 
-<p>This time, you have to <a href="http://stackoverflow.com/a/12524366/242682">set</a> the deployment target to at least iOS 4.3.</p>
+<ul>
+<li><p>If you don&#8217;t use a feature, you must EXPLICITLY say that <code>required=false</code>!</p></li>
+<li><p><a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#permissions">Permissions imply Features</a></p></li>
+</ul>
 
-<p>Well done Apple.</p>
+
+<p>Android has grown complex.</p>
 </div>
 
 
@@ -147,12 +151,12 @@
   
 
 
-<time datetime="2012-10-23T22:20:00+08:00" pubdate data-updated="true">Oct 23<span>rd</span>, 2012</time>
+<time datetime="2013-05-07T22:46:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/android/'>Android</a>
   
 </span>
 
@@ -161,7 +165,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/" data-via="samwize" data-counturl="http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/" data-via="samwize" data-counturl="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -174,10 +178,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/10/22/updating-app-for-iphone-5/" title="Previous Post: Updating App for iPhone 5">&laquo; Updating App for iPhone 5</a>
+        <a class="basic-alignment left" href="/2013/04/26/what-is-the-replacement-for-ios-udid/" title="Previous Post: What is the replacement for iOS UDID?">&laquo; What is the replacement for iOS UDID?</a>
       
-      
-        <a class="basic-alignment right" href="/2012/10/24/good-strategy-bad-strategy/" title="Next Post: Good Strategy, Bad Strategy">Good Strategy, Bad Strategy &raquo;</a>
       
     </p>
   </footer>
@@ -256,8 +258,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/';
-        var disqus_url = 'http://samwize.com/2012/10/23/error-application-executable-missing-required-architecture/';
+        var disqus_identifier = 'http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/';
+        var disqus_url = 'http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/';
         var disqus_script = 'embed.js';
       
     (function () {

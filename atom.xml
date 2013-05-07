@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-30T00:16:22+08:00</updated>
+  <updated>2013-05-07T22:55:09+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why an Android app is not supported for a particular device?]]></title>
+    <link href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/"/>
+    <updated>2013-05-07T22:46:00+08:00</updated>
+    <id>http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device</id>
+    <content type="html"><![CDATA[<p>This is what happend to my Android app.</p>
+
+<p>It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device).</p>
+
+<p>But after I upload the APK to Google Play Store, I could not find the app using the tablet!</p>
+
+<!-- more -->
+
+
+<p>After researching, I realized it is to do with the features and permissions declared in the manifest file.</p>
+
+<p>The documentation that you must read is on the <a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#market-feature-filtering">uses-feature element</a>.</p>
+
+<p>Key takeaway:</p>
+
+<ul>
+<li><p>If you don&#8217;t use a feature, you must EXPLICITLY say that <code>required=false</code>!</p></li>
+<li><p><a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#permissions">Permissions imply Features</a></p></li>
+</ul>
+
+
+<p>Android has grown complex.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What is the replacement for iOS UDID?]]></title>
@@ -932,28 +962,6 @@ else
 <p><img class="center" src="http://samwize.com/images/ios-device-resolutions.png"></p>
 
 <p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Enable NSZombie for Debugging Crashes]]></title>
-    <link href="http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes/"/>
-    <updated>2012-12-07T23:50:00+08:00</updated>
-    <id>http://samwize.com/2012/12/07/enable-nszombie-for-debugging-crashes</id>
-    <content type="html"><![CDATA[<p>I posted a tip before on how you can <a href="http://blog.just2us.com/2012/02/find-the-real-exception-in-xcode-debugger/">find the real cause of exception in Xcode</a>.</p>
-
-<p>There is another feature which you can enable to help in debugging.</p>
-
-<p><code>NSZombie</code> is an option that helps to trace overreleasing of objects.</p>
-
-<!-- more -->
-
-
-<p>Sometimes you might encounter exceptions <code>objc_msgSend</code>, which no matter how many times you Continue, an exception is thrown. That is a good sign get help from the zombie.</p>
-
-<p>To enable, go to Product > Edit Scheme > Diagnostics, and check <strong>Enable Zombie Objects</strong>.</p>
-
-<p>Run and debug again, and more meaningful info of what was deallocated wrongly will be shown.</p>
 ]]></content>
   </entry>
   

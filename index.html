@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Apple has long announced uniqueIdentifier UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier. So &hellip;">
+  <meta name="description" content="This is what happend to my Android app. It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device). But after I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Why an Android App Is Not Supported for a Particular Device?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T22:46:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is what happend to my Android app.</p>
+
+<p>It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device).</p>
+
+<p>But after I upload the APK to Google Play Store, I could not find the app using the tablet!</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Continue reading &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -557,63 +604,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/14/set-user-agent-for-uiwebview/">Set User Agent for UIWebView</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-14T23:46:00+08:00" pubdate data-updated="true">Mar 14<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/14/set-user-agent-for-uiwebview/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>There is a very easy (but not documented) way to set the User Agent header for HTTP requests sent via <code>UIWebView</code>.</p>
-
-<p>I find saw the solution from <a href="http://www.mphweb.com/en/blog/easily-set-user-agent-uiwebview">mphweb</a>.</p>
-
-<p>Basically, you just set register it with <code>NSUserDefaults</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initialize</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Set user agent (the only problem is that we can&#39;t modify the User-Agent later in the program)</span>
-</span><span class='line'>    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionnary</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjectsAndKeys:</span><span class="s">@&quot;Your desired user agent&quot;</span><span class="p">,</span> <span class="s">@&quot;UserAgent&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">registerDefaults:</span><span class="n">dictionnary</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">dictionnary</span> <span class="n">release</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -629,6 +619,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Why an Android app is not supported for a particular device?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/04/26/what-is-the-replacement-for-ios-udid/">What is the replacement for iOS UDID?</a>
       </li>
     
@@ -642,10 +636,6 @@
     
       <li class="post">
         <a href="/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/">Migrate mongodb data from Dotcloud to MongoLab</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/04/01/transfer-away-dotcloud-data-using-ftp/">Transfer Away Dotcloud Data using FTP</a>
       </li>
     
   </ul>

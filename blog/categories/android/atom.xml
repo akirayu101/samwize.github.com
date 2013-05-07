@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-04-30T00:16:22+08:00</updated>
+  <updated>2013-05-07T22:55:09+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Why an Android app is not supported for a particular device?]]></title>
+    <link href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/"/>
+    <updated>2013-05-07T22:46:00+08:00</updated>
+    <id>http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device</id>
+    <content type="html"><![CDATA[<p>This is what happend to my Android app.</p>
+
+<p>It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device).</p>
+
+<p>But after I upload the APK to Google Play Store, I could not find the app using the tablet!</p>
+
+<!-- more -->
+
+
+<p>After researching, I realized it is to do with the features and permissions declared in the manifest file.</p>
+
+<p>The documentation that you must read is on the <a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#market-feature-filtering">uses-feature element</a>.</p>
+
+<p>Key takeaway:</p>
+
+<ul>
+<li><p>If you don't use a feature, you must EXPLICITLY say that <code>required=false</code>!</p></li>
+<li><p><a href="http://developer.android.com/guide/topics/manifest/uses-feature-element.html#permissions">Permissions imply Features</a></p></li>
+</ul>
+
+
+<p>Android has grown complex.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android Developement Refresher 2013]]></title>
