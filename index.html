@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="This is what happend to my Android app. It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device). But after I &hellip;">
+  <meta name="description" content="In the previous post, I discussed about how to Google Play manage compatibility between your app and devices. The key is to make use-feature optional &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/09/android-use-feature-element-is-case-sensitive/">Android Use-feature Element Is Case Sensitive</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T22:12:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/09/android-use-feature-element-is-case-sensitive/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In the previous post, I discussed about how to <a href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Google Play manage compatibility</a> between your app and devices.</p>
+
+<p>The key is to make <code>use-feature</code> optional.</p>
+
+<p>Recently, I have encountered another problem which I want to share.</p>
+
+<p>I have this in my manifest file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">&quot;android.hardware.TELEPHONY&quot;</span> <span class="na">android:required=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On first look, it seems ok. Making TELEPHONY optional will make the app compatible with tablet (a common solution).</p>
+
+<p>However, the above is WRONG! Because it should be <code>android.hardware.telephony</code> (lower case)!</p>
+
+<p>I made a mistake.</p>
+
+<p>But I also blame Android, because for permission, it is upper case! <code>android.permission.INTERNET</code> is correct.</p>
+
+<p>Weirdedness of Android..</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -525,85 +590,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">Auto Fill Username &amp; Password Fields in UIWebView</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-15T01:46:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you use <code>UIWebView</code> and would like to automatically fill in the username and password (or any other text input fields), you could do so by executing Javascript on the webview.</p>
-
-<p>I first learnt about this from <a href="http://stackoverflow.com/a/9722805/242682">stackoverflow</a>, and has edited slightly.</p>
-
-<p>The technique is to implement <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIWebViewDelegate_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UIWebViewDelegate"><code>UIWebViewDelegate</code></a> and execute some Javascript in <code>webViewDidFinishLoad</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">webViewDidFinishLoad:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="nv">webView</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Auto fill the username and password text fields, assuming the HTML has</span>
-</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt; and</span>
-</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedUsername</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;USERNAME&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedPassword</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;PASSWORD&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">savedUsername</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">savedPassword</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Create js strings</span>
-</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadUsernameJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;username&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
-</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedUsername</span><span class="p">];</span>
-</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadPasswordJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;password&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
-</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedPassword</span><span class="p">];</span>
-</span><span class='line'>        <span class="c1">// Runs the JS</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadUsernameJS</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadPasswordJS</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -619,6 +605,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/09/android-use-feature-element-is-case-sensitive/">Android use-feature element is case sensitive</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Why an Android app is not supported for a particular device?</a>
       </li>
     
@@ -632,10 +622,6 @@
     
       <li class="post">
         <a href="/2013/04/21/s3cmd-broken-pipe-error-errno-32/">s3cmd broken pipe error (errno 32)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/">Migrate mongodb data from Dotcloud to MongoLab</a>
       </li>
     
   </ul>

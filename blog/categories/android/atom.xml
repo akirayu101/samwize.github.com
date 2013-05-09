@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Android | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-05-07T23:28:00+08:00</updated>
+  <updated>2013-05-09T22:21:31+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android use-feature element is case sensitive]]></title>
+    <link href="http://samwize.com/2013/05/09/android-use-feature-element-is-case-sensitive/"/>
+    <updated>2013-05-09T22:12:00+08:00</updated>
+    <id>http://samwize.com/2013/05/09/android-use-feature-element-is-case-sensitive</id>
+    <content type="html"><![CDATA[<p>In the previous post, I discussed about how to <a href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Google Play manage compatibility</a> between your app and devices.</p>
+
+<p>The key is to make <code>use-feature</code> optional.</p>
+
+<p>Recently, I have encountered another problem which I want to share.</p>
+
+<p>I have this in my manifest file:</p>
+
+<p>```xml
+<uses-feature android:name="android.hardware.TELEPHONY" android:required="false" /></p>
+
+<p><uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```</p>
+
+<p>On first look, it seems ok. Making TELEPHONY optional will make the app compatible with tablet (a common solution).</p>
+
+<p>However, the above is WRONG! Because it should be <code>android.hardware.telephony</code> (lower case)!</p>
+
+<p>I made a mistake.</p>
+
+<p>But I also blame Android, because for permission, it is upper case! <code>android.permission.INTERNET</code> is correct.</p>
+
+<p>Weirdedness of Android..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why an Android app is not supported for a particular device?]]></title>

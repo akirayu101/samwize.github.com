@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-05-07T23:28:00+08:00</updated>
+  <updated>2013-05-09T22:21:31+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Android use-feature element is case sensitive]]></title>
+    <link href="http://samwize.com/2013/05/09/android-use-feature-element-is-case-sensitive/"/>
+    <updated>2013-05-09T22:12:00+08:00</updated>
+    <id>http://samwize.com/2013/05/09/android-use-feature-element-is-case-sensitive</id>
+    <content type="html"><![CDATA[<p>In the previous post, I discussed about how to <a href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Google Play manage compatibility</a> between your app and devices.</p>
+
+<p>The key is to make <code>use-feature</code> optional.</p>
+
+<p>Recently, I have encountered another problem which I want to share.</p>
+
+<p>I have this in my manifest file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">&quot;android.hardware.TELEPHONY&quot;</span> <span class="na">android:required=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>On first look, it seems ok. Making TELEPHONY optional will make the app compatible with tablet (a common solution).</p>
+
+<p>However, the above is WRONG! Because it should be <code>android.hardware.telephony</code> (lower case)!</p>
+
+<p>I made a mistake.</p>
+
+<p>But I also blame Android, because for permission, it is upper case! <code>android.permission.INTERNET</code> is correct.</p>
+
+<p>Weirdedness of Android..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why an Android app is not supported for a particular device?]]></title>
@@ -945,23 +981,6 @@ else
 <li>time to take Apollo 11 to the moon</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Devices Cheat Sheet]]></title>
-    <link href="http://samwize.com/2013/01/11/ios-devices-cheat-sheet/"/>
-    <updated>2013-01-11T23:21:00+08:00</updated>
-    <id>http://samwize.com/2013/01/11/ios-devices-cheat-sheet</id>
-    <content type="html"><![CDATA[<p>Not long ago, I posted about <a href="http://samwize.com/2012/10/29/ios-guide-to-multiple-device-resolutions/">a guide to iOS multiple devices resolutions</a>.</p>
-
-<p>There is a similar, but more complete <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a> from Ivo.</p>
-
-<p>Here is 1 of the table:</p>
-
-<p><img class="center" src="http://samwize.com/images/ios-device-resolutions.png"></p>
-
-<p>For the other guides on display PPI, icons size and other iOS design elements, refer to the <a href="http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2/">cheat sheet</a>.</p>
 ]]></content>
   </entry>
   
