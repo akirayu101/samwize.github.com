@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>What is the replacement for iOS UDID? - Junda Ong</title>
+  <title>Where is global gitignore? - Junda Ong</title>
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="Apple has long announced uniqueIdentifier UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier. So &hellip;">
+  <meta name="description" content="I made a commit to a git repos and broke the build. (I should be punished to clean the toilet for a week for accidents like this) But what happened &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/">
+  <link rel="canonical" href="http://samwize.com/2013/05/12/where-is-global-gitignore/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">What Is the Replacement for iOS UDID?</h1>
+      <h1 class="entry-title">Where Is Global Gitignore?</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2013-04-26T00:11:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time>
+<time datetime="2013-05-12T14:59:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,13 +107,17 @@
   </header>
 
 
-<div class="entry-content"><p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
+<div class="entry-content"><p>I made a commit to a git repos and broke the build.</p>
 
-<p>So what you have do?</p>
+<p>(I should be punished to clean the toilet for a week for accidents like this)</p>
 
-<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
+<p>But what happened was unexpected, because I added a framework (Crashlytics), and I thought the library will be pushed fine to the repos.</p>
 
-<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
+<p>What I didn&#8217;t expect was that my GLOBAL gitignore has an entry for Crashlytics framework.</p>
+
+<p>For developers who didn&#8217;t know, other than the project gitignore file, there is also a global file for your machine.</p>
+
+<p>It is at <code>~/.gitignore_global</code>.</p>
 </div>
 
 
@@ -136,12 +140,12 @@
   
 
 
-<time datetime="2013-04-26T00:11:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2013</time>
+<time datetime="2013-05-12T14:59:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ios/'>iOS</a>
+    <a class='category' href='/blog/categories/git/'>Git</a>
   
 </span>
 
@@ -150,7 +154,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/" data-via="samwize" data-counturl="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://samwize.com/2013/05/12/where-is-global-gitignore/" data-via="samwize" data-counturl="http://samwize.com/2013/05/12/where-is-global-gitignore/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -163,10 +167,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2013/04/24/android-developement-refresher-2013/" title="Previous Post: Android Developement Refresher 2013">&laquo; Android Developement Refresher 2013</a>
+        <a class="basic-alignment left" href="/2013/05/09/android-use-feature-element-is-case-sensitive/" title="Previous Post: Android use-feature element is case sensitive">&laquo; Android use-feature element is case sensitive</a>
       
-      
-        <a class="basic-alignment right" href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/" title="Next Post: Why an Android app is not supported for a particular device?">Why an Android app is not supported for a particular device? &raquo;</a>
       
     </p>
   </footer>
@@ -245,8 +247,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/';
-        var disqus_url = 'http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/';
+        var disqus_identifier = 'http://samwize.com/2013/05/12/where-is-global-gitignore/';
+        var disqus_url = 'http://samwize.com/2013/05/12/where-is-global-gitignore/';
         var disqus_script = 'embed.js';
       
     (function () {

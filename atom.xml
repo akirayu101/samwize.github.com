@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-05-09T22:21:31+08:00</updated>
+  <updated>2013-05-12T15:03:53+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Where is global gitignore?]]></title>
+    <link href="http://samwize.com/2013/05/12/where-is-global-gitignore/"/>
+    <updated>2013-05-12T14:59:00+08:00</updated>
+    <id>http://samwize.com/2013/05/12/where-is-global-gitignore</id>
+    <content type="html"><![CDATA[<p>I made a commit to a git repos and broke the build.</p>
+
+<p>(I should be punished to clean the toilet for a week for accidents like this)</p>
+
+<p>But what happened was unexpected, because I added a framework (Crashlytics), and I thought the library will be pushed fine to the repos.</p>
+
+<p>What I didn&#8217;t expect was that my GLOBAL gitignore has an entry for Crashlytics framework.</p>
+
+<p>For developers who didn&#8217;t know, other than the project gitignore file, there is also a global file for your machine.</p>
+
+<p>It is at <code>~/.gitignore_global</code>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android use-feature element is case sensitive]]></title>
@@ -953,34 +972,6 @@ else
 <p>In each version of iOS, Apple has made Story Board (XIB) and Xcode support much better. They kept improving. They value Story Board.</p>
 
 <p>Hence, you will be missing out a lot if you didn&#8217;t even bother trying it out.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[It takes 18 weeks to build a mobile app]]></title>
-    <link href="http://samwize.com/2013/01/14/it-takes-18-weeks-to-build-a-mobile-app/"/>
-    <updated>2013-01-14T23:36:00+08:00</updated>
-    <id>http://samwize.com/2013/01/14/it-takes-18-weeks-to-build-a-mobile-app</id>
-    <content type="html"><![CDATA[<p>This is a <a href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app">research</a> from surveying 100 mobile developers.</p>
-
-<p></p></p>
-
-<div style="width:600px;background-color:#fff;padding:10px 20px 20px;font:14px/21px HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, sans-serif;">
-<h3 style="color:#da5024;clear:both;">How long does it take to make a mobile app?</h3>
-<p><a href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app"><img alt="Kinvey Backend as a Service" src="http://www.kinvey.com/blog/images/2013/01/how-long-does-it-take-to-build-an-app-kinvey.jpg" width="600" /></a></p>
-<div style="width:100%;text-align:center;margin-top:5px;">From: <a style="text-decoration:none;color:#da5024;" href="http://www.kinvey.com/blog/2086/how-long-does-it-take-to-build-a-mobile-app">Kinvey Backend as a Service</a></div>
-</div>
-
-
-<p>
-
-<p>Interesting to note is that 18 weeks =</p>
-<ul>
-<li>time to build 1.3 Boeing 777</li>
-<li>time to build 1/231 of Giza Pyramid</li>
-<li>time to take Apollo 11 to the moon</li>
-</ul>
-
 ]]></content>
   </entry>
   

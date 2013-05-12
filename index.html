@@ -9,7 +9,7 @@
   <meta name="author" content="Junda">
 
   
-  <meta name="description" content="In the previous post, I discussed about how to Google Play manage compatibility between your app and devices. The key is to make use-feature optional &hellip;">
+  <meta name="description" content="I made a commit to a git repos and broke the build. (I should be punished to clean the toilet for a week for accidents like this) But what happened &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/05/12/where-is-global-gitignore/">Where Is Global Gitignore?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-12T14:59:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2013</time>
+        
+         | <a href="/2013/05/12/where-is-global-gitignore/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I made a commit to a git repos and broke the build.</p>
+
+<p>(I should be punished to clean the toilet for a week for accidents like this)</p>
+
+<p>But what happened was unexpected, because I added a framework (Crashlytics), and I thought the library will be pushed fine to the repos.</p>
+
+<p>What I didn&#8217;t expect was that my GLOBAL gitignore has an entry for Crashlytics framework.</p>
+
+<p>For developers who didn&#8217;t know, other than the project gitignore file, there is also a global file for your machine.</p>
+
+<p>It is at <code>~/.gitignore_global</code>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -513,83 +561,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/15/post-request-to-uiwebview/">POST Request to UIWebView</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-15T01:58:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2013</time>
-        
-         | <a href="/2013/03/15/post-request-to-uiwebview/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In the last post, I wrote about <a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
-
-<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
-
-<p>It turns out to be simple if the login uses a simple form POST.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Setup the URL</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">loginUrl</span> <span class="o">=</span> <span class="s">@&quot;https://just2us.com/login&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">loginUrl</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">requestObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// POST the username password</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPMethod:</span><span class="s">@&quot;POST&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">postString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;username=%@&amp;password=%@&quot;</span><span class="p">,</span> <span class="s">@&quot;samwize&quot;</span><span class="p">,</span> <span class="s">@&quot;secret&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">postString</span> <span class="nl">dataUsingEncoding:</span> <span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPBody:</span><span class="n">data</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// Load the request</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">webview</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">loadRequest:</span><span class="n">requestObj</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -605,6 +576,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/05/12/where-is-global-gitignore/">Where is global gitignore?</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/09/android-use-feature-element-is-case-sensitive/">Android use-feature element is case sensitive</a>
       </li>
     
@@ -618,10 +593,6 @@
     
       <li class="post">
         <a href="/2013/04/24/android-developement-refresher-2013/">Android Developement Refresher 2013</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/04/21/s3cmd-broken-pipe-error-errno-32/">s3cmd broken pipe error (errno 32)</a>
       </li>
     
   </ul>
