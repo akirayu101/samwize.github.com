@@ -4,14 +4,45 @@
   <title><![CDATA[Category: Octopress | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-05-12T15:03:53+08:00</updated>
+  <updated>2013-05-23T23:54:21+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
-    
+    <email><![CDATA[junda@just2us.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New Theme for Octopress]]></title>
+    <link href="http://samwize.com/2013/05/23/new-theme-for-octopress/"/>
+    <updated>2013-05-23T23:44:00+08:00</updated>
+    <id>http://samwize.com/2013/05/23/new-theme-for-octopress</id>
+    <content type="html"><![CDATA[<p>I have changed the classic Octopress theme to this cleaner greyshade theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>.</p>
+
+<p>This is how you can install:</p>
+
+<!-- more -->
+
+
+<p><code>
+$ git submodule add git@github.com:shashankmehta/greyshade.git .themes/greyshade
+$ git submodule update --init
+$ echo "\$greyshade: #1DBE49;" &gt;&gt; sass/custom/_colors.scss
+$ rake "install[greyshade]"
+</code></p>
+
+<p>Note that the <a href="https://github.com/shashankmehta/greyshade#readme">only condition</a> from the author is that you use a unique highlight color. In the above, my highlight color is <code>#1DBE49</code> (my kind of green).</p>
+
+<p>After installing, I entered my <code>email</code> in <code>_config.yml</code> which is needed to show the profile pic (via Gravatar).</p>
+
+<p>With that, here are screenshots of the old vs new:</p>
+
+<p><img class="center" src="/images/theme-classic.png"></p>
+
+<p><img class="center" src="/images/theme-greyshade.png"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress would not deploy]]></title>
@@ -295,45 +326,6 @@ git add .
 git commit -m 'your message'
 git push origin source  
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Switched Wordpress to Octopress]]></title>
-    <link href="http://samwize.com/2012/09/10/switched-from-wordpress-to-octopress/"/>
-    <updated>2012-09-10T00:29:00+08:00</updated>
-    <id>http://samwize.com/2012/09/10/switched-from-wordpress-to-octopress</id>
-    <content type="html"><![CDATA[<p>I started <a href="http://blog.just2us.com/2009/05/just2uscom-is-here/">just2us.com</a> 3 years ago, using it as a avenue for me to share about my apps and development guides.</p>
-
-<p>Over the last 3 years, I have been actively blogging at just2us.com, as there are lots to share. I have especially enjoyed writing development guides which help fellow developers, as well as being a bookmark for myself. Many times, I had googled for <em><strong>topic + just2us.com</strong></em> to recap my memories.</p>
-
-<p>I wanted to keep that going, but I was constantly bothered by a few things.</p>
-
-<!-- more -->
-
-
-<ol>
-<li><p>My Wordpress template looks out-of-date after 3 years</p></li>
-<li><p>There isn't a good &amp; free Wordpress editor for Mac</p></li>
-<li><p>I wish I can write in markdown or something</p></li>
-</ol>
-
-
-<p>And so.. I decided to make a bold move and switch to <a href="http://octopress.org/">Octopress</a>. It is dubbed as</p>
-
-<blockquote><p>A blogging framework for hackers</p></blockquote>
-
-<p>It makes sense:</p>
-
-<ul>
-<li><p>Hacker prefers entirely static HTML, aka baked; it performs better than PHP + MySQL, and not hackable!</p></li>
-<li><p>Hacker prefers to write in markdown; it's clear like code</p></li>
-</ul>
-
-
-<p>Switching wouldn't count as risky for me, if guys like <a href="http://mattgemmell.com/2011/09/12/blogging-with-octopress/">Matt Gemmell</a> (with 900+ posts) and <a href="http://felipecypriano.com/2011/09/16/why-ive-migrated-to-octopress/">Felipe Cypriano</a> could migrate successfully.</p>
-
-<p>Time will tell if it's worth.</p>
 ]]></content>
   </entry>
   

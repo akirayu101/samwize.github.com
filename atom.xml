@@ -4,14 +4,50 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-05-12T15:03:53+08:00</updated>
+  <updated>2013-05-23T23:54:21+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
-    
+    <email><![CDATA[junda@just2us.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[New Theme for Octopress]]></title>
+    <link href="http://samwize.com/2013/05/23/new-theme-for-octopress/"/>
+    <updated>2013-05-23T23:44:00+08:00</updated>
+    <id>http://samwize.com/2013/05/23/new-theme-for-octopress</id>
+    <content type="html"><![CDATA[<p>I have changed the classic Octopress theme to this cleaner greyshade theme by <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a>.</p>
+
+<p>This is how you can install:</p>
+
+<!-- more -->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git submodule add git@github.com:shashankmehta/greyshade.git .themes/greyshade
+</span><span class='line'>$ git submodule update --init
+</span><span class='line'>$ echo "\$greyshade: #1DBE49;" &gt;&gt; sass/custom/_colors.scss
+</span><span class='line'>$ rake "install[greyshade]"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that the <a href="https://github.com/shashankmehta/greyshade#readme">only condition</a> from the author is that you use a unique highlight color. In the above, my highlight color is <code>#1DBE49</code> (my kind of green).</p>
+
+<p>After installing, I entered my <code>email</code> in <code>_config.yml</code> which is needed to show the profile pic (via Gravatar).</p>
+
+<p>With that, here are screenshots of the old vs new:</p>
+
+<p><img class="center" src="http://samwize.com/images/theme-classic.png"></p>
+
+<p><img class="center" src="http://samwize.com/images/theme-greyshade.png"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Where is global gitignore?]]></title>
@@ -939,39 +975,6 @@ else
 <p>To do so, in Xcode > Organizer > Archives > Your app > Distribute > <a href="http://developer.apple.com/library/ios/#qa/qa1764/_index.html">Save for Enterprise or Ad-Hoc Deployment</a>, double click and sync with iTunes. Your device will now run the same copy that you submitted to Apple.</p>
 
 <p>Hopefully, you can then squash the bug.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS Developer Tips 2013]]></title>
-    <link href="http://samwize.com/2013/01/18/ios-developer-tips-2013/"/>
-    <updated>2013-01-18T21:47:00+08:00</updated>
-    <id>http://samwize.com/2013/01/18/ios-developer-tips-2013</id>
-    <content type="html"><![CDATA[<p>If you are starting out iOS development, there are some good tips for you from Stuart Hall:</p>
-
-<p><a href="http://stuartkhall.com/posts/ios-development-tips-i-would-want-if-i-was-starting-out-today">http://stuartkhall.com/posts/ios-development-tips-i-would-want-if-i-was-starting-out-today</a></p>
-
-<p>There is only one point which I don&#8217;t agree on:</p>
-
-<blockquote><p>Story Boards Are Just For Rapid Prototypes</p></blockquote>
-
-<!-- more -->
-
-
-<p>The choice between &#8220;Story Boards&#8221; vs &#8220;Code the UI&#8221; depends very much on your app requirements.</p>
-
-<p>For simple apps that use the stock UI components, Story Board is really useful because</p>
-
-<ol>
-<li><p>Drag and drop to design = very quick and easy to make UI changes</p></li>
-<li><p>Support Auto Layout easily = Design iPad and iPhone at the same time easily</p></li>
-<li><p>Xcode support = Beautiful UI is possible with powerful customizable features</p></li>
-</ol>
-
-
-<p>In each version of iOS, Apple has made Story Board (XIB) and Xcode support much better. They kept improving. They value Story Board.</p>
-
-<p>Hence, you will be missing out a lot if you didn&#8217;t even bother trying it out.</p>
 ]]></content>
   </entry>
   
