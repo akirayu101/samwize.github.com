@@ -26,8 +26,14 @@ The size is 640 x 1136.
 Xcode 4.5 will actually offer to add one automatically.
 
 
+## 2. Set to Full Screen at launch for MainWindow.xib ##
 
-## 2. Code to detect 4-inch screen ##
+If your tab bar didn't work properly (such as don't respond to click) after you added `Default-568h@2x.png`, then it is likely due to the nib configuration. 
+
+You have to go to interface builder, select the window object, and [enable](http://stackoverflow.com/a/12699347/242682) `Full Screen at launch`. 
+
+
+## 3. Code to detect 4-inch screen ##
 
 You can detect the 4-inch screen size with the following method:
 
@@ -54,7 +60,7 @@ if ([Device isScreen4Inch]) {
 ```
 
 
-## 3. Use Auto Layout for iOS6 ##
+## 4. Use Auto Layout for iOS6 ##
 
 If you are supporting only iOS6 and above, you should use Auto Layout. 
 
@@ -62,7 +68,7 @@ You can read up a tutorial by [Ray Wenderlich](http://www.raywenderlich.com/2088
 
 
 
-## 4. Set auto resizing mask for pre iOS6 ##
+## 5. Set auto resizing mask for pre iOS6 ##
 
 If you are still supporting pre iOS6, you still need auto resizing mask for your views to stretch and re-position automatically.
 
@@ -73,7 +79,7 @@ This 'feature' was in iOS ever since iOS is available. If you design your apps m
 You could change a subview to auto resize its width/height, and fix it's margin to left/right/top/bottom. 
 
 
-## 5. Stretch Images ##
+## 6. Stretch Images ##
 
 If you are using Xcode Interface Builder, change the UIImageView `mode` to `Scale to Fill` (or others).
 
@@ -84,7 +90,7 @@ Your images can also be [stretched](http://mobiledevelopertips.com/user-interfac
 But that works only if your image has portion that can be stretched without distortion. If it doesn't, you have to create a new image `-568@2x` image, and use the trick covered next to load it automatically.
 
 
-## 6. Load -568h@2x images ##
+## 7. Load -568h@2x images ##
 
 Unlike `@2x` which are loaded automatically for Retina Display, the `-568h@2x` are not loaded automatically for the taller iPhone (except the `Default-568h@2x.png`).
 
@@ -105,13 +111,13 @@ Using category, I introduced the method for UIImage.
 To use, I would have to change the methods `[UIImage imageName:@"foo.png"]` to `[UIImage imageNameFor568h:@"foo.png"]`.
 
 
-## 7. iOS Simulator ##
+## 8. iOS Simulator ##
 
 To run and test on a 4 inch iPhone, select **Hardware** > **Device** > **iPhone (Retina 4-inch)**.
 
 
 
-## 8. Last words.. ##
+## 9. Last words.. ##
 
 It largely depends on how you code your existing apps. 
 

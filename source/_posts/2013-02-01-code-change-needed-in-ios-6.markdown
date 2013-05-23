@@ -7,13 +7,17 @@ categories: iOS
 published: true
 ---
 
+Some tips on your iOS code change needed for supporting iOS 6.
+
+<!-- more -->
+
 ## presentModalViewController ##
 
-Starting from iOS 6, `UIViewController` deprecated 
+Starting from iOS 6, `UIViewController` deprecated this:
 
 	- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated
 
-Starting from iOS 5, the replacement is
+Starting from iOS 5, the replacement is:
 
 	- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^)(void))completion
 
