@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Opensource | Junda Ong]]></title>
+  <link href="http://samwize.com/blog/categories/opensource/atom.xml" rel="self"/>
+  <link href="http://samwize.com/"/>
+  <updated>2013-06-06T22:19:13+08:00</updated>
+  <id>http://samwize.com/</id>
+  <author>
+    <name><![CDATA[Junda]]></name>
+    <email><![CDATA[junda@just2us.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Extract YouTube Video Links - Github Project]]></title>
+    <link href="http://samwize.com/2013/06/06/extract-youtube-video-links-github-project/"/>
+    <updated>2013-06-06T22:17:00+08:00</updated>
+    <id>http://samwize.com/2013/06/06/extract-youtube-video-links-github-project</id>
+    <content type="html"><![CDATA[<p>I have create <a href="https://github.com/samwize/youtube-parser">youtube-parser</a>, a small node.js app to extract youtube video links from Youtube.com.</p>
+
+<p>You can find out <a href="http://www.just2me.com/2013/06/how-i-downloaded-100-full-house-youtube.html">why</a> I need that..</p>
+]]></content>
+  </entry>
+  
+</feed>
