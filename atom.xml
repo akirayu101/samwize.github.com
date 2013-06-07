@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-06T22:19:13+08:00</updated>
+  <updated>2013-06-08T00:17:51+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[armv7s build for tesseract and opencv2]]></title>
+    <link href="http://samwize.com/2013/06/08/armv7s-build-for-tesseract-and-opencv2/"/>
+    <updated>2013-06-08T00:07:00+08:00</updated>
+    <id>http://samwize.com/2013/06/08/armv7s-build-for-tesseract-and-opencv2</id>
+    <content type="html"><![CDATA[<p>Tesseract is the OCR engine that helps to recoginze text. Google now maintains <a href="https://code.google.com/p/tesseract-ocr/wiki/ReadMe">the project</a>.</p>
+
+<p>You can use Tesseract on iOS too.</p>
+
+<p>I <a href="https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV">forked</a> the github project because the <a href="https://github.com/pablosproject/iPhone-OCR-Tesseract-and-OpenCV">original</a> has a couple of problems compiling. To be precise:</p>
+
+<pre><code>File is universal (three slices), but it does not contain a(n) ARMv7-s slice for ..
+</code></pre>
+
+<p>This is because the original project was 10 months ago, and did not support for armv7s (iPhone 5). You can <a href="http://www.galloway.me.uk/2012/09/hacking-up-an-armv7s-library/">hack</a> a build by yourself.</p>
+
+<p>But I have fixed that for both tesseract libs and also updated opencv2 libs.</p>
+
+<p>For your convenience: <a href="https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV">https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Extract YouTube Video Links - Github Project]]></title>
@@ -879,34 +901,6 @@ find . -name '.gitignore' -type f -delete
 <h2>Pitfalls</h2>
 
 <p>Google AppEngine always append to your <a href="http://stackoverflow.com/questions/13226598/how-to-remove-the-google-app-engine-default-header-when-fetching-a-url">User-Agent header</a>, so as to identify the http request is from a particular AppEngine app. This is a bane because if you are crawling some website, they could easily block you since you can&#8217;t spoof your user-agent.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Apple Trackpad 4 finger swipe up/down not working]]></title>
-    <link href="http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working/"/>
-    <updated>2013-02-15T00:06:00+08:00</updated>
-    <id>http://samwize.com/2013/02/15/apple-trackpad-4-finger-not-working</id>
-    <content type="html"><![CDATA[<p>When my new iMac was delivered, the only unsatisfactory I had was with the faulty trackpad. It can click, but can&#8217;t move the cursor at all! I sent it for servicing and got a replacement after a few days.</p>
-
-<p>Anyway, this post isn&#8217;t about a new iMac with a faulty trackpad.</p>
-
-<p>What happened is that when I use the new and working trackpad, I realized the 4 finger swipe up/down gestures were not working (therefore I can&#8217;t do Expose and Mission Control).</p>
-
-<!-- more -->
-
-
-<p>The fix is rather trivial:</p>
-
-<p>Go to Preferences > Trackpad > More Gestures > Mission Control and change <strong>Swipe up with four fingers</strong> to <strong>Swipe up with three fingers</strong>.</p>
-
-<p>Try it now and it should work.</p>
-
-<p>Now, change it back to <strong>Swipe up with four fingers</strong>, and it works too!</p>
-
-<p>Do the same trick for App Expose.</p>
-
-<p>Finally, go to Point &amp; Click to re-enable <strong>Three Finger Drag</strong>.</p>
 ]]></content>
   </entry>
   
