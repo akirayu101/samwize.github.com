@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-08T00:17:51+08:00</updated>
+  <updated>2013-06-08T00:59:07+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -26,6 +26,9 @@
 
 <pre><code>File is universal (three slices), but it does not contain a(n) ARMv7-s slice for ..
 </code></pre>
+
+<!-- more -->
+
 
 <p>This is because the original project was 10 months ago, and did not support for armv7s (iPhone 5). You can <a href="http://www.galloway.me.uk/2012/09/hacking-up-an-armv7s-library/">hack</a> a build by yourself.</p>
 
