@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-08T00:59:07+08:00</updated>
+  <updated>2013-06-09T02:25:29+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,111 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using OpenCV to match template multiple times]]></title>
+    <link href="http://samwize.com/2013/06/09/using-opencv-to-match-template-multiple-times/"/>
+    <updated>2013-06-09T02:15:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/using-opencv-to-match-template-multiple-times</id>
+    <content type="html"><![CDATA[<p>OpenCV has a <a href="http://opencv.itseez.com/modules/imgproc/doc/object_detection.html?highlight=matchtemplate#matchtemplate">matchTemplate</a> function that let you seach for matches between an image and a given template.</p>
+
+<!-- more -->
+
+
+<p>There is a <a href="http://docs.opencv.org/doc/tutorials/imgproc/histograms/template_matching/template_matching.html#template-matching">tutorial</a> on that.</p>
+
+<p>However, the tutorial falls short. It only explain how to match 1 occurence.</p>
+
+<p>I know the answer is somewhere in the <code>result</code>.. But I am a newbie and cannot figure out. Do are <a href="http://answers.opencv.org/question/11180/template-matching-with-multiple-occurance/">others</a>.</p>
+
+<p>I found the best answer from: <a href="http://opencv-code.com/quick-tips/how-to-handle-template-matching-with-multiple-occurences/">OpenCV-Code.com</a></p>
+
+<p>The genius part of the code is that it finds a match with <code>minMaxLoc</code>, then it <code>floodFill</code> it. Then it can repeat.</p>
+
+<p>I have used it for an iOS project to count the number of matching templates. Here&#8217;s the code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// Returns number of matching templates</span>
+</span><span class='line'><span class="o">+</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nl">matchTemplate:</span><span class="p">(</span><span class="n">UIImage</span><span class="o">*</span><span class="p">)</span><span class="n">templateImage</span> <span class="nl">in:</span><span class="p">(</span><span class="n">UIImage</span><span class="o">*</span><span class="p">)</span><span class="n">src</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// http://opencv-code.com/quick-tips/how-to-handle-template-matching-with-multiple-occurences/</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">ref</span> <span class="o">=</span> <span class="p">[</span><span class="n">src</span> <span class="n">CVMat</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">tpl</span> <span class="o">=</span> <span class="p">[</span><span class="n">templateImage</span> <span class="n">CVMat</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">gref</span><span class="p">,</span> <span class="n">gtpl</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">gref</span><span class="p">,</span> <span class="n">CV_BGR2GRAY</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">tpl</span><span class="p">,</span> <span class="n">gtpl</span><span class="p">,</span> <span class="n">CV_BGR2GRAY</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">res</span><span class="p">(</span><span class="n">ref</span><span class="p">.</span><span class="n">rows</span><span class="o">-</span><span class="n">tpl</span><span class="p">.</span><span class="n">rows</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">ref</span><span class="p">.</span><span class="n">cols</span><span class="o">-</span><span class="n">tpl</span><span class="p">.</span><span class="n">cols</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">CV_32FC1</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">matchTemplate</span><span class="p">(</span><span class="n">gref</span><span class="p">,</span> <span class="n">gtpl</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">CV_TM_CCOEFF_NORMED</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cv</span><span class="o">::</span><span class="n">threshold</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">CV_THRESH_TOZERO</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">double</span> <span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="n">minloc</span><span class="p">,</span> <span class="n">maxloc</span><span class="p">;</span>
+</span><span class='line'>        <span class="n">cv</span><span class="o">::</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minval</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">maxval</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">minloc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">maxloc</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">maxval</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">cv</span><span class="o">::</span><span class="n">rectangle</span><span class="p">(</span>
+</span><span class='line'>                          <span class="n">ref</span><span class="p">,</span>
+</span><span class='line'>                          <span class="n">maxloc</span><span class="p">,</span>
+</span><span class='line'>                          <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="n">maxloc</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">tpl</span><span class="p">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">maxloc</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">tpl</span><span class="p">.</span><span class="n">rows</span><span class="p">),</span>
+</span><span class='line'>                          <span class="n">CV_RGB</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="mi">2</span>
+</span><span class='line'>                          <span class="p">);</span>
+</span><span class='line'>            <span class="n">cv</span><span class="o">::</span><span class="n">floodFill</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">maxloc</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mf">.1</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mf">1.</span><span class="p">));</span>
+</span><span class='line'>            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">&quot;# of matches: %d&quot;</span><span class="p">,</span> <span class="n">count</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[armv7s build for tesseract and opencv2]]></title>
@@ -750,160 +855,6 @@ find . -name '.gitignore' -type f -delete
 </span><span class='line'><span class="p">[</span><span class="n">operationQueue</span> <span class="nl">addOperations:</span><span class="err">@</span><span class="p">[</span><span class="n">operation1</span><span class="p">,</span> <span class="n">operation2</span><span class="p">,</span> <span class="n">operation3</span><span class="p">]</span> <span class="nl">waitUntilFinished:</span><span class="n">NO</span><span class="p">];</span>
 </span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Sample GET/POST using Google AppEngine Java HttpConnection]]></title>
-    <link href="http://samwize.com/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection/"/>
-    <updated>2013-02-16T20:26:00+08:00</updated>
-    <id>http://samwize.com/2013/02/16/sample-get-slash-post-using-google-appengine-java-httpconnection</id>
-    <content type="html"><![CDATA[<p>A sample code on basic usage of HTTP GET/POST is always helpful.</p>
-
-<p>I wrote once for <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">AFNetworking</a> (for iOS), which I subsequently referred to it myself. Hence, I am now writing for Google App Engine (Java).</p>
-
-<p>Google provided <a href="https://developers.google.com/appengine/docs/java/urlfetch/usingjavanet">documentation</a> on http connection, but it is incomplete. Here&#8217;s my version.</p>
-
-<!-- more -->
-
-
-<h2>GET</h2>
-
-<p>In my example, I want to get a JSON response for a Comment resource.</p>
-
-<p>I showed how I set my custom headers, especially the Content-Type header. Then I read the response body by using <code>BufferedReader</code>, finally parse the string to <code>JSONObject</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;https://api.myserver.com/v1/comments&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;X-Custom-Header&quot;</span><span class="o">,</span> <span class="s">&quot;xxx&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">connection</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">==</span> <span class="n">HttpURLConnection</span><span class="o">.</span><span class="na">HTTP_OK</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">// OK</span>
-</span><span class='line'>        <span class="n">BufferedReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">openStream</span><span class="o">()));</span>
-</span><span class='line'>        <span class="n">StringBuffer</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
-</span><span class='line'>        <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">res</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">JSONObject</span> <span class="n">jsonObj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">res</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">String</span> <span class="n">count</span> <span class="o">=</span> <span class="n">jsonObj</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">&quot;count&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">...</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">// Server returned HTTP error code.</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>POST</h2>
-
-<p>Similarly, this is how you POST data.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="k">try</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">&quot;https://api.myserver.com/v1/comments&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">HttpURLConnection</span> <span class="n">connection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">url</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;X-Custom-Header&quot;</span><span class="o">,</span> <span class="s">&quot;xxx&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestProperty</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;application/json&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// POST the http body data</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setDoOutput</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">connection</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">&quot;POST&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">OutputStreamWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OutputStreamWriter</span><span class="o">(</span><span class="n">connection</span><span class="o">.</span><span class="na">getOutputStream</span><span class="o">());</span>
-</span><span class='line'>    <span class="n">writer</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="s">&quot;{\&quot;comment\&quot;: \&quot;awesome tutorial\&quot;}&quot;</span><span class="o">);</span>
-</span><span class='line'>    <span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="o">(</span><span class="n">connection</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">()</span> <span class="o">==</span> <span class="n">HttpURLConnection</span><span class="o">.</span><span class="na">HTTP_OK</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">// OK</span>
-</span><span class='line'>        <span class="n">BufferedReader</span> <span class="n">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span><span class="k">new</span> <span class="n">InputStreamReader</span><span class="o">(</span><span class="n">url</span><span class="o">.</span><span class="na">openStream</span><span class="o">()));</span>
-</span><span class='line'>        <span class="n">StringBuffer</span> <span class="n">res</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">String</span> <span class="n">line</span><span class="o">;</span>
-</span><span class='line'>        <span class="k">while</span> <span class="o">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">res</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">line</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>        <span class="n">reader</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">JSONObject</span> <span class="n">jsonObj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="o">(</span><span class="n">res</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">String</span> <span class="n">count</span> <span class="o">=</span> <span class="n">jsonObj</span><span class="o">.</span><span class="na">getInt</span><span class="o">(</span><span class="s">&quot;count&quot;</span><span class="o">);</span>
-</span><span class='line'>        <span class="o">...</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>        <span class="c1">// Server returned HTTP error code.</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Pitfalls</h2>
-
-<p>Google AppEngine always append to your <a href="http://stackoverflow.com/questions/13226598/how-to-remove-the-google-app-engine-default-header-when-fetching-a-url">User-Agent header</a>, so as to identify the http request is from a particular AppEngine app. This is a bane because if you are crawling some website, they could easily block you since you can&#8217;t spoof your user-agent.</p>
 ]]></content>
   </entry>
   
