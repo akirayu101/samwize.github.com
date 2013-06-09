@@ -7,7 +7,7 @@
 	<meta name="author" content="Junda">
 
 	
-	<meta name="description" content="Apr 24th, 2013 Android Comments Android Developement Refresher 2013 It has been nearly 3 years since I stopped Android development. A lot has &hellip;">
+	<meta name="description" content="Apr 26th, 2013 iOS Comments What Is the Replacement for iOS UDID? Apple has long announced uniqueIdentifier UDIDs would be deprecated. From 1st May &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,49 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-26T00:11:00+08:00" data-updated="true" itemprop="datePublished">Apr 26<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>iOS</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2013/04/26/what-is-the-replacement-for-ios-udid/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/04/26/what-is-the-replacement-for-ios-udid/" itemprop="url">What Is the Replacement for iOS UDID?</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
+
+<p>So what you have do?</p>
+
+<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
+
+<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -558,48 +601,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-02T22:55:00+08:00" data-updated="true" itemprop="datePublished">Mar 2<span>nd</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ios/'>iOS</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2013/03/02/queue-http-operations-with-afnetworking/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2013/03/02/queue-http-operations-with-afnetworking/" itemprop="url">Queue HTTP Operations With AFNetworking</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>In a previous post, I wrote about a <a href="http://samwize.com/2012/10/25/simple-get-post-afnetworking/">simple usage of AFNetworking</a>, the de facto HTTP library for iOS.</p>
-
-<p>This post, I will show how you can use AFNetworking to queue multiple HTTP operations. They could be running concurrently, or have dependencies.</p>
-
-<p>Adding dependencies to HTTP operations is especially useful. For example, you can make sure that you fetch a list of resources, then fetch image1, then image2, &#8230;</p>
-
-
-		
-		<a href="/2013/03/02/queue-http-operations-with-afnetworking/" class="more-link">Continue reading &rarr;</a>
 	</div>
 
 </article>

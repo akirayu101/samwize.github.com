@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T02:25:29+08:00</updated>
+  <updated>2013-06-09T16:07:31+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac Right Click using Keyboard Shortcut]]></title>
+    <link href="http://samwize.com/2013/06/09/mac-right-click-using-keyboard-shortcut/"/>
+    <updated>2013-06-09T15:59:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/mac-right-click-using-keyboard-shortcut</id>
+    <content type="html"><![CDATA[<p>If you to be more efficient with computers, you must use the keyboard more than the mouse.</p>
+
+<p>For Mac, it remains a mystery why there isn't a built-in keyboard shortcut for "right clicking". As of Jun 2013, with Mountain Lion, we still lack that.</p>
+
+<p>However, there is a <a href="http://superuser.com/questions/93937/keyboard-shortcut-to-right-click-in-mac-os-x">workaround</a>. But it is recommended only for Mac users with a <strong>separate numpad</strong>.</p>
+
+<p>Luckily I chose to have a Apple Keyboard with Numeric Keypad for my new 27" iMac..</p>
+
+<!-- more -->
+
+
+<p>Go to:</p>
+
+<pre><code>System Preferences &gt; Accessibility &gt; Mouse &amp; Trackpad &gt; Enable Mouse Keys
+</code></pre>
+
+<p>Press <code>Control+5</code> for right click.</p>
+
+<p>Achievement Unlocked: Shortcut Ninja!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Show hidden files in Finder for Mountain Lion]]></title>
@@ -179,39 +206,6 @@
 <h2>8. More..</h2>
 
 <p>More to be updated as I use my new iMac :)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Wifi Scanner for Mac OSX (Mountain Lion)]]></title>
-    <link href="http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion/"/>
-    <updated>2012-10-28T10:05:00+08:00</updated>
-    <id>http://samwize.com/2012/10/28/wifi-scanner-for-mac-osx-mountain-lion</id>
-    <content type="html"><![CDATA[<p>Mountain Lion comes with a Wifi Scanner that is much better than you expected.</p>
-
-<p>I tried out <a href="http://kismac-ng.org/">KisMAC</a> at first, but couldn't get it working. I hate reading their lengthy <a href="http://trac.kismac-ng.org/wiki/NewbieGuide">newbie guide</a>.</p>
-
-<p>Then I found a gem in Mountain Lion.</p>
-
-<!-- more -->
-
-
-<p>It turns out the Wi-Fi Diagnostics Tool (app) in Mountain Lion is updated with new features. It has added a wifi stumbler to discover the wifi nearbys (ssid, channel, protocols, etc).</p>
-
-<p>To do a Wifi scan,</p>
-
-<ol>
-<li><p>Go to terminal and <code>open open /System/Library/CoreServices/Wi-Fi\ Diagnostics.app/</code></p></li>
-<li><p>Go to <strong>File</strong> > <strong>Network Utilities</strong></p></li>
-<li><p>Press Scan</p></li>
-</ol>
-
-
-<p><img src="/images/wifi-scanner-mountain-lion.png" title="Scan Results" ></p>
-
-<p>That's it. You got to see the details of wifi nearby.</p>
-
-<p>PS: I was looking for a uncongested, clear channel to use.</p>
 ]]></content>
   </entry>
   
