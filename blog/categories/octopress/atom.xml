@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T16:07:31+08:00</updated>
+  <updated>2013-06-09T23:01:30+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fix rake error: You have already activated rake x.x.x]]></title>
+    <link href="http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/"/>
+    <updated>2013-06-09T22:55:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x</id>
+    <content type="html"><![CDATA[<p>I encountered the following error when I try to create a new post in Octopress:</p>
+
+<pre><code>You have already activated rake 10.0.4, but your Gemfile requires rake 0.9.2.2. Using bundle exec may solve this.
+</code></pre>
+
+<!-- more -->
+
+
+<p>This happened because I updated rake.</p>
+
+<p>To solve, simple open <code>Gemfile</code>, and update the version number to the latest activated version on your system. eg.</p>
+
+<pre><code>gem 'rake', '~&gt; 10.0.4'
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[New Theme for Octopress]]></title>
@@ -225,107 +247,6 @@ _deploy
 </tbody>
 </table>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to setup Octopress on Github Pages]]></title>
-    <link href="http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages/"/>
-    <updated>2012-09-11T02:07:00+08:00</updated>
-    <id>http://samwize.com/2012/09/11/how-to-setup-octopress-on-github-pages</id>
-    <content type="html"><![CDATA[<p>This blog is hosted entirely on <a href="http://pages.github.com/">Github Pages</a>, powered by the blogging framework for hacker - <a href="http://octopress.org/">Octopress</a>.</p>
-
-<p>As mentioned in the previous post, I have <a href="/2012/09/10/switched-from-wordpress-to-octopress">switched from Wordpress to Octopress</a>. This post, I am writing the steps on how I get it running.</p>
-
-<!-- more -->
-
-
-<h2>Setup</h2>
-
-<p>You need to install <strong>Git</strong> and <strong>Ruby 1.9.3</strong>. As Octopress must use Ruby 1.9.3, if <code>ruby --version</code> does not give you 1.9.3, then you must install via rbenv.</p>
-
-<p>Follow the guide for <a href="http://octopress.org/docs/setup/rbenv/">rbenv</a>. Do the standard method if you have Mac Ports installed (cos it will conflict with Homebrew).</p>
-
-<p>If you are using Mac, you will need to download and install <a href="https://github.com/kennethreitz/osx-gcc-installer/downloads">OSX GCC Compiler</a> because Apple no longer includes that, and Ruby needs that.</p>
-
-<p>An exception for me is that I installed p194 instead of p0. You might need other post revisions.</p>
-
-<pre><code># Here's how I found out
-rake new_post["Switched Wordpress to Octopress"]
-rbenv: version `1.9.3-p194' is not installed
-
-# Hence..
-rbenv install 1.9.3-p194
-rbenv global 1.9.3-p194
-</code></pre>
-
-<p>With Ruby 1.9.3, <a href="http://octopress.org/docs/setup/">setup octopress</a>.</p>
-
-<pre><code>gem install bundler
-rbenv rehash
-bundle install
-</code></pre>
-
-<h2>Deploy</h2>
-
-<p>I chose to deploy to <a href="http://pages.github.com/">Github Pages</a>, since it's free as long as you don't mind pushing your 'code' to public. Follow the guide at <a href="http://octopress.org/docs/deploying/github/">Octopress</a>.</p>
-
-<p>It is interesting to notice that <code>rake setup_github_pages</code> does 2 things:</p>
-
-<ol>
-<li><strong>master</strong> branch is your _deploy directory (the static html)</li>
-<li><strong>source</strong> branch contains the project <em>less</em> _deploy (the markdowns, config and plugins)</li>
-</ol>
-
-
-<p>To deploy:</p>
-
-<pre><code>rake generate
-rake deploy
-</code></pre>
-
-<p>Note that <code>rake deploy</code> will commit and push up to the master branch. In a few minutes, Github will be serving those webpages (it takes longer for the first time).</p>
-
-<p>So what about the source branch? You should also commit and push them.</p>
-
-<pre><code>git add .
-git commit -m 'your message'
-git push origin source
-</code></pre>
-
-<h2>Custom Domain</h2>
-
-<p>I am using my custom domain samwize.just2us.com, instead of samwize.github.com. This can be accomplished easily be adding a CNAME file.</p>
-
-<pre><code>echo 'your-domain.com' &gt;&gt; source/CNAME
-</code></pre>
-
-<p>Then <a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">setup your DNS</a>. For myself, I added a new <strong>CNAME record</strong> <code>samwize.just2us.com</code> pointing to <code>samwize.github.com</code>.</p>
-
-<p>If you are using a Top-level domain, add a <strong>A record</strong> pointing to <code>204.232.175.78</code>.</p>
-
-<h2>New Post</h2>
-
-<p>This is my process whenever I have a new blog post.</p>
-
-<pre><code>rake new_post["My New Post"]
-
-# edit my-new-post.markdown with text editor
-
-rake preview
-
-# Open http://localhost:4000 for a preview
-# Edit and preview until satified
-
-# Ready to publish
-rake generate
-rake deploy
-
-# Commit source
-git add .
-git commit -m 'your message'
-git push origin source  
-</code></pre>
 ]]></content>
   </entry>
   

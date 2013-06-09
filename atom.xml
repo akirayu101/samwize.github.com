@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T16:07:31+08:00</updated>
+  <updated>2013-06-09T23:01:30+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fix rake error: You have already activated rake x.x.x]]></title>
+    <link href="http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/"/>
+    <updated>2013-06-09T22:55:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x</id>
+    <content type="html"><![CDATA[<p>I encountered the following error when I try to create a new post in Octopress:</p>
+
+<pre><code>You have already activated rake 10.0.4, but your Gemfile requires rake 0.9.2.2. Using bundle exec may solve this.
+</code></pre>
+
+<!-- more -->
+
+
+<p>This happened because I updated rake.</p>
+
+<p>To solve, simple open <code>Gemfile</code>, and update the version number to the latest activated version on your system. eg.</p>
+
+<pre><code>gem 'rake', '~&gt; 10.0.4'
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fix cocoapod error: the platform of the target pods is not compatible]]></title>
+    <link href="http://samwize.com/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible/"/>
+    <updated>2013-06-09T22:46:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible</id>
+    <content type="html"><![CDATA[<p>While using <a href="http://cocoapods.org/">Cocoapod</a> and running <code>pod install</code>, I encountered the following error:</p>
+
+<pre><code>[!] The platform of the target `Pods` (iOS 4.3) is not compatible with `FlatUIKit (1.1)` which has a minimum requirement of iOS 5.0.
+</code></pre>
+
+<!-- more -->
+
+
+<p>There is obviously a dependency error. Immediately, I open Xcode, go to Project Building Settings, and changed <strong>iOS Deployment Target</strong> to 5.0. I was pretty sure that is the way to change the minimum deployment version.</p>
+
+<p>However, running the command gives me the same error.</p>
+
+<p>I was puzzled. Did I set it wrongly in Xcode? I started to question myself..</p>
+
+<p>After some probing, I realized it is Cocoapod&#8217;s <a href="https://github.com/CocoaPods/CocoaPods/issues/603">fault</a>.</p>
+
+<p>You have to write in <code>Podfile</code> your minimum deployment version eg.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>platform :ios, '5.0'
+</span><span class='line'>pod 'FlatUIKit', '~&gt; 1.1'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you don&#8217;t specify &#8216;5.0&#8217;, it is taken to be &#8216;4.3&#8217;. Duh.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac Right Click using Keyboard Shortcut]]></title>
@@ -36,7 +91,16 @@
 
 <p>Press <code>Control+5</code> for right click.</p>
 
-<p>Achievement Unlocked: Shortcut Ninja!</p>
+<h2>UPDATE</h2>
+
+<p>Shortly after trying out, I realize this &#8216;shortcut&#8217; is not what I wanted.</p>
+
+<p>Because to &#8216;right click&#8217;, you have to move your mouse to that location FIRST, then right click on. That is not cool.</p>
+
+<p>What I wanted is when I am at a particular item, I can activate &#8216;right click&#8217;, for example to bring up the contextual menu in Finder.
+The trick above would be useless. And it rendered my Keypad useless; I can&#8217;t enter numbers.</p>
+
+<p>Therefore, the above is NOT recommended.</p>
 ]]></content>
   </entry>
   
@@ -712,84 +776,6 @@ find . -name '.gitignore' -type f -delete
 </span><span class='line'>    <span class="c1">// Load the request</span>
 </span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">webview</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">loadRequest:</span><span class="n">requestObj</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Auto fill Username &amp; Password fields in UIWebView]]></title>
-    <link href="http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/"/>
-    <updated>2013-03-15T01:46:00+08:00</updated>
-    <id>http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview</id>
-    <content type="html"><![CDATA[<p>If you use <code>UIWebView</code> and would like to automatically fill in the username and password (or any other text input fields), you could do so by executing Javascript on the webview.</p>
-
-<p>I first learnt about this from <a href="http://stackoverflow.com/a/9722805/242682">stackoverflow</a>, and has edited slightly.</p>
-
-<p>The technique is to implement <a href="http://developer.apple.com/library/ios/#documentation/uikit/reference/UIWebViewDelegate_Protocol/Reference/Reference.html#//apple_ref/occ/intf/UIWebViewDelegate"><code>UIWebViewDelegate</code></a> and execute some Javascript in <code>webViewDidFinishLoad</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">webViewDidFinishLoad:</span><span class="p">(</span><span class="n">UIWebView</span> <span class="o">*</span><span class="p">)</span><span class="nv">webView</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Auto fill the username and password text fields, assuming the HTML has</span>
-</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt; and</span>
-</span><span class='line'>    <span class="c1">// &lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedUsername</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;USERNAME&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">savedPassword</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">objectForKey:</span><span class="s">@&quot;PASSWORD&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">savedUsername</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">savedPassword</span><span class="p">.</span><span class="n">length</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Create js strings</span>
-</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadUsernameJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;username&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
-</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedUsername</span><span class="p">];</span>
-</span><span class='line'>        <span class="n">NSString</span> <span class="o">*</span><span class="n">loadPasswordJS</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;var inputFields = document.querySelectorAll(</span><span class="se">\&quot;</span><span class="s">input[name=&#39;password&#39;]</span><span class="se">\&quot;</span><span class="s">); \</span>
-</span><span class='line'><span class="s">                                    for (var i = inputFields.length &gt;&gt;&gt; 0; i--;) { inputFields[i].value = &#39;%@&#39;;}&quot;</span><span class="p">,</span> <span class="n">savedPassword</span><span class="p">];</span>
-</span><span class='line'>        <span class="c1">// Runs the JS</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadUsernameJS</span><span class="p">];</span>
-</span><span class='line'>        <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">stringByEvaluatingJavaScriptFromString:</span> <span class="n">loadPasswordJS</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Set User Agent for UIWebView]]></title>
-    <link href="http://samwize.com/2013/03/14/set-user-agent-for-uiwebview/"/>
-    <updated>2013-03-14T23:46:00+08:00</updated>
-    <id>http://samwize.com/2013/03/14/set-user-agent-for-uiwebview</id>
-    <content type="html"><![CDATA[<p>There is a very easy (but not documented) way to set the User Agent header for HTTP requests sent via <code>UIWebView</code>.</p>
-
-<p>I find saw the solution from <a href="http://www.mphweb.com/en/blog/easily-set-user-agent-uiwebview">mphweb</a>.</p>
-
-<p>Basically, you just set register it with <code>NSUserDefaults</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initialize</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Set user agent (the only problem is that we can&#39;t modify the User-Agent later in the program)</span>
-</span><span class='line'>    <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">dictionnary</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSDictionary</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithObjectsAndKeys:</span><span class="s">@&quot;Your desired user agent&quot;</span><span class="p">,</span> <span class="s">@&quot;UserAgent&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[[</span><span class="n">NSUserDefaults</span> <span class="n">standardUserDefaults</span><span class="p">]</span> <span class="nl">registerDefaults:</span><span class="n">dictionnary</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">dictionnary</span> <span class="n">release</span><span class="p">];</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 

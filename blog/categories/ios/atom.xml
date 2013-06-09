@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T16:07:31+08:00</updated>
+  <updated>2013-06-09T23:01:30+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fix cocoapod error: the platform of the target pods is not compatible]]></title>
+    <link href="http://samwize.com/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible/"/>
+    <updated>2013-06-09T22:46:00+08:00</updated>
+    <id>http://samwize.com/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible</id>
+    <content type="html"><![CDATA[<p>While using <a href="http://cocoapods.org/">Cocoapod</a> and running <code>pod install</code>, I encountered the following error:</p>
+
+<pre><code>[!] The platform of the target `Pods` (iOS 4.3) is not compatible with `FlatUIKit (1.1)` which has a minimum requirement of iOS 5.0.
+</code></pre>
+
+<!-- more -->
+
+
+<p>There is obviously a dependency error. Immediately, I open Xcode, go to Project Building Settings, and changed <strong>iOS Deployment Target</strong> to 5.0. I was pretty sure that is the way to change the minimum deployment version.</p>
+
+<p>However, running the command gives me the same error.</p>
+
+<p>I was puzzled. Did I set it wrongly in Xcode? I started to question myself..</p>
+
+<p>After some probing, I realized it is Cocoapod's <a href="https://github.com/CocoaPods/CocoaPods/issues/603">fault</a>.</p>
+
+<p>You have to write in <code>Podfile</code> your minimum deployment version eg.</p>
+
+<p><code>
+platform :ios, '5.0'
+pod 'FlatUIKit', '~&gt; 1.1'
+</code></p>
+
+<p>If you don't specify '5.0', it is taken to be '4.3'. Duh.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using OpenCV to match template multiple times]]></title>
@@ -134,41 +166,6 @@ return count;
 <p>Apple recommend you to test on a real device.</p>
 
 <p>I'm sorry.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[POST Request to UIWebView]]></title>
-    <link href="http://samwize.com/2013/03/15/post-request-to-uiwebview/"/>
-    <updated>2013-03-15T01:58:00+08:00</updated>
-    <id>http://samwize.com/2013/03/15/post-request-to-uiwebview</id>
-    <content type="html"><![CDATA[<p>In the last post, I wrote about <a href="/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
-
-<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
-
-<p>It turns out to be simple if the login uses a simple form POST.</p>
-
-<p>```objc
-- (void)login {</p>
-
-<pre><code>// Setup the URL
-NSString *loginUrl = @"https://just2us.com/login";
-NSURL *url = [NSURL URLWithString:loginUrl];    
-NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:url];
-
-// POST the username password
-[requestObj setHTTPMethod:@"POST"];
-NSString *postString = [NSString stringWithFormat:@"username=%@&amp;password=%@", @"samwize", @"secret"];
-NSData *data = [postString dataUsingEncoding: NSUTF8StringEncoding]; 
-[requestObj setHTTPBody:data];
-
-// Load the request
-self.webview.delegate = self;
-[self.webview loadRequest:requestObj];
-</code></pre>
-
-<p>}
-```</p>
 ]]></content>
   </entry>
   

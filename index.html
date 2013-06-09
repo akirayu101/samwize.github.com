@@ -7,7 +7,7 @@
 	<meta name="author" content="Junda">
 
 	
-	<meta name="description" content="Jun 9th, 2013 Mac Comments Mac Right Click Using Keyboard Shortcut If you to be more efficient with computers, you must use the keyboard more than &hellip;">
+	<meta name="description" content="Jun 9th, 2013 Octopress Comments Fix Rake Error: You Have Already Activated Rake x.x.x I encountered the following error when I try to create a new &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,88 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-09T22:55:00+08:00" data-updated="true" itemprop="datePublished">Jun 9<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/" itemprop="url">Fix Rake Error: You Have Already Activated Rake x.x.x</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I encountered the following error when I try to create a new post in Octopress:</p>
+
+<pre><code>You have already activated rake 10.0.4, but your Gemfile requires rake 0.9.2.2. Using bundle exec may solve this.
+</code></pre>
+
+
+		
+		<a href="/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/" class="more-link">Continue reading &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-09T22:46:00+08:00" data-updated="true" itemprop="datePublished">Jun 9<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ios/'>iOS</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible/" itemprop="url">Fix Cocoapod Error: The Platform of the Target Pods Is Not Compatible</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>While using <a href="http://cocoapods.org/">Cocoapod</a> and running <code>pod install</code>, I encountered the following error:</p>
+
+<pre><code>[!] The platform of the target `Pods` (iOS 4.3) is not compatible with `FlatUIKit (1.1)` which has a minimum requirement of iOS 5.0.
+</code></pre>
+
+
+		
+		<a href="/2013/06/09/fix-cocoapod-error-the-platform-of-the-target-pods-is-not-compatible/" class="more-link">Continue reading &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -434,112 +516,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-09T22:12:00+08:00" data-updated="true" itemprop="datePublished">May 9<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/android/'>Android</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2013/05/09/android-use-feature-element-is-case-sensitive/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2013/05/09/android-use-feature-element-is-case-sensitive/" itemprop="url">Android Use-feature Element Is Case Sensitive</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>In the previous post, I discussed about how to <a href="http://samwize.com/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/">Google Play manage compatibility</a> between your app and devices.</p>
-
-<p>The key is to make <code>use-feature</code> optional.</p>
-
-<p>Recently, I have encountered another problem which I want to share.</p>
-
-<p>I have this in my manifest file:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;uses-feature</span> <span class="na">android:name=</span><span class="s">&quot;android.hardware.TELEPHONY&quot;</span> <span class="na">android:required=</span><span class="s">&quot;false&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.INTERNET&quot;</span> <span class="nt">/&gt;</span>
-</span><span class='line'><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>On first look, it seems ok. Making TELEPHONY optional will make the app compatible with tablet (a common solution).</p>
-
-<p>However, the above is WRONG! Because it should be <code>android.hardware.telephony</code> (lower case)!</p>
-
-<p>I made a mistake.</p>
-
-<p>But I also blame Android, because for permission, it is upper case! <code>android.permission.INTERNET</code> is correct.</p>
-
-<p>Weirdedness of Android..</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-07T22:46:00+08:00" data-updated="true" itemprop="datePublished">May 7<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/android/'>Android</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/" itemprop="url">Why an Android App Is Not Supported for a Particular Device?</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>This is what happend to my Android app.</p>
-
-<p>It works well when I install and test on my Lenovo IdeaPad Tablet (it could be any other device).</p>
-
-<p>But after I upload the APK to Google Play Store, I could not find the app using the tablet!</p>
-
-
-		
-		<a href="/2013/05/07/why-an-android-app-is-not-supported-for-a-particular-device/" class="more-link">Continue reading &rarr;</a>
 	</div>
 
 </article>

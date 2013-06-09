@@ -3,11 +3,11 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Mac Right Click using Keyboard Shortcut - Junda Ong</title>
+	<title>Fix rake error: You have already activated rake x.x.x - Junda Ong</title>
 	<meta name="author" content="Junda">
 
 	
-	<meta name="description" content="Mac Right Click Using Keyboard Shortcut If you to be more efficient with computers, you must use the keyboard more than the mouse. For Mac, it &hellip;">
+	<meta name="description" content="Fix Rake Error: You Have Already Activated Rake x.x.x I encountered the following error when I try to create a new post in Octopress: You have &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -17,7 +17,7 @@
 
 	<link href="/atom.xml" rel="alternate" title="Junda Ong" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://samwize.com/2013/06/09/mac-right-click-using-keyboard-shortcut/">
+	<link rel="canonical" href="http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -99,35 +99,21 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">Mac Right Click Using Keyboard Shortcut</h1>
-	<div class="entry-content" itemprop="articleBody"><p>If you to be more efficient with computers, you must use the keyboard more than the mouse.</p>
+	<h1 class="title" itemprop="name">Fix Rake Error: You Have Already Activated Rake x.x.x</h1>
+	<div class="entry-content" itemprop="articleBody"><p>I encountered the following error when I try to create a new post in Octopress:</p>
 
-<p>For Mac, it remains a mystery why there isn&#8217;t a built-in keyboard shortcut for &#8220;right clicking&#8221;. As of Jun 2013, with Mountain Lion, we still lack that.</p>
-
-<p>However, there is a <a href="http://superuser.com/questions/93937/keyboard-shortcut-to-right-click-in-mac-os-x">workaround</a>. But it is recommended only for Mac users with a <strong>separate numpad</strong>.</p>
-
-<p>Luckily I chose to have a Apple Keyboard with Numeric Keypad for my new 27&#8221; iMac..</p>
+<pre><code>You have already activated rake 10.0.4, but your Gemfile requires rake 0.9.2.2. Using bundle exec may solve this.
+</code></pre>
 
 <!-- more -->
 
 
-<p>Go to:</p>
+<p>This happened because I updated rake.</p>
 
-<pre><code>System Preferences &gt; Accessibility &gt; Mouse &amp; Trackpad &gt; Enable Mouse Keys
+<p>To solve, simple open <code>Gemfile</code>, and update the version number to the latest activated version on your system. eg.</p>
+
+<pre><code>gem 'rake', '~&gt; 10.0.4'
 </code></pre>
-
-<p>Press <code>Control+5</code> for right click.</p>
-
-<h2>UPDATE</h2>
-
-<p>Shortly after trying out, I realize this &#8216;shortcut&#8217; is not what I wanted.</p>
-
-<p>Because to &#8216;right click&#8217;, you have to move your mouse to that location FIRST, then right click on. That is not cool.</p>
-
-<p>What I wanted is when I am at a particular item, I can activate &#8216;right click&#8217;, for example to bring up the contextual menu in Finder.
-The trick above would be useless. And it rendered my Keypad useless; I can&#8217;t enter numbers.</p>
-
-<p>Therefore, the above is NOT recommended.</p>
 </div>
 
 </article>
@@ -177,8 +163,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://samwize.com/2013/06/09/mac-right-click-using-keyboard-shortcut/';
-        var disqus_url = 'http://samwize.com/2013/06/09/mac-right-click-using-keyboard-shortcut/';
+        var disqus_identifier = 'http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/';
+        var disqus_url = 'http://samwize.com/2013/06/09/fix-rake-error-you-have-already-activated-rake-x-dot-x-x/';
         var disqus_script = 'embed.js';
       
     (function () {
