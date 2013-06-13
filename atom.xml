@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T23:01:30+08:00</updated>
+  <updated>2013-06-13T21:45:14+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remember to enable iAd for new iOS apps after uploading binary]]></title>
+    <link href="http://samwize.com/2013/06/12/remember-to-enable-iad-for-new-ios-apps-after-uploading-binary/"/>
+    <updated>2013-06-12T01:16:00+08:00</updated>
+    <id>http://samwize.com/2013/06/12/remember-to-enable-iad-for-new-ios-apps-after-uploading-binary</id>
+    <content type="html"><![CDATA[<p>You can enable iAd network ONLY when your app is in an editable state. That is after uploading binary and before being approved.</p>
+
+<p>If not, you can&#8217;t.</p>
+
+<p><img class="center" src="http://samwize.com/images/enable-iads-when-app-is-in-editable-state.png"></p>
+
+<p>I am not sure how many developers forgot to enable iAd. But I am one. And I blatantly forgot to enable 1 app for over a year.. (I also use Admob, Mopub, MMedia, etc)</p>
+
+<p>Why can&#8217;t we just flick the switch?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fix rake error: You have already activated rake x.x.x]]></title>
@@ -731,54 +748,6 @@ find . -name '.gitignore' -type f -delete
 
 
 <p>Follow through and it will be done!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[POST Request to UIWebView]]></title>
-    <link href="http://samwize.com/2013/03/15/post-request-to-uiwebview/"/>
-    <updated>2013-03-15T01:58:00+08:00</updated>
-    <id>http://samwize.com/2013/03/15/post-request-to-uiwebview</id>
-    <content type="html"><![CDATA[<p>In the last post, I wrote about <a href="http://samwize.com/2013/03/15/auto-fill-username-and-password-fields-in-uiwebview/">how you can automatically fill in username and password in a UIWebView</a>.</p>
-
-<p>This post, I will teach you how you can automatically login to a <code>UIWebView</code>.</p>
-
-<p>It turns out to be simple if the login uses a simple form POST.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">login</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// Setup the URL</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">loginUrl</span> <span class="o">=</span> <span class="s">@&quot;https://just2us.com/login&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">NSURL</span> <span class="o">*</span><span class="n">url</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSURL</span> <span class="nl">URLWithString:</span><span class="n">loginUrl</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSMutableURLRequest</span> <span class="o">*</span><span class="n">requestObj</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSMutableURLRequest</span> <span class="nl">requestWithURL:</span><span class="n">url</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// POST the username password</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPMethod:</span><span class="s">@&quot;POST&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSString</span> <span class="o">*</span><span class="n">postString</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nl">stringWithFormat:</span><span class="s">@&quot;username=%@&amp;password=%@&quot;</span><span class="p">,</span> <span class="s">@&quot;samwize&quot;</span><span class="p">,</span> <span class="s">@&quot;secret&quot;</span><span class="p">];</span>
-</span><span class='line'>    <span class="n">NSData</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">postString</span> <span class="nl">dataUsingEncoding:</span> <span class="n">NSUTF8StringEncoding</span><span class="p">];</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">requestObj</span> <span class="nl">setHTTPBody:</span><span class="n">data</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1">// Load the request</span>
-</span><span class='line'>    <span class="n">self</span><span class="p">.</span><span class="n">webview</span><span class="p">.</span><span class="n">delegate</span> <span class="o">=</span> <span class="n">self</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">webview</span> <span class="nl">loadRequest:</span><span class="n">requestObj</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

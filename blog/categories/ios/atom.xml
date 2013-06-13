@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-09T23:01:30+08:00</updated>
+  <updated>2013-06-13T21:45:14+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Remember to enable iAd for new iOS apps after uploading binary]]></title>
+    <link href="http://samwize.com/2013/06/12/remember-to-enable-iad-for-new-ios-apps-after-uploading-binary/"/>
+    <updated>2013-06-12T01:16:00+08:00</updated>
+    <id>http://samwize.com/2013/06/12/remember-to-enable-iad-for-new-ios-apps-after-uploading-binary</id>
+    <content type="html"><![CDATA[<p>You can enable iAd network ONLY when your app is in an editable state. That is after uploading binary and before being approved.</p>
+
+<p>If not, you can't.</p>
+
+<p><img class="center" src="/images/enable-iads-when-app-is-in-editable-state.png"></p>
+
+<p>I am not sure how many developers forgot to enable iAd. But I am one. And I blatantly forgot to enable 1 app for over a year.. (I also use Admob, Mopub, MMedia, etc)</p>
+
+<p>Why can't we just flick the switch?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fix cocoapod error: the platform of the target pods is not compatible]]></title>
@@ -151,21 +168,6 @@ return count;
 <p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
 
 <p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to run iOS 4.3 Simulator on Mountain Lion?]]></title>
-    <link href="http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/"/>
-    <updated>2013-03-29T15:23:00+08:00</updated>
-    <id>http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion</id>
-    <content type="html"><![CDATA[<p>You can't.</p>
-
-<p>This is a <a href="http://stackoverflow.com/questions/11651773/install-simulator-sdk-4-3-to-xcode-4-4-on-mountain-lion">Mountain Lion issue</a>. Apple somehow broke it, and so even if you manage to download and install the simulator, you can't run it.</p>
-
-<p>Apple recommend you to test on a real device.</p>
-
-<p>I'm sorry.</p>
 ]]></content>
   </entry>
   
