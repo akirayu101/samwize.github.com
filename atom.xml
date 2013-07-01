@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-13T21:45:14+08:00</updated>
+  <updated>2013-06-30T12:12:08+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Data Storage Guidelines - and how to resolve iTunes Connect Reject]]></title>
+    <link href="http://samwize.com/2013/06/28/ios-data-storage-guidelines-and-how-to-resolve-itunes-connect-reject/"/>
+    <updated>2013-06-28T01:10:00+08:00</updated>
+    <id>http://samwize.com/2013/06/28/ios-data-storage-guidelines-and-how-to-resolve-itunes-connect-reject</id>
+    <content type="html"><![CDATA[<p>Since the introduction of <a href="https://www.apple.com/support/icloud/backup/">iCloud Backup</a>, developers have increasingly faced the following reason for rejected binary:</p>
+
+<pre><code>2.23: Apps must follow the iOS Data Storage Guidelines or they will be rejected
+
+The iOS Data Storage Guidelines indicate that only content that the user creates using your app, e.g., documents, new files, edits, etc., should be backed up by iCloud. 
+</code></pre>
+
+<p>This all boils down to understanding <a href="http://developer.apple.com/library/ios/#documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/PerformanceTuning/PerformanceTuning.html#//apple_ref/doc/uid/TP40007072-CH8-SW9">iOS Data Storage Guidelines</a>.</p>
+
+<!-- more -->
+
+
+<h1>How App Backup and Update</h1>
+
+<p>Apps are backup via iCloud/iTunes, but they do NOT backup the following directories:</p>
+
+<ol>
+<li><code>&lt;Application_Home&gt;/AppName.app</code></li>
+<li><code>&lt;Application_Home&gt;/Library/Caches</code></li>
+<li><code>&lt;Application_Home&gt;/tmp</code></li>
+</ol>
+
+
+<p>In addition, if a file has an attribute that says &#8220;exclude from backup&#8221;, it will NOT be backup too.</p>
+
+<p>When you update an application, data in these 2 directories will be copied over:</p>
+
+<ol>
+<li><code>&lt;Application_Home&gt;/Documents</code></li>
+<li><code>&lt;Application_Home&gt;/Library</code></li>
+</ol>
+
+
+<p>Although files in other user directories may also be moved over, you should not rely on them being present after an update.</p>
+
+<h1>Type of data - Critical, Support, Cached, Temporary</h1>
+
+<p>Before we move on, these are the definitions for the 4 types of data:</p>
+
+<ol>
+<li><p><strong>Critical</strong>: Data that cannot be recreated by your app such as user generated content. These need to be backup.</p></li>
+<li><p><strong>Support</strong>: Needed files which the app can re-generate or download. They should be excluded from backup.</p></li>
+<li><p><strong>Cached</strong>: Downloaded content such as images, map data, magazine. System could delete them to free up disk space.</p></li>
+<li><p><strong>Temporary</strong>: Data that are needed for a short while such as during processing. You should delete them after use.</p></li>
+</ol>
+
+
+<p>As you see, only critical data should be backup.</p>
+
+<h1>Different iOS Version</h1>
+
+<p>There are 3 versions that you <a href="https://developer.apple.com/library/ios/#qa/qa1719/_index.html">need to beware of</a> when you are using iCloud Backup. It is a fragmentation issue.</p>
+
+<p>Actually it deals with what files you do NOT want to backup. Because if you simply backup every files (including non critical files), Apple will reject your app.</p>
+
+<ol>
+<li><p>5.1 and later: You can add a file attribute <code>NSURLIsExcludedFromBackupKey</code> to specify that you don&#8217;t want to backup the file.</p></li>
+<li><p>5.0.1: A slightly different method that uses <code>setxattr</code></p></li>
+<li><p>5.0: No method to specify a file not to backup. The only way is to store them in <code>&lt;Application_Home&gt;/Library/Caches</code></p></li>
+</ol>
+
+
+<h1>Summary</h1>
+
+<p>At last, this is the guideline for your files.</p>
+
+<ul>
+<li><p>For <strong>critcal</strong> data (the only type that need to be backup), store them in:</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/Documents</code></li>
+</ul>
+</li>
+<li><p>For <strong>support</strong> data, they should be excluded from backup. It is a little complicated due to the different iOS version.</p>
+
+<ul>
+<li><p>For iOS 5.0.1 and later, store in <code>&lt;Application_Home&gt;/Library/Application Support</code> and add the file attribute as described in the previous section.</p></li>
+<li><p>If you need to support iOS 5.0, then store in <code>&lt;Application_Home&gt;/Library/Caches</code> and still use the file attributes for 5.0.1 and later</p></li>
+<li><p>Note: Support files might not exist when an app backup or update, so you should check if it exists first before use.</p></li>
+</ul>
+</li>
+<li><p>For <strong>cache</strong>, store in</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/Library/Caches</code></li>
+</ul>
+</li>
+<li><p>For <strong>temp</strong> files, store in</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/tmp</code></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Crash when using ChartboostInterstitialCustomEvent in MoPub: unrecognized selector requestAdWithSize]]></title>
+    <link href="http://samwize.com/2013/06/14/crash-when-using-chartboostinterstitialcustomevent-in-mopub-unrecognized-selector-requestadwithsize/"/>
+    <updated>2013-06-14T00:50:00+08:00</updated>
+    <id>http://samwize.com/2013/06/14/crash-when-using-chartboostinterstitialcustomevent-in-mopub-unrecognized-selector-requestadwithsize</id>
+    <content type="html"><![CDATA[<p>While integrating <a href="https://chartboost.com/">Chartboost</a> into <a href="http://mopub.com/">MoPub</a> for an iOS app, I encountered a crash every time there is a Chartboost ad loading.</p>
+
+<p>The error is:</p>
+
+<pre><code>ChartboostInterstitialCustomEvent requestAdWithSize customEventInfo unrecognized selector 
+</code></pre>
+
+<!-- more -->
+
+
+<p>I thought it is a bug with MoPub at first (my experience tells me as MMedia crashes at times too).</p>
+
+<p>After researching a while, I found out the crash is because MoPub tried to load a banner ad, while Chartboost does not have banner ads! Chartboost ONLY has interstitial ads!</p>
+
+<p>To solve, you have to disable banner ads in MoPub portal for Chartboost..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remember to enable iAd for new iOS apps after uploading binary]]></title>
@@ -704,50 +830,6 @@ find . -name '.gitignore' -type f -delete
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to run iOS 4.3 Simulator on Mountain Lion?]]></title>
-    <link href="http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion/"/>
-    <updated>2013-03-29T15:23:00+08:00</updated>
-    <id>http://samwize.com/2013/03/29/how-to-run-ios-4-dot-3-simulator-on-mountain-lion</id>
-    <content type="html"><![CDATA[<p>You can&#8217;t.</p>
-
-<p>This is a <a href="http://stackoverflow.com/questions/11651773/install-simulator-sdk-4-3-to-xcode-4-4-on-mountain-lion">Mountain Lion issue</a>. Apple somehow broke it, and so even if you manage to download and install the simulator, you can&#8217;t run it.</p>
-
-<p>Apple recommend you to test on a real device.</p>
-
-<p>I&#8217;m sorry.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clean install iMac on Mountain Lion]]></title>
-    <link href="http://samwize.com/2013/03/27/clean-install-imac-on-mountain-lion/"/>
-    <updated>2013-03-27T21:54:00+08:00</updated>
-    <id>http://samwize.com/2013/03/27/clean-install-imac-on-mountain-lion</id>
-    <content type="html"><![CDATA[<p>I posted about how I <a href="http://samwize.com/2013/02/14/migrating-old-mac-to-new-mac/">migrate an old Mac to a new Mac</a> in a previous post.</p>
-
-<p>After migration, I also wanted to do a clean install on the old Mac, and bring it to factory settings, but with the latest OS X (Mountain Lion for me).</p>
-
-<p>It is very easy.</p>
-
-<!-- more -->
-
-
-<blockquote></blockquote>
-
-<p>The steps:</p>
-
-<ul>
-<li><p>Restart computer and press <strong>Command + R</strong> while it restart to get to a menu screen</p></li>
-<li><p>Select <strong>Disk Utility</strong> > Macintosh HD (your startup volume) > Erase</p></li>
-<li><p>Go back to menu screen and select <strong>Install Mac OS X</strong></p></li>
-</ul>
-
-
-<p>Follow through and it will be done!</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-13T21:45:14+08:00</updated>
+  <updated>2013-07-02T01:07:15+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[WWDC 2013 - download sessions directly]]></title>
+    <link href="http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly/"/>
+    <updated>2013-07-02T00:54:00+08:00</updated>
+    <id>http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly</id>
+    <content type="html"><![CDATA[Liquid error: invalid byte sequence in UTF-8]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Crash when using ChartboostInterstitialCustomEvent in MoPub: unrecognized selector requestAdWithSize]]></title>
+    <link href="http://samwize.com/2013/06/14/crash-when-using-chartboostinterstitialcustomevent-in-mopub-unrecognized-selector-requestadwithsize/"/>
+    <updated>2013-06-14T00:50:00+08:00</updated>
+    <id>http://samwize.com/2013/06/14/crash-when-using-chartboostinterstitialcustomevent-in-mopub-unrecognized-selector-requestadwithsize</id>
+    <content type="html"><![CDATA[<p>While integrating <a href="https://chartboost.com/">Chartboost</a> into <a href="http://mopub.com/">MoPub</a> for an iOS app, I encountered a crash every time there is a Chartboost ad loading.</p>
+
+<p>The error is:</p>
+
+<pre><code>ChartboostInterstitialCustomEvent requestAdWithSize customEventInfo unrecognized selector 
+</code></pre>
+
+<!-- more -->
+
+
+<p>I thought it is a bug with MoPub at first (my experience tells me as MMedia crashes at times too).</p>
+
+<p>After researching a while, I found out the crash is because MoPub tried to load a banner ad, while Chartboost does not have banner ads! Chartboost ONLY has interstitial ads!</p>
+
+<p>To solve, you have to disable banner ads in MoPub portal for Chartboost..</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Remember to enable iAd for new iOS apps after uploading binary]]></title>
@@ -22,7 +53,7 @@
 
 <p>If not, you can't.</p>
 
-<p><img class="center" src="/images/enable-iads-when-app-is-in-editable-state.png"></p>
+<p>{%img center /images/enable-iads-when-app-is-in-editable-state.png %}</p>
 
 <p>I am not sure how many developers forgot to enable iAd. But I am one. And I blatantly forgot to enable 1 app for over a year.. (I also use Admob, Mopub, MMedia, etc)</p>
 
@@ -128,46 +159,6 @@ return count;
 
 <p>}
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[armv7s build for tesseract and opencv2]]></title>
-    <link href="http://samwize.com/2013/06/08/armv7s-build-for-tesseract-and-opencv2/"/>
-    <updated>2013-06-08T00:07:00+08:00</updated>
-    <id>http://samwize.com/2013/06/08/armv7s-build-for-tesseract-and-opencv2</id>
-    <content type="html"><![CDATA[<p>Tesseract is the OCR engine that helps to recoginze text. Google now maintains <a href="https://code.google.com/p/tesseract-ocr/wiki/ReadMe">the project</a>.</p>
-
-<p>You can use Tesseract on iOS too.</p>
-
-<p>I <a href="https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV">forked</a> the github project because the <a href="https://github.com/pablosproject/iPhone-OCR-Tesseract-and-OpenCV">original</a> has a couple of problems compiling. To be precise:</p>
-
-<pre><code>File is universal (three slices), but it does not contain a(n) ARMv7-s slice for ..
-</code></pre>
-
-<!-- more -->
-
-
-<p>This is because the original project was 10 months ago, and did not support for armv7s (iPhone 5). You can <a href="http://www.galloway.me.uk/2012/09/hacking-up-an-armv7s-library/">hack</a> a build by yourself.</p>
-
-<p>But I have fixed that for both tesseract libs and also updated opencv2 libs.</p>
-
-<p>For your convenience: <a href="https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV">https://github.com/samwize/iPhone-OCR-Tesseract-and-OpenCV</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What is the replacement for iOS UDID?]]></title>
-    <link href="http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid/"/>
-    <updated>2013-04-26T00:11:00+08:00</updated>
-    <id>http://samwize.com/2013/04/26/what-is-the-replacement-for-ios-udid</id>
-    <content type="html"><![CDATA[<p>Apple has long announced <code>uniqueIdentifier</code> UDIDs would be deprecated. From 1st May 2013, Apple will reject apps that use the deprecated identifier.</p>
-
-<p>So what you have do?</p>
-
-<p>DoubleEncore has writtern a good article on the <a href="http://www.doubleencore.com/2013/04/unique-identifiers/">other ways to generate UDID</a>. It is up to you and your use case.</p>
-
-<p>For me, <a href="https://github.com/ylechelle/OpenUDID">OpenUDID</a> is the nearest replacement. The only difference is that it cannot persist the identifier if there is a system reset.</p>
 ]]></content>
   </entry>
   

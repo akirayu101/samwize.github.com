@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Books | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/books/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-13T21:45:14+08:00</updated>
+  <updated>2013-07-02T01:07:15+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -100,7 +100,7 @@
 
 <p>I will be summarizing some great concepts that I have learnt.</p>
 
-<p><a href="http://www.bookdepository.co.uk/Lean-Startup-Eric-Ries/9780670921607?a_aid=Just2me"><img class="center" src="/images/book-the-lean-startup.jpeg"></a></p>
+<p><a href="http://www.bookdepository.co.uk/Lean-Startup-Eric-Ries/9780670921607?a_aid=Just2me">{%img center /images/book-the-lean-startup.jpeg %}</a></p>
 
 <!-- more -->
 
@@ -136,7 +136,7 @@
 </ul>
 
 
-<p><img class="center" src="/images/build-measure-learn-cycle.png"></p>
+<p>{%img center /images/build-measure-learn-cycle.png %}</p>
 
 <p>The process is actually reverse; You start with planning what you want to learn, what you need to measure, then build it small and ASAP - the eventual MVP.</p>
 

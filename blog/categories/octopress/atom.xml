@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-13T21:45:14+08:00</updated>
+  <updated>2013-07-02T01:07:15+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -60,9 +60,9 @@ $ rake "install[greyshade]"
 
 <p>With that, here are screenshots of the old vs new:</p>
 
-<p><img class="center" src="/images/theme-classic.png"></p>
+<p>{%img center /images/theme-classic.png %}</p>
 
-<p><img class="center" src="/images/theme-greyshade.png"></p>
+<p>{%img center /images/theme-greyshade.png %}</p>
 ]]></content>
   </entry>
   
@@ -151,47 +151,14 @@ _deploy
 
 <p>Add data-table.css to <code>source/stylesheets/</code>.</p>
 
-<p><div><script src='https://gist.github.com/1993032.js?file=data-table.css'></script>
-<noscript><pre><code>* + table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#e7e3e7;
-}
-
-* + table th, * + table td {
-  border-style:dashed;
-  border-width:1px;
-  border-color:#e7e3e7;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
-* + table th {
-  border-style:solid;
-  font-weight:bold;
-  background: url(&quot;/images/noise.png?1330434582&quot;) repeat scroll left top #F7F3F7;
-}
-
-* + table th[align=&quot;left&quot;], * + table td[align=&quot;left&quot;] {
-  text-align:left;
-}
-
-* + table th[align=&quot;right&quot;], * + table td[align=&quot;right&quot;] {
-  text-align:right;
-}
-
-* + table th[align=&quot;center&quot;], * + table td[align=&quot;center&quot;] {
-  text-align:center;
-}
-</code></pre></noscript></div>
-</p>
+<p>{% gist 1993032 data-table.css %}</p>
 
 <h3>Step 2. Add link header</h3>
 
 <p>In <code>source/_includes/head.html</code> insert this:</p>
 
 <p><code>html
-&lt;link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
+&lt;link href="{{ root_url }}/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
 </code></p>
 
 <p>And now the table appears!</p>
