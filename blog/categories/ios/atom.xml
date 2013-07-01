@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-07-02T01:07:15+08:00</updated>
+  <updated>2013-07-02T01:09:54+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -19,6 +19,109 @@
     <updated>2013-07-02T00:54:00+08:00</updated>
     <id>http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly</id>
     <content type="html"><![CDATA[Liquid error: invalid byte sequence in UTF-8]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS Data Storage Guidelines - and how to resolve iTunes Connect Reject]]></title>
+    <link href="http://samwize.com/2013/06/28/ios-data-storage-guidelines-and-how-to-resolve-itunes-connect-reject/"/>
+    <updated>2013-06-28T01:10:00+08:00</updated>
+    <id>http://samwize.com/2013/06/28/ios-data-storage-guidelines-and-how-to-resolve-itunes-connect-reject</id>
+    <content type="html"><![CDATA[<p>Since the introduction of <a href="https://www.apple.com/support/icloud/backup/">iCloud Backup</a>, developers have increasingly faced the following reason for rejected binary:</p>
+
+<pre><code>2.23: Apps must follow the iOS Data Storage Guidelines or they will be rejected
+
+The iOS Data Storage Guidelines indicate that only content that the user creates using your app, e.g., documents, new files, edits, etc., should be backed up by iCloud. 
+</code></pre>
+
+<p>This all boils down to understanding <a href="http://developer.apple.com/library/ios/#documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/PerformanceTuning/PerformanceTuning.html#//apple_ref/doc/uid/TP40007072-CH8-SW9">iOS Data Storage Guidelines</a>.</p>
+
+<!-- more -->
+
+
+<h1>How App Backup and Update</h1>
+
+<p>Apps are backup via iCloud/iTunes, but they do NOT backup the following directories:</p>
+
+<ol>
+<li><code>&lt;Application_Home&gt;/AppName.app</code></li>
+<li><code>&lt;Application_Home&gt;/Library/Caches</code></li>
+<li><code>&lt;Application_Home&gt;/tmp</code></li>
+</ol>
+
+
+<p>In addition, if a file has an attribute that says "exclude from backup", it will NOT be backup too.</p>
+
+<p>When you update an application, data in these 2 directories will be copied over:</p>
+
+<ol>
+<li><code>&lt;Application_Home&gt;/Documents</code></li>
+<li><code>&lt;Application_Home&gt;/Library</code></li>
+</ol>
+
+
+<p>Although files in other user directories may also be moved over, you should not rely on them being present after an update.</p>
+
+<h1>Type of data - Critical, Support, Cached, Temporary</h1>
+
+<p>Before we move on, these are the definitions for the 4 types of data:</p>
+
+<ol>
+<li><p><strong>Critical</strong>: Data that cannot be recreated by your app such as user generated content. These need to be backup.</p></li>
+<li><p><strong>Support</strong>: Needed files which the app can re-generate or download. They should be excluded from backup.</p></li>
+<li><p><strong>Cached</strong>: Downloaded content such as images, map data, magazine. System could delete them to free up disk space.</p></li>
+<li><p><strong>Temporary</strong>: Data that are needed for a short while such as during processing. You should delete them after use.</p></li>
+</ol>
+
+
+<p>As you see, only critical data should be backup.</p>
+
+<h1>Different iOS Version</h1>
+
+<p>There are 3 versions that you <a href="https://developer.apple.com/library/ios/#qa/qa1719/_index.html">need to beware of</a> when you are using iCloud Backup. It is a fragmentation issue.</p>
+
+<p>Actually it deals with what files you do NOT want to backup. Because if you simply backup every files (including non critical files), Apple will reject your app.</p>
+
+<ol>
+<li><p>5.1 and later: You can add a file attribute <code>NSURLIsExcludedFromBackupKey</code> to specify that you don't want to backup the file.</p></li>
+<li><p>5.0.1: A slightly different method that uses <code>setxattr</code></p></li>
+<li><p>5.0: No method to specify a file not to backup. The only way is to store them in <code>&lt;Application_Home&gt;/Library/Caches</code></p></li>
+</ol>
+
+
+<h1>Summary</h1>
+
+<p>At last, this is the guideline for your files.</p>
+
+<ul>
+<li><p>For <strong>critcal</strong> data (the only type that need to be backup), store them in:</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/Documents</code></li>
+</ul>
+</li>
+<li><p>For <strong>support</strong> data, they should be excluded from backup. It is a little complicated due to the different iOS version.</p>
+
+<ul>
+<li><p>For iOS 5.0.1 and later, store in <code>&lt;Application_Home&gt;/Library/Application Support</code> and add the file attribute as described in the previous section.</p></li>
+<li><p>If you need to support iOS 5.0, then store in <code>&lt;Application_Home&gt;/Library/Caches</code> and still use the file attributes for 5.0.1 and later</p></li>
+<li><p>Note: Support files might not exist when an app backup or update, so you should check if it exists first before use.</p></li>
+</ul>
+</li>
+<li><p>For <strong>cache</strong>, store in</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/Library/Caches</code></li>
+</ul>
+</li>
+<li><p>For <strong>temp</strong> files, store in</p>
+
+<ul>
+<li><code>&lt;Application_Home&gt;/tmp</code></li>
+</ul>
+</li>
+</ul>
+
+]]></content>
   </entry>
   
   <entry>
@@ -90,75 +193,6 @@ pod 'FlatUIKit', '~&gt; 1.1'
 </code></p>
 
 <p>If you don't specify '5.0', it is taken to be '4.3'. Duh.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using OpenCV to match template multiple times]]></title>
-    <link href="http://samwize.com/2013/06/09/using-opencv-to-match-template-multiple-times/"/>
-    <updated>2013-06-09T02:15:00+08:00</updated>
-    <id>http://samwize.com/2013/06/09/using-opencv-to-match-template-multiple-times</id>
-    <content type="html"><![CDATA[<p>OpenCV has a <a href="http://opencv.itseez.com/modules/imgproc/doc/object_detection.html?highlight=matchtemplate#matchtemplate">matchTemplate</a> function that let you seach for matches between an image and a given template.</p>
-
-<!-- more -->
-
-
-<p>There is a <a href="http://docs.opencv.org/doc/tutorials/imgproc/histograms/template_matching/template_matching.html#template-matching">tutorial</a> on that.</p>
-
-<p>However, the tutorial falls short. It only explain how to match 1 occurence.</p>
-
-<p>I know the answer is somewhere in the <code>result</code>.. But I am a newbie and cannot figure out. Do are <a href="http://answers.opencv.org/question/11180/template-matching-with-multiple-occurance/">others</a>.</p>
-
-<p>I found the best answer from: <a href="http://opencv-code.com/quick-tips/how-to-handle-template-matching-with-multiple-occurences/">OpenCV-Code.com</a></p>
-
-<p>The genius part of the code is that it finds a match with <code>minMaxLoc</code>, then it <code>floodFill</code> it. Then it can repeat.</p>
-
-<p>I have used it for an iOS project to count the number of matching templates. Here's the code:</p>
-
-<p>```cpp
-// Returns number of matching templates
-+ (int)matchTemplate:(UIImage<em>)templateImage in:(UIImage</em>)src {</p>
-
-<pre><code>// http://opencv-code.com/quick-tips/how-to-handle-template-matching-with-multiple-occurences/
-cv::Mat ref = [src CVMat];
-cv::Mat tpl = [templateImage CVMat];
-cv::Mat gref, gtpl;
-cv::cvtColor(ref, gref, CV_BGR2GRAY);
-cv::cvtColor(tpl, gtpl, CV_BGR2GRAY);
-
-cv::Mat res(ref.rows-tpl.rows+1, ref.cols-tpl.cols+1, CV_32FC1);
-cv::matchTemplate(gref, gtpl, res, CV_TM_CCOEFF_NORMED);
-cv::threshold(res, res, 0.9, 1., CV_THRESH_TOZERO);
-
-int count = 0;
-while (true)
-{
-    double minval, maxval, threshold = 0.9;
-    cv::Point minloc, maxloc;
-    cv::minMaxLoc(res, &amp;minval, &amp;maxval, &amp;minloc, &amp;maxloc);
-
-    if (maxval &gt;= threshold)
-    {
-        cv::rectangle(
-                      ref,
-                      maxloc,
-                      cv::Point(maxloc.x + tpl.cols, maxloc.y + tpl.rows),
-                      CV_RGB(0,255,0), 2
-                      );
-        cv::floodFill(res, maxloc, cv::Scalar(0), 0, cv::Scalar(.1), cv::Scalar(1.));
-        count++;
-    }
-    else
-        break;
-}
-
-NSLog(@"# of matches: %d", count);
-
-return count;
-</code></pre>
-
-<p>}
-```</p>
 ]]></content>
   </entry>
   
