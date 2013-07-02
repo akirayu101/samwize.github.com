@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-07-02T20:33:22+08:00</updated>
+  <updated>2013-07-02T20:51:40+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -18,7 +18,16 @@
     <link href="http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly/"/>
     <updated>2013-07-02T00:54:00+08:00</updated>
     <id>http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly</id>
-    <content type="html"><![CDATA[Liquid error: invalid byte sequence in UTF-8]]></content>
+    <content type="html"><![CDATA[<p>Unlike in previous years (WWDC 2012 and earlier), the developer session videos can be subscribed in iTunes University, hence you can easily download all the videos and conveniently sync to your iPhone to watch.</p>
+
+<p>But for WWDC 2013, Apple provided (an app)[https://itunes.apple.com/us/app/wwdc/id640199958?mt=8], which seems to be the recommended way for developers to watch from their iPhone.</p>
+
+<p>You can also download 1 by 1 from <a href="https://developer.apple.com/wwdc/videos/">Apple Developer website</a>.
+‎
+But here is a better: <a href="https://github.com/ohoachuck/wwdc-downloader">WWDC Video and PDF downloder</a> by <a href="http://blog.hoachuck.biz/blog/2013/06/15/script-to-download-wwdc-2013-videos">ohoachuck</a>.</p>
+
+<p>Or a <a href="http://blog.manbolo.com/2013/06/18/download-videos-and-slides-from-wwdc-2013">Python version</a>.</p>
+]]></content>
   </entry>
   
   <entry>
@@ -156,7 +165,7 @@ The iOS Data Storage Guidelines indicate that only content that the user creates
 
 <p>If not, you can't.</p>
 
-<p>{%img center /images/enable-iads-when-app-is-in-editable-state.png %}</p>
+<p><img class="center" src="/images/enable-iads-when-app-is-in-editable-state.png"></p>
 
 <p>I am not sure how many developers forgot to enable iAd. But I am one. And I blatantly forgot to enable 1 app for over a year.. (I also use Admob, Mopub, MMedia, etc)</p>
 

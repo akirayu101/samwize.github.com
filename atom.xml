@@ -4,7 +4,7 @@
   <title><![CDATA[Junda Ong]]></title>
   <link href="http://samwize.com/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-06-30T12:12:08+08:00</updated>
+  <updated>2013-07-02T20:51:40+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Python Tool to extract email]]></title>
+    <link href="http://samwize.com/2013/07/02/a-python-tool-to-extract-email/"/>
+    <updated>2013-07-02T20:28:00+08:00</updated>
+    <id>http://samwize.com/2013/07/02/a-python-tool-to-extract-email</id>
+    <content type="html"><![CDATA[<p>Recently I was requested by my fiancee to help send bulk SMS to her students. Its an emergency relay.</p>
+
+<p>I know how to send bulk SMS (using SMS API). What it needs is the list of phone numbers in csv format. But all she send me is a &#8216;nice looking&#8217; word document with the names and phone numbers.. I could spend 10 minutes copy-and-paste the phone numbers..</p>
+
+<p>But being a programmer, I added extraction of mobile phone numbers (Singapore format only) to <a href="https://github.com/samwize/pyExtractor">pyExtractor</a>.</p>
+
+<p>This is the tool which I wrote 1 year ago to extract emails, URLs and domain names.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[WWDC 2013 - download sessions directly]]></title>
+    <link href="http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly/"/>
+    <updated>2013-07-02T00:54:00+08:00</updated>
+    <id>http://samwize.com/2013/07/02/wwdc-2013-download-sessions-directly</id>
+    <content type="html"><![CDATA[<p>Unlike in previous years (WWDC 2012 and earlier), the developer session videos can be subscribed in iTunes University, hence you can easily download all the videos and conveniently sync to your iPhone to watch.</p>
+
+<p>But for WWDC 2013, Apple provided (an app)[https://itunes.apple.com/us/app/wwdc/id640199958?mt=8], which seems to be the recommended way for developers to watch from their iPhone.</p>
+
+<p>You can also download 1 by 1 from <a href="https://developer.apple.com/wwdc/videos/">Apple Developer website</a>.
+‎
+But here is a better: <a href="https://github.com/ohoachuck/wwdc-downloader">WWDC Video and PDF downloder</a> by <a href="http://blog.hoachuck.biz/blog/2013/06/15/script-to-download-wwdc-2013-videos">ohoachuck</a>.</p>
+
+<p>Or a <a href="http://blog.manbolo.com/2013/06/18/download-videos-and-slides-from-wwdc-2013">Python version</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iOS Data Storage Guidelines - and how to resolve iTunes Connect Reject]]></title>
@@ -748,88 +780,6 @@ find . -name '.gitignore' -type f -delete
 
 
 <p>It&#8217;s subtle..</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Migrate mongodb data from Dotcloud to MongoLab]]></title>
-    <link href="http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab/"/>
-    <updated>2013-04-17T02:50:00+08:00</updated>
-    <id>http://samwize.com/2013/04/17/migrate-mongodb-data-from-dotcloud-to-mongolab</id>
-    <content type="html"><![CDATA[<p>Similar to how you <a href="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/">transfer data away from Dotcloud</a>, you can do the same for your mongodb database.</p>
-
-<p>I have been moving away from Dotcloud as they no longer provide free sandbox app.</p>
-
-<!-- more -->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// ssh into mongo db instance first
-</span><span class='line'>dot cloud run db
-</span><span class='line'>
-</span><span class='line'>// dump the data, then transfer via ftp
-</span><span class='line'>mongodump -h mongo.MYAPP.dotcloud.com:MYPORT -u root -p MYPASSWORD -d MYDBNAME
-</span><span class='line'>tar -czf MYDBNAME.tgz dump
-</span><span class='line'>curl -u myftpusername:myftppassword -sST MYDBNAME.tgz ftp://myftpdomain.com</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I use FTP, but if you prefer S3, you could do <a href="http://icodesnip.com/snippet/bash/dotcloud-mongodb-backup-script">this</a>.</p>
-
-<p>Download the tgz and unzip to get a dump directory.</p>
-
-<p>Create a database in mongolab.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// On local machine, do a mongorestore to mongolab
-</span><span class='line'>mongorestore -h xxx037077.mongolab.com:37077 -d MYDBNAME -u root -p MYPASSWORD2 dump/MYAPP/</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Transfer Away Dotcloud Data using FTP]]></title>
-    <link href="http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp/"/>
-    <updated>2013-04-01T23:41:00+08:00</updated>
-    <id>http://samwize.com/2013/04/01/transfer-away-dotcloud-data-using-ftp</id>
-    <content type="html"><![CDATA[<p>If you have data on Dotcloud server that you want to transfer away via FTP directly, you can&#8217;t, because Dotcloud don&#8217;t provide FTP to the instances.</p>
-
-<p>This is about the best way I know of transfering data, first by transferring to your own FTP server:</p>
-
-<!-- more -->
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// SSH to your dotcloud instance
-</span><span class='line'>dotcloud run www
-</span><span class='line'>
-</span><span class='line'>// ZIP the data eg. html
-</span><span class='line'>tar -C $HOME -czf html.tar.gz ./current/html
-</span><span class='line'>
-</span><span class='line'>// curl
-</span><span class='line'>curl -u myusername:mypassword -sST html.tar.gz ftp://myserver.com</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   

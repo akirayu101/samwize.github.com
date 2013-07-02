@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-07-02T20:33:22+08:00</updated>
+  <updated>2013-07-02T20:51:40+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -18,11 +18,13 @@
     <link href="http://samwize.com/2013/07/02/a-python-tool-to-extract-email/"/>
     <updated>2013-07-02T20:28:00+08:00</updated>
     <id>http://samwize.com/2013/07/02/a-python-tool-to-extract-email</id>
-    <content type="html"><![CDATA[<p>Recently I was requested by my fiancee to help send bulk SMS to her students. Its an emergency replay.</p>
+    <content type="html"><![CDATA[<p>Recently I was requested by my fiancee to help send bulk SMS to her students. Its an emergency relay.</p>
 
-<p>I know of the way to send bulk SMS (using SMS API). What it needs is the list of phone numbers in csv format. But all she send me is a 'nice looking' word document with the names and phone numbers..</p>
+<p>I know how to send bulk SMS (using SMS API). What it needs is the list of phone numbers in csv format. But all she send me is a 'nice looking' word document with the names and phone numbers.. I could spend 10 minutes copy-and-paste the phone numbers..</p>
 
-<p>Being a programmer, I added extraction of mobile phone numbers (Singapore format only) to <a href="https://github.com/samwize/pyExtractor">pyExtractor</a>. The tool which I wrote 1 year ago can also extract emails, URLs and domain names.</p>
+<p>But being a programmer, I added extraction of mobile phone numbers (Singapore format only) to <a href="https://github.com/samwize/pyExtractor">pyExtractor</a>.</p>
+
+<p>This is the tool which I wrote 1 year ago to extract emails, URLs and domain names.</p>
 ]]></content>
   </entry>
   
@@ -33,7 +35,7 @@
     <id>http://samwize.com/2012/11/29/phewtick-api-message-to-any-user</id>
     <content type="html"><![CDATA[<p>I wrote a <a href="https://github.com/samwize/phewtick-hack">Phewtick Hack</a> a few days ago.</p>
 
-<p>{%img http://www.phewtick.com/img/home_main.png Phewtick %}</p>
+<p><img src="http://www.phewtick.com/img/home_main.png" title="Phewtick" ></p>
 
 <p>It started out as a hack via their RESTful API to automatically scan QR code and get Phewtick points ($$$).</p>
 
