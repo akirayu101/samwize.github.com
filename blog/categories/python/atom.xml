@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Junda Ong]]></title>
   <link href="http://samwize.com/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://samwize.com/"/>
-  <updated>2013-07-02T01:09:54+08:00</updated>
+  <updated>2013-07-02T20:33:22+08:00</updated>
   <id>http://samwize.com/</id>
   <author>
     <name><![CDATA[Junda]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Python Tool to extract email]]></title>
+    <link href="http://samwize.com/2013/07/02/a-python-tool-to-extract-email/"/>
+    <updated>2013-07-02T20:28:00+08:00</updated>
+    <id>http://samwize.com/2013/07/02/a-python-tool-to-extract-email</id>
+    <content type="html"><![CDATA[<p>Recently I was requested by my fiancee to help send bulk SMS to her students. Its an emergency replay.</p>
+
+<p>I know of the way to send bulk SMS (using SMS API). What it needs is the list of phone numbers in csv format. But all she send me is a 'nice looking' word document with the names and phone numbers..</p>
+
+<p>Being a programmer, I added extraction of mobile phone numbers (Singapore format only) to <a href="https://github.com/samwize/pyExtractor">pyExtractor</a>. The tool which I wrote 1 year ago can also extract emails, URLs and domain names.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Phewtick API - Message to any user you want]]></title>
@@ -224,68 +237,6 @@ MyClass.foo = 3
 MyClass.foo
 3
 ```</p></blockquote></blockquote></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How you should write getter/setter for Python]]></title>
-    <link href="http://samwize.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python/"/>
-    <updated>2012-09-19T18:49:00+08:00</updated>
-    <id>http://samwize.com/2012/09/19/how-you-should-write-getter-slash-setter-for-python</id>
-    <content type="html"><![CDATA[<p>Coming from the Java world, I am used to writing getter/setter for every member variables that I want to expose. (truth is I made use of IDE to auto generate)</p>
-
-<p>I hate how much code Java has.</p>
-
-<p>With it's philosophy of readable code, Python is different.</p>
-
-<!-- more -->
-
-
-<h3>Getter</h3>
-
-<p>To write a getter for this member <code>foo</code>:</p>
-
-<p>``` python
-class MyClass(object):</p>
-
-<pre><code>def __init__(self):
-    self._foo = 1
-
-@property
-def foo(self):
-    return self._foo
-</code></pre>
-
-<p>```</p>
-
-<p>It uses an annotation <code>@property</code>. Then to access the property:</p>
-
-<p>``` python
-my_class = MyClass()
-print my_class.foo</p>
-
-<h1>1</h1>
-
-<p>```</p>
-
-<h3>Setter</h3>
-
-<p>To set a memter, use the annotation <code>@foo.setter</code> (replace foo with your member name).</p>
-
-<p>``` python
-class MyClass(object):</p>
-
-<pre><code>...
-
-@foo.setter
-def foo(self, value):
-    self._foo = value
-</code></pre>
-
-<p>```</p>
-
-<!-- http://stackoverflow.com/questions/6618002/python-property-versus-getters-and-setters -->
-
 ]]></content>
   </entry>
   
